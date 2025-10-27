@@ -1,20 +1,31 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Work_Sans, Inter, Crimson_Text } from "next/font/google";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const workSans = Work_Sans({
+  variable: "--font-work-sans",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const crimsonText = Crimson_Text({
+  variable: "--font-crimson",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio - Next.js Static Export Boilerplate",
-  description: "A modern, responsive portfolio built with Next.js, TypeScript, and Tailwind CSS. Configured for static site generation.",
+  title: "Sahil - Software Engineer & Full-Stack Developer",
+  description: "Experienced software engineer specializing in full-stack development, modern web technologies, and elegant digital solutions.",
 };
 
 export default function RootLayout({
@@ -23,11 +34,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('portfolio-theme') || 'light';
+                  var root = document.documentElement;
+                  root.classList.remove('light', 'dark');
+                  root.classList.add(theme);
+                  root.style.colorScheme = theme;
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${workSans.variable} ${inter.variable} ${crimsonText.variable} font-sans antialiased scroll-smooth`}
       >
-        {children}
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

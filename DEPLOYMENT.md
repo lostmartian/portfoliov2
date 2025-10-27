@@ -70,20 +70,20 @@ You need to configure your domain's DNS settings to point to GitHub Pages:
 
 Add these DNS records:
 
-| Type | Name | Value |
-|------|------|-------|
-| A | @ | 185.199.108.153 |
-| A | @ | 185.199.109.153 |
-| A | @ | 185.199.110.153 |
-| A | @ | 185.199.111.153 |
+| Type | Name | Value           |
+| ---- | ---- | --------------- |
+| A    | @    | 185.199.108.153 |
+| A    | @    | 185.199.109.153 |
+| A    | @    | 185.199.110.153 |
+| A    | @    | 185.199.111.153 |
 
 #### For Subdomain (www.yourdomain.com):
 
 Add this DNS record:
 
-| Type | Name | Value |
-|------|------|-------|
-| CNAME | www | yourusername.github.io |
+| Type  | Name | Value                  |
+| ----- | ---- | ---------------------- |
+| CNAME | www  | yourusername.github.io |
 
 **Note:** Replace `yourusername` with your actual GitHub username.
 
@@ -109,21 +109,25 @@ Once set up, your site will automatically deploy whenever you:
 ### Common Issues:
 
 #### 1. Site Not Loading
+
 - Check DNS propagation: [whatsmydns.net](https://www.whatsmydns.net/)
 - Verify CNAME file exists in your repository
 - Check GitHub Pages settings
 
 #### 2. HTTPS Issues
+
 - Wait 24 hours after adding custom domain
 - Check "Enforce HTTPS" in GitHub Pages settings
 - Clear browser cache
 
 #### 3. Build Failures
+
 - Check GitHub Actions logs
 - Ensure all dependencies are in `package.json`
 - Verify Next.js configuration
 
 #### 4. 404 Errors
+
 - Ensure `output: 'export'` is set in `next.config.ts`
 - Check that `.nojekyll` file exists in `public/` directory
 - Verify file paths are correct
@@ -131,6 +135,7 @@ Once set up, your site will automatically deploy whenever you:
 ### DNS Propagation Check
 
 Use these tools to check if your DNS changes have propagated:
+
 - [whatsmydns.net](https://www.whatsmydns.net/)
 - [dnschecker.org](https://dnschecker.org/)
 

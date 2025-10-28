@@ -146,28 +146,42 @@ export default function Projects() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#0a0a0f]">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-[#0a0a0f] dark:via-[#0f0f17] dark:to-[#12121c] mesh-gradient">
       <Header />
       
       <main className="flex-1 pt-24">
         {/* Hero Section */}
-        <section className="py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-[#0d0d14] dark:via-[#0f0f17] dark:to-[#12121c]">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <section className="py-24 relative overflow-hidden">
+          {/* Glass orbs background */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="glass-orb w-96 h-96 top-10 right-10 float-animation opacity-50" style={{ animationDelay: '0s' }}></div>
+            <div className="glass-orb w-72 h-72 bottom-20 left-20 float-animation opacity-60" style={{ animationDelay: '2s' }}></div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
-              <h1 className="text-5xl md:text-6xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
-                My Work
-              </h1>
-              <p className="text-xl md:text-2xl font-body text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                A showcase of my projects in AI/ML, database systems, and full-stack development, 
-                featuring innovative solutions and research contributions.
-              </p>
+              <div className="frosted-glass rounded-3xl p-12 md:p-16 edge-glow inline-block">
+                <h1 className="text-5xl md:text-6xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
+                  My Work
+                </h1>
+                <p className="text-xl md:text-2xl font-body text-gray-700 dark:text-gray-200 max-w-4xl mx-auto leading-relaxed">
+                  A showcase of my projects in AI/ML, database systems, and full-stack development, 
+                  featuring innovative solutions and research contributions.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Projects Section */}
-        <section className="py-24 bg-white dark:bg-[#08080c]">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <section className="py-24 relative overflow-hidden">
+          {/* Background decorative elements */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="glass-orb w-64 h-64 top-20 right-10 float-animation opacity-40" style={{ animationDelay: '1s' }}></div>
+            <div className="glass-orb w-56 h-56 bottom-20 left-10 float-animation opacity-50" style={{ animationDelay: '3s' }}></div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div className="space-y-24">
               {projects.map((project, index) => (
                 <div
@@ -178,29 +192,29 @@ export default function Projects() {
                 >
                   <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                     <div className="relative group">
-                      <div className="aspect-video bg-gradient-to-br from-blue-100 to-blue-200 dark:from-[#12121c] dark:to-[#1a1a24] rounded-2xl overflow-hidden border border-blue-200 dark:border-gray-800">
-                        <div className="w-full h-full flex items-center justify-center">
-                          <project.icon className="w-24 h-24 text-blue-600 dark:text-blue-400" />
+                      <div className="aspect-video glass-card rounded-3xl overflow-hidden edge-glow">
+                        <div className="w-full h-full flex items-center justify-center relative z-10">
+                          <project.icon className="w-24 h-24 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-all duration-500" />
                         </div>
                       </div>
                     </div>
                   </div>
 
                   <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-                    <div className="space-y-6">
-                      <div className="space-y-2">
-                        <div className="text-blue-600 font-body font-medium text-sm">
+                    <div className="space-y-6 glass-card rounded-3xl p-8">
+                      <div className="space-y-2 relative z-10">
+                        <div className="text-blue-600 dark:text-blue-400 font-body font-medium text-sm">
                           {project.date}
                         </div>
                         <h3 className="text-3xl md:text-4xl font-elegant font-bold text-gray-900 dark:text-gray-100">
                           {project.title}
                         </h3>
-                        <div className="text-gray-600 dark:text-gray-300 font-body">
+                        <div className="text-gray-700 dark:text-gray-300 font-body">
                           {project.technologies}
                         </div>
                       </div>
 
-                      <ul className="space-y-3">
+                      <ul className="space-y-3 relative z-10">
                         {project.points.map((point, pointIndex) => (
                           <li key={pointIndex} className="flex items-start text-gray-700 dark:text-gray-300 font-body leading-relaxed">
                             <span className="mr-3 text-blue-600 dark:text-blue-400 font-bold flex-shrink-0">•</span>
@@ -209,13 +223,13 @@ export default function Projects() {
                         ))}
                       </ul>
 
-                      <div className="flex space-x-4 pt-4">
+                      <div className="flex flex-wrap gap-4 pt-4 relative z-10">
                         {project.type === "code" && project.githubUrl && (
                           <a
                             href={project.githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center space-x-2 px-6 py-3 border-2 border-blue-600 text-blue-600 font-body font-semibold rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-300"
+                            className="glass-button flex items-center space-x-2 px-6 py-3 border-2 border-blue-600/50 text-blue-700 dark:text-blue-300 font-body font-semibold rounded-xl hover:border-blue-600 transition-all duration-300 hover:scale-105"
                           >
                             <Github className="w-5 h-5" />
                             <span>Code</span>
@@ -226,14 +240,14 @@ export default function Projects() {
                             href={project.paperUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center space-x-2 px-6 py-3 bg-blue-600 text-white font-body font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300"
+                            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-body font-semibold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg shadow-blue-500/50"
                           >
                             <FileText className="w-5 h-5" />
                             <span>Paper</span>
                           </a>
                         )}
                         {project.venue && (
-                          <div className="text-sm text-gray-600 dark:text-gray-300 font-body italic pt-3">
+                          <div className="text-sm text-gray-700 dark:text-gray-300 font-body italic pt-3 w-full">
                             {project.venue}
                           </div>
                         )}
@@ -247,19 +261,25 @@ export default function Projects() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 bg-gradient-to-r from-[#08080c] to-black text-white">
-          <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-elegant font-bold mb-6">
+        <section className="py-24 relative overflow-hidden bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 dark:from-slate-900 dark:via-indigo-900 dark:to-purple-900">
+          <div className="absolute inset-0 mesh-gradient opacity-30"></div>
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="glass-orb w-80 h-80 top-10 left-10 float-animation opacity-30" style={{ animationDelay: '0s' }}></div>
+            <div className="glass-orb w-72 h-72 bottom-10 right-10 float-animation opacity-40" style={{ animationDelay: '2s' }}></div>
+          </div>
+
+          <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
+            <div className="frosted-glass rounded-3xl p-12 md:p-16 edge-glow">
+              <h2 className="text-4xl md:text-5xl font-elegant font-bold mb-6 text-gray-900 dark:text-white">
                 Interested in Working Together?
               </h2>
-              <p className="text-xl font-body mb-12 text-gray-300 max-w-2xl mx-auto">
+              <p className="text-xl font-body mb-12 text-gray-700 dark:text-white/90 max-w-2xl mx-auto">
                 I'm always excited to take on new challenges and collaborate on 
                 innovative AI-powered projects that push the boundaries of what's possible.
               </p>
               <a
                 href="/about"
-                className="inline-flex items-center space-x-2 px-10 py-4 bg-blue-600 text-white font-body font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
+                className="inline-flex items-center space-x-2 px-10 py-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-body font-semibold rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl shadow-blue-500/50 hover:from-indigo-600 hover:to-purple-600"
               >
                 <span>Let's Connect</span>
                 <ArrowRight className="w-5 h-5" />

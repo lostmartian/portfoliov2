@@ -51,12 +51,20 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gray-900 dark:bg-black text-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+    <footer className="relative bg-gradient-to-br from-slate-900 via-indigo-950 to-purple-950 dark:from-black dark:via-[#0a0a0f] dark:to-[#0f0f17] text-white overflow-hidden">
+      {/* Glass orbs background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-30">
+        <div className="glass-orb w-64 h-64 top-10 left-10 float-animation" style={{ animationDelay: '0s' }}></div>
+        <div className="glass-orb w-48 h-48 bottom-20 right-20 float-animation" style={{ animationDelay: '3s' }}></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Brand Section */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-elegant font-bold text-blue-400">Sahil</h3>
+            <h3 className="text-2xl font-elegant font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
+              Sahil
+            </h3>
             <p className="text-gray-300 font-body leading-relaxed">
               Crafting elegant digital solutions with modern technologies and timeless design principles.
             </p>
@@ -64,7 +72,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-serif font-semibold text-blue-400">Quick Links</h4>
+            <h4 className="text-lg font-serif font-semibold text-blue-300">Quick Links</h4>
             <nav className="space-y-2">
               {[
                 { href: '/', label: 'Home' },
@@ -75,7 +83,7 @@ export default function Footer() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block text-gray-300 hover:text-blue-400 transition-colors duration-300 font-body"
+                  className="block text-gray-300 hover:text-blue-400 transition-all duration-300 font-body hover:translate-x-2"
                 >
                   {link.label}
                 </a>
@@ -85,7 +93,7 @@ export default function Footer() {
 
           {/* Social Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-serif font-semibold text-blue-400">Connect</h4>
+            <h4 className="text-lg font-serif font-semibold text-blue-300">Connect</h4>
             <div className="flex space-x-4">
               {socialLinks.map((social, index) => (
                 <a
@@ -93,7 +101,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 bg-gray-800 dark:bg-[#1a1a24] hover:bg-gray-700 dark:hover:bg-[#22222e] rounded-lg transition-colors duration-300 group"
+                  className="p-3 bg-white/5 hover:bg-white/10 dark:bg-white/5 dark:hover:bg-white/10 rounded-xl transition-all duration-300 group hover:scale-110 border border-white/10"
                 >
                   <social.icon className="w-5 h-5 text-gray-300 group-hover:text-blue-400 transition-colors" />
                 </a>
@@ -103,12 +111,12 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-12 pt-8 border-t border-gray-700 dark:border-gray-800">
+        <div className="mt-12 pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-gray-400 font-body text-sm">
+            <p className="text-gray-300 font-body text-sm">
               © {currentYear} Sahil. All rights reserved.
             </p>
-            <div className="flex items-center justify-center text-gray-400 font-body text-sm italic">
+            <div className="flex items-center justify-center text-gray-300 font-body text-sm italic">
               <span className="text-center">{todaysPun}</span>
             </div>
           </div>

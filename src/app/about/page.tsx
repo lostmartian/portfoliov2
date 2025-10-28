@@ -91,28 +91,42 @@ export default function About() {
 
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#0a0a0f]">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-[#0a0a0f] dark:via-[#0f0f17] dark:to-[#12121c] mesh-gradient">
       <Header />
       
       <main className="flex-1 pt-24">
         {/* Hero Section */}
-        <section className="py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-[#0d0d14] dark:via-[#0f0f17] dark:to-[#12121c]">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <section className="py-24 relative overflow-hidden">
+          {/* Glass orbs background */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="glass-orb w-96 h-96 top-10 right-10 float-animation opacity-50" style={{ animationDelay: '0s' }}></div>
+            <div className="glass-orb w-72 h-72 bottom-20 left-20 float-animation opacity-60" style={{ animationDelay: '2s' }}></div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
-              <h1 className="text-5xl md:text-6xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
-                About Me
-              </h1>
-              <p className="text-xl md:text-2xl font-body text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                Founding Full-Stack AI Engineer passionate about building innovative solutions 
-                that combine cutting-edge AI technology with robust engineering practices.
-              </p>
+              <div className="frosted-glass rounded-3xl p-12 md:p-16 edge-glow inline-block">
+                <h1 className="text-5xl md:text-6xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
+                  About Me
+                </h1>
+                <p className="text-xl md:text-2xl font-body text-gray-700 dark:text-gray-200 max-w-4xl mx-auto leading-relaxed">
+                  Founding Full-Stack AI Engineer passionate about building innovative solutions 
+                  that combine cutting-edge AI technology with robust engineering practices.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Technical Skills Section */}
-        <section className="py-24 bg-white dark:bg-[#08080c]">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <section className="py-24 relative overflow-hidden">
+          {/* Background decorative elements */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="glass-orb w-64 h-64 top-20 left-10 float-animation opacity-40" style={{ animationDelay: '1s' }}></div>
+            <div className="glass-orb w-56 h-56 bottom-10 right-10 float-animation opacity-50" style={{ animationDelay: '3s' }}></div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
                 Technical Skills
@@ -129,24 +143,24 @@ export default function About() {
                 return (
                   <div
                     key={idx}
-                    className="bg-gradient-to-br from-white to-gray-50 dark:from-[#12121c] dark:to-[#0f0f17] rounded-2xl p-6 border border-gray-200 dark:border-gray-800 hover:border-blue-300 dark:hover:border-gray-700 hover:shadow-xl transition-all duration-300 group"
+                    className="glass-card rounded-3xl p-6 group"
                   >
                     {/* Category Header */}
-                    <div className="flex items-center space-x-3 mb-6">
-                      <div className="w-12 h-12 bg-blue-100 dark:bg-blue-950/50 rounded-xl flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300">
-                        <CategoryIcon className="w-6 h-6 text-blue-600 dark:text-blue-300 group-hover:text-white transition-colors duration-300" />
+                    <div className="flex items-center space-x-3 mb-6 relative z-10">
+                      <div className="w-12 h-12 glass rounded-2xl flex items-center justify-center group-hover:scale-110 transition-all duration-300 edge-glow">
+                        <CategoryIcon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                       </div>
-                      <h3 className="text-lg font-serif font-semibold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors">
+                      <h3 className="text-lg font-serif font-semibold text-gray-900 dark:text-gray-100">
                         {category.category}
                       </h3>
                     </div>
 
                     {/* Skills List */}
-                    <div className="space-y-2 mt-1">
+                    <div className="space-y-2 mt-1 relative z-10">
                       {category.items.map((item, itemIdx) => (
                         <div
                           key={itemIdx}
-                          className="py-2 px-3 rounded-lg bg-white dark:bg-[#1a1a24] hover:shadow-sm transition-all duration-200"
+                          className="py-2 px-3 rounded-lg glass hover:scale-105 transition-all duration-200"
                         >
                           <span className="text-sm font-body text-gray-700 dark:text-gray-200">
                             {item}
@@ -162,7 +176,7 @@ export default function About() {
         </section>
 
         {/* Coding Profiles Section */}
-        <section className="py-12 bg-gradient-to-b from-gray-50 to-white dark:from-[#0d0d14] dark:to-[#0a0a0f]">
+        <section className="py-12 relative">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <h2 className="text-3xl md:text-4xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
               Coding Profiles
@@ -174,21 +188,21 @@ export default function About() {
                   href={profile.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block bg-white dark:bg-[#14141c] rounded-xl p-6 border border-gray-200 dark:border-gray-800 hover:border-blue-300 dark:hover:border-gray-700 hover:shadow-lg transition-all duration-300 group"
+                  className="block glass-card rounded-2xl p-6 group"
                 >
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-start justify-between relative z-10">
                     <div className="flex-1">
-                      <h3 className="text-lg font-serif font-semibold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                      <h3 className="text-lg font-serif font-semibold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {profile.platform}
                       </h3>
                       <p className="text-blue-600 dark:text-blue-400 font-body font-medium text-sm mb-2">
                         {profile.rating}
                       </p>
-                      <p className="text-gray-600 dark:text-gray-300 font-body text-sm">
+                      <p className="text-gray-700 dark:text-gray-300 font-body text-sm">
                         {profile.description}
                       </p>
                     </div>
-                    <ExternalLink className="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 shrink-0" />
+                    <ExternalLink className="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:scale-110 transition-all shrink-0" />
                   </div>
                 </a>
               ))}
@@ -197,47 +211,59 @@ export default function About() {
         </section>
 
         {/* My Journey Section */}
-        <section className="py-24 bg-gradient-to-b from-gray-50 to-white dark:from-[#0a0a0f] dark:to-[#08080c]">
-          <div className="max-w-4xl mx-auto px-6 lg:px-8">
-            <h2 className="text-3xl md:text-4xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-8">
-                My Journey
-              </h2>
-            <div className="prose prose-lg max-w-none">
-              <p className="text-lg font-body text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                My journey began at the Indian Institute of Information Technology, Gwalior, where I pursued 
-                an integrated B.Tech & M.Tech in Information Technology. During my studies, I developed a deep 
-                passion for artificial intelligence and machine learning, particularly in computer vision applications.
-              </p>
-              
-              <p className="text-lg font-body text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                As a Founding Full-Stack AI Engineer at a stealth-mode startup, I've had the unique opportunity 
-                to build AI-powered solutions from the ground up. I specialize in LLMs, computer vision with OpenCV, 
-                and cloud-native architectures using AWS services like Lambda, SQS, and EC2.
-              </p>
-              
-              <p className="text-lg font-body text-gray-600 dark:text-gray-300 leading-relaxed">
-                My research background includes published work on steganography and computer vision, with papers 
-                presented at IEEE conferences. I'm passionate about solving complex problems through innovative 
-                technology solutions and continuous learning in the rapidly evolving field of AI.
-              </p>
+        <section className="py-24 relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="glass-orb w-80 h-80 top-10 right-10 float-animation opacity-40" style={{ animationDelay: '2s' }}></div>
+          </div>
+
+          <div className="max-w-4xl mx-auto px-6 lg:px-8 relative z-10">
+            <div className="frosted-glass rounded-3xl p-8 md:p-12">
+              <h2 className="text-3xl md:text-4xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-8">
+                  My Journey
+                </h2>
+              <div className="prose prose-lg max-w-none space-y-6">
+                <p className="text-lg font-body text-gray-700 dark:text-gray-200 leading-relaxed">
+                  My journey began at the Indian Institute of Information Technology, Gwalior, where I pursued 
+                  an integrated B.Tech & M.Tech in Information Technology. During my studies, I developed a deep 
+                  passion for artificial intelligence and machine learning, particularly in computer vision applications.
+                </p>
+                
+                <p className="text-lg font-body text-gray-700 dark:text-gray-200 leading-relaxed">
+                  As a Founding Full-Stack AI Engineer at a stealth-mode startup, I've had the unique opportunity 
+                  to build AI-powered solutions from the ground up. I specialize in LLMs, computer vision with OpenCV, 
+                  and cloud-native architectures using AWS services like Lambda, SQS, and EC2.
+                </p>
+                
+                <p className="text-lg font-body text-gray-700 dark:text-gray-200 leading-relaxed">
+                  My research background includes published work on steganography and computer vision, with papers 
+                  presented at IEEE conferences. I'm passionate about solving complex problems through innovative 
+                  technology solutions and continuous learning in the rapidly evolving field of AI.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 bg-gradient-to-r from-[#08080c] to-black text-white">
-          <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-elegant font-bold mb-6">
+        <section className="py-24 relative overflow-hidden bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 dark:from-slate-900 dark:via-indigo-900 dark:to-purple-900">
+          <div className="absolute inset-0 mesh-gradient opacity-30"></div>
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="glass-orb w-72 h-72 top-10 left-10 float-animation opacity-30" style={{ animationDelay: '1s' }}></div>
+            <div className="glass-orb w-64 h-64 bottom-10 right-10 float-animation opacity-40" style={{ animationDelay: '3s' }}></div>
+          </div>
+
+          <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
+            <div className="frosted-glass rounded-3xl p-12 md:p-16 edge-glow">
+              <h2 className="text-4xl md:text-5xl font-elegant font-bold mb-6 text-gray-900 dark:text-white">
                 Let's Work Together
               </h2>
-              <p className="text-xl font-body mb-12 text-gray-300 max-w-2xl mx-auto">
+              <p className="text-xl font-body mb-12 text-gray-700 dark:text-white/90 max-w-2xl mx-auto">
                 I'm always excited to take on new challenges and collaborate on 
                 innovative AI-powered projects that push the boundaries of what's possible.
               </p>
               <a
                 href="/projects"
-                className="inline-block px-10 py-4 bg-blue-600 text-white font-body font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
+                className="inline-block px-10 py-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-body font-semibold rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl shadow-blue-500/50 hover:from-indigo-600 hover:to-purple-600"
               >
                 View My Work
               </a>

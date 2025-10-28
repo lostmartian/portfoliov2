@@ -79,31 +79,45 @@ export default function Experience() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#0a0a0f]">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-[#0a0a0f] dark:via-[#0f0f17] dark:to-[#12121c] mesh-gradient">
       <Header />
       
       <main className="flex-1 pt-24">
         {/* Hero Section */}
-        <section className="py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-[#0d0d14] dark:via-[#0f0f17] dark:to-[#12121c]">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <section className="py-24 relative overflow-hidden">
+          {/* Glass orbs background */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="glass-orb w-96 h-96 top-10 left-10 float-animation opacity-50" style={{ animationDelay: '0s' }}></div>
+            <div className="glass-orb w-80 h-80 bottom-20 right-20 float-animation opacity-60" style={{ animationDelay: '2s' }}></div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 dark:bg-blue-950/50 rounded-2xl mb-6">
-                <Briefcase className="w-10 h-10 text-blue-600 dark:text-blue-400" />
+              <div className="frosted-glass rounded-3xl p-12 md:p-16 edge-glow inline-block">
+                <div className="inline-flex items-center justify-center w-20 h-20 glass rounded-2xl mb-6 edge-glow">
+                  <Briefcase className="w-10 h-10 text-blue-600 dark:text-blue-400" />
+                </div>
+                <h1 className="text-5xl md:text-6xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
+                  Professional Experience
+                </h1>
+                <p className="text-xl md:text-2xl font-body text-gray-700 dark:text-gray-200 max-w-4xl mx-auto leading-relaxed">
+                  Building innovative AI-powered solutions and contributing to the tech community 
+                  through education and hands-on development
+                </p>
               </div>
-              <h1 className="text-5xl md:text-6xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
-                Professional Experience
-              </h1>
-              <p className="text-xl md:text-2xl font-body text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                Building innovative AI-powered solutions and contributing to the tech community 
-                through education and hands-on development
-              </p>
             </div>
           </div>
         </section>
 
         {/* Experience Timeline */}
-        <section className="py-24 bg-white dark:bg-[#08080c]">
-          <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <section className="py-24 relative overflow-hidden">
+          {/* Background decorative elements */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="glass-orb w-64 h-64 top-20 right-10 float-animation opacity-40" style={{ animationDelay: '1.5s' }}></div>
+            <div className="glass-orb w-56 h-56 bottom-20 left-10 float-animation opacity-50" style={{ animationDelay: '3.5s' }}></div>
+          </div>
+
+          <div className="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
             <div className="space-y-16">
               {experiences.map((exp, index) => {
                 const IconComponent = exp.icon;
@@ -111,26 +125,26 @@ export default function Experience() {
                   <div key={exp.id} className="relative">
                     {/* Timeline line */}
                     {index !== experiences.length - 1 && (
-                      <div className="absolute left-0 md:left-1/2 top-24 bottom-0 w-0.5 bg-gradient-to-b from-blue-600 to-blue-200 dark:from-blue-400 dark:to-blue-900 transform -translate-x-1/2 hidden md:block"></div>
+                      <div className="absolute left-1/2 top-20 w-0.5 h-full bg-gradient-to-b from-blue-600 to-blue-200 dark:from-blue-400 dark:to-blue-900 transform -translate-x-1/2 hidden md:block" style={{ height: 'calc(100% + 4rem)' }}></div>
                     )}
                     
                     <div className={`flex flex-col md:flex-row gap-8 ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
                       {/* Timeline Dot */}
-                      <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-16 h-16 bg-blue-600 dark:bg-blue-500 rounded-full items-center justify-center z-10 shadow-lg">
+                      <div className="hidden md:flex absolute left-1/2 top-0 transform -translate-x-1/2 w-16 h-16 rounded-full items-center justify-center z-20 shadow-2xl bg-gradient-to-br from-blue-600 to-indigo-600 border-4 border-white dark:border-[#0a0a0f]">
                         <IconComponent className="w-8 h-8 text-white" />
                       </div>
                       
                       {/* Content Card */}
                       <div className={`md:w-1/2 ${index % 2 === 1 ? 'md:text-right' : ''}`}>
-                        <div className="bg-gradient-to-br from-white to-gray-50 dark:from-[#12121c] dark:to-[#0f0f17] rounded-2xl p-8 border border-gray-200 dark:border-gray-800 hover:border-blue-300 dark:hover:border-blue-700 transition-all duration-300 hover:shadow-xl group">
+                        <div className="glass-card rounded-3xl p-8 group">
                           {/* Header */}
-                          <div className="mb-6">
+                          <div className="mb-6 relative z-10">
                             <div className="flex items-center gap-3 mb-3 md:hidden">
-                              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-950/50 rounded-xl flex items-center justify-center">
+                              <div className="w-12 h-12 glass rounded-xl flex items-center justify-center edge-glow">
                                 <IconComponent className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                               </div>
                               {exp.current && (
-                                <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold rounded-full">
+                                <span className="px-3 py-1 glass text-green-700 dark:text-green-400 text-xs font-semibold rounded-full">
                                   Current
                                 </span>
                               )}
@@ -141,7 +155,7 @@ export default function Experience() {
                                 {exp.role}
                               </h3>
                               {exp.current && (
-                                <span className="hidden md:inline-block px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold rounded-full">
+                                <span className="hidden md:inline-block px-3 py-1 glass text-green-700 dark:text-green-400 text-xs font-semibold rounded-full">
                                   Current
                                 </span>
                               )}
@@ -164,12 +178,12 @@ export default function Experience() {
                           </div>
 
                           {/* Technologies */}
-                          <div className="mb-6">
+                          <div className="mb-6 relative z-10">
                             <div className={`flex flex-wrap gap-2 ${index % 2 === 1 ? 'md:justify-end' : ''}`}>
                               {exp.technologies.map((tech, idx) => (
                                 <span 
                                   key={idx}
-                                  className="px-3 py-1 bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 text-xs font-body font-semibold rounded-lg"
+                                  className="px-3 py-1 glass text-blue-700 dark:text-blue-300 text-xs font-body font-semibold rounded-lg hover:scale-105 transition-transform"
                                 >
                                   {tech}
                                 </span>
@@ -178,10 +192,10 @@ export default function Experience() {
                           </div>
 
                           {/* Achievements */}
-                          <div className="space-y-4">
+                          <div className="space-y-4 relative z-10">
                             {exp.achievements.map((achievement, idx) => (
                               <div key={idx} className={`flex items-start gap-3 ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
-                                <div className="flex-shrink-0 w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full mt-2"></div>
+                                <div className="flex-shrink-0 w-2 h-2 bg-blue-600 dark:text-blue-400 rounded-full mt-2"></div>
                                 <p 
                                   className={`font-body text-gray-700 dark:text-gray-300 leading-relaxed ${index % 2 === 1 ? 'md:text-right' : ''}`}
                                   dangerouslySetInnerHTML={{ 
@@ -202,8 +216,13 @@ export default function Experience() {
         </section>
 
         {/* Skills Highlight Section */}
-        <section className="py-24 bg-gradient-to-br from-gray-50 to-white dark:from-[#0d0d14] dark:to-[#0a0a0f]">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <section className="py-24 relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="glass-orb w-72 h-72 top-10 left-10 float-animation opacity-40" style={{ animationDelay: '0.5s' }}></div>
+            <div className="glass-orb w-64 h-64 bottom-10 right-10 float-animation opacity-50" style={{ animationDelay: '2.5s' }}></div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
                 Core Competencies
@@ -222,15 +241,15 @@ export default function Experience() {
               ].map((skill, idx) => (
                 <div 
                   key={idx}
-                  className="bg-white dark:bg-[#14141c] rounded-2xl p-6 border border-gray-200 dark:border-gray-800 hover:border-blue-300 dark:hover:border-blue-700 transition-all duration-300 hover:shadow-xl group text-center"
+                  className="glass-card rounded-3xl p-6 group text-center"
                 >
-                  <div className="w-16 h-16 bg-blue-100 dark:bg-blue-950/50 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-600 transition-colors duration-300">
-                    <skill.icon className="w-8 h-8 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors duration-300" />
+                  <div className="w-16 h-16 glass rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-300 edge-glow">
+                    <skill.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
                   </div>
-                  <h3 className="text-lg font-serif font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                  <h3 className="text-lg font-serif font-semibold text-gray-900 dark:text-gray-100 mb-2 relative z-10">
                     {skill.title}
                   </h3>
-                  <p className="text-sm font-body text-gray-600 dark:text-gray-300">
+                  <p className="text-sm font-body text-gray-700 dark:text-gray-300 relative z-10">
                     {skill.desc}
                   </p>
                 </div>
@@ -240,28 +259,36 @@ export default function Experience() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 bg-gradient-to-r from-[#08080c] to-black text-white">
-          <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-            <h2 className="text-4xl md:text-5xl font-elegant font-bold mb-6">
-              Let's Work Together
-            </h2>
-            <p className="text-xl font-body mb-12 text-gray-300 max-w-2xl mx-auto">
-              Interested in collaborating on innovative AI and full-stack projects? 
-              Let's connect and build something amazing.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="mailto:sahilgangurde08@gmail.com"
-                className="inline-block px-10 py-4 bg-blue-600 text-white font-body font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
-              >
-                Get In Touch
-              </a>
-              <a
-                href="/projects"
-                className="inline-block px-10 py-4 border-2 border-blue-600 text-blue-600 font-body font-semibold rounded-lg hover:bg-blue-600 hover:text-white transition-all duration-300"
-              >
-                View Projects
-              </a>
+        <section className="py-24 relative overflow-hidden bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 dark:from-slate-900 dark:via-indigo-900 dark:to-purple-900">
+          <div className="absolute inset-0 mesh-gradient opacity-30"></div>
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="glass-orb w-80 h-80 top-10 left-10 float-animation opacity-30" style={{ animationDelay: '0s' }}></div>
+            <div className="glass-orb w-72 h-72 bottom-10 right-10 float-animation opacity-40" style={{ animationDelay: '2s' }}></div>
+          </div>
+
+          <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
+            <div className="frosted-glass rounded-3xl p-12 md:p-16 edge-glow">
+              <h2 className="text-4xl md:text-5xl font-elegant font-bold mb-6 text-gray-900 dark:text-white">
+                Let's Work Together
+              </h2>
+              <p className="text-xl font-body mb-12 text-gray-700 dark:text-white/90 max-w-2xl mx-auto">
+                Interested in collaborating on innovative AI and full-stack projects? 
+                Let's connect and build something amazing.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                <a
+                  href="mailto:sahilgangurde08@gmail.com"
+                  className="inline-block px-10 py-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-body font-semibold rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl shadow-blue-500/50 hover:from-indigo-600 hover:to-purple-600"
+                >
+                  Get In Touch
+                </a>
+                <a
+                  href="/projects"
+                  className="inline-block px-10 py-5 border-2 border-blue-600 text-blue-600 dark:border-white dark:text-white font-body font-semibold rounded-2xl transition-all duration-300 hover:bg-blue-600 hover:text-white dark:hover:bg-white dark:hover:text-blue-600"
+                >
+                  View Projects
+                </a>
+              </div>
             </div>
           </div>
         </section>

@@ -46,18 +46,29 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
         isScrolled 
-          ? 'backdrop-blur-md shadow-lg border-b bg-gray-50/95 dark:bg-[#0a0a0f]/95 dark:border-gray-800' 
-          : 'bg-transparent'
+          ? 'border-gray-200/30 dark:border-gray-800/30' 
+          : 'border-transparent'
       }`}
+      style={!isScrolled ? { 
+        backdropFilter: 'none',
+        WebkitBackdropFilter: 'none',
+        position: 'fixed',
+        background: 'transparent'
+      } : {
+        position: 'fixed',
+        background: theme === 'dark' ? 'rgba(10, 10, 15, 0.4)' : 'rgba(255, 255, 255, 0.4)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+      }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center py-6">
           <div className="flex items-center">
             <Link 
               href="/" 
-              className="text-3xl font-elegant font-bold hover:text-blue-600 transition-colors duration-300 text-gray-900 dark:text-gray-100"
+              className="text-3xl font-elegant font-bold hover:text-blue-600 transition-all duration-300 text-gray-900 dark:text-gray-100 hover:scale-105"
             >
               lostmartian
             </Link>
@@ -68,10 +79,10 @@ export default function Header() {
               <div key={item.href}>
                 <Link 
                   href={item.href}
-                  className="relative text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors duration-300 font-body font-medium group"
+                  className="relative text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 font-body font-medium group"
                 >
                   {item.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 transition-all duration-300 group-hover:w-full shadow-lg shadow-blue-500/50"></span>
                 </Link>
               </div>
             ))}
@@ -82,23 +93,23 @@ export default function Header() {
             {mounted ? (
               <button
                 onClick={toggleDarkMode}
-                className="p-2 rounded-lg bg-gray-100 dark:bg-[#1a1a24] hover:bg-gray-200 dark:hover:bg-[#22222e] transition-colors duration-300"
+                className="glass-button p-3 rounded-xl transition-all duration-300 group"
                 aria-label="Toggle dark mode"
               >
                 {theme === 'dark' ? (
-                  <Sun className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+                  <Sun className="w-5 h-5 text-yellow-500 group-hover:scale-110 transition-transform duration-300" />
                 ) : (
-                  <Moon className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+                  <Moon className="w-5 h-5 text-indigo-600 group-hover:scale-110 transition-transform duration-300" />
                 )}
               </button>
             ) : (
-              <div className="p-2 rounded-lg bg-gray-100 w-[36px] h-[36px]" />
+              <div className="glass-button p-3 rounded-xl w-[44px] h-[44px]" />
             )}
 
             {/* Mobile menu button */}
             <button 
               onClick={toggleMobileMenu}
-              className="md:hidden text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors"
+              className="md:hidden glass-button p-3 rounded-xl text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-all duration-300"
               aria-label="Toggle mobile menu"
             >
               {isMobileMenuOpen ? (
@@ -116,13 +127,13 @@ export default function Header() {
             isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
-          <nav className="px-6 py-4 space-y-4 bg-white dark:bg-[#0a0a0f] border-t border-gray-200 dark:border-gray-800">
+          <nav className="px-6 py-4 space-y-4 glass rounded-2xl mx-2 mb-4 border-t-0">
             {menuItems.map((item) => (
               <Link 
                 key={item.href}
                 href={item.href}
                 onClick={closeMobileMenu}
-                className="block text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 font-body font-medium py-2"
+                className="block text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 font-body font-medium py-2 hover:translate-x-2"
               >
                 {item.label}
               </Link>

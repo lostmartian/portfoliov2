@@ -3,7 +3,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import TableOfContents from '@/components/TableOfContents';
-import { Github, ArrowRight, Code, Palette, Database, Globe, FileText, Brain } from 'lucide-react';
+import { Github, Code, Palette, Database, Globe, FileText, Brain } from 'lucide-react';
 
 export default function Projects() {
   const projects = [
@@ -151,11 +151,11 @@ export default function Projects() {
       <Header />
       <TableOfContents />
       
-      <main className="flex-1 pt-24">
+      <main className="flex-1 pt-24 lg:pl-64 xl:pr-80">
         {/* Hero Section */}
-        <section className="py-24 relative overflow-hidden">
+        <section className="pt-24 pb-8 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-16">
+            <div className="text-center mb-2">
               <h1 className="text-5xl md:text-6xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
                 My Work
               </h1>
@@ -164,7 +164,7 @@ export default function Projects() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-24 relative overflow-hidden">
+        <section id="projects" className="pt-8 pb-24 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <h2 className="text-4xl md:text-5xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-16 text-center">
               Projects
@@ -250,28 +250,6 @@ export default function Projects() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section id="contact" className="py-24 relative overflow-hidden bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 dark:from-slate-900 dark:via-indigo-900 dark:to-purple-900">
-          <div className="absolute inset-0 mesh-gradient opacity-30"></div>
-          <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
-            <div className="frosted-glass rounded-3xl p-12 md:p-16 edge-glow">
-              <h2 className="text-4xl md:text-5xl font-elegant font-bold mb-6 text-gray-900 dark:text-white">
-                Interested in Working Together?
-              </h2>
-              <p className="text-xl font-body mb-12 text-gray-700 dark:text-white/90 max-w-2xl mx-auto">
-                I'm always excited to take on new challenges and collaborate on 
-                innovative AI-powered projects that push the boundaries of what's possible.
-              </p>
-              <a
-                href="/about"
-                className="inline-flex items-center space-x-2 px-10 py-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-body font-semibold rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl shadow-blue-500/50 hover:from-indigo-600 hover:to-purple-600"
-              >
-                <span>Let's Connect</span>
-                <ArrowRight className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
-        </section>
       </main>
       
       <Footer />

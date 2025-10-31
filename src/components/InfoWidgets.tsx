@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Github, Zap, Cloud, Rss } from 'lucide-react';
+import { useEffect, useState, useRef } from 'react';
+import { Github, Zap, Cloud, Rss, ExternalLink } from 'lucide-react';
 
 interface GitHubStats {
   public_repos: number;
@@ -23,11 +23,32 @@ interface RSSItem {
   pubDate: string;
 }
 
+interface LeetCodeStats {
+  totalSolved: number;
+  totalQuestions: number;
+  easySolved: number;
+  totalEasy: number;
+  mediumSolved: number;
+  totalMedium: number;
+  hardSolved: number;
+  totalHard: number;
+  acceptanceRate: number;
+  ranking: number;
+  contributionPoints: number;
+  reputation: number;
+}
+
 export default function InfoWidgets() {
   const [githubStats, setGithubStats] = useState<GitHubStats | null>(null);
   const [currentTime, setCurrentTime] = useState('');
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [rssItems, setRssItems] = useState<RSSItem[]>([]);
+  const [leetcodeStats, setLeetcodeStats] = useState<LeetCodeStats | null>(null);
+  const [showRssWidget, setShowRssWidget] = useState(true);
+  const [showCodingStats, setShowCodingStats] = useState(true);
+  const [showGitHubStats, setShowGitHubStats] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isAdjustingRef = useRef(false);
 
   // Fetch GitHub stats
   useEffect(() => {
@@ -206,40 +227,283 @@ export default function InfoWidgets() {
     return () => clearInterval(interval);
   }, []);
 
+  // Fetch LeetCode Stats
+  useEffect(() => {
+    const fetchLeetCodeStats = async () => {
+      try {
+        // Replace 'sahilgangurde' with your actual LeetCode username
+        const username = "sahilgangurde";
+        const apis = [
+          `https://leetcode-stats-api.herokuapp.com/${username}`,
+          `https://leetcode-stats.tashif.codes/${username}`,
+        ];
+
+        for (const apiUrl of apis) {
+          try {
+            const response = await fetch(apiUrl);
+            if (response.ok) {
+              const data = await response.json();
+
+              // Handle different API response formats
+              let stats;
+              if (data.status === "success" || data.totalSolved !== undefined) {
+                stats = {
+                  totalSolved: data.totalSolved || 0,
+                  totalQuestions: data.totalQuestions || 0,
+                  easySolved: data.easySolved || 0,
+                  totalEasy: data.totalEasy || 0,
+                  mediumSolved: data.mediumSolved || 0,
+                  totalMedium: data.totalMedium || 0,
+                  hardSolved: data.hardSolved || 0,
+                  totalHard: data.totalHard || 0,
+                  acceptanceRate: data.acceptanceRate || 0,
+                  ranking: data.ranking || 0,
+                  contributionPoints: data.contributionPoints || 0,
+                  reputation: data.reputation || 0,
+                };
+              } else if (data.totalSolved !== undefined) {
+                // Alternative format
+                stats = {
+                  totalSolved: data.totalSolved || 0,
+                  totalQuestions: data.totalQuestions || 0,
+                  easySolved: data.easySolved || 0,
+                  totalEasy: data.totalEasy || 0,
+                  mediumSolved: data.mediumSolved || 0,
+                  totalMedium: data.totalMedium || 0,
+                  hardSolved: data.hardSolved || 0,
+                  totalHard: data.totalHard || 0,
+                  acceptanceRate: data.acceptanceRate || 0,
+                  ranking: data.ranking || 0,
+                  contributionPoints: data.contributionPoints || 0,
+                  reputation: data.reputation || 0,
+                };
+              }
+
+              if (stats && stats.totalSolved > 0) {
+                setLeetcodeStats(stats);
+                return; // Success, exit the loop
+              }
+            }
+          } catch (error) {
+            // Try next API
+            continue;
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch LeetCode stats:', error);
+      }
+    };
+
+    fetchLeetCodeStats();
+    // Refresh every 6 hours
+    const interval = setInterval(fetchLeetCodeStats, 21600000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Check for overflow and hide widgets when content loads (only when data changes)
+  useEffect(() => {
+    if (!containerRef.current || isAdjustingRef.current) return;
+
+    const checkOverflow = () => {
+      if (!containerRef.current || isAdjustingRef.current) return;
+
+      const container = containerRef.current;
+      const maxHeight = window.innerHeight - 128;
+      const currentHeight = container.scrollHeight;
+      const hasOverflow = currentHeight > maxHeight + 10; // Small buffer
+
+      if (hasOverflow) {
+        isAdjustingRef.current = true;
+        // Hide widgets in order of priority (least important first)
+        // Check DOM directly to see which widgets are actually visible
+        const rssWidget = container.querySelector('[data-widget="rss"]');
+        const codingWidget = container.querySelector('[data-widget="coding"]');
+        const githubWidget = container.querySelector('[data-widget="github"]');
+
+        if (rssWidget && rssItems.length > 0) {
+          setShowRssWidget(false);
+        } else if (codingWidget) {
+          setShowCodingStats(false);
+        } else if (githubWidget && githubStats) {
+          setShowGitHubStats(false);
+        }
+        
+        setTimeout(() => {
+          isAdjustingRef.current = false;
+        }, 200);
+      }
+    };
+
+    // Only check when data loads, not when visibility changes
+    const timeoutId = setTimeout(checkOverflow, 300);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [githubStats, weather, rssItems]); // Only depend on data changes
+
+  // Separate effect for window resize to restore widgets if space becomes available
+  useEffect(() => {
+    let resizeTimer: NodeJS.Timeout;
+    
+    const handleResize = () => {
+      if (isAdjustingRef.current) return; // Don't restore while adjusting
+      
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        if (!containerRef.current || isAdjustingRef.current) return;
+
+        const container = containerRef.current;
+        const maxHeight = window.innerHeight - 128;
+        const currentHeight = container.scrollHeight;
+        const availableSpace = maxHeight - currentHeight;
+
+        // Only restore if there's significant space (prevent flickering)
+        // Restore widgets in reverse priority order, but only check one at a time per resize
+        if (availableSpace > 250 && !showRssWidget && rssItems.length > 0) {
+          isAdjustingRef.current = true;
+          setShowRssWidget(true);
+          setTimeout(() => { isAdjustingRef.current = false; }, 100);
+        } else if (availableSpace > 150 && !showCodingStats) {
+          isAdjustingRef.current = true;
+          setShowCodingStats(true);
+          setTimeout(() => { isAdjustingRef.current = false; }, 100);
+        } else if (availableSpace > 150 && !showGitHubStats && githubStats) {
+          isAdjustingRef.current = true;
+          setShowGitHubStats(true);
+          setTimeout(() => { isAdjustingRef.current = false; }, 100);
+        }
+      }, 500); // Longer debounce to prevent rapid toggling
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      clearTimeout(resizeTimer);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [showRssWidget, showCodingStats, showGitHubStats, githubStats, rssItems]);
+
   return (
-    <aside className="fixed right-0 top-1/2 -translate-y-1/2 z-30 hidden xl:block">
-      <div className="mr-8 w-64 space-y-4">
+    <aside
+      className="fixed right-0 -translate-y-1/2 z-30 hidden xl:block"
+      style={{ top: "calc(50vh + 48px)" }}
+    >
+      <div
+        ref={containerRef}
+        className="widget-container mr-8 w-64 space-y-4 max-h-[calc(100vh-8rem)] pr-2"
+        style={{
+          background: "transparent",
+          overflow: "visible",
+          paddingTop: "4px",
+          paddingBottom: "4px",
+        }}
+      >
         {/* GitHub Stats Widget */}
-        {githubStats && (
-          <div className="glass-card rounded-2xl p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <Github className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-              <h3 className="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                GitHub
-              </h3>
+        {showGitHubStats && githubStats && (
+          <div data-widget="github" className="glass-card rounded-2xl p-4">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <Github className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                <h3 className="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                  GitHub
+                </h3>
+              </div>
+              <a
+                href="https://github.com/lostmartian"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
             </div>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600 dark:text-gray-400">Repos</span>
-                <span className="font-semibold text-gray-900 dark:text-gray-100">{githubStats.public_repos}</span>
+                <span className="font-semibold text-gray-900 dark:text-gray-100">
+                  {githubStats.public_repos}
+                </span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Followers</span>
-                <span className="font-semibold text-gray-900 dark:text-gray-100">{githubStats.followers}</span>
+                <span className="text-gray-600 dark:text-gray-400">
+                  Followers
+                </span>
+                <span className="font-semibold text-gray-900 dark:text-gray-100">
+                  {githubStats.followers}
+                </span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Following</span>
-                <span className="font-semibold text-gray-900 dark:text-gray-100">{githubStats.following}</span>
+                <span className="text-gray-600 dark:text-gray-400">
+                  Following
+                </span>
+                <span className="font-semibold text-gray-900 dark:text-gray-100">
+                  {githubStats.following}
+                </span>
               </div>
             </div>
-            <a
-              href="https://github.com/lostmartian"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block mt-3 text-xs text-blue-600 dark:text-blue-400 hover:underline text-center"
-            >
-              View Profile →
-            </a>
+          </div>
+        )}
+
+        {/* Coding Stats Widget */}
+        {showCodingStats && (
+          <div data-widget="coding" className="glass-card rounded-2xl p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <Zap className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <h3 className="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                Coding Stats
+              </h3>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center text-sm">
+                <span className="text-gray-600 dark:text-gray-400">
+                  LeetCode
+                </span>
+                <div className="flex items-center gap-2">
+                  {leetcodeStats ? (
+                    <span className="font-semibold text-gray-900 dark:text-gray-100">
+                      {leetcodeStats.totalSolved}+
+                    </span>
+                  ) : (
+                    <span className="font-semibold text-gray-900 dark:text-gray-100">
+                      Loading...
+                    </span>
+                  )}
+                  <a
+                    href="https://leetcode.com/u/sahilgangurde/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+              {leetcodeStats && (
+                <div className="text-xs text-gray-500 dark:text-gray-500 pt-1">
+                  {leetcodeStats.easySolved}E / {leetcodeStats.mediumSolved}M /{" "}
+                  {leetcodeStats.hardSolved}H
+                </div>
+              )}
+              <div className="flex justify-between items-center text-sm mt-2 pt-2 border-t border-gray-200 dark:border-gray-700">
+                <span className="text-gray-600 dark:text-gray-400">
+                  CodeChef
+                </span>
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-gray-900 dark:text-gray-100">
+                    5★
+                  </span>
+                  <a
+                    href="https://www.codechef.com/users/lost_martian"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
@@ -251,7 +515,7 @@ export default function InfoWidgets() {
               lostmartian's Location
             </h3>
           </div>
-          
+
           {/* Time Section */}
           <div className="text-center mb-4 pb-4 border-b border-gray-200 dark:border-gray-700">
             <div className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-1">
@@ -293,8 +557,8 @@ export default function InfoWidgets() {
         </div>
 
         {/* RSS Feed Widget */}
-        {rssItems.length > 0 && (
-          <div className="glass-card rounded-2xl p-4">
+        {showRssWidget && rssItems.length > 0 && (
+          <div data-widget="rss" className="glass-card rounded-2xl p-4">
             <div className="flex items-center gap-2 mb-3">
               <Rss className="w-4 h-4 text-blue-600 dark:text-blue-400" />
               <h3 className="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
@@ -315,9 +579,9 @@ export default function InfoWidgets() {
                   </div>
                   {item.pubDate && (
                     <div className="text-xs text-gray-500 dark:text-gray-500">
-                      {new Date(item.pubDate).toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
+                      {new Date(item.pubDate).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
                       })}
                     </div>
                   )}
@@ -326,26 +590,6 @@ export default function InfoWidgets() {
             </div>
           </div>
         )}
-
-        {/* Coding Stats Widget */}
-        <div className="glass-card rounded-2xl p-4">
-          <div className="flex items-center gap-2 mb-3">
-            <Zap className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-            <h3 className="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-              Coding Stats
-            </h3>
-          </div>
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-600 dark:text-gray-400">LeetCode</span>
-              <span className="font-semibold text-gray-900 dark:text-gray-100">600+</span>
-            </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-600 dark:text-gray-400">CodeChef</span>
-              <span className="font-semibold text-gray-900 dark:text-gray-100">5★</span>
-            </div>
-          </div>
-        </div>
       </div>
     </aside>
   );

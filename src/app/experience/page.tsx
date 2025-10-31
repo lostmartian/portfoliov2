@@ -84,11 +84,11 @@ export default function Experience() {
       <Header />
       <TableOfContents />
       
-      <main className="flex-1 pt-24">
+      <main className="flex-1 pt-24 lg:pl-64 xl:pr-80">
         {/* Hero Section */}
-        <section className="py-24 relative overflow-hidden">
+        <section className="pt-24 pb-8 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-16">
+            <div className="text-center mb-2">
               <h1 className="text-5xl md:text-6xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
                 Professional Experience
               </h1>
@@ -97,7 +97,7 @@ export default function Experience() {
         </section>
 
         {/* Experience Timeline */}
-        <section id="experience" className="py-24 relative overflow-hidden">
+        <section id="experience" className="pt-8 pb-24 relative overflow-hidden">
           <div className="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
             <h2 className="text-4xl md:text-5xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-16 text-center">
               Experience
@@ -238,35 +238,6 @@ export default function Experience() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section id="contact" className="py-24 relative overflow-hidden bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 dark:from-slate-900 dark:via-indigo-900 dark:to-purple-900">
-          <div className="absolute inset-0 mesh-gradient opacity-30"></div>
-          <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
-            <div className="frosted-glass rounded-3xl p-12 md:p-16 edge-glow">
-              <h2 className="text-4xl md:text-5xl font-elegant font-bold mb-6 text-gray-900 dark:text-white">
-                Let's Work Together
-              </h2>
-              <p className="text-xl font-body mb-12 text-gray-700 dark:text-white/90 max-w-2xl mx-auto">
-                Interested in collaborating on innovative AI and full-stack projects? 
-                Let's connect and build something amazing.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <a
-                  href="mailto:sahilgangurde08@gmail.com"
-                  className="inline-block px-10 py-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-body font-semibold rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl shadow-blue-500/50 hover:from-indigo-600 hover:to-purple-600"
-                >
-                  Get In Touch
-                </a>
-                <a
-                  href="/projects"
-                  className="inline-block px-10 py-5 border-2 border-blue-600 text-blue-600 dark:border-white dark:text-white font-body font-semibold rounded-2xl transition-all duration-300 hover:bg-blue-600 hover:text-white dark:hover:bg-white dark:hover:text-blue-600"
-                >
-                  View Projects
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
       
       <Footer />

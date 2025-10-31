@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 
 interface TocItem {
   id: string;
@@ -17,9 +18,13 @@ export default function TableOfContents({ sections }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>('');
   const [activeParentIds, setActiveParentIds] = useState<Set<string>>(new Set());
   const [isVisible, setIsVisible] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [animationState, setAnimationState] = useState<'idle' | 'slide-out' | 'slide-in'>('idle');
   const observerRef = useRef<IntersectionObserver | null>(null);
   const observedElementsRef = useRef<Map<string, Element>>(new Map());
   const parentChildMapRef = useRef<Map<string, string[]>>(new Map()); // parent id -> child ids
+  const pathname = usePathname();
+  const prevPathnameRef = useRef<string>(pathname);
 
   // Extract headings on mount
   useEffect(() => {
@@ -264,13 +269,64 @@ export default function TableOfContents({ sections }: TableOfContentsProps) {
     }
   };
 
+  // Handle page transition animations
+  useEffect(() => {
+    const currentPath = pathname.replace(/\/$/, ''); // Normalize pathname
+    const prevPath = prevPathnameRef.current ? prevPathnameRef.current.replace(/\/$/, '') : '';
+    
+    // Skip animation on initial mount
+    if (prevPathnameRef.current === '') {
+      prevPathnameRef.current = pathname;
+      return;
+    }
+
+    // Skip if same page (e.g., just trailing slash difference)
+    if (prevPath === currentPath) {
+      return;
+    }
+
+    // Page changed - animate out then in
+    setIsAnimating(true);
+    setAnimationState('slide-out');
+    
+    // After slide-out completes, slide in with new content
+    const slideOutTimer = setTimeout(() => {
+      setAnimationState('slide-in');
+      const slideInTimer = setTimeout(() => {
+        setAnimationState('idle');
+        setIsAnimating(false);
+      }, 300); // Animation duration
+      
+      return () => clearTimeout(slideInTimer);
+    }, 300); // Wait for slide-out to complete
+    
+    prevPathnameRef.current = pathname;
+    
+    return () => {
+      clearTimeout(slideOutTimer);
+    };
+  }, [pathname]);
+
   if (!isVisible || headings.length === 0) {
     return null;
   }
 
+  // Determine animation classes
+  const getAnimationClasses = () => {
+    if (animationState === 'slide-out') {
+      return 'animate-slide-out-left';
+    } else if (animationState === 'slide-in') {
+      return 'animate-slide-in-left';
+    }
+    return '';
+  };
+
   return (
-    <aside className="fixed left-0 top-1/2 -translate-y-1/2 z-40 hidden lg:block">
-      <nav className="ml-8 w-56">
+    <aside 
+      className={`fixed left-0 -translate-y-1/2 z-40 hidden lg:block ${getAnimationClasses()}`} 
+      style={{ top: 'calc(50vh + 48px)' }}
+    >
+      <nav className="ml-8 w-56 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-400 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent">
         <div className="space-y-1">
           <div className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 px-2">
             Contents

@@ -129,16 +129,21 @@ export default function InfoWidgets() {
   useEffect(() => {
     const fetchRSS = async () => {
       try {
-        // Hacker News RSS feeds (may have CORS issues on localhost but should work in production)
+        // Hacker News RSS feeds - using CORS proxy since hnrss.org doesn't allow CORS
         const rssFeeds = [
           'https://hnrss.org/newest?points=50',
           'https://hnrss.org/frontpage',
         ];
 
-        // Parse RSS feed
-        const parseRSS = async (url: string): Promise<RSSItem[]> => {
+        // Parse RSS feed using CORS proxy
+        const parseRSS = async (feedUrl: string): Promise<RSSItem[]> => {
           try {
-            const response = await fetch(url, {
+            // Use AllOrigins CORS proxy (free, no auth required)
+            // Format: https://api.allorigins.win/raw?url=ENCODED_URL
+            const encodedUrl = encodeURIComponent(feedUrl);
+            const proxyUrl = `https://api.allorigins.win/raw?url=${encodedUrl}`;
+            
+            const response = await fetch(proxyUrl, {
               method: 'GET',
               headers: {
                 'Accept': 'application/rss+xml, application/xml, text/xml',
@@ -177,13 +182,7 @@ export default function InfoWidgets() {
             
             return parsedItems;
           } catch (error: any) {
-            // CORS errors: fetch will fail silently or throw TypeError
-            // This is expected on localhost but should work when deployed
-            if (error.name === 'TypeError' || error.message?.includes('Failed to fetch') || error.message?.includes('CORS')) {
-              console.warn(`RSS feed CORS issue on localhost (${url}). This should work when deployed.`);
-            } else {
-              console.error(`Failed to parse RSS feed ${url}:`, error);
-            }
+            console.error(`Failed to fetch RSS feed ${feedUrl}:`, error);
             return [];
           }
         };

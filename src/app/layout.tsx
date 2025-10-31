@@ -27,6 +27,10 @@ const crimsonText = Crimson_Text({
 export const metadata: Metadata = {
   title: "Sahil - Software Engineer & Full-Stack Developer",
   description: "Experienced software engineer specializing in full-stack development, modern web technologies, and elegant digital solutions.",
+  icons: {
+    icon: '/icon.svg',
+    apple: '/icon.svg',
+  },
 };
 
 export default function RootLayout({

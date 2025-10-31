@@ -172,20 +172,7 @@ html.dark {
   overflow: hidden;
 }
 
-/* Glass Reflection Overlay */
-.glass::before,
-.glass-strong::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: var(--glass-reflection);
-  pointer-events: none;
-  opacity: 0.5;
-  border-radius: inherit;
-}
+/* Glass Reflection Overlay - Removed */
 
 /* Glass Card */
 .glass-card {
@@ -210,24 +197,7 @@ html.dark {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Glass reflection effect for cards */
-.glass-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 40%;
-  background: var(--glass-reflection);
-  pointer-events: none;
-  opacity: 0.3;
-  transition: opacity 0.3s ease;
-  border-radius: inherit;
-}
-
-.glass-card:hover::before {
-  opacity: 0.5;
-}
+/* Glass reflection effect for cards - Removed */
 
 /* Glass Button */
 .glass-button {
@@ -242,18 +212,7 @@ html.dark {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.glass-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: var(--glass-reflection);
-  pointer-events: none;
-  opacity: 0.4;
-  border-radius: inherit;
-}
+/* Glass button reflection - Removed */
 
 .glass-button:hover {
   transform: translateY(-2px);

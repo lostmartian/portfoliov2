@@ -2,6 +2,7 @@
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import TableOfContents from '@/components/TableOfContents';
 import { ExternalLink, Brain, Code, Cloud, Server, Globe, Database } from 'lucide-react';
 
 export default function About() {
@@ -93,90 +94,123 @@ export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-[#0a0a0f] dark:via-[#0f0f17] dark:to-[#12121c] mesh-gradient">
       <Header />
-      
+      <TableOfContents />
+
       <main className="flex-1 pt-24">
         {/* Hero Section */}
-        <section className="py-24 relative overflow-hidden">
-          {/* Glass orbs background */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="glass-orb w-96 h-96 top-10 right-10 float-animation opacity-50" style={{ animationDelay: '0s' }}></div>
-            <div className="glass-orb w-72 h-72 bottom-20 left-20 float-animation opacity-60" style={{ animationDelay: '2s' }}></div>
-          </div>
-
+        <section className="pt-24 pb-8 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-16">
-              <div className="frosted-glass rounded-3xl p-12 md:p-16 edge-glow inline-block">
-                <h1 className="text-5xl md:text-6xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
-                  About Me
-                </h1>
-                <p className="text-xl md:text-2xl font-body text-gray-700 dark:text-gray-200 max-w-4xl mx-auto leading-relaxed">
-                  Founding Full-Stack AI Engineer passionate about building innovative solutions 
-                  that combine cutting-edge AI technology with robust engineering practices.
+            <div className="text-center mb-2">
+              <h1 className="text-5xl md:text-6xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
+                About Me
+              </h1>
+            </div>
+          </div>
+        </section>
+
+        {/* My Journey Section */}
+        <section id="my-journey" className="pt-8 pb-24 relative overflow-hidden">
+          <div className="max-w-4xl mx-auto px-6 lg:px-8 relative z-10">
+            <h2 className="text-4xl md:text-5xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-8">
+              My Journey
+            </h2>
+            <div className="space-y-8">
+              <div className="space-y-6">
+                <p className="text-lg md:text-xl font-body text-gray-700 dark:text-gray-200 leading-relaxed text-justify">
+                  My journey in technology began at the{" "}
+                  <span className="font-semibold text-gray-900 dark:text-gray-100">
+                    Indian Institute of Information Technology, Gwalior
+                  </span>
+                  , where I pursued an integrated{" "}
+                  <span className="font-semibold">
+                    B.Tech & M.Tech in Information Technology
+                  </span>{" "}
+                  from{" "}
+                  <span className="font-semibold">July 2019 to July 2024</span>.
+                  During my five years of study, I developed a deep passion for
+                  artificial intelligence, machine learning, and computer vision
+                  applications.
+                </p>
+
+                <p className="text-lg md:text-xl font-body text-gray-700 dark:text-gray-200 leading-relaxed text-justify">
+                  My academic research focused on cutting-edge computer vision
+                  and machine learning techniques. For my{" "}
+                  <span className="font-semibold text-gray-900 dark:text-gray-100">
+                    Master's Thesis
+                  </span>
+                  , I worked on{" "}
+                  <span className="font-semibold">
+                    "Enhancing Design Parameters and Efficient Mode Recognition
+                    of Cylindrical DRA using ML"
+                  </span>
+                  , exploring the intersection of machine learning and antenna
+                  design. My{" "}
+                  <span className="font-semibold text-gray-900 dark:text-gray-100">
+                    Bachelor's Thesis
+                  </span>{" "}
+                  involved developing a novel{" "}
+                  <span className="font-semibold">
+                    "Building and Road Segmentation using EffUNet and Transfer
+                    Learning Approach"
+                  </span>
+                  , where I created an innovative architecture combining
+                  EfficientNetV2 as an encoder with a UNet decoder, achieving
+                  benchmark mIOU scores of 0.8365 and 0.9153.
+                </p>
+
+                <p className="text-lg md:text-xl font-body text-gray-700 dark:text-gray-200 leading-relaxed text-justify">
+                  Since <span className="font-semibold">October 2024</span>,
+                  I've been working as a{" "}
+                  <span className="font-semibold text-gray-900 dark:text-gray-100">
+                    Founding Full-Stack AI Engineer
+                  </span>{" "}
+                  at a{" "}
+                  <span className="font-semibold">
+                    stealth-mode AI tech startup
+                  </span>
+                  , where I've had the unique opportunity to build AI-powered
+                  solutions from the ground up. As the sole engineer for this
+                  function, I independently engineer and deploy solutions
+                  leveraging <span className="font-semibold">LLMs</span>,
+                  computer vision with{" "}
+                  <span className="font-semibold">OpenCV</span>, and{" "}
+                  <span className="font-semibold">AWS cloud services</span>{" "}
+                  (Lambda, SQS, EC2). I've developed proprietary multi-role data
+                  labeling platforms, engineered full-stack applications using
+                  Next.js, Go, Python, PostgreSQL, and MongoDB, and built
+                  complex ML pipelines for image digitization.
+                </p>
+
+                <p className="text-lg md:text-xl font-body text-gray-700 dark:text-gray-200 leading-relaxed text-justify">
+                  My research contributions include published work on
+                  steganography and computer vision. I co-authored a paper on{" "}
+                  <span className="font-semibold">
+                    "LSB Steganography Using Pixel Locator Sequence with AES"
+                  </span>{" "}
+                  which was presented at{" "}
+                  <span className="font-semibold text-gray-900 dark:text-gray-100">
+                    IEEE ICSCCC'21, NITJ
+                  </span>
+                  , showcasing significant improvements in steganography
+                  security through innovative techniques using Pixel Locator
+                  Sequences and AES encryption.
+                </p>
+
+                <p className="text-lg md:text-xl font-body text-gray-700 dark:text-gray-200 leading-relaxed text-justify">
+                  I'm passionate about solving complex problems through
+                  innovative technology solutions and continuous learning in the
+                  rapidly evolving field of AI. My expertise spans from
+                  low-level system design to high-level AI/ML applications, and
+                  I'm always excited to push the boundaries of what's possible
+                  with cutting-edge technology.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Technical Skills Section */}
-        <section className="py-24 relative overflow-hidden">
-          {/* Background decorative elements */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="glass-orb w-64 h-64 top-20 left-10 float-animation opacity-40" style={{ animationDelay: '1s' }}></div>
-            <div className="glass-orb w-56 h-56 bottom-10 right-10 float-animation opacity-50" style={{ animationDelay: '3s' }}></div>
-          </div>
-
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
-                Technical Skills
-              </h2>
-              <p className="text-xl font-body text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                Comprehensive expertise across AI/ML, full-stack development, and cloud technologies
-              </p>
-            </div>
-
-            {/* Skills Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {skillsWithIcons.map((category, idx) => {
-                const CategoryIcon = category.icon;
-                return (
-                  <div
-                    key={idx}
-                    className="glass-card rounded-3xl p-6 group"
-                  >
-                    {/* Category Header */}
-                    <div className="flex items-center space-x-3 mb-6 relative z-10">
-                      <div className="w-12 h-12 glass rounded-2xl flex items-center justify-center group-hover:scale-110 transition-all duration-300 edge-glow">
-                        <CategoryIcon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                      </div>
-                      <h3 className="text-lg font-serif font-semibold text-gray-900 dark:text-gray-100">
-                        {category.category}
-                      </h3>
-                    </div>
-
-                    {/* Skills List */}
-                    <div className="space-y-2 mt-1 relative z-10">
-                      {category.items.map((item, itemIdx) => (
-                        <div
-                          key={itemIdx}
-                          className="py-2 px-3 rounded-lg glass hover:scale-105 transition-all duration-200"
-                        >
-                          <span className="text-sm font-body text-gray-700 dark:text-gray-200">
-                            {item}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
         {/* Coding Profiles Section */}
-        <section className="py-12 relative">
+        <section id="coding-profiles" className="py-12 relative">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <h2 className="text-3xl md:text-4xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
               Coding Profiles
@@ -210,56 +244,67 @@ export default function About() {
           </div>
         </section>
 
-        {/* My Journey Section */}
-        <section className="py-24 relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="glass-orb w-80 h-80 top-10 right-10 float-animation opacity-40" style={{ animationDelay: '2s' }}></div>
-          </div>
+        {/* Technical Skills Section */}
+        <section id="technical-skills" className="py-24 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
+                Technical Skills
+              </h2>
+              <p className="text-xl font-body text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                Comprehensive expertise across AI/ML, full-stack development,
+                and cloud technologies
+              </p>
+            </div>
 
-          <div className="max-w-4xl mx-auto px-6 lg:px-8 relative z-10">
-            <div className="frosted-glass rounded-3xl p-8 md:p-12">
-              <h2 className="text-3xl md:text-4xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-8">
-                  My Journey
-                </h2>
-              <div className="prose prose-lg max-w-none space-y-6">
-                <p className="text-lg font-body text-gray-700 dark:text-gray-200 leading-relaxed">
-                  My journey began at the Indian Institute of Information Technology, Gwalior, where I pursued 
-                  an integrated B.Tech & M.Tech in Information Technology. During my studies, I developed a deep 
-                  passion for artificial intelligence and machine learning, particularly in computer vision applications.
-                </p>
-                
-                <p className="text-lg font-body text-gray-700 dark:text-gray-200 leading-relaxed">
-                  As a Founding Full-Stack AI Engineer at a stealth-mode startup, I've had the unique opportunity 
-                  to build AI-powered solutions from the ground up. I specialize in LLMs, computer vision with OpenCV, 
-                  and cloud-native architectures using AWS services like Lambda, SQS, and EC2.
-                </p>
-                
-                <p className="text-lg font-body text-gray-700 dark:text-gray-200 leading-relaxed">
-                  My research background includes published work on steganography and computer vision, with papers 
-                  presented at IEEE conferences. I'm passionate about solving complex problems through innovative 
-                  technology solutions and continuous learning in the rapidly evolving field of AI.
-                </p>
-              </div>
+            {/* Skills Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {skillsWithIcons.map((category, idx) => {
+                const CategoryIcon = category.icon;
+                return (
+                  <div key={idx} className="glass-card rounded-3xl p-6 group">
+                    {/* Category Header */}
+                    <div className="flex items-center space-x-3 mb-6 relative z-10">
+                      <div className="w-12 h-12 glass rounded-2xl flex items-center justify-center group-hover:scale-110 transition-all duration-300 edge-glow">
+                        <CategoryIcon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                      </div>
+                      <h3 className="text-lg font-serif font-semibold text-gray-900 dark:text-gray-100">
+                        {category.category}
+                      </h3>
+                    </div>
+
+                    {/* Skills List */}
+                    <div className="space-y-2 mt-1 relative z-10">
+                      {category.items.map((item, itemIdx) => (
+                        <div
+                          key={itemIdx}
+                          className="py-2 px-3 rounded-lg glass hover:scale-105 transition-all duration-200"
+                        >
+                          <span className="text-sm font-body text-gray-700 dark:text-gray-200">
+                            {item}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 relative overflow-hidden bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 dark:from-slate-900 dark:via-indigo-900 dark:to-purple-900">
+        <section id="contact" className="py-24 relative overflow-hidden bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 dark:from-slate-900 dark:via-indigo-900 dark:to-purple-900">
           <div className="absolute inset-0 mesh-gradient opacity-30"></div>
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="glass-orb w-72 h-72 top-10 left-10 float-animation opacity-30" style={{ animationDelay: '1s' }}></div>
-            <div className="glass-orb w-64 h-64 bottom-10 right-10 float-animation opacity-40" style={{ animationDelay: '3s' }}></div>
-          </div>
-
           <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
             <div className="frosted-glass rounded-3xl p-12 md:p-16 edge-glow">
               <h2 className="text-4xl md:text-5xl font-elegant font-bold mb-6 text-gray-900 dark:text-white">
                 Let's Work Together
               </h2>
               <p className="text-xl font-body mb-12 text-gray-700 dark:text-white/90 max-w-2xl mx-auto">
-                I'm always excited to take on new challenges and collaborate on 
-                innovative AI-powered projects that push the boundaries of what's possible.
+                I'm always excited to take on new challenges and collaborate on
+                innovative AI-powered projects that push the boundaries of
+                what's possible.
               </p>
               <a
                 href="/projects"
@@ -271,7 +316,7 @@ export default function About() {
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );

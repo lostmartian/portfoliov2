@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
 
 export default function Footer() {
@@ -80,13 +81,13 @@ export default function Footer() {
                 { href: '/experience', label: 'Experience' },
                 { href: '/projects', label: 'Projects' }
               ].map((link) => (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
                   className="block text-gray-300 hover:text-blue-400 transition-all duration-300 font-body hover:translate-x-2"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Work_Sans, Inter, Crimson_Text } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import PersistentWidgets from "@/components/PersistentWidgets";
 import "./globals.css";
 
 const workSans = Work_Sans({
@@ -56,6 +57,7 @@ export default function RootLayout({
         className={`${workSans.variable} ${inter.variable} ${crimsonText.variable} font-sans antialiased scroll-smooth`}
       >
         <ThemeProvider>
+          <PersistentWidgets />
           {children}
         </ThemeProvider>
       </body>

@@ -2,6 +2,7 @@
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import TableOfContents from '@/components/TableOfContents';
 import { Github, ArrowRight, Code, Palette, Database, Globe, FileText, Brain } from 'lucide-react';
 
 export default function Projects() {
@@ -148,44 +149,33 @@ export default function Projects() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-[#0a0a0f] dark:via-[#0f0f17] dark:to-[#12121c] mesh-gradient">
       <Header />
+      <TableOfContents />
       
       <main className="flex-1 pt-24">
         {/* Hero Section */}
         <section className="py-24 relative overflow-hidden">
-          {/* Glass orbs background */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="glass-orb w-96 h-96 top-10 right-10 float-animation opacity-50" style={{ animationDelay: '0s' }}></div>
-            <div className="glass-orb w-72 h-72 bottom-20 left-20 float-animation opacity-60" style={{ animationDelay: '2s' }}></div>
-          </div>
-
           <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
-              <div className="frosted-glass rounded-3xl p-12 md:p-16 edge-glow inline-block">
-                <h1 className="text-5xl md:text-6xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
-                  My Work
-                </h1>
-                <p className="text-xl md:text-2xl font-body text-gray-700 dark:text-gray-200 max-w-4xl mx-auto leading-relaxed">
-                  A showcase of my projects in AI/ML, database systems, and full-stack development, 
-                  featuring innovative solutions and research contributions.
-                </p>
-              </div>
+              <h1 className="text-5xl md:text-6xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
+                My Work
+              </h1>
             </div>
           </div>
         </section>
 
         {/* Projects Section */}
-        <section className="py-24 relative overflow-hidden">
-          {/* Background decorative elements */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="glass-orb w-64 h-64 top-20 right-10 float-animation opacity-40" style={{ animationDelay: '1s' }}></div>
-            <div className="glass-orb w-56 h-56 bottom-20 left-10 float-animation opacity-50" style={{ animationDelay: '3s' }}></div>
-          </div>
-
+        <section id="projects" className="py-24 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <h2 className="text-4xl md:text-5xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-16 text-center">
+              Projects
+            </h2>
             <div className="space-y-24">
-              {projects.map((project, index) => (
+              {projects.map((project, index) => {
+                const projectId = `project-${project.id}`;
+                return (
                 <div
                   key={project.id}
+                  id={projectId}
                   className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
                     index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
                   }`}
@@ -255,19 +245,14 @@ export default function Projects() {
                     </div>
                   </div>
                 </div>
-              ))}
+              )})}
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 relative overflow-hidden bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 dark:from-slate-900 dark:via-indigo-900 dark:to-purple-900">
+        <section id="contact" className="py-24 relative overflow-hidden bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 dark:from-slate-900 dark:via-indigo-900 dark:to-purple-900">
           <div className="absolute inset-0 mesh-gradient opacity-30"></div>
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="glass-orb w-80 h-80 top-10 left-10 float-animation opacity-30" style={{ animationDelay: '0s' }}></div>
-            <div className="glass-orb w-72 h-72 bottom-10 right-10 float-animation opacity-40" style={{ animationDelay: '2s' }}></div>
-          </div>
-
           <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
             <div className="frosted-glass rounded-3xl p-12 md:p-16 edge-glow">
               <h2 className="text-4xl md:text-5xl font-elegant font-bold mb-6 text-gray-900 dark:text-white">

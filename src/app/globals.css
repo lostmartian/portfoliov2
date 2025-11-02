@@ -411,3 +411,19 @@ html.dark {
 .animate-slide-in-left {
   animation: slide-in-left 0.3s ease-in-out forwards;
 }
+
+/* Fade in animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-in-out forwards;
+}
+
+/* Masonry Gallery Styles - Flowbite inspired */

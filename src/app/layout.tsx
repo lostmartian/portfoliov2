@@ -1,66 +1,43 @@
-import type { Metadata } from "next";
-import { Work_Sans, Inter, Crimson_Text } from "next/font/google";
-import { ThemeProvider } from "@/components/ThemeProvider";
-import PersistentWidgets from "@/components/PersistentWidgets";
-import "./globals.css";
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter, Outfit, Space_Grotesk } from 'next/font/google';
+import { ThemeProvider } from 'next-themes';
+import PersistentWidgets from '@/components/PersistentWidgets';
 
-const workSans = Work_Sans({
-  variable: "--font-work-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const crimsonText = Crimson_Text({
-  variable: "--font-crimson",
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  display: "swap",
-});
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
+const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space' });
 
 export const metadata: Metadata = {
-  title: "Sahil - Software Engineer & Full-Stack Developer",
-  description: "Experienced software engineer specializing in full-stack development, modern web technologies, and elegant digital solutions.",
-  icons: {
-    icon: '/icon.svg',
-    apple: '/icon.svg',
-  },
+  title: 'Portfolio | Creative Developer',
+  description: 'A showcase of creative development and design engineering.',
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="dark">
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
                 try {
-                  var theme = localStorage.getItem('portfolio-theme') || 'light';
-                  var root = document.documentElement;
-                  root.classList.remove('light', 'dark');
-                  root.classList.add(theme);
-                  root.style.colorScheme = theme;
+                  // Force dark mode
+                  localStorage.setItem('theme', 'dark');
+                  document.documentElement.classList.add('dark');
+                  document.documentElement.style.colorScheme = 'dark';
                 } catch (e) {}
               })();
             `,
           }}
         />
       </head>
-      <body
-        className={`${workSans.variable} ${inter.variable} ${crimsonText.variable} font-sans antialiased scroll-smooth`}
-      >
-        <ThemeProvider>
+      <body className={`${inter.variable} ${outfit.variable} ${spaceGrotesk.variable} font-sans antialiased bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300`}>
+        <ThemeProvider attribute="class" forcedTheme="dark" enableSystem={false} storageKey="theme">
           <PersistentWidgets />
           {children}
         </ThemeProvider>

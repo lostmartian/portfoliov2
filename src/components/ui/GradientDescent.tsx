@@ -26,7 +26,16 @@ export default function GradientDescent({ learningRate }: GradientDescentProps) 
   const { theme } = useTheme();
 
   // Physics state
-  const ballPos = useRef({ x: 0.0, y: 0.0 });
+  const getRandomStartPoint = () => {
+    const angle = Math.random() * Math.PI * 2;
+    const radius = 0.8 + Math.random() * 0.5; // Random radius between 0.8 and 1.3
+    return {
+      x: Math.cos(angle) * radius,
+      y: Math.sin(angle) * radius
+    };
+  };
+
+  const ballPos = useRef(getRandomStartPoint());
   const velocity = useRef({ x: 0.0, y: 0.0 });
   const pathHistory = useRef<PathPoint[]>([]);
   const turnPoints = useRef<TurnPoint[]>([]);
@@ -436,11 +445,40 @@ export default function GradientDescent({ learningRate }: GradientDescentProps) 
       setLastTurn(null);
     };
 
-    window.addEventListener('mousedown', handleMouseDown);
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const rect = canvas.getBoundingClientRect();
+        const clickX = e.touches[0].clientX - rect.left;
+        const clickY = e.touches[0].clientY - rect.top;
+
+        const x = ((clickX - rect.width / 2) / rect.height) * 3.0;
+        const y = -((clickY - rect.height / 2) / rect.height) * 3.0; // Flip Y
+
+        ballPos.current = { x, y };
+        velocity.current = { x: 0, y: 0 };
+        pathHistory.current = [];
+        turnPoints.current = [];
+        prevGradient.current = { dx: 0, dy: 0 };
+        stepCount.current = 0;
+        totalDistance.current = 0;
+        setTurns(0);
+        setSteps(0);
+        setDistance(0);
+        setLastTurn(null);
+      }
+    };
+
+    // Use existing canvas variable from outer scope
+    canvas.addEventListener('mousedown', handleMouseDown);
+    canvas.addEventListener('touchstart', handleTouchStart);
+
     animationId = requestAnimationFrame(render);
 
     return () => {
-      window.removeEventListener('mousedown', handleMouseDown);
+      if (canvas) {
+        canvas.removeEventListener('mousedown', handleMouseDown);
+        canvas.removeEventListener('touchstart', handleTouchStart);
+      }
       cancelAnimationFrame(animationId);
       // Clean up overlay canvas
       if (ctx2d) {
@@ -459,7 +497,7 @@ export default function GradientDescent({ learningRate }: GradientDescentProps) 
 
       {/* Analysis Panel */}
       {steps > 0 && (
-        <div className="absolute top-32 right-8 z-20 w-72 pointer-events-auto">
+        <div className="absolute top-24 right-4 md:top-32 md:right-8 z-20 w-64 md:w-72 pointer-events-auto">
           <div className="bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl p-4 shadow-2xl backdrop-blur-xl">
             <div className="flex items-center gap-2 mb-3 text-[var(--text-primary)] border-b border-[var(--glass-border)] pb-2">
               <TrendingDown size={16} className="text-[var(--neon-cyan)]" />

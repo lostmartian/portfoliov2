@@ -5,7 +5,6 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import AnimatedText from '@/components/ui/AnimatedText';
 import MagneticButton from '@/components/ui/MagneticButton';
-import Spotlight from '@/components/ui/Spotlight';
 import GameOfLife from '@/components/ui/GameOfLife';
 import GradientDescent from '@/components/ui/GradientDescent';
 import GradientControls from '@/components/ui/GradientControls';
@@ -14,6 +13,24 @@ import BackgroundSwitcher from '@/components/ui/BackgroundSwitcher';
 import SimulationLegend from '@/components/ui/SimulationLegend';
 import { ArrowRight, Code, Zap, Globe, Cpu, Database, Layout, Server, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const skills = [
+  { icon: Layout, title: 'Frontend Architecture', description: 'React, Next.js, Tailwind CSS, Framer Motion' },
+  { icon: Server, title: 'Backend Systems', description: 'Node.js, Python, Go, PostgreSQL, Redis' },
+  { icon: Cpu, title: 'AI Integration', description: 'LLMs, RAG, LangChain, Vector Databases' },
+  { icon: Globe, title: 'Cloud Infrastructure', description: 'AWS, Docker, Kubernetes, Terraform' },
+];
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5
+    }
+  }
+};
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -26,16 +43,8 @@ export default function Home() {
 
   if (!mounted) return null;
 
-  const skills = [
-    { icon: Layout, title: 'Frontend Architecture', description: 'React, Next.js, Tailwind CSS, Framer Motion' },
-    { icon: Server, title: 'Backend Systems', description: 'Node.js, Python, Go, PostgreSQL, Redis' },
-    { icon: Cpu, title: 'AI Integration', description: 'LLMs, RAG, LangChain, Vector Databases' },
-    { icon: Globe, title: 'Cloud Infrastructure', description: 'AWS, Docker, Kubernetes, Terraform' },
-  ];
-
   return (
     <div className="min-h-screen bg-[var(--bg-deep)] text-[var(--text-primary)] overflow-x-hidden selection:bg-[var(--neon-cyan)] selection:text-black">
-      <Spotlight />
       <Header />
       <BackgroundSwitcher currentMode={bgMode} onSwitch={setBgMode} />
       <AnimatePresence>
@@ -48,42 +57,44 @@ export default function Home() {
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
           {/* Background Elements */}
-          <AnimatePresence mode="wait">
-            {bgMode === 'life' ? (
-              <motion.div
-                key="life"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}
-                className="absolute inset-0"
-              >
-                <GameOfLife />
-              </motion.div>
-            ) : bgMode === 'gradient' ? (
-              <motion.div
-                key="gradient"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}
-                className="absolute inset-0"
-              >
-                <GradientDescent learningRate={learningRate} />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="neural"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}
-                className="absolute inset-0"
-              >
-                <NeuralSearch />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <div className="hidden md:block absolute inset-0">
+            <AnimatePresence mode="wait">
+              {bgMode === 'life' ? (
+                <motion.div
+                  key="life"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  className="absolute inset-0"
+                >
+                  <GameOfLife />
+                </motion.div>
+              ) : bgMode === 'gradient' ? (
+                <motion.div
+                  key="gradient"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  className="absolute inset-0"
+                >
+                  <GradientDescent learningRate={learningRate} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="neural"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  className="absolute inset-0"
+                >
+                  <NeuralSearch />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
           <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
           {/* Hero Content - Conditionally Rendered */}
           <AnimatePresence mode="wait">
@@ -97,14 +108,18 @@ export default function Home() {
                 className="relative z-10 text-center px-4 max-w-4xl mx-auto"
               >
                 <div className="mb-6 inline-block">
-                  <span className="px-4 py-1.5 rounded-full text-sm font-medium bg-[var(--glass-highlight)] border border-[var(--glass-border)] text-[var(--neon-cyan)] shadow-[0_0_20px_rgba(0,180,216,0.2)]">
+                  <span className="px-4 py-1.5 rounded-full text-sm font-medium bg-[var(--glass-highlight)] border border-[var(--glass-border)] text-[var(--neon-cyan)] shadow-[0_0_20px_rgba(0,180,216,0.2)] flex items-center gap-2">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
                     Open to Opportunities
                   </span>
                 </div>
 
-                <h1 className="text-5xl md:text-7xl font-bold mb-8 tracking-tight text-center">
-                  <AnimatedText text="Full-Stack Engineer" className="block text-[var(--text-primary)] drop-shadow-lg mx-auto" />
-                  <AnimatedText text="& AI Architect" className="block bg-clip-text text-transparent bg-gradient-to-r from-[var(--neon-purple)] via-[var(--neon-cyan)] to-[var(--neon-purple)] animate-gradient mx-auto" delay={0.2} />
+                <h1 className="text-5xl md:text-7xl font-bold mb-8 tracking-tight text-center leading-tight">
+                  <AnimatedText text="Full-Stack Engineer" className="block text-[var(--text-primary)] drop-shadow-lg mx-auto mb-2" />
+                  <AnimatedText text="& AI Architect" className="block bg-clip-text text-transparent bg-gradient-to-r from-[var(--neon-purple)] via-[var(--neon-cyan)] to-[var(--neon-purple)] animate-gradient mx-auto" delay={0.1} />
                 </h1>
 
                 <p className="text-lg md:text-xl text-[var(--text-secondary)] mb-10 max-w-3xl mx-auto leading-relaxed">
@@ -156,11 +171,12 @@ export default function Home() {
               {skills.map((skill, index) => (
                 <motion.div
                   key={skill.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  variants={cardVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
                   transition={{ delay: index * 0.1 }}
-                  className="glass-card group p-8 rounded-3xl hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
+                  className="glass-card group p-8 rounded-3xl hover:shadow-2xl transition-shadow duration-300 relative overflow-hidden"
                 >
                   {/* Gradient accent */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[var(--neon-cyan)]/10 to-[var(--neon-purple)]/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-500" />
@@ -224,7 +240,7 @@ export default function Home() {
               <MagneticButton>
                 <a
                   href="mailto:sahilgangurde08@gmail.com"
-                  className="inline-flex items-center px-10 py-5 bg-gradient-to-r from-[var(--neon-cyan)] to-[var(--neon-purple)] text-white font-bold rounded-full hover:opacity-90 transition-opacity shadow-lg"
+                  className="inline-flex items-center px-10 py-5 bg-[var(--glass-bg)] border border-[var(--glass-border)] text-[var(--text-primary)] font-bold rounded-full hover:bg-[var(--glass-highlight)] hover:border-[var(--neon-purple)] transition-all shadow-lg backdrop-blur-md"
                 >
                   <Mail className="w-5 h-5 mr-2" />
                   Get in Touch

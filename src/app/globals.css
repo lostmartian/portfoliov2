@@ -145,6 +145,62 @@ body::before {
   transform: translateY(-2px);
 }
 
+/* Hyper-Realistic VisionOS Glass */
+.glass-vision-os {
+  background: rgba(255, 255, 255, 0.65);
+  /* Slightly lower opacity to show blur */
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+}
+
+.dark .glass-vision-os {
+  background: rgba(5, 5, 10, 0.75);
+  /* Slightly lower opacity to show blur */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+/* 3D Water Bubble Effect */
+.glass-bubble {
+  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 80%);
+  backdrop-filter: blur(4px);
+  /* Low blur for clear refraction */
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    inset 0 3px 6px rgba(255, 255, 255, 0.9),
+    /* Strong top highlight */
+    inset 0 -3px 6px rgba(0, 0, 0, 0.1),
+    /* Bottom shadow */
+    0 4px 15px rgba(0, 0, 0, 0.15),
+    /* Drop shadow */
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+  /* Outer rim */
+}
+
+.dark .glass-bubble {
+  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 80%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    inset 0 3px 6px rgba(255, 255, 255, 0.6),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.3),
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
 /* Neon Glow Utilities */
 .text-glow {
   text-shadow: 0 0 10px rgba(0, 243, 255, 0.5), 0 0 20px rgba(0, 243, 255, 0.3);

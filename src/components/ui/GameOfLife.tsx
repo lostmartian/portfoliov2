@@ -132,8 +132,30 @@ export default function GameOfLife() {
             }
         };
 
+        const handleTouchMove = (e: TouchEvent) => {
+            if (e.touches.length > 0) {
+                const rect = canvas.getBoundingClientRect();
+                const x = Math.floor((e.touches[0].clientX - rect.left) / CELL_SIZE);
+                const y = Math.floor((e.touches[0].clientY - rect.top) / CELL_SIZE);
+
+                // Paint cells around cursor
+                const brushSize = 2;
+                for (let i = -brushSize; i <= brushSize; i++) {
+                    for (let j = -brushSize; j <= brushSize; j++) {
+                        const col = (x + i + cols) % cols;
+                        const row = (y + j + rows) % rows;
+                        if (Math.random() > 1 - SPAWN_RATE) {
+                            grid[col][row] = 1;
+                        }
+                    }
+                }
+            }
+        };
+
         window.addEventListener('resize', resize);
         window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('touchmove', handleTouchMove);
+        window.addEventListener('touchstart', handleTouchMove);
 
         resize();
         loop();
@@ -141,6 +163,8 @@ export default function GameOfLife() {
         return () => {
             window.removeEventListener('resize', resize);
             window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('touchmove', handleTouchMove);
+            window.removeEventListener('touchstart', handleTouchMove);
             cancelAnimationFrame(animationId);
         };
     }, [theme]);

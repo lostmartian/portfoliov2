@@ -132,7 +132,7 @@ export default function Home() {
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <MagneticButton>
-                    <a href="#projects" className="px-8 py-4 bg-[var(--text-primary)] text-[var(--bg-deep)] rounded-full font-bold hover:bg-[var(--neon-cyan)] transition-colors flex items-center gap-2">
+                    <a href="/projects" className="px-8 py-4 bg-[var(--text-primary)] text-[var(--bg-deep)] rounded-full font-bold hover:bg-[var(--neon-cyan)] transition-colors flex items-center gap-2">
                       View Projects <ArrowRight size={20} />
                     </a>
                   </MagneticButton>

@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter, Outfit, Space_Grotesk } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import PersistentWidgets from '@/components/PersistentWidgets';
+import MobileNavbar from '@/components/MobileNavbar';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
@@ -39,6 +40,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${outfit.variable} ${spaceGrotesk.variable} font-sans antialiased bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300`}>
         <ThemeProvider attribute="class" forcedTheme="dark" enableSystem={false} storageKey="theme">
           <PersistentWidgets />
+          <MobileNavbar />
           {children}
         </ThemeProvider>
       </body>

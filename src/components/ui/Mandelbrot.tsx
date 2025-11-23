@@ -184,11 +184,20 @@ export default function Mandelbrot() {
             mouseY = 1.0 - e.clientY / window.innerHeight; // Flip Y for WebGL
         };
 
+        const handleTouchMove = (e: TouchEvent) => {
+            if (e.touches.length > 0) {
+                mouseX = e.touches[0].clientX / window.innerWidth;
+                mouseY = 1.0 - e.touches[0].clientY / window.innerHeight;
+            }
+        };
+
         window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('touchmove', handleTouchMove);
         animationId = requestAnimationFrame(render);
 
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('touchmove', handleTouchMove);
             cancelAnimationFrame(animationId);
         };
     }, [theme]);

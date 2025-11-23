@@ -98,6 +98,10 @@ export default function NeuralSearch() {
         target: [0, 0, 0]
     });
 
+    // Touch handling state
+    const touchStart = useRef<{ x: number, y: number } | null>(null);
+    const lastTouchTime = useRef<number>(0);
+
     // Data
     const concepts = useMemo(() => generateConcepts(), []);
     const [searchResults, setSearchResults] = useState<Record<string, number>>({}); // id -> distance
@@ -376,7 +380,8 @@ export default function NeuralSearch() {
 
             const aspect = canvas.width / canvas.height;
             Mat4.perspective(projMatrix, Math.PI / 4, aspect, 0.1, 100.0);
-            Mat4.lookAt(viewMatrix, [camX, camY, camZ], [0, 0, 0], [0, 1, 0]);
+            // Look at a point higher up (y=3) to shift the graph down in the viewport
+            Mat4.lookAt(viewMatrix, [camX, camY + 2, camZ], [0, 2, 0], [0, 1, 0]);
 
             // 1. Draw Axes
             gl.useProgram(lineProgram);
@@ -473,6 +478,31 @@ export default function NeuralSearch() {
         };
     }, [concepts, relevanceScores]); // Re-bind when relevance changes
 
+    // Touch Event Handlers
+    const handleTouchStart = (e: React.TouchEvent) => {
+        if (e.touches.length === 1) {
+            touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        if (!touchStart.current || e.touches.length !== 1) return;
+
+        const deltaX = e.touches[0].clientX - touchStart.current.x;
+        const deltaY = e.touches[0].clientY - touchStart.current.y;
+
+        // Sensitivity factor
+        const sensitivity = 0.005;
+
+        rotate(-deltaX * sensitivity, -deltaY * sensitivity);
+
+        touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    };
+
+    const handleTouchEnd = () => {
+        touchStart.current = null;
+    };
+
     // UI Control Handlers
     const rotate = (dTheta: number, dPhi: number) => {
         cameraState.current.theta += dTheta;
@@ -496,7 +526,12 @@ export default function NeuralSearch() {
     };
 
     return (
-        <div className="absolute inset-0 w-full h-full">
+        <div
+            className="absolute inset-0 w-full h-full"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+        >
             <canvas
                 ref={canvasRef}
                 className="absolute inset-0 w-full h-full"
@@ -504,7 +539,7 @@ export default function NeuralSearch() {
             />
 
             {/* Search Interface */}
-            <div className="absolute top-32 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-md px-4 pointer-events-auto">
+            <div className="absolute top-24 md:top-32 left-1/2 transform -translate-x-1/2 z-20 w-[90%] md:w-full max-w-md px-0 md:px-4 pointer-events-auto">
                 <div className="relative group">
                     <div className="absolute inset-0 bg-gradient-to-r from-[var(--neon-cyan)] to-[var(--neon-purple)] rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
                     <div className="relative flex items-center bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-full px-4 py-3 shadow-2xl backdrop-blur-xl">
@@ -513,7 +548,7 @@ export default function NeuralSearch() {
                             type="text"
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
-                            placeholder="Search concepts (e.g., 'AI', 'React')..."
+                            placeholder="Search concepts..."
                             className="bg-transparent border-none outline-none text-[var(--text-primary)] placeholder-[var(--text-muted)] w-full font-medium"
                         />
                     </div>
@@ -527,7 +562,7 @@ export default function NeuralSearch() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 20 }}
-                        className="absolute top-32 right-8 z-20 w-64 pointer-events-auto"
+                        className="absolute top-[calc(100vh-280px)] md:top-32 left-4 md:left-auto md:right-8 z-20 w-[calc(100%-2rem)] md:w-64 pointer-events-auto"
                     >
                         <div className="bg-[var(--glass-bg)] border border-[var(--glass-border)] rounded-xl p-4 shadow-2xl backdrop-blur-xl">
                             <div className="flex items-center gap-2 mb-3 text-[var(--text-primary)]">
@@ -570,7 +605,7 @@ export default function NeuralSearch() {
             </AnimatePresence>
 
             {/* Dedicated Controls */}
-            <div className="absolute bottom-8 right-8 z-30 flex flex-col gap-2 pointer-events-auto">
+            <div className="absolute top-24 left-4 md:top-32 md:left-8 z-30 flex flex-col gap-2 pointer-events-auto scale-90 md:scale-100 origin-top-left">
                 <div className="flex gap-2 justify-center">
                     <button onClick={() => rotate(0, -0.1)} className="p-2 rounded-full bg-[var(--glass-bg)] border border-[var(--glass-border)] hover:bg-[var(--glass-highlight)] transition-colors">
                         <ArrowUp size={16} className="text-[var(--text-primary)]" />

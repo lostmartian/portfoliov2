@@ -11,7 +11,7 @@ interface BackgroundSwitcherProps {
 
 export default function BackgroundSwitcher({ currentMode, onSwitch }: BackgroundSwitcherProps) {
     return (
-        <div className="fixed bottom-8 right-8 z-50 flex items-center gap-2 p-1 rounded-full glass-panel">
+        <div className="hidden md:flex fixed bottom-8 right-8 z-50 items-center gap-2 p-1 rounded-full glass-panel">
             <button
                 onClick={() => onSwitch('life')}
                 className={cn(

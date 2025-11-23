@@ -2,6 +2,7 @@
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PageHero from '@/components/PageHero';
 import { useState, useEffect } from 'react';
 import { Palette, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -23,10 +24,10 @@ export default function Hobbies() {
         if (response.ok) {
           const data = await response.json();
           setCaptions(data);
-          
+
           // Use captions.json keys as the source of truth for which paintings exist
           const paintingNames = Object.keys(data);
-          
+
           // Sort numerically (1.jpg, 2.jpg, 3.jpg, etc.)
           const sortedPaintings = paintingNames.sort((a, b) => {
             const numA = parseInt(a.replace('.jpg', ''));
@@ -50,7 +51,7 @@ export default function Hobbies() {
 
     const loadImageDimensions = async () => {
       const dimensions: Record<string, { width: number; height: number; isLandscape: boolean }> = {};
-      
+
       await Promise.all(
         paintings.map((painting) => {
           return new Promise<void>((resolve) => {
@@ -68,7 +69,7 @@ export default function Hobbies() {
           });
         })
       );
-      
+
       setImageDimensions(dimensions);
     };
 
@@ -120,20 +121,20 @@ export default function Hobbies() {
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!touchStart) return;
-    
+
     const currentX = e.targetTouches[0].clientX;
     const currentY = e.targetTouches[0].clientY;
-    
+
     // Check if this is primarily a horizontal swipe
     const deltaX = Math.abs(currentX - touchStart);
     const deltaY = Math.abs(currentY - touchStartY);
-    
+
     // If horizontal swipe is more significant than vertical, prevent default to stop page scrolling
     if (deltaX > deltaY && deltaX > 10) {
       e.preventDefault();
       e.stopPropagation();
     }
-    
+
     setTouchEnd(currentX);
   };
 
@@ -144,7 +145,7 @@ export default function Hobbies() {
       setTouchStartY(0);
       return;
     }
-    
+
     const distanceX = touchStart - touchEnd;
     const distanceY = Math.abs((e.changedTouches[0]?.clientY || 0) - touchStartY);
     const minSwipeDistance = 50;
@@ -153,7 +154,7 @@ export default function Hobbies() {
     if (Math.abs(distanceX) > distanceY && Math.abs(distanceX) > minSwipeDistance) {
       e.preventDefault();
       e.stopPropagation();
-      
+
       if (distanceX > minSwipeDistance) {
         // Swiped left - go to next
         goToNext();
@@ -162,7 +163,7 @@ export default function Hobbies() {
         goToPrevious();
       }
     }
-    
+
     // Reset touch points
     setTouchStart(0);
     setTouchEnd(0);
@@ -189,23 +190,12 @@ export default function Hobbies() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-[#0a0a0f] dark:via-[#0f0f17] dark:to-[#12121c] mesh-gradient">
       <Header />
 
-      <main className="w-full pt-24">
+      <main className="w-full pt-4 md:pt-24">
         {/* Hero Section */}
-        <section className="pt-16 pb-12 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-20 h-20 glass-card rounded-3xl mb-6 group">
-                <Palette className="w-10 h-10 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300" />
-              </div>
-              <h1 className="text-5xl md:text-7xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-4">
-                My Hobbies
-              </h1>
-              <p className="text-xl md:text-2xl font-body text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                Exploring creativity through paintings, photography, and music
-              </p>
-            </div>
-          </div>
-        </section>
+        <PageHero
+          title="My Hobbies"
+          subtitle="Exploring creativity through paintings, photography, and music"
+        />
 
         {/* Paintings Gallery Section */}
         <section className="py-8 pb-24 relative overflow-hidden">
@@ -256,10 +246,10 @@ export default function Hobbies() {
                   </>
                 )}
 
-                <div 
+                <div
                   className="relative overflow-hidden min-h-[70vh]"
-                  style={{ 
-                    position: 'relative', 
+                  style={{
+                    position: 'relative',
                     backgroundColor: 'transparent',
                     touchAction: 'pan-y pinch-zoom'
                   }}
@@ -267,10 +257,10 @@ export default function Hobbies() {
                   onTouchMove={handleTouchMove}
                   onTouchEnd={handleTouchEnd}
                 >
-                  <div 
+                  <div
                     className="flex transition-transform duration-500 ease-in-out h-full"
-                    style={{ 
-                      transform: `translateX(-${currentIndex * 100}%)` 
+                    style={{
+                      transform: `translateX(-${currentIndex * 100}%)`
                     }}
                   >
                     {paintings.map((painting, index) => {
@@ -278,21 +268,21 @@ export default function Hobbies() {
                       const caption = captions[painting];
                       const isLandscape = dimensions?.isLandscape ?? false;
                       return (
-                        <div 
-                          key={painting} 
+                        <div
+                          key={painting}
                           className="w-full shrink-0 px-4 sm:px-8 flex flex-col relative"
                           style={{
                             justifyContent: isLandscape ? 'center' : 'flex-start'
                           }}
                         >
-                          <div 
+                          <div
                             className="relative rounded-3xl w-full"
                             style={{ backgroundColor: 'transparent', overflow: 'visible' }}
                           >
                             <div
                               className="relative w-full cursor-pointer rounded-3xl overflow-hidden"
-                              style={{ 
-                                padding: 0, 
+                              style={{
+                                padding: 0,
                                 aspectRatio: dimensions ? `${dimensions.width} / ${dimensions.height}` : '4 / 5'
                               }}
                               onClick={() => openLightbox(painting)}
@@ -306,7 +296,7 @@ export default function Hobbies() {
                               />
                               {/* Gradient overlay on hover */}
                               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-3xl" />
-                              
+
                               {/* Zoom icon and text on hover (desktop only) */}
                               <div className="hidden sm:flex absolute inset-0 flex-col items-center justify-center opacity-0 hover:opacity-100 transition-all duration-300 transform translate-y-4 hover:translate-y-0 pointer-events-none">
                                 <div className="w-16 h-16 glass rounded-2xl flex items-center justify-center mb-3 edge-glow shadow-2xl">
@@ -336,11 +326,10 @@ export default function Hobbies() {
                       <button
                         key={index}
                         onClick={() => goToSlide(index)}
-                        className={`transition-all duration-300 rounded-full ${
-                          index === currentIndex
-                            ? 'w-8 h-2 bg-blue-600 dark:bg-blue-400'
-                            : 'w-2 h-2 bg-gray-400 dark:bg-gray-600 hover:bg-gray-500 dark:hover:bg-gray-500'
-                        }`}
+                        className={`transition-all duration-300 rounded-full ${index === currentIndex
+                          ? 'w-8 h-2 bg-blue-600 dark:bg-blue-400'
+                          : 'w-2 h-2 bg-gray-400 dark:bg-gray-600 hover:bg-gray-500 dark:hover:bg-gray-500'
+                          }`}
                         aria-label={`Go to painting ${index + 1}`}
                       />
                     ))}

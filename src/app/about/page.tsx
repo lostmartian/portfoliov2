@@ -2,8 +2,10 @@
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PageHero from '@/components/PageHero';
 import TableOfContents from '@/components/TableOfContents';
 import { ExternalLink, Brain, Code, Cloud, Server, Globe, Database } from 'lucide-react';
+import Image from 'next/image';
 
 export default function About() {
   const skillsWithIcons = [
@@ -96,121 +98,105 @@ export default function About() {
       <Header />
       <TableOfContents />
 
-      <main className="flex-1 pt-24 lg:pl-64 xl:pr-80">
+      <main className="flex-1 pt-4 md:pt-24 lg:pl-64 xl:pr-80">
         {/* Hero Section */}
-        <section className="pt-24 pb-8 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-2">
-              <h1 className="text-5xl md:text-6xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
-                About Me
-              </h1>
-            </div>
-          </div>
-        </section>
+        <PageHero
+          title="About Me"
+          subtitle="A glimpse into my journey, skills, and passions."
+        />
 
-        {/* My Journey Section */}
-        <section id="my-journey" className="pt-8 pb-24 relative overflow-hidden">
-          <div className="max-w-4xl mx-auto px-6 lg:px-8 relative z-10">
-            <h2 className="text-4xl md:text-5xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-8">
-              My Journey
-            </h2>
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <p className="text-lg md:text-xl font-body text-gray-700 dark:text-gray-200 leading-relaxed text-justify">
-                  My journey in technology began at the{" "}
-                  <span className="font-semibold text-gray-900 dark:text-gray-100">
-                    Indian Institute of Information Technology, Gwalior
-                  </span>
-                  , where I pursued an integrated{" "}
-                  <span className="font-semibold">
-                    B.Tech & M.Tech in Information Technology
-                  </span>{" "}
-                  from{" "}
-                  <span className="font-semibold">July 2019 to July 2024</span>.
-                  During my five years of study, I developed a deep passion for
-                  artificial intelligence, machine learning, and computer vision
-                  applications.
-                </p>
+        {/* Bio Section (Split Layout) */}
+        <section id="bio" data-toc-title="Bio" className="pt-8 pb-16 relative overflow-hidden">
+          <div className="max-w-5xl mx-auto px-6 lg:px-8 relative z-10">
+            <div className="flex flex-col md:flex-row items-center gap-12">
+              {/* Profile Picture (Left) */}
+              <div className="w-full md:w-1/3 flex justify-center md:justify-start">
+                <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-3xl overflow-hidden shadow-xl">
+                  <Image
+                    src="/images/Screenshot 2025-11-23 at 7.43.08 PM.png"
+                    alt="Profile Picture"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </div>
 
-                <p className="text-lg md:text-xl font-body text-gray-700 dark:text-gray-200 leading-relaxed text-justify">
-                  My academic research focused on cutting-edge computer vision
-                  and machine learning techniques. For my{" "}
-                  <span className="font-semibold text-gray-900 dark:text-gray-100">
-                    Master's Thesis
-                  </span>
-                  , I worked on{" "}
-                  <span className="font-semibold">
-                    "Enhancing Design Parameters and Efficient Mode Recognition
-                    of Cylindrical DRA using ML"
-                  </span>
-                  , exploring the intersection of machine learning and antenna
-                  design. My{" "}
-                  <span className="font-semibold text-gray-900 dark:text-gray-100">
-                    Bachelor's Thesis
-                  </span>{" "}
-                  involved developing a novel{" "}
-                  <span className="font-semibold">
-                    "Building and Road Segmentation using EffUNet and Transfer
-                    Learning Approach"
-                  </span>
-                  , where I created an innovative architecture combining
-                  EfficientNetV2 as an encoder with a UNet decoder, achieving
-                  benchmark mIOU scores of 0.8365 and 0.9153.
-                </p>
-
-                <p className="text-lg md:text-xl font-body text-gray-700 dark:text-gray-200 leading-relaxed text-justify">
-                  Since <span className="font-semibold">October 2024</span>,
-                  I've been working as a{" "}
-                  <span className="font-semibold text-gray-900 dark:text-gray-100">
-                    Founding Full-Stack AI Engineer
-                  </span>{" "}
-                  at a{" "}
-                  <span className="font-semibold">
-                    stealth-mode AI tech startup
-                  </span>
-                  , where I've had the unique opportunity to build AI-powered
-                  solutions from the ground up. As the sole engineer for this
-                  function, I independently engineer and deploy solutions
-                  leveraging <span className="font-semibold">LLMs</span>,
-                  computer vision with{" "}
-                  <span className="font-semibold">OpenCV</span>, and{" "}
-                  <span className="font-semibold">AWS cloud services</span>{" "}
-                  (Lambda, SQS, EC2). I've developed proprietary multi-role data
-                  labeling platforms, engineered full-stack applications using
-                  Next.js, Go, Python, PostgreSQL, and MongoDB, and built
-                  complex ML pipelines for image digitization.
-                </p>
-
-                <p className="text-lg md:text-xl font-body text-gray-700 dark:text-gray-200 leading-relaxed text-justify">
-                  My research contributions include published work on
-                  steganography and computer vision. I co-authored a paper on{" "}
-                  <span className="font-semibold">
-                    "LSB Steganography Using Pixel Locator Sequence with AES"
-                  </span>{" "}
-                  which was presented at{" "}
-                  <span className="font-semibold text-gray-900 dark:text-gray-100">
-                    IEEE ICSCCC'21, NITJ
-                  </span>
-                  , showcasing significant improvements in steganography
-                  security through innovative techniques using Pixel Locator
-                  Sequences and AES encryption.
-                </p>
-
-                <p className="text-lg md:text-xl font-body text-gray-700 dark:text-gray-200 leading-relaxed text-justify">
-                  I'm passionate about solving complex problems through
-                  innovative technology solutions and continuous learning in the
-                  rapidly evolving field of AI. My expertise spans from
-                  low-level system design to high-level AI/ML applications, and
-                  I'm always excited to push the boundaries of what's possible
-                  with cutting-edge technology.
-                </p>
+              {/* Bio Text (Right) */}
+              <div className="w-full md:w-2/3">
+                <h2 className="text-3xl md:text-4xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
+                  Hello, I'm Sahil.
+                </h2>
+                <div className="space-y-4 text-lg font-body text-gray-700 dark:text-gray-200 leading-relaxed">
+                  <p>
+                    I hold a <span className="font-semibold text-gray-900 dark:text-gray-100">B.Tech & M.Tech in Information Technology</span> from IIIT Gwalior (2019-2024).
+                    Currently, I work as a <span className="font-semibold text-gray-900 dark:text-gray-100">Founding Full-Stack AI Engineer</span> at a stealth startup, building AI-powered solutions from scratch.
+                  </p>
+                  <p>
+                    My expertise lies in <span className="font-semibold text-blue-600 dark:text-blue-400">Generative AI</span>, <span className="font-semibold text-blue-600 dark:text-blue-400">Python</span>, <span className="font-semibold text-blue-600 dark:text-blue-400">Backend Development</span>, and building scalable systems.
+                    I specialize in crafting seamless <span className="font-semibold">Frontend</span> experiences, robust <span className="font-semibold">Backend</span> architectures, and integrating cutting-edge <span className="font-semibold">AI models</span>.
+                  </p>
+                  <p>
+                    Beyond coding, <span className="font-semibold text-gray-900 dark:text-gray-100">I love to teach</span> and mentor others in their tech journey.
+                  </p>
+                  <p>
+                    I am open to freelance opportunities across the full stack—whether it's building a modern web app, designing a complex backend, or implementing AI features.
+                    Let's build something amazing together.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
+        {/* Technical Skills Section */}
+        <section id="technical-skills" data-toc-title="Technical Skills" className="py-12 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-4">
+                Technical Skills
+              </h2>
+              <p className="text-lg font-body text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                My technical toolkit for building scalable and intelligent applications.
+              </p>
+            </div>
+
+            {/* Skills Grid - Clean & Minimal */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {skillsWithIcons.map((category, idx) => {
+                const CategoryIcon = category.icon;
+                return (
+                  <div key={idx} className="bg-white/50 dark:bg-white/5 border border-gray-200 dark:border-gray-800 rounded-2xl p-6 hover:border-blue-500/30 transition-colors duration-300">
+                    {/* Category Header */}
+                    <div className="flex items-center space-x-3 mb-6">
+                      <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                        <CategoryIcon className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-lg font-serif font-semibold text-gray-900 dark:text-gray-100">
+                        {category.category}
+                      </h3>
+                    </div>
+
+                    {/* Skills List */}
+                    <div className="flex flex-wrap gap-2">
+                      {category.items.map((item, itemIdx) => (
+                        <span
+                          key={itemIdx}
+                          className="py-1 px-3 rounded-md bg-gray-100 dark:bg-gray-800 text-sm font-body text-gray-700 dark:text-gray-300 border border-transparent hover:border-gray-300 dark:hover:border-gray-700 transition-colors"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* Coding Profiles Section */}
-        <section id="coding-profiles" className="py-12 relative">
+        <section id="coding-profiles" data-toc-title="Coding Profiles" className="py-12 pb-24 relative">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <h2 className="text-3xl md:text-4xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
               Coding Profiles
@@ -222,73 +208,24 @@ export default function About() {
                   href={profile.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block glass-card rounded-2xl p-6 group"
+                  className="group block bg-white/50 dark:bg-white/5 border border-gray-200 dark:border-gray-800 rounded-2xl p-6 hover:border-blue-500/50 hover:shadow-lg transition-all duration-300"
                 >
-                  <div className="flex items-start justify-between relative z-10">
-                    <div className="flex-1">
-                      <h3 className="text-lg font-serif font-semibold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h3 className="text-lg font-serif font-semibold text-gray-900 dark:text-gray-100 mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {profile.platform}
                       </h3>
-                      <p className="text-blue-600 dark:text-blue-400 font-body font-medium text-sm mb-2">
+                      <p className="text-blue-600 dark:text-blue-400 font-medium text-sm mb-2">
                         {profile.rating}
                       </p>
-                      <p className="text-gray-700 dark:text-gray-300 font-body text-sm">
+                      <p className="text-gray-600 dark:text-gray-400 text-sm">
                         {profile.description}
                       </p>
                     </div>
-                    <ExternalLink className="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:scale-110 transition-all shrink-0" />
+                    <ExternalLink className="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
                   </div>
                 </a>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Technical Skills Section */}
-        <section id="technical-skills" className="py-24 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
-                Technical Skills
-              </h2>
-              <p className="text-xl font-body text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                Comprehensive expertise across AI/ML, full-stack development,
-                and cloud technologies
-              </p>
-            </div>
-
-            {/* Skills Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {skillsWithIcons.map((category, idx) => {
-                const CategoryIcon = category.icon;
-                return (
-                  <div key={idx} className="glass-card rounded-3xl p-6 group">
-                    {/* Category Header */}
-                    <div className="flex items-center space-x-3 mb-6 relative z-10">
-                      <div className="w-12 h-12 glass rounded-2xl flex items-center justify-center group-hover:scale-110 transition-all duration-300 edge-glow">
-                        <CategoryIcon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                      </div>
-                      <h3 className="text-lg font-serif font-semibold text-gray-900 dark:text-gray-100">
-                        {category.category}
-                      </h3>
-                    </div>
-
-                    {/* Skills List */}
-                    <div className="space-y-2 mt-1 relative z-10">
-                      {category.items.map((item, itemIdx) => (
-                        <div
-                          key={itemIdx}
-                          className="py-2 px-3 rounded-lg glass hover:scale-105 transition-all duration-200"
-                        >
-                          <span className="text-sm font-body text-gray-700 dark:text-gray-200">
-                            {item}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
             </div>
           </div>
         </section>

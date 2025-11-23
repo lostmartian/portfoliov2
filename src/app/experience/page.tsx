@@ -3,9 +3,17 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import TableOfContents from '@/components/TableOfContents';
-import { Briefcase, Calendar, MapPin, ExternalLink, Code, Brain, Cloud, Database, Layers, GraduationCap, Users, Puzzle } from 'lucide-react';
+import { Briefcase, Calendar, MapPin, Code, Brain, Cloud, Database, GraduationCap, Puzzle, ArrowRight } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
 export default function Experience() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
   const experiences = [
     {
       id: 1,
@@ -83,165 +91,176 @@ export default function Experience() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-[#0a0a0f] dark:via-[#0f0f17] dark:to-[#12121c] mesh-gradient">
       <Header />
       <TableOfContents />
-      
-      <main className="flex-1 pt-24 lg:pl-64 xl:pr-80">
+
+      <main className="flex-1 pt-4 md:pt-24 lg:pl-64 xl:pr-80" ref={containerRef}>
         {/* Hero Section */}
-        <section className="pt-24 pb-8 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div className="text-center mb-2">
-              <h1 className="text-5xl md:text-6xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
-                Professional Experience
+        <section className="pt-4 md:pt-24 pb-16 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h1 className="text-5xl md:text-7xl font-elegant font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 dark:from-white dark:via-blue-200 dark:to-white mb-6 tracking-tight">
+                Professional Odyssey
               </h1>
-            </div>
+              <p className="text-xl md:text-2xl font-body text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                A timeline of building, teaching, and innovating.
+              </p>
+            </motion.div>
           </div>
         </section>
 
         {/* Experience Timeline */}
-        <section id="experience" className="pt-8 pb-24 relative overflow-hidden">
+        <section id="experience" className="pb-32 relative">
           <div className="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
-            <h2 className="text-4xl md:text-5xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-16 text-center">
-              Experience
-            </h2>
-            <div className="space-y-16">
+
+            {/* Central Line */}
+            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[var(--neon-cyan)] to-transparent opacity-30 md:-translate-x-1/2" />
+
+            <div className="space-y-24">
               {experiences.map((exp, index) => {
                 const IconComponent = exp.icon;
-                const experienceId = `experience-${exp.id}`;
+                const isEven = index % 2 === 0;
+
                 return (
-                  <div key={exp.id} id={experienceId} className="relative">
-                    {/* Timeline line */}
-                    {index !== experiences.length - 1 && (
-                      <div className="absolute left-1/2 top-20 w-0.5 h-full bg-gradient-to-b from-blue-600 to-blue-200 dark:from-blue-400 dark:to-blue-900 transform -translate-x-1/2 hidden md:block" style={{ height: 'calc(100% + 4rem)' }}></div>
-                    )}
-                    
-                    <div className={`flex flex-col md:flex-row gap-8 ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
-                      {/* Timeline Dot */}
-                      <div className="hidden md:flex absolute left-1/2 top-0 transform -translate-x-1/2 w-16 h-16 rounded-full items-center justify-center z-20 shadow-2xl bg-gradient-to-br from-blue-600 to-indigo-600 border-4 border-white dark:border-[#0a0a0f]">
-                        <IconComponent className="w-8 h-8 text-white" />
-                      </div>
-                      
-                      {/* Content Card */}
-                      <div className={`md:w-1/2 ${index % 2 === 1 ? 'md:text-right' : ''}`}>
-                        <div className="glass-card rounded-3xl p-8 group">
+                  <motion.div
+                    key={exp.id}
+                    id={`experience-${exp.id}`} // Added ID for TableOfContents
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={index < 2 ? { opacity: 1, y: 0 } : undefined}
+                    whileInView={index >= 2 ? { opacity: 1, y: 0 } : undefined}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className={`relative flex flex-col md:flex-row gap-8 md:gap-16 items-center ${!isEven ? 'md:flex-row-reverse' : ''}`}
+                  >
+                    {/* Timeline Node */}
+                    <div className="absolute left-6 md:left-1/2 w-4 h-4 bg-[var(--bg-deep)] border-2 border-[var(--neon-cyan)] rounded-full transform -translate-x-1/2 z-20 shadow-[0_0_10px_var(--neon-cyan)]">
+                      <div className="absolute inset-0 bg-[var(--neon-cyan)] opacity-50 blur-sm rounded-full animate-pulse" />
+                    </div>
+
+                    {/* Date Label (Desktop) */}
+                    <div className={`hidden md:block w-1/2 text-right ${!isEven ? 'text-left' : ''} px-8`}>
+                      <span className="text-4xl font-bold font-elegant text-transparent bg-clip-text bg-gradient-to-b from-[var(--text-primary)] to-transparent opacity-20">
+                        {exp.duration.split(' - ')[0].split(' ')[1]}
+                      </span>
+                    </div>
+
+                    {/* Card */}
+                    <div className="w-full md:w-1/2 pl-12 md:pl-0">
+                      <div className="group relative">
+                        <div className="relative glass-card rounded-3xl p-8 border border-[var(--glass-border)] bg-[var(--bg-deep)]/80 backdrop-blur-xl overflow-hidden transition-all duration-500 group-hover:border-[var(--neon-cyan)]/50 group-hover:shadow-[0_0_20px_-5px_var(--neon-cyan)]">
+                          {/* Background Decoration */}
+                          <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--neon-cyan)]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+
                           {/* Header */}
-                          <div className="mb-6 relative z-10">
-                            <div className="flex items-center gap-3 mb-3 md:hidden">
-                              <div className="w-12 h-12 glass rounded-xl flex items-center justify-center edge-glow">
-                                <IconComponent className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                          <div className="relative z-10 mb-6">
+                            <div className="flex items-center justify-between mb-2">
+                              <div className="p-3 rounded-xl bg-[var(--glass-highlight)] border border-[var(--glass-border)] text-[var(--neon-cyan)]">
+                                <IconComponent size={24} />
                               </div>
                               {exp.current && (
-                                <span className="px-3 py-1 glass text-green-700 dark:text-green-400 text-xs font-semibold rounded-full">
+                                <span className="px-3 py-1 text-xs font-bold tracking-wider uppercase text-green-400 bg-green-400/10 border border-green-400/20 rounded-full animate-pulse">
                                   Current
                                 </span>
                               )}
                             </div>
-                            
-                            <div className={`flex items-center gap-3 mb-2 ${index % 2 === 1 ? 'md:justify-end' : ''}`}>
-                              <h3 className="text-2xl md:text-3xl font-elegant font-bold text-gray-900 dark:text-gray-100">
-                                {exp.role}
-                              </h3>
-                              {exp.current && (
-                                <span className="hidden md:inline-block px-3 py-1 glass text-green-700 dark:text-green-400 text-xs font-semibold rounded-full">
-                                  Current
-                                </span>
-                              )}
-                            </div>
-                            
-                            <h4 className="text-xl font-serif font-semibold text-blue-600 dark:text-blue-400 mb-4">
-                              {exp.company}
-                            </h4>
-                            
-                            <div className={`flex flex-wrap gap-4 text-gray-600 dark:text-gray-300 text-sm ${index % 2 === 1 ? 'md:justify-end' : ''}`}>
-                              <div className="flex items-center gap-2">
-                                <Calendar className="w-4 h-4" />
-                                <span className="font-body">{exp.duration}</span>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <MapPin className="w-4 h-4" />
-                                <span className="font-body">{exp.location} • {exp.type}</span>
-                              </div>
+
+                            <h3 className="text-2xl font-bold font-elegant text-[var(--text-primary)] mb-1 group-hover:text-[var(--neon-cyan)] transition-colors">
+                              {exp.role}
+                            </h3>
+
+                            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-[var(--text-secondary)] mb-4">
+                              <span className="font-semibold text-[var(--text-primary)]">{exp.company}</span>
+                              <span className="w-1 h-1 rounded-full bg-[var(--text-muted)]" />
+                              <span>{exp.duration}</span>
+                              <span className="w-1 h-1 rounded-full bg-[var(--text-muted)]" />
+                              <span>{exp.location}</span>
                             </div>
                           </div>
 
-                          {/* Technologies */}
-                          <div className="mb-6 relative z-10">
-                            <div className={`flex flex-wrap gap-2 ${index % 2 === 1 ? 'md:justify-end' : ''}`}>
-                              {exp.technologies.map((tech, idx) => (
-                                <span 
-                                  key={idx}
-                                  className="px-3 py-1 glass text-blue-700 dark:text-blue-300 text-xs font-body font-semibold rounded-lg hover:scale-105 transition-transform"
-                                >
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
+                          {/* Tech Stack */}
+                          <div className="flex flex-wrap gap-2 mb-6 relative z-10">
+                            {exp.technologies.map((tech, idx) => (
+                              <span
+                                key={idx}
+                                className="px-2.5 py-1 text-xs font-medium rounded-md bg-[var(--glass-highlight)] text-[var(--text-muted)] border border-[var(--glass-border)] hover:border-[var(--neon-cyan)] hover:text-[var(--neon-cyan)] transition-colors cursor-default"
+                              >
+                                {tech}
+                              </span>
+                            ))}
                           </div>
 
                           {/* Achievements */}
-                          <div className="space-y-4 relative z-10">
+                          <ul className="space-y-3 relative z-10">
                             {exp.achievements.map((achievement, idx) => (
-                              <div key={idx} className={`flex items-start gap-3 ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
-                                <div className="flex-shrink-0 w-2 h-2 bg-blue-600 dark:text-blue-400 rounded-full mt-2"></div>
-                                <p 
-                                  className={`font-body text-gray-700 dark:text-gray-300 leading-relaxed ${index % 2 === 1 ? 'md:text-right' : ''}`}
-                                  dangerouslySetInnerHTML={{ 
-                                    __html: achievement.replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-900 dark:text-gray-100">$1</strong>') 
-                                  }}
-                                />
-                              </div>
+                              <li key={idx} className="flex gap-3 text-sm text-[var(--text-secondary)] leading-relaxed group/item">
+                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[var(--neon-cyan)]/50 group-hover/item:bg-[var(--neon-cyan)] transition-colors flex-shrink-0" />
+                                <span dangerouslySetInnerHTML={{
+                                  __html: achievement.replace(/\*\*(.*?)\*\*/g, '<strong class="text-[var(--text-primary)] font-semibold">$1</strong>')
+                                }} />
+                              </li>
                             ))}
-                          </div>
+                          </ul>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
           </div>
         </section>
 
-        {/* Skills Highlight Section */}
-        <section id="core-competencies" className="py-24 relative overflow-hidden">
+        {/* Core Competencies - Bento Grid Style */}
+        <section id="core-competencies" className="py-24 relative overflow-hidden border-t border-[var(--glass-border)]/30">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-elegant font-bold text-gray-900 dark:text-gray-100 mb-6">
+              <h2 className="text-4xl md:text-5xl font-elegant font-bold text-[var(--text-primary)] mb-6">
                 Core Competencies
               </h2>
-              <p className="text-xl font-body text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                Expertise across the full stack of modern software development
+              <p className="text-xl font-body text-[var(--text-muted)] max-w-2xl mx-auto">
+                A holistic skillset bridging advanced AI research with robust software engineering.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { icon: Brain, title: "AI & ML", desc: "LLMs, Computer Vision, ML Pipelines" },
-                { icon: Cloud, title: "Cloud Native", desc: "AWS, Lambda, Docker, Microservices" },
-                { icon: Code, title: "Full-Stack Dev", desc: "Next.js, Go, Python, TypeScript" },
-                { icon: Database, title: "Data Systems", desc: "PostgreSQL, MongoDB, Neo4j" }
+                { icon: Brain, title: "AI & ML", desc: "LLMs, Computer Vision, ML Pipelines", color: "from-purple-500 to-pink-500" },
+                { icon: Cloud, title: "Cloud Native", desc: "AWS, Lambda, Docker, Microservices", color: "from-blue-500 to-cyan-500" },
+                { icon: Code, title: "Full-Stack", desc: "Next.js, Go, Python, TypeScript", color: "from-green-500 to-emerald-500" },
+                { icon: Database, title: "Data Systems", desc: "PostgreSQL, MongoDB, Neo4j", color: "from-orange-500 to-red-500" }
               ].map((skill, idx) => (
-                <div 
+                <motion.div
                   key={idx}
-                  className="glass-card rounded-3xl p-6 group text-center"
+                  whileHover={{ y: -5 }}
+                  className="group relative overflow-hidden rounded-3xl glass-card p-8 border border-[var(--glass-border)]"
                 >
-                  <div className="w-16 h-16 glass rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-300 edge-glow">
-                    <skill.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+                  <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${skill.color} opacity-10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2 group-hover:opacity-20 transition-opacity duration-500`} />
+
+                  <div className="relative z-10">
+                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${skill.color} p-0.5 mb-6`}>
+                      <div className="w-full h-full bg-[var(--bg-deep)] rounded-[14px] flex items-center justify-center">
+                        <skill.icon size={20} className="text-[var(--text-primary)]" />
+                      </div>
+                    </div>
+
+                    <h3 className="text-xl font-bold font-elegant text-[var(--text-primary)] mb-2">
+                      {skill.title}
+                    </h3>
+                    <p className="text-sm text-[var(--text-muted)] leading-relaxed">
+                      {skill.desc}
+                    </p>
                   </div>
-                  <h3 className="text-lg font-serif font-semibold text-gray-900 dark:text-gray-100 mb-2 relative z-10">
-                    {skill.title}
-                  </h3>
-                  <p className="text-sm font-body text-gray-700 dark:text-gray-300 relative z-10">
-                    {skill.desc}
-                  </p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
       </main>
-      
+
       <Footer />
     </div>
   );
 }
-

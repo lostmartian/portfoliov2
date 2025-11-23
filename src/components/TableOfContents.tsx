@@ -43,8 +43,10 @@ export default function TableOfContents({ sections }: TableOfContentsProps) {
 
         // Check if this section has an h2 (main section header)
         const h2 = section.querySelector('h2');
-        if (h2) {
-          const title = h2.textContent?.trim() || '';
+        const customTitle = section.getAttribute('data-toc-title');
+
+        if (h2 || customTitle) {
+          const title = customTitle || h2?.textContent?.trim() || '';
           if (title && !tocItems.find(item => item.id === sectionId)) {
             tocItems.push({ id: sectionId, title, level: 1 });
           }
@@ -138,10 +140,10 @@ export default function TableOfContents({ sections }: TableOfContentsProps) {
         // Prefer sections that are more visible and closer to top
         const ratio = entry.intersectionRatio;
         const top = entry.boundingClientRect.top;
-        
+
         // Weight: higher ratio + closer to top = better
         const score = ratio * 100 + (top < 200 ? 50 : 0);
-        
+
         const currentMaxTop = maxEntry?.boundingClientRect.top ?? Infinity;
         if (score > maxRatio || (score === maxRatio && top < currentMaxTop)) {
           maxRatio = score;
@@ -156,7 +158,7 @@ export default function TableOfContents({ sections }: TableOfContentsProps) {
 
         // Find and activate parent if this is a level 2 item
         const activeParentIdsSet = new Set<string>();
-        
+
         // Check if active item is a level 2 item and has a parent
         parentChildMapRef.current.forEach((childIds, parentId) => {
           if (childIds.includes(activeItemId)) {
@@ -187,7 +189,7 @@ export default function TableOfContents({ sections }: TableOfContentsProps) {
     // Initial check: determine which section is currently visible on page load
     const checkInitialActive = () => {
       let bestMatch: { id: string; score: number } | null = null;
-      
+
       headings.forEach((item) => {
         const element = document.getElementById(item.id) || document.querySelector(`section#${item.id}`);
         if (!element) return;
@@ -195,7 +197,7 @@ export default function TableOfContents({ sections }: TableOfContentsProps) {
         const rect = element.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
         const offset = 120; // Account for header
-        
+
         // Check if element is in viewport
         if (rect.top < viewportHeight + offset && rect.bottom > offset) {
           // Calculate visibility score
@@ -203,11 +205,11 @@ export default function TableOfContents({ sections }: TableOfContentsProps) {
           const visibleBottom = Math.min(viewportHeight, rect.bottom);
           const visibleHeight = Math.max(0, visibleBottom - visibleTop);
           const visibilityRatio = visibleHeight / Math.min(rect.height, viewportHeight);
-          
+
           // Prefer items that are closer to the top of viewport
           const topScore = rect.top < offset + 100 ? 50 : 0;
           const score = visibilityRatio * 100 + topScore;
-          
+
           if (!bestMatch || score > bestMatch.score || (score === bestMatch.score && rect.top < (document.getElementById(bestMatch.id)?.getBoundingClientRect().top || Infinity))) {
             bestMatch = { id: item.id, score };
           }
@@ -217,7 +219,7 @@ export default function TableOfContents({ sections }: TableOfContentsProps) {
       if (bestMatch) {
         const activeMatch: { id: string; score: number } = bestMatch;
         setActiveId(activeMatch.id);
-        
+
         // Find and activate parent if this is a level 2 item
         const activeParentIdsSet = new Set<string>();
         parentChildMapRef.current.forEach((childIds, parentId) => {
@@ -255,7 +257,7 @@ export default function TableOfContents({ sections }: TableOfContentsProps) {
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id) || document.querySelector(`section#${id}`);
-    
+
     if (element) {
       const offset = 120;
       const elementPosition = element.getBoundingClientRect().top;
@@ -273,7 +275,7 @@ export default function TableOfContents({ sections }: TableOfContentsProps) {
   useEffect(() => {
     const currentPath = pathname.replace(/\/$/, ''); // Normalize pathname
     const prevPath = prevPathnameRef.current ? prevPathnameRef.current.replace(/\/$/, '') : '';
-    
+
     // Skip animation on initial mount
     if (prevPathnameRef.current === '') {
       prevPathnameRef.current = pathname;
@@ -288,7 +290,7 @@ export default function TableOfContents({ sections }: TableOfContentsProps) {
     // Page changed - animate out then in
     setIsAnimating(true);
     setAnimationState('slide-out');
-    
+
     // After slide-out completes, slide in with new content
     const slideOutTimer = setTimeout(() => {
       setAnimationState('slide-in');
@@ -296,12 +298,12 @@ export default function TableOfContents({ sections }: TableOfContentsProps) {
         setAnimationState('idle');
         setIsAnimating(false);
       }, 300); // Animation duration
-      
+
       return () => clearTimeout(slideInTimer);
     }, 300); // Wait for slide-out to complete
-    
+
     prevPathnameRef.current = pathname;
-    
+
     return () => {
       clearTimeout(slideOutTimer);
     };
@@ -322,8 +324,8 @@ export default function TableOfContents({ sections }: TableOfContentsProps) {
   };
 
   return (
-    <aside 
-      className={`fixed left-0 -translate-y-1/2 z-40 hidden lg:block ${getAnimationClasses()}`} 
+    <aside
+      className={`fixed left-0 -translate-y-1/2 z-40 hidden lg:block ${getAnimationClasses()}`}
       style={{ top: 'calc(50vh + 48px)' }}
     >
       <nav className="ml-8 w-56 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-400 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent">
@@ -340,32 +342,29 @@ export default function TableOfContents({ sections }: TableOfContentsProps) {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`group relative block w-full text-left transition-colors duration-300 ease-out ${
-                  isActiveOrParent
+                className={`group relative block w-full text-left transition-colors duration-300 ease-out ${isActiveOrParent
                     ? 'text-gray-900 dark:text-gray-100'
                     : 'text-gray-500 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
-                }`}
+                  }`}
                 title={item.title}
               >
                 <div className="flex items-center gap-2 min-w-0">
                   {/* Notion-style indicator */}
                   <div
-                    className={`h-0.5 transition-all duration-300 ease-out flex-shrink-0 ${
-                      isActiveOrParent
-                        ? item.level === 1 
+                    className={`h-0.5 transition-all duration-300 ease-out flex-shrink-0 ${isActiveOrParent
+                        ? item.level === 1
                           ? 'w-4 bg-gray-900 dark:bg-gray-100'
                           : 'w-2 bg-gray-700 dark:bg-gray-300 ml-2'
                         : item.level === 1
                           ? 'w-0 group-hover:w-2 bg-gray-400 dark:bg-gray-600'
                           : 'w-0 group-hover:w-1 bg-gray-400 dark:bg-gray-600 ml-2'
-                    }`}
+                      }`}
                   />
                   <span
-                    className={`text-sm leading-6 transition-all duration-300 ease-out whitespace-nowrap overflow-hidden text-ellipsis flex-1 min-w-0 ${
-                      isActiveOrParent
+                    className={`text-sm leading-6 transition-all duration-300 ease-out whitespace-nowrap overflow-hidden text-ellipsis flex-1 min-w-0 ${isActiveOrParent
                         ? item.level === 1 ? 'font-semibold' : 'font-medium'
                         : 'font-normal'
-                    } ${item.level === 2 ? 'text-gray-600 dark:text-gray-400' : ''}`}
+                      } ${item.level === 2 ? 'text-gray-600 dark:text-gray-400' : ''}`}
                   >
                     {item.title}
                   </span>

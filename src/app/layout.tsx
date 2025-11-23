@@ -10,7 +10,10 @@ const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space' });
 
 export const metadata: Metadata = {
-  title: 'Portfolio | Creative Developer',
+  title: {
+    default: 'Home | lostmartian',
+    template: '%s | lostmartian',
+  },
   description: 'A showcase of creative development and design engineering.',
 };
 

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
-import { Home, User, Briefcase, FolderKanban, Palette, BookOpen } from 'lucide-react';
+import { Home, User, Briefcase, FolderKanban, Palette } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -26,8 +26,7 @@ export default function MobileNavbar() {
         { href: '/about', label: 'About', icon: User },
         { href: '/experience', label: 'Exp', icon: Briefcase },
         { href: '/projects', label: 'Work', icon: FolderKanban },
-        { href: '/hobbies', label: 'Hobbies', icon: Palette },
-        { href: '/blogs', label: 'Blogs', icon: BookOpen }
+        { href: '/hobbies', label: 'Hobbies', icon: Palette }
     ];
 
     const normalizedPathname = pathname?.replace(/\/$/, '') || '/';

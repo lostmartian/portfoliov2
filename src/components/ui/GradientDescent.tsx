@@ -93,40 +93,56 @@ export default function GradientDescent({ learningRate }: GradientDescentProps) 
 
       // Height function (Loss Landscape)
       float height(vec2 p) {
-        // Combination of sin waves and noise to create peaks/valleys
-        float h = sin(p.x * 2.0) * cos(p.y * 2.0) * 0.5;
-        h += noise(p * 3.0) * 0.3;
-        h += 0.2 * (p.x * p.x + p.y * p.y); // Bowl shape to keep it centered
+        // Create a more complex landscape with multiple frequencies
+        // Low frequency for large hills
+        float h = sin(p.x * 1.5) * cos(p.y * 1.5) * 0.8;
+        
+        // Medium frequency for varied terrain
+        h += sin(p.x * 3.0 + 1.5) * cos(p.y * 3.0 + 1.5) * 0.4;
+        
+        // High frequency noise for texture
+        h += noise(p * 4.0) * 0.3;
+        h += noise(p * 8.0) * 0.15;
+        
+        // Gentle bowl shape to keep it centered (reduced from 0.2 to 0.1)
+        h += 0.1 * (p.x * p.x + p.y * p.y);
+        
         return h;
       }
 
       vec3 getColor(float h) {
-        // The height function outputs roughly:
-        // - sin*cos term: -0.5 to 0.5
-        // - noise term: 0 to 0.3
-        // - bowl term: 0 to ~1.8 (at edges)
-        // Total range: roughly -0.2 to 2.6
-        // We want valleys (low h) to be blue, peaks (high h) to be red
+        // The new height function outputs roughly:
+        // - Large waves: -0.8 to 0.8
+        // - Medium waves: -0.4 to 0.4
+        // - Noise: 0 to 0.45
+        // - Bowl: 0 to ~0.9 (at edges)
+        // Total range: roughly -1.2 to 2.55
         
-        // Normalize to 0-1 range with better mapping
-        // Use a wider range to ensure proper color distribution
-        float t = clamp((h + 0.3) / 2.0, 0.0, 1.0);
+        // Normalize to 0-1 range with adjusted mapping
+        // Shift and scale to show more color variation
+        float t = clamp((h + 1.0) / 3.0, 0.0, 1.0);
         
-        // Colors
-        vec3 valley = vec3(0.0, 0.2, 1.0); // Neon Blue
-        vec3 mid = vec3(0.5, 0.0, 1.0);    // Neon Purple
-        vec3 peak = vec3(1.0, 0.0, 0.2);   // Neon Red
+        // Deeper, more saturated colors
+        vec3 deepValley = vec3(0.0, 0.1, 0.8);  // Deep Blue
+        vec3 valley = vec3(0.0, 0.4, 1.0);      // Bright Blue
+        vec3 mid = vec3(0.6, 0.2, 0.9);         // Purple
+        vec3 peak = vec3(1.0, 0.3, 0.0);        // Orange-Red
+        vec3 highPeak = vec3(0.9, 0.0, 0.0);    // Deep Red
         
-        // Light mode adjustments (pastel versions)
+        // Light mode adjustments
         if (!uIsDark) {
+           deepValley = vec3(0.2, 0.5, 1.0);
            valley = vec3(0.4, 0.6, 1.0);
            mid = vec3(0.7, 0.4, 1.0);
-           peak = vec3(1.0, 0.4, 0.5);
+           peak = vec3(1.0, 0.5, 0.3);
+           highPeak = vec3(1.0, 0.2, 0.2);
         }
         
-        // Three-stop gradient: blue -> purple -> red
-        if (t < 0.5) return mix(valley, mid, t * 2.0);
-        return mix(mid, peak, (t - 0.5) * 2.0);
+        // Five-stop gradient for more variation
+        if (t < 0.25) return mix(deepValley, valley, t * 4.0);
+        if (t < 0.5) return mix(valley, mid, (t - 0.25) * 4.0);
+        if (t < 0.75) return mix(mid, peak, (t - 0.5) * 4.0);
+        return mix(peak, highPeak, (t - 0.75) * 4.0);
       }
 
       void main() {
@@ -209,8 +225,11 @@ export default function GradientDescent({ learningRate }: GradientDescentProps) 
     const calculateGradient = (x: number, y: number) => {
       const eps = 0.01;
       const h = (x: number, y: number) => {
-        let val = Math.sin(x * 2.0) * Math.cos(y * 2.0) * 0.5;
-        val += 0.2 * (x * x + y * y);
+        // Match the shader's height function exactly
+        let val = Math.sin(x * 1.5) * Math.cos(y * 1.5) * 0.8;
+        val += Math.sin(x * 3.0 + 1.5) * Math.cos(y * 3.0 + 1.5) * 0.4;
+        // Note: We skip the noise terms for physics as they're not critical for gradient
+        val += 0.1 * (x * x + y * y);
         return val;
       };
 
@@ -220,8 +239,10 @@ export default function GradientDescent({ learningRate }: GradientDescentProps) 
     };
 
     const calculateHeight = (x: number, y: number) => {
-      let val = Math.sin(x * 2.0) * Math.cos(y * 2.0) * 0.5;
-      val += 0.2 * (x * x + y * y);
+      // Match the shader's height function exactly
+      let val = Math.sin(x * 1.5) * Math.cos(y * 1.5) * 0.8;
+      val += Math.sin(x * 3.0 + 1.5) * Math.cos(y * 3.0 + 1.5) * 0.4;
+      val += 0.1 * (x * x + y * y);
       return val;
     };
 
@@ -352,6 +373,7 @@ export default function GradientDescent({ learningRate }: GradientDescentProps) 
         overlay.style.top = '0';
         overlay.style.left = '0';
         overlay.style.pointerEvents = 'none';
+        overlay.style.zIndex = '2'; // Above the WebGL canvas
         canvas.parentElement?.appendChild(overlay);
         ctx2d = overlay.getContext('2d');
       }
@@ -364,8 +386,8 @@ export default function GradientDescent({ learningRate }: GradientDescentProps) 
 
         // Draw path line - Use EXACT inverse of WebGL transformation
         if (pathHistory.current.length > 1) {
-          ctx2d.strokeStyle = 'rgba(64, 224, 208, 0.6)'; // Cyan
-          ctx2d.lineWidth = 2;
+          ctx2d.strokeStyle = 'rgba(64, 224, 208, 0.9)'; // Cyan with higher opacity
+          ctx2d.lineWidth = 3; // Thicker line
           ctx2d.beginPath();
 
           pathHistory.current.forEach((point, i) => {
@@ -422,6 +444,9 @@ export default function GradientDescent({ learningRate }: GradientDescentProps) 
     };
 
     const handleMouseDown = (e: MouseEvent) => {
+      // Only respond to left clicks (button 0)
+      if (e.button !== 0) return;
+
       const rect = canvas.getBoundingClientRect();
       // Use exact inverse of WebGL transformation
       // WebGL: uv = (gl_FragCoord.xy - 0.5 * resolution) / height; uv *= 3.0
@@ -491,8 +516,8 @@ export default function GradientDescent({ learningRate }: GradientDescentProps) 
     <>
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full cursor-crosshair opacity-60"
-        style={{ zIndex: 0 }}
+        className="absolute inset-0 w-full h-full cursor-pointer"
+        style={{ zIndex: 1 }}
       />
 
       {/* Analysis Panel */}

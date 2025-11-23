@@ -46,7 +46,6 @@ export default function Footer() {
               <li><Link href="/" className="hover:text-[var(--neon-cyan)] transition-colors">Home</Link></li>
               <li><Link href="/about" className="hover:text-[var(--neon-cyan)] transition-colors">About</Link></li>
               <li><Link href="/projects" className="hover:text-[var(--neon-cyan)] transition-colors">Projects</Link></li>
-              <li><Link href="/blogs" className="hover:text-[var(--neon-cyan)] transition-colors">Blogs</Link></li>
             </ul>
           </div>
 

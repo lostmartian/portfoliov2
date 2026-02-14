@@ -55,7 +55,7 @@ export default function Home() {
                 </h1>
 
                 <p className="text-body-large text-[var(--text-secondary)] mb-10 max-w-2xl mx-auto leading-relaxed">
-                  We are <span className="text-[var(--text-primary)] font-bold">lostmartian</span>. A high-stakes development shop that blends{' '}
+                  We are <span className="text-[var(--text-primary)] font-bold">lostmartian</span>. A high-stakes Product Engineering Studio that blends{' '}
                   <span className="text-[var(--neon-cyan)] font-semibold">elite AI engineering</span> with{' '}
                   <span className="text-[var(--neon-purple)] font-semibold">robust architecture</span>
                   {' '}to turn complex visions into market-ready products.

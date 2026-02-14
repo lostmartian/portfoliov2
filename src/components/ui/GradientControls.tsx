@@ -14,7 +14,7 @@ export default function GradientControls({ learningRate, onChange }: GradientCon
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="fixed bottom-24 right-8 z-50 glass-panel p-4 rounded-2xl w-64"
+            className="absolute bottom-24 right-8 z-50 glass-panel p-4 rounded-2xl w-64"
         >
             <div className="flex items-center gap-2 mb-3 text-[var(--text-primary)]">
                 <Activity size={16} className="text-[var(--neon-cyan)]" />

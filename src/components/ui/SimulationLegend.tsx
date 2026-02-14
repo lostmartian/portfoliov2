@@ -53,7 +53,7 @@ export default function SimulationLegend({ mode }: SimulationLegendProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                className="fixed bottom-8 left-8 z-40 max-w-xs"
+                className="absolute bottom-8 left-8 z-40 max-w-xs"
             >
                 <div className="glass-card p-5 rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-xl shadow-2xl">
                     <div className="flex items-center gap-3 mb-3 border-b border-[var(--glass-border)] pb-3">

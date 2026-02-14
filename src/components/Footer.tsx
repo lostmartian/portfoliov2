@@ -22,48 +22,64 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative pt-16 pb-8 overflow-hidden border-t border-[var(--glass-border)] bg-[var(--bg-deep)] mt-auto">
+    <footer className="relative pt-24 pb-12 overflow-hidden bg-[var(--bg-deep)] border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* Main Columns */}
-        <div className="flex flex-col md:flex-row justify-between gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8 mb-20">
 
           {/* Brand Section (Left) */}
-          <div className="max-w-sm space-y-4">
-            <Link href="/" className="text-2xl font-bold font-elegant text-[var(--text-primary)] flex items-center gap-2">
-              <Terminal className="text-[var(--neon-cyan)]" />
-              <span>lostmartian<span className="text-[var(--text-muted)]">.in</span></span>
+          <div className="md:col-span-12 lg:col-span-5 space-y-8">
+            <Link href="/" className="text-2xl font-black font-elegant tracking-tight text-[var(--text-primary)] flex items-center gap-3 group">
+              <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-cyan-500/50 transition-colors">
+                <Terminal className="w-5 h-5 text-cyan-400" />
+              </div>
+              <span className="tracking-[-0.03em]">lostmartian<span className="text-white/20">.in</span></span>
             </Link>
-            <p className="text-[var(--text-secondary)] leading-relaxed text-sm">
-              Crafting digital experiences at the intersection of design, engineering, and artificial intelligence.
+            <p className="text-slate-400 leading-relaxed font-body text-base max-w-sm">
+              An elite development shop merging deep AI research with
+              production-grade software engineering to build the next generation of products.
             </p>
           </div>
 
+          {/* Spacer for Desktop */}
+          <div className="hidden lg:block lg:col-span-1" />
+
           {/* Navigation (Center) */}
-          <div className="space-y-4 md:text-center">
-            <h3 className="font-bold text-[var(--text-primary)]">Navigate</h3>
-            <ul className="space-y-2 text-[var(--text-muted)] text-sm">
-              <li><Link href="/" className="hover:text-[var(--neon-cyan)] transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-[var(--neon-cyan)] transition-colors">About</Link></li>
-              <li><Link href="/projects" className="hover:text-[var(--neon-cyan)] transition-colors">Projects</Link></li>
+          <div className="md:col-span-6 lg:col-span-3 space-y-6">
+            <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500">Navigation</h3>
+            <ul className="space-y-4">
+              {['Home', 'About', 'Projects'].map((item) => (
+                <li key={item}>
+                  <Link
+                    href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                    className="text-slate-300 hover:text-cyan-400 transition-colors font-body text-sm flex items-center gap-2 group"
+                  >
+                    <span className="h-px w-0 bg-cyan-400 group-hover:w-4 transition-all" />
+                    {item}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Connect (Right) */}
-          <div className="space-y-4 md:text-right">
-            <h3 className="font-bold text-[var(--text-primary)]">Connect</h3>
-            <div className="flex flex-col md:items-end gap-3">
+          <div className="md:col-span-6 lg:col-span-3 space-y-6">
+            <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500">Connect</h3>
+            <div className="flex flex-col gap-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.href}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-[var(--text-muted)] hover:text-[var(--neon-cyan)] transition-colors text-sm group"
+                  className="flex items-center gap-4 text-slate-300 hover:text-white transition-colors group"
                   aria-label={social.label}
                 >
-                  <social.icon size={16} className="group-hover:scale-110 transition-transform" />
-                  <span>{social.label}</span>
+                  <div className="p-2 rounded-full bg-white/5 border border-white/5 group-hover:border-cyan-500/30 group-hover:bg-cyan-500/5 transition-all">
+                    <social.icon size={14} />
+                  </div>
+                  <span className="text-sm font-body">{social.label}</span>
                 </a>
               ))}
             </div>
@@ -73,24 +89,27 @@ export default function Footer() {
 
         {/* Daily Bit (Subtle) */}
         {joke && (
-          <div className="mb-8 pt-8 border-t border-[var(--glass-border)]/50 text-center">
-            <p className="text-xs text-[var(--text-muted)] flex items-center justify-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-              <Coffee size={12} className="text-[var(--neon-pink)]" />
-              <span className="font-medium">Daily Bit:</span>
-              <span>"{joke.setup}"</span>
-              <span className="text-[var(--neon-cyan)] italic">{joke.punchline}</span>
+          <div className="mb-12 py-4 text-center">
+            <p className="text-xs text-slate-500 flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
+              <span className="flex items-center gap-2 text-cyan-500/60 font-black uppercase tracking-[0.2em]">
+                <Coffee size={14} /> Daily Bit
+              </span>
+              <span className="italic font-medium text-slate-500/80">"{joke.setup}"</span>
+              <span className="text-cyan-400/80 font-bold">— {joke.punchline}</span>
             </p>
           </div>
         )}
 
         {/* Bottom Bar */}
-        <div className={`flex flex-col md:flex-row justify-between items-center gap-4 ${!joke ? 'border-t border-[var(--glass-border)] pt-8' : ''}`}>
-          <p className="text-[var(--text-muted)] text-xs">
-            © {currentYear} Sahil Gangurde. All rights reserved.
-          </p>
+        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-4">
+            <p className="text-slate-600 text-[10px] font-bold uppercase tracking-widest">
+              © {currentYear} Sahil Gangurde
+            </p>
+          </div>
 
-          <p className="text-[var(--text-muted)] text-xs flex items-center gap-1">
-            Made with <Heart size={10} className="text-red-500 fill-red-500" /> using Next.js & Tailwind
+          <p className="text-slate-600 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
+            Built with <Heart size={10} className="text-rose-500 fill-rose-500 animate-pulse" /> on the Edge
           </p>
         </div>
       </div>

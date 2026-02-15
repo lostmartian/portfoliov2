@@ -4,7 +4,7 @@ import { readFileSync } from 'fs';
 
 export const dynamic = 'force-static';
 
-export const alt = 'lostmartian - Full-Stack Engineer & AI Architect';
+export const alt = 'lostmartian Studio - High-End Dev Studio & Design Engineering';
 export const size = {
     width: 1200,
     height: 630,
@@ -56,7 +56,7 @@ export default async function Image() {
                             marginBottom: 10,
                         }}
                     >
-                        Sahil Gangurde
+                        lostmartian
                     </h1>
                     <div
                         style={{
@@ -66,7 +66,7 @@ export default async function Image() {
                             marginBottom: 30,
                         }}
                     >
-                        @lostmartian
+                        Sahil Gangurde | Full-Stack AI Engineer
                     </div>
                     <div
                         style={{
@@ -75,7 +75,7 @@ export default async function Image() {
                             gap: '15px',
                         }}
                     >
-                        {['Full-Stack', 'AI Architect', 'Cloud'].map((tag) => (
+                        {['Dev Studio', 'AI Solutions', 'Design Eng'].map((tag) => (
                             <div
                                 key={tag}
                                 style={{

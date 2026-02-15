@@ -3,14 +3,21 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
-import { Home, User, Briefcase, FolderKanban, Palette } from 'lucide-react';
-import { useState } from 'react';
+import { Home, User, Briefcase, FolderKanban, Palette, Sun, Moon } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
 
 export default function MobileNavbar() {
     const [hidden, setHidden] = useState(false);
+    const [mounted, setMounted] = useState(false);
+    const { setTheme, resolvedTheme } = useTheme();
     const { scrollY } = useScroll();
     const pathname = usePathname();
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious() ?? 0;
@@ -73,6 +80,19 @@ export default function MobileNavbar() {
                         </Link>
                     );
                 })}
+
+                <div className="w-px h-6 bg-[var(--glass-border)] mx-1 opacity-50" />
+
+                <button
+                    onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+                    className="relative flex items-center justify-center w-12 h-12 rounded-full text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-all duration-300"
+                    aria-label="Toggle theme"
+                >
+                    {mounted && (
+                        resolvedTheme === 'dark' ? <Sun size={20} /> : <Moon size={20} />
+                    )}
+                    {!mounted && <div className="w-5 h-5" />}
+                </button>
             </div>
         </motion.nav>
     );

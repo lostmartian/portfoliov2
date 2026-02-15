@@ -16,10 +16,10 @@ export default function PageHero({ title, subtitle }: PageHeroProps) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h1 className="text-5xl md:text-7xl font-elegant font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 dark:from-white dark:via-blue-200 dark:to-white mb-6 tracking-tight">
+                    <h1 className="h1 font-elegant text-transparent bg-clip-text bg-gradient-to-r from-[var(--text-primary)] via-blue-600 to-[var(--text-primary)] mb-6">
                         {title}
                     </h1>
-                    <p className="text-xl md:text-2xl font-body text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                    <p className="text-body-large font-body text-[var(--text-secondary)] max-w-2xl mx-auto">
                         {subtitle}
                     </p>
                 </motion.div>

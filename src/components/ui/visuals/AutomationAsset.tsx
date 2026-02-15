@@ -35,9 +35,9 @@ export default function AutomationAsset() {
     };
 
     return (
-        <div className="relative w-full h-[260px] bg-slate-950 rounded-xl overflow-hidden border border-[var(--glass-border)] shadow-2xl p-6">
+        <div className="relative w-full h-[260px] bg-[var(--bg-card)] rounded-xl overflow-hidden border border-[var(--glass-border)] shadow-2xl p-6 backdrop-blur-sm">
             {/* Grid Background */}
-            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px]" />
+            <div className="absolute inset-0 opacity-[0.05] bg-[radial-gradient(var(--text-primary)_1px,transparent_1px)] [background-size:24px_24px]" />
 
             {/* Flowing Data Connections */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 400 260">
@@ -56,23 +56,24 @@ export default function AutomationAsset() {
                         <g key={i}>
                             <path
                                 d={path}
-                                stroke="rgba(255,255,255,0.15)"
+                                stroke="var(--glass-border)"
                                 strokeWidth="2"
                                 fill="none"
                             />
                             <motion.path
                                 d={path}
-                                stroke="rgba(64,224,208,0.4)"
+                                stroke="var(--neon-cyan)"
                                 strokeWidth="2"
                                 fill="none"
                                 strokeDasharray="4 12"
                                 animate={{ strokeDashoffset: [0, -32] }}
                                 transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                                style={{ opacity: 0.3 }}
                             />
                             {/* Animated Data Packet */}
                             <motion.circle
                                 r="3"
-                                fill="#40e0d0"
+                                fill="var(--neon-cyan)"
                                 filter="url(#glow)"
                                 initial={{ offsetDistance: "0%" }}
                                 animate={{ offsetDistance: "100%" }}
@@ -101,14 +102,14 @@ export default function AutomationAsset() {
                 >
                     <div className="group relative flex flex-col items-center">
                         {/* Connection Node */}
-                        <div className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center p-2 shadow-2xl group-hover:border-cyan-500/50 transition-colors duration-300">
+                        <div className="w-10 h-10 rounded-xl bg-[var(--bg-deep)] border border-[var(--glass-border)] flex items-center justify-center p-2 shadow-2xl group-hover:border-[var(--neon-cyan)] transition-colors duration-300">
                             <node.icon className={`w-5 h-5 ${node.color}`} />
                             <div className={`absolute inset-0 rounded-xl ${node.bg} opacity-0 group-hover:opacity-100 blur-sm transition-opacity`} />
                         </div>
 
                         {/* Label */}
                         <div className="absolute -bottom-6 whitespace-nowrap opacity-100 transition-opacity duration-300 pointer-events-none">
-                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
+                            <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-tighter bg-[var(--bg-deep)]/80 backdrop-blur-md px-2 py-0.5 rounded border border-[var(--glass-border)]">
                                 {node.label}
                             </span>
                         </div>
@@ -124,9 +125,9 @@ export default function AutomationAsset() {
             ))}
 
             {/* Mini Breadcrumb/Indicator */}
-            <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1 bg-white/5 backdrop-blur-md rounded-full border border-white/10">
-                <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-[9px] font-bold text-green-400/80 uppercase tracking-widest">System Active</span>
+            <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1 bg-[var(--glass-highlight)] backdrop-blur-md rounded-full border border-[var(--glass-border)]">
+                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-[9px] font-bold text-green-500/80 uppercase tracking-widest">System Active</span>
             </div>
         </div>
     );

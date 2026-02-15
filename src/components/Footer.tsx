@@ -22,7 +22,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative pt-24 pb-12 overflow-hidden bg-[var(--bg-deep)] border-t border-white/5">
+    <footer className="relative pt-24 pb-12 overflow-hidden bg-[var(--bg-deep)] border-t border-[var(--glass-border)]">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* Main Columns */}
@@ -31,12 +31,9 @@ export default function Footer() {
           {/* Brand Section (Left) */}
           <div className="md:col-span-12 lg:col-span-5 space-y-8">
             <Link href="/" className="text-2xl font-black font-elegant tracking-tight text-[var(--text-primary)] flex items-center gap-3 group">
-              <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-cyan-500/50 transition-colors">
-                <Terminal className="w-5 h-5 text-cyan-400" />
-              </div>
-              <span className="tracking-[-0.03em]">lostmartian<span className="text-white/20">.in</span></span>
+              <span className="tracking-[-0.03em]">lostmartian<span className="text-[var(--text-muted)]">.in</span></span>
             </Link>
-            <p className="text-slate-400 leading-relaxed font-body text-base max-w-sm">
+            <p className="text-[var(--text-secondary)] leading-relaxed font-body text-base max-w-sm">
               An elite Product Engineering Studio merging deep AI research with
               production-grade software engineering to build the next generation of products.
             </p>
@@ -47,13 +44,13 @@ export default function Footer() {
 
           {/* Navigation (Center) */}
           <div className="md:col-span-6 lg:col-span-3 space-y-6">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500">Navigation</h3>
+            <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--text-muted)]">Navigation</h3>
             <ul className="space-y-4">
               {['Home', 'About', 'Projects'].map((item) => (
                 <li key={item}>
                   <Link
                     href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                    className="text-slate-300 hover:text-cyan-400 transition-colors font-body text-sm flex items-center gap-2 group"
+                    className="text-[var(--text-secondary)] hover:text-cyan-400 transition-colors font-body text-sm flex items-center gap-2 group"
                   >
                     <span className="h-px w-0 bg-cyan-400 group-hover:w-4 transition-all" />
                     {item}
@@ -65,7 +62,7 @@ export default function Footer() {
 
           {/* Connect (Right) */}
           <div className="md:col-span-6 lg:col-span-3 space-y-6">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500">Connect</h3>
+            <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--text-muted)]">Connect</h3>
             <div className="flex flex-col gap-4">
               {socialLinks.map((social) => (
                 <a
@@ -73,12 +70,9 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 text-slate-300 hover:text-white transition-colors group"
+                  className="flex items-center gap-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors group"
                   aria-label={social.label}
                 >
-                  <div className="p-2 rounded-full bg-white/5 border border-white/5 group-hover:border-cyan-500/30 group-hover:bg-cyan-500/5 transition-all">
-                    <social.icon size={14} />
-                  </div>
                   <span className="text-sm font-body">{social.label}</span>
                 </a>
               ))}
@@ -90,25 +84,25 @@ export default function Footer() {
         {/* Daily Bit (Subtle) */}
         {joke && (
           <div className="mb-12 py-4 text-center">
-            <p className="text-xs text-slate-500 flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
+            <p className="text-xs text-[var(--text-muted)] flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
               <span className="flex items-center gap-2 text-cyan-500/60 font-black uppercase tracking-[0.2em]">
                 <Coffee size={14} /> Daily Bit
               </span>
-              <span className="italic font-medium text-slate-500/80">"{joke.setup}"</span>
+              <span className="italic font-medium text-[var(--text-muted)]/80">"{joke.setup}"</span>
               <span className="text-cyan-400/80 font-bold">— {joke.punchline}</span>
             </p>
           </div>
         )}
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="pt-8 border-t border-[var(--glass-border)] flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-4">
-            <p className="text-slate-600 text-[10px] font-bold uppercase tracking-widest">
+            <p className="text-[var(--text-muted)] text-[10px] font-bold uppercase tracking-widest">
               © {currentYear} Sahil Gangurde
             </p>
           </div>
 
-          <p className="text-slate-600 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
+          <p className="text-[var(--text-muted)] text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
             Built with <Heart size={10} className="text-rose-500 fill-rose-500 animate-pulse" /> on the Edge
           </p>
         </div>

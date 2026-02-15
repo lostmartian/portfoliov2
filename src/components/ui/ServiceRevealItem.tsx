@@ -42,25 +42,25 @@ export default function ServiceRevealItem({
                 {/* Text Content Block */}
                 <div className={`space-y-8 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
                     <div className="space-y-4">
-                        <h3 className="text-4xl lg:text-5xl font-elegant text-white leading-tight">
+                        <h3 className="text-4xl lg:text-5xl font-elegant text-[var(--text-primary)] leading-tight">
                             {title}
                         </h3>
                     </div>
 
-                    <p className="text-lg lg:text-xl text-slate-400 leading-relaxed font-body max-w-xl">
+                    <p className="text-lg lg:text-xl text-[var(--text-secondary)] leading-relaxed font-body max-w-xl">
                         {description}
                     </p>
 
                     <div className="space-y-5 pt-8">
                         <div className="flex items-center gap-3">
                             <div className="h-px w-8 bg-cyan-500/50" />
-                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Core Stack</span>
+                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[var(--text-muted)]">Core Stack</span>
                         </div>
                         <div className="flex flex-wrap gap-2">
                             {tech.map((t) => (
                                 <span
                                     key={t}
-                                    className="px-4 py-1.5 text-[11px] font-bold bg-white/5 border border-white/10 rounded-full text-slate-300 backdrop-blur-md hover:border-cyan-500/30 transition-colors"
+                                    className="px-4 py-1.5 text-[11px] font-bold bg-[var(--glass-highlight)] border border-[var(--glass-border)] rounded-full text-[var(--text-secondary)] backdrop-blur-md hover:border-cyan-500/30 transition-colors"
                                 >
                                     {t}
                                 </span>

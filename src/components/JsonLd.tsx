@@ -10,10 +10,21 @@ export default function JsonLd() {
             'https://github.com/lostmartian',
             'https://www.linkedin.com/in/lostmartian/',
         ],
-        jobTitle: 'Full-Stack Engineer & AI Architect',
+        jobTitle: 'Full-Stack AI Engineer',
         email: 'sahilgangurde08@gmail.com',
         image: 'https://lostmartian.in/opengraph-image',
-        description: 'Full-Stack Engineer & AI Architect building intelligent systems.',
+        description: 'Founder of lostmartian Dev Studio. Full-Stack AI Engineer specializing in design engineering, specialized high-performance AI solutions, and boutique software development.',
+        knowsAbout: [
+            'Generative AI', 'Large Language Models (LLMs)', 'GraphRAG', 'Knowledge Graphs',
+            'Full-Stack Development', 'Design Engineering', 'WebAssembly (Wasm)',
+            'High-Performance C++', 'Golang Microservices', 'Distributed Systems',
+            'Cloud Infrastructure (AWS)', 'Database Systems', 'Computer Vision'
+        ],
+        brand: {
+            '@type': 'Brand',
+            name: 'lostmartian',
+            alternateName: 'lostmartian Studio'
+        }
     };
 
     return (

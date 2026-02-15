@@ -1,7 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Outfit, Space_Grotesk } from 'next/font/google';
-import { ThemeProvider } from 'next-themes';
+import { ThemeProvider } from '@/components/ThemeProvider';
 import PersistentWidgets from '@/components/PersistentWidgets';
 import MobileNavbar from '@/components/MobileNavbar';
 import JsonLd from '@/components/JsonLd';
@@ -13,17 +13,72 @@ const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space
 export const metadata: Metadata = {
   metadataBase: new URL('https://lostmartian.in'),
   title: {
-    default: 'Home | lostmartian',
+    default: 'lostmartian | High-End Dev Studio & Design Engineering',
     template: '%s | lostmartian',
   },
-  description: 'A showcase of creative development and design engineering.',
-  keywords: ['Full-Stack Engineer', 'AI Architect', 'Web Development', 'React', 'Next.js', 'Portfolio', 'Sahil Gangurde'],
+  description: 'Specializing in design engineering, high-performance AI solutions, and boutique software development. Elevating digital products through technical excellence.',
+  keywords: [
+    'lostmartian',
+    'lostmartian Studio',
+    'Dev Studio',
+    'Design Engineering',
+    'AI Solutions',
+    'Full-Stack AI Engineer',
+    'AI Architect',
+    'Sahil Gangurde',
+    'Boutique Software Development',
+    'High-Performance Computing',
+    'WebAssembly',
+    'Wasm',
+    'C++',
+    'Golang',
+    'Go Language',
+    'Python',
+    'TypeScript',
+    'Next.js',
+    'React',
+    'Generative AI',
+    'LLMs',
+    'LangGraph',
+    'LangChain',
+    'GraphRAG',
+    'Knowledge Graphs',
+    'Neo4j',
+    'PostgreSQL',
+    'Database Systems',
+    'B-Tree Indexing',
+    'Distributed Systems',
+    'Microservices',
+    'Event-Driven Architecture',
+    'AWS',
+    'Docker',
+    'Kubernetes',
+    'EKS',
+    'Serverless',
+    'Cloud Native',
+    'Computer Vision',
+    'Deep Learning',
+    'Image Processing',
+    'UNet',
+    'EffUNet',
+    'Steganography',
+    'Cryptography',
+    'AES',
+    'Slotted Page Format',
+    'Key-Value Store',
+    'lostdb',
+    'WasmQuant',
+    'Quant Tech',
+    'Financial Technology',
+    'Algorithm Design',
+    'DSA'
+  ],
   authors: [{ name: 'Sahil Gangurde' }],
   creator: 'Sahil Gangurde',
   publisher: 'Sahil Gangurde',
   openGraph: {
-    title: 'Home | lostmartian',
-    description: 'A showcase of creative development and design engineering.',
+    title: 'lostmartian | High-End Dev Studio & Design Engineering',
+    description: 'Specializing in design engineering, high-performance AI solutions, and boutique software development. Elevating digital products through technical excellence.',
     url: 'https://lostmartian.in',
     siteName: 'lostmartian',
     locale: 'en_US',
@@ -31,8 +86,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Home | lostmartian',
-    description: 'A showcase of creative development and design engineering.',
+    title: 'lostmartian | High-End Dev Studio & Design Engineering',
+    description: 'Specializing in design engineering, high-performance AI solutions, and boutique software development. Elevating digital products through technical excellence.',
     creator: '@lostmartian',
   },
   robots: {
@@ -53,25 +108,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className="dark">
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  // Force dark mode
-                  localStorage.setItem('theme', 'dark');
-                  document.documentElement.classList.add('dark');
-                  document.documentElement.style.colorScheme = 'dark';
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
-      </head>
-      <body className={`${inter.variable} ${outfit.variable} ${spaceGrotesk.variable} font-sans antialiased bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300`}>
-        <ThemeProvider attribute="class" forcedTheme="dark" enableSystem={false} storageKey="theme">
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.variable} ${outfit.variable} ${spaceGrotesk.variable} font-sans antialiased bg-[var(--bg-deep)] text-[var(--text-primary)] transition-colors duration-300`}>
+        <ThemeProvider>
           <PersistentWidgets />
           <MobileNavbar />
           {children}

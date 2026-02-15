@@ -46,20 +46,18 @@ const services = [
 
 export default function ExpertiseSection() {
     return (
-        <section className="relative py-24 lg:py-40 bg-[var(--bg-deep)]">
-            {/* Smooth transition gradient from top */}
-            <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/20 to-transparent pointer-events-none" />
+        <section className="relative pt-24 lg:pt-40 pb-12 lg:pb-20 bg-[var(--bg-deep)]">
 
             <div className="container mx-auto px-6">
                 {/* Section Heading */}
                 <div className="text-center mb-20 lg:mb-32">
-                    <h2 className="text-sm font-elegant text-white/40 uppercase tracking-[0.6em] mb-4">
+                    <h2 className="text-sm font-elegant text-[var(--text-muted)] uppercase tracking-[0.6em] mb-4">
                         Expertise & Performance
                     </h2>
-                    <h3 className="h2 font-elegant text-white mb-6">
-                        Specialized <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Solutions</span>
+                    <h3 className="h2 font-elegant text-[var(--text-primary)] mb-6">
+                        Specialized <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--neon-cyan)] to-[var(--neon-purple)]">Solutions</span>
                     </h3>
-                    <p className="text-body-large text-slate-400 max-w-2xl mx-auto font-body leading-relaxed">
+                    <p className="text-body-large text-[var(--text-secondary)] max-w-2xl mx-auto font-body leading-relaxed">
                         We combine deep technical engineering with strategic product thinking to build
                         systems that aren't just robust, but transformational.
                     </p>

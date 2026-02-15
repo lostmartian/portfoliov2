@@ -9,7 +9,7 @@ import { Sun, Moon, Home, User, Briefcase, FolderKanban, Palette, Menu, X } from
 import { cn } from '@/lib/utils';
 
 export default function Header() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -98,13 +98,34 @@ export default function Header() {
             })}
           </nav>
 
+          <div className="hidden md:flex items-center ml-2 border-l border-[var(--glass-border)] pl-4">
+            <button
+              onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+              className="p-2.5 rounded-full glass-vision-os hover:scale-110 transition-all duration-300 text-[var(--text-primary)]"
+              aria-label="Toggle theme"
+            >
+              {mounted && (
+                resolvedTheme === 'dark' ? <Sun size={18} /> : <Moon size={18} />
+              )}
+              {!mounted && <div className="w-[18px] h-[18px]" />}
+            </button>
+          </div>
+
           {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-full hover:bg-[var(--glass-highlight)] text-[var(--text-secondary)] transition-colors"
-          >
-            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+              className="p-2 rounded-full hover:bg-[var(--glass-highlight)] text-[var(--text-secondary)] transition-colors"
+            >
+              {mounted && (resolvedTheme === 'dark' ? <Sun size={18} /> : <Moon size={18} />)}
+            </button>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-full hover:bg-[var(--glass-highlight)] text-[var(--text-secondary)] transition-colors"
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
 
         </div>
       </motion.header>
@@ -138,6 +159,20 @@ export default function Header() {
                   </Link>
                 );
               })}
+
+              <div className="h-px bg-[var(--glass-border)] my-2" />
+
+              <button
+                onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--glass-highlight)] transition-all"
+              >
+                {mounted && (
+                  <>
+                    {resolvedTheme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                    <span className="font-medium">Switch to {resolvedTheme === 'dark' ? 'Light' : 'Dark'} Mode</span>
+                  </>
+                )}
+              </button>
             </div>
           </motion.div>
         )}

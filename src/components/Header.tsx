@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
-import { Sun, Moon, Home, User, Briefcase, FolderKanban, Palette, Menu, X } from 'lucide-react';
+import { Sun, Moon, Home, User, Briefcase, FolderKanban, Palette, Menu, X, BookOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function Header() {
@@ -36,6 +36,7 @@ export default function Header() {
     { href: '/', label: 'Home', icon: Home },
     { href: '/about', label: 'About Me', icon: User },
     { href: '/experience', label: 'Experience', icon: Briefcase },
+    { href: '/blog', label: 'Blog', icon: BookOpen },
     { href: '/projects', label: 'Projects', icon: FolderKanban },
     { href: '/hobbies', label: 'Hobbies', icon: Palette }
   ];

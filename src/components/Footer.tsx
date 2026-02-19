@@ -34,7 +34,7 @@ export default function Footer() {
               <span className="tracking-[-0.03em]">lostmartian<span className="text-[var(--text-muted)]">.in</span></span>
             </Link>
             <p className="text-[var(--text-secondary)] leading-relaxed font-body text-base max-w-sm">
-              An elite Product Engineering Studio merging deep AI research with
+              Freelance Full-Stack Engineer merging deep AI research with
               production-grade software engineering to build the next generation of products.
             </p>
           </div>

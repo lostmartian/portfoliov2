@@ -13,7 +13,7 @@ const services = [
     {
         icon: Cpu,
         title: 'AI & Intelligent Agents',
-        description: 'We build production-grade AI systems that go beyond simple chat. From custom RAG pipelines to autonomous agent swarms that handle complex business logic without human intervention.',
+        description: 'I build production-grade AI systems that go beyond simple chat. From custom RAG pipelines to autonomous agent swarms that handle complex business logic without human intervention.',
         tech: ['Gemini API', 'LangGraph', 'OpenAI', 'LangChain', 'Python'],
         color: 'from-purple-500 to-indigo-600',
         visual: <AIAsset />
@@ -21,7 +21,7 @@ const services = [
     {
         icon: Layout,
         title: 'Full-Stack Product Engineering',
-        description: 'Bespoke web applications built for scale and speed. We focus on high-performance architectures and premium user experiences that convert. Pixel-perfect, responsive, and robust.',
+        description: 'Bespoke web applications built for scale and speed. I focus on high-performance architectures and premium user experiences that convert. Pixel-perfect, responsive, and robust.',
         tech: ['Next.js', 'Go', 'TypeScript', 'React', 'Supabase'],
         color: 'from-cyan-400 to-blue-600',
         visual: <FullStackAsset />
@@ -29,7 +29,7 @@ const services = [
     {
         icon: Server,
         title: 'Workflows & Automation',
-        description: 'Automate away the boring stuff with sophisticated node-based workflows. We integrate your existing tools into a seamless, self-healing ecosystem that runs 24/7.',
+        description: 'Automate away the boring stuff with sophisticated node-based workflows. I integrate your existing tools into a seamless, self-healing ecosystem that runs 24/7.',
         tech: ['n8n', 'Python', 'AWS Lambda', 'Zapier', 'Node.js'],
         color: 'from-green-400 to-emerald-600',
         visual: <AutomationAsset />
@@ -37,7 +37,7 @@ const services = [
     {
         icon: BarChart,
         title: 'Strategic Architecture & Consulting',
-        description: 'Technical leadership for high-growth startups. We conduct deep architectural audits, plan scalable roadmaps, and provide the fractional CTO guidance needed to reach the next level.',
+        description: 'Technical leadership for high-growth startups. I conduct deep architectural audits, plan scalable roadmaps, and provide the fractional CTO guidance needed to reach the next level.',
         tech: ['System Design', 'AWS', 'Microservices', 'Distributed Systems'],
         color: 'from-orange-400 to-rose-600',
         visual: <ConsultingAsset />
@@ -58,7 +58,7 @@ export default function ExpertiseSection() {
                         Specialized <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--neon-cyan)] to-[var(--neon-purple)]">Solutions</span>
                     </h3>
                     <p className="text-body-large text-[var(--text-secondary)] max-w-2xl mx-auto font-body leading-relaxed">
-                        We combine deep technical engineering with strategic product thinking to build
+                        I combine deep technical engineering with strategic product thinking to build
                         systems that aren't just robust, but transformational.
                     </p>
                 </div>

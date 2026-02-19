@@ -97,7 +97,7 @@ export default function AboutClient() {
             <Header />
             <TableOfContents />
 
-            <main className="flex-1 pt-4 md:pt-24 lg:pl-64 xl:pr-80">
+            <main className="flex-1 lg:pl-64 xl:pr-80">
                 {/* Hero Section */}
                 <PageHero
                     title="Sahil Gangurde | AI Engineering"

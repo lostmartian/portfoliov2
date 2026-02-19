@@ -190,7 +190,7 @@ export default function HobbiesClient() {
         <div className="min-h-screen bg-[var(--bg-deep)] transition-colors duration-300">
             <Header />
 
-            <main className="w-full pt-4 md:pt-24">
+            <main className="w-full">
                 {/* Hero Section */}
                 <PageHero
                     title="Fine Arts & Creative Explorations"

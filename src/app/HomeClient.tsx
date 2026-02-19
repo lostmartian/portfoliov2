@@ -65,7 +65,7 @@ export default function HomeClient() {
                                 </h1>
 
                                 <p className="text-body-large text-[var(--text-secondary)] mb-10 max-w-2xl mx-auto leading-relaxed">
-                                    We are <span className="text-[var(--text-primary)] font-bold">lostmartian</span>. A high-stakes Product Engineering Studio that blends{' '}
+                                    I am <span className="text-[var(--text-primary)] font-bold">Sahil Gangurde</span>. A Freelance Full-Stack AI Engineer who blends{' '}
                                     <span className="text-[var(--neon-cyan)] font-semibold">elite AI engineering</span> with{' '}
                                     <span className="text-[var(--neon-purple)] font-semibold">robust architecture</span>
                                     {' '}to turn complex visions into market-ready products.
@@ -104,20 +104,36 @@ export default function HomeClient() {
                                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
                                                 </span>
-                                                <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[var(--neon-cyan)] opacity-70">Live Studio Status</span>
+                                                <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[var(--neon-cyan)] opacity-70">Currently Working On</span>
                                             </div>
                                             <div className="h-px w-8 bg-gradient-to-l from-transparent to-[var(--neon-cyan)]" />
                                         </div>
 
                                         {/* High-Impact Typographic Hook */}
                                         <div className="text-center max-w-4xl mx-auto">
-                                            <div className="mb-4">
-                                                <span className="text-[var(--text-secondary)] font-body text-lg md:text-xl opacity-70">Currently engineering </span>
+                                            <div className="flex flex-wrap justify-center gap-10 md:gap-16 items-center">
                                                 {[
                                                     {
                                                         name: 'WasmQuant',
                                                         link: 'https://wasmquant.vercel.app/',
-                                                        desc: 'a high-performance backtesting engine that runs entirely in your browser.'
+                                                    },
+                                                    {
+                                                        name: 'Blimze',
+                                                        link: 'https://blimze.com',
+                                                        logo: (
+                                                            <div className="relative w-24 h-7 md:w-36 md:h-10 flex items-center justify-center">
+                                                                <img
+                                                                    src="/clientlogo/blimze/darklogo.svg"
+                                                                    alt="Blimze"
+                                                                    className="dark:hidden object-contain w-full h-full"
+                                                                />
+                                                                <img
+                                                                    src="/clientlogo/blimze/lightlogo.svg"
+                                                                    alt="Blimze"
+                                                                    className="hidden dark:block object-contain w-full h-full"
+                                                                />
+                                                            </div>
+                                                        )
                                                     }
                                                 ].map((project) => (
                                                     <a
@@ -125,24 +141,17 @@ export default function HomeClient() {
                                                         href={project.link}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="group relative inline-block ml-2 border-b border-[var(--neon-cyan)]/20 hover:border-[var(--neon-cyan)] transition-colors"
+                                                        className="group flex items-center transition-all hover:scale-105"
                                                     >
-                                                        <span className="font-space font-bold text-xl md:text-2xl tracking-tight text-[var(--neon-cyan)]">
-                                                            {project.name}
-                                                        </span>
+                                                        {project.logo ? (
+                                                            project.logo
+                                                        ) : (
+                                                            <span className="font-space font-bold text-xl md:text-3xl tracking-tight text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">
+                                                                {project.name}
+                                                            </span>
+                                                        )}
                                                     </a>
                                                 ))}
-                                            </div>
-
-                                            <p className="text-base md:text-lg text-[var(--text-secondary)] font-body leading-relaxed opacity-80 max-w-2xl mx-auto">
-                                                No servers, no latency, no data leaks. Just <span className="text-[var(--neon-cyan)] font-semibold">raw C++ power</span> leveraged through
-                                                <span className="text-[var(--neon-purple)] font-semibold"> WebAssembly</span> for institutional-grade speed in the cloud.
-                                            </p>
-
-                                            <div className="mt-6 flex items-center justify-center gap-3">
-                                                <span className="h-px w-12 bg-gradient-to-r from-transparent to-[var(--glass-border)]" />
-                                                <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[var(--text-muted)] opacity-60">Architectural Audit in Progress</span>
-                                                <span className="h-px w-12 bg-gradient-to-l from-transparent to-[var(--glass-border)]" />
                                             </div>
                                         </div>
                                     </div>
@@ -185,7 +194,7 @@ export default function HomeClient() {
 
                                 <p className="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-12 font-body leading-relaxed">
                                     Whether you have a fully-fleshed idea or just a spark of inspiration,
-                                    we combine technical excellence with strategic vision to bring it to life.
+                                    I combine technical excellence with strategic vision to bring it to life.
                                 </p>
 
                                 <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -210,6 +219,6 @@ export default function HomeClient() {
             </main>
 
             <Footer />
-        </div>
+        </div >
     );
 }

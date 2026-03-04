@@ -25,6 +25,8 @@ const logos = [
 export default function LogoBand() {
     return (
         <div className="relative py-8 overflow-hidden">
+            {/* Top Separator Line */}
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--glass-border)] to-transparent opacity-50" />
             <div className="flex whitespace-nowrap">
                 <motion.div
                     animate={{

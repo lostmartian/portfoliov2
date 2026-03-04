@@ -104,24 +104,31 @@ export default function HomeClient() {
                                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
                                                 </span>
-                                                <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[var(--neon-cyan)] opacity-70">Currently Working On</span>
+                                                <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[var(--neon-cyan)] opacity-70">Currently Working With</span>
                                             </div>
                                             <div className="h-px w-8 bg-gradient-to-l from-transparent to-[var(--neon-cyan)]" />
                                         </div>
 
                                         {/* High-Impact Typographic Hook */}
                                         <div className="text-center max-w-4xl mx-auto">
-                                            <div className="flex flex-wrap justify-center gap-10 md:gap-16 items-center">
+                                            <div className="flex flex-wrap justify-center gap-12 md:gap-20 items-center">
                                                 {[
                                                     {
                                                         name: 'WasmQuant',
                                                         link: 'https://wasmquant.vercel.app/',
+                                                        logo: (
+                                                            <div className="flex items-center justify-center h-10 md:h-14 min-w-[140px] md:min-w-[200px]">
+                                                                <span className="font-space font-bold text-xl md:text-3xl tracking-tight text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">
+                                                                    WasmQuant
+                                                                </span>
+                                                            </div>
+                                                        )
                                                     },
                                                     {
                                                         name: 'Blimze',
                                                         link: 'https://blimze.com',
                                                         logo: (
-                                                            <div className="relative w-24 h-7 md:w-36 md:h-10 flex items-center justify-center">
+                                                            <div className="relative w-32 h-10 md:w-44 md:h-14 flex items-center justify-center">
                                                                 <img
                                                                     src="/clientlogo/blimze/darklogo.svg"
                                                                     alt="Blimze"
@@ -134,6 +141,19 @@ export default function HomeClient() {
                                                                 />
                                                             </div>
                                                         )
+                                                    },
+                                                    {
+                                                        name: 'JRATS',
+                                                        link: 'https://www.jrats.studio/',
+                                                        logo: (
+                                                            <div className="relative w-44 h-12 md:w-64 md:h-20 flex items-center justify-center -mx-6 md:-mx-10">
+                                                                <img
+                                                                    src="https://www.jrats.studio/_next/image?url=%2Flogo.webp&w=1080&q=75"
+                                                                    alt="JRATS"
+                                                                    className="object-contain w-full h-full scale-125"
+                                                                />
+                                                            </div>
+                                                        )
                                                     }
                                                 ].map((project) => (
                                                     <a
@@ -141,15 +161,9 @@ export default function HomeClient() {
                                                         href={project.link}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="group flex items-center transition-all hover:scale-105"
+                                                        className="group flex items-center justify-center transition-all hover:scale-105"
                                                     >
-                                                        {project.logo ? (
-                                                            project.logo
-                                                        ) : (
-                                                            <span className="font-space font-bold text-xl md:text-3xl tracking-tight text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">
-                                                                {project.name}
-                                                            </span>
-                                                        )}
+                                                        {project.logo}
                                                     </a>
                                                 ))}
                                             </div>

@@ -104,7 +104,7 @@ export default function HomeClient() {
                                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
                                                 </span>
-                                                <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[var(--neon-cyan)] opacity-70">Currently Working With</span>
+                                                <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[var(--neon-cyan)] opacity-70">Companies/Clients I have/am worked/ing with</span>
                                             </div>
                                             <div className="h-px w-8 bg-gradient-to-l from-transparent to-[var(--neon-cyan)]" />
                                         </div>
@@ -114,12 +114,12 @@ export default function HomeClient() {
                                             <div className="flex flex-wrap justify-center gap-12 md:gap-20 items-center">
                                                 {[
                                                     {
-                                                        name: 'WasmQuant',
-                                                        link: 'https://wasmquant.vercel.app/',
+                                                        name: 'Omara',
+                                                        link: 'https://www.omaratechnologies.com/en',
                                                         logo: (
-                                                            <div className="flex items-center justify-center h-10 md:h-14 min-w-[140px] md:min-w-[200px]">
-                                                                <span className="font-space font-bold text-xl md:text-3xl tracking-tight text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">
-                                                                    WasmQuant
+                                                            <div className="flex items-center justify-center h-12 md:h-16 min-w-[140px] md:min-w-[200px]">
+                                                                <span className="font-body font-semibold text-3xl md:text-5xl tracking-tight text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">
+                                                                    Omara
                                                                 </span>
                                                             </div>
                                                         )
@@ -128,7 +128,7 @@ export default function HomeClient() {
                                                         name: 'Blimze',
                                                         link: 'https://blimze.com',
                                                         logo: (
-                                                            <div className="relative w-32 h-10 md:w-44 md:h-14 flex items-center justify-center">
+                                                            <div className="relative w-28 h-8 md:w-40 md:h-12 flex items-center justify-center">
                                                                 <img
                                                                     src="/clientlogo/blimze/darklogo.svg"
                                                                     alt="Blimze"

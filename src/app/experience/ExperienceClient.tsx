@@ -3,7 +3,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import TableOfContents from '@/components/TableOfContents';
-import { Briefcase, Calendar, MapPin, Code, Brain, Cloud, Database, GraduationCap, Puzzle, ArrowRight } from 'lucide-react';
+import { Briefcase, Calendar, MapPin, Code, Brain, Cloud, Database, GraduationCap, Puzzle, ArrowRight, ExternalLink } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
@@ -12,13 +12,31 @@ import PageHero from '@/components/PageHero';
 const experiences = [
     {
         id: 1,
-        company: "Stealth-Mode AI Tech Startup",
+        company: "JRat’s Studio",
+        role: "Software Engineer, Freelance",
+        type: "Remote",
+        location: "Remote",
+        duration: "March 2026 - Present",
+        current: true,
+        icon: Briefcase,
+        link: "https://www.jrats.studio/",
+        technologies: ["AWS (Batch, ECS, RDS, Cognito, S3)", "Next.js", "Python", "Polars", "Go"],
+        achievements: [
+            "**Building a High-Throughput IPO Allotment & Reconciliation Engine**: Developed a Python-powered engine to automate complex lottery and proportionate allocation logic for Mainboard and SME IPOs, achieving a benchmark of **20 million records in ≤90 minutes** to meet SEBI’s T+3 mandate.",
+            "**Engineering a Secure External Integration Layer**: Connected with 8 national financial systems (**BSE, NSE, NSDL, CDSL**) via SFTP and REST APIs, implementing the mandatory **UDIFF protocol** and **SEBI CSCRF cybersecurity standards**.",
+            "**Architected and Built an ERP System**: Developed a custom ERP system to streamline internal operations, financial tracking, and resource management for the studio."
+        ]
+    },
+    {
+        id: 2,
+        company: "Omara Technologies",
         role: "Founding Full-Stack AI Engineer",
         type: "Remote",
         location: "India",
-        duration: "October 2024 - Present",
-        current: true,
+        duration: "October 2024 - January 2026",
+        current: false,
         icon: Brain,
+        link: "https://www.omaratechnologies.com/en",
         technologies: ["Go", "Python", "Next.js", "PostgreSQL", "Neo4j", "AWS (EKS, Cognito, S3)", "Docker", "LLMs (Gemini)", "GraphRAG", "LangChain/LangGraph"],
         achievements: [
             "**Architected and Deployed a Cloud-Native PDF Annotation Platform**: Built a scalable, enterprise-grade system using **Go (Golang)** and **PostgreSQL**, leveraging **AWS Cognito** for secure, role-based access control (RBAC) and **AWS S3** for persistent document storage",
@@ -30,7 +48,7 @@ const experiences = [
         ]
     },
     {
-        id: 2,
+        id: 3,
         company: "Independent Tutoring",
         role: "DSA & Machine Learning Instructor",
         type: "Remote",
@@ -48,7 +66,7 @@ const experiences = [
         ]
     },
     {
-        id: 3,
+        id: 4,
         company: "GeekforGeeks",
         role: "Remote Content Writer",
         type: "Remote",
@@ -64,7 +82,7 @@ const experiences = [
         ]
     },
     {
-        id: 4,
+        id: 5,
         company: "HackerEarth",
         role: "Remote Problem Setter",
         type: "Remote",
@@ -122,14 +140,26 @@ export default function ExperienceClient() {
                                             <div className="relative z-10">
                                                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8">
                                                     <div className="space-y-2">
-                                                        <h3 className="text-3xl md:text-4xl font-bold font-elegant text-[var(--text-primary)] transition-colors">
-                                                            {exp.role}
-                                                        </h3>
-                                                        <div className="flex flex-wrap items-center gap-x-3 text-xl text-[var(--text-secondary)] font-body">
-                                                            <span className="font-semibold text-[var(--text-primary)]">{exp.company}</span>
+                                                        <div className="text-3xl md:text-4xl font-bold font-elegant">
+                                                            {(exp as any).link ? (
+                                                                <a
+                                                                    href={(exp as any).link}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="flex items-center gap-3 group/link text-[var(--text-primary)] hover:text-[var(--neon-cyan)] transition-colors"
+                                                                >
+                                                                    <span>{exp.company}</span>
+                                                                    <ExternalLink size={24} className="text-[var(--text-muted)] group-hover/link:text-[var(--neon-cyan)] transition-all" />
+                                                                </a>
+                                                            ) : (
+                                                                <span className="text-[var(--text-primary)]">{exp.company}</span>
+                                                            )}
+                                                        </div>
+                                                        <h3 className="flex flex-wrap items-center gap-x-3 text-xl md:text-2xl text-[var(--text-secondary)] font-body">
+                                                            <span className="font-semibold">{exp.role}</span>
                                                             <span className="w-1.5 h-1.5 rounded-full bg-[var(--text-muted)] opacity-30" />
                                                             <span className="text-[var(--text-muted)]">{exp.location}</span>
-                                                        </div>
+                                                        </h3>
                                                     </div>
 
                                                     <div className="flex flex-col items-start md:items-end gap-3 shrink-0">

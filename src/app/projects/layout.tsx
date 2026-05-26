@@ -1,13 +1,11 @@
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-    title: 'Projects',
-};
-
 export default function ProjectsLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-    return <>{children}</>;
+  return (
+    <>
+      {children}
+    </>
+  );
 }

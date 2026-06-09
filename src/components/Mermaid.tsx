@@ -45,5 +45,5 @@ export default function Mermaid({ chart }: { chart: string }) {
     return <div className="py-12 bg-foreground/[0.02] border border-border/20 my-8 animate-pulse flex items-center justify-center text-[10px] font-mono text-foreground/20">LOADING_DIAGRAM...</div>;
   }
 
-  return <div ref={ref} className="mermaid flex justify-center py-12 bg-foreground/[0.02] border border-border/20 my-8 overflow-x-auto" />;
+  return <div ref={ref} className="mermaid flex justify-start md:justify-center pl-6 pr-6 w-full max-w-full overflow-x-auto py-12 bg-foreground/[0.02] border border-border/20 my-8" />;
 }

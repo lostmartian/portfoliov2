@@ -5,7 +5,7 @@ import BackButton from "@/components/Work/BackButton";
 export default function FarsightPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background transition-colors duration-300 overflow-x-hidden">
-      <main className="max-w-7xl mx-auto px-8 pt-32 pb-64 sm:px-16">
+      <main className="max-w-7xl mx-auto px-8 pt-32 pb-16 sm:px-16 md:pb-24">
         {/* Bespoke Header */}
         <div className="relative mb-32">
           <BackButton label="Back to System" fallback="/work" />
@@ -265,40 +265,7 @@ export default function FarsightPage() {
               </p>
             </div>
           </section>
-
         </div>
-
-        {/* Project Navigation (Minimalist) */}
-        {/* <div className="mt-80 border-t border-foreground/10 flex flex-col md:flex-row items-center justify-between py-12 group/nav">
-          <Link
-            href="/work/ipo-allotment-engine"
-            className="flex flex-col md:items-start group py-8"
-          >
-            <span className="text-[9px] uppercase tracking-[0.4em] text-foreground/20 mb-2 group-hover:text-foreground/40 transition-colors">Previous</span>
-            <span className="text-sm font-mono text-foreground/40 group-hover:text-foreground transition-colors flex items-center gap-2">
-              <span className="transition-transform group-hover:-translate-x-1">←</span>
-              IPO Allotment Engine
-            </span>
-          </Link> */}
-
-        <Link
-          href="/#work"
-          className="py-8 text-[9px] uppercase tracking-[0.8em] text-foreground/10 hover:text-foreground transition-colors"
-        >
-          Index
-        </Link>
-
-        {/* <Link
-            href="/work/stellar-interface"
-            className="flex flex-col md:items-end group py-8"
-          >
-            <span className="text-[9px] uppercase tracking-[0.4em] text-foreground/20 mb-2 group-hover:text-foreground/40 transition-colors">Next</span>
-            <span className="text-sm font-mono text-foreground/40 group-hover:text-foreground transition-colors flex items-center gap-2">
-              Stellar Interface
-              <span className="transition-transform group-hover:translate-x-1">→</span>
-            </span>
-          </Link> 
-        </div> */}
       </main>
     </div>
   );

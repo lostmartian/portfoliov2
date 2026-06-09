@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import ExperienceShowcase from "@/components/ExperienceShowcase";
 import WorkJourney from "@/components/WorkJourney";
 
 export default function Home() {
@@ -6,7 +7,8 @@ export default function Home() {
     <div className="relative min-h-screen">
       <Hero />
 
-      <main className="flex flex-col items-center">
+      <main className="flex flex-col items-center w-full">
+        <ExperienceShowcase />
         <WorkJourney />
         
         {/* Other sections like About can go here */}

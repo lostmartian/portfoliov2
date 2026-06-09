@@ -98,9 +98,10 @@ export default function WorkJourney() {
 
 
   return (
-    <section className="relative w-full py-32 bg-background overflow-hidden border-t border-border/40">
-      <div className="max-w-7xl mx-auto px-8 sm:px-16">
-        <div className="flex items-center justify-between mb-20">
+    <section className="relative w-full py-16 md:py-24 lg:py-32 bg-background overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16">
+        <div className="w-full h-px bg-border/40 mb-10 md:mb-16" />
+        <div className="flex items-center justify-between mb-8 md:mb-12">
           <div className="flex items-center gap-3">
             <span className="w-2 h-2 bg-foreground/40 rounded-full" />
             <p className="text-technical tracking-[0.2em]">Methodology / Work_Process</p>
@@ -112,13 +113,112 @@ export default function WorkJourney() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
-          {/* Navigation Sidebar */}
-          <div className="lg:col-span-4 space-y-4">
+        {/* Section Heading & Copy */}
+        <div className="mb-12 md:mb-16 max-w-3xl">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-medium tracking-tight text-foreground leading-[1.1]">
+            Methodology
+          </h2>
+          <p className="mt-4 text-foreground/50 font-light text-base sm:text-lg leading-relaxed">
+            A structured, engineering-first approach to analyzing requirements, designing scale-ready blueprints, and executing high-performance code.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-24">
+          
+          {/* Mobile/Tablet Accordion Layout (visible < lg) */}
+          <div className="block lg:hidden w-full space-y-4 col-span-1">
+            {steps.map((step, idx) => (
+              <div
+                key={step.id}
+                onClick={() => handleManualSwitch(idx)}
+                className={`group relative p-5 sm:p-6 cursor-pointer border transition-all duration-500 rounded-lg ${
+                  activeStep === idx ? 'bg-foreground/[0.03] border-border/60' : 'border-border/10 bg-transparent hover:bg-foreground/[0.01]'
+                }`}
+              >
+                {/* Progress Bar for active step */}
+                {activeStep === idx && (
+                  <motion.div 
+                    className="absolute bottom-0 left-0 h-[2px] bg-foreground/30 rounded-b-lg"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${progress}%` }}
+                    transition={{ ease: "linear" }}
+                  />
+                )}
+                
+                <div className="flex items-start gap-4">
+                  <span className={`text-xs font-mono transition-colors duration-500 mt-0.5 ${
+                    activeStep === idx ? 'text-foreground/80' : 'text-foreground/20'
+                  }`}>
+                    {step.id}
+                  </span>
+                  <div className="flex-1">
+                    <h3 className={`text-sm font-bold uppercase tracking-[0.1em] transition-colors duration-500 ${
+                      activeStep === idx ? 'text-foreground' : 'text-foreground/40 group-hover:text-foreground/60'
+                    }`}>
+                      {step.title}
+                    </h3>
+                    <p className={`text-[11px] mt-1 transition-colors duration-500 ${
+                      activeStep === idx ? 'text-foreground/70' : 'text-foreground/30'
+                    }`}>
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Inline Content Accordion */}
+                <AnimatePresence initial={false}>
+                  {activeStep === idx && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pt-6 pb-2 space-y-4 border-t border-border/10 mt-5">
+                        <div className="flex items-center gap-4 mb-2">
+                          <span className="text-6xl font-serif italic text-foreground/5 leading-none">{step.id}</span>
+                          <div className="flex-grow h-px bg-border/20" />
+                        </div>
+                        {step.content.map((para, i) => (
+                          <p 
+                            key={i} 
+                            className="text-sm sm:text-base font-normal text-foreground/75 leading-relaxed tracking-tight"
+                          >
+                            {para}
+                          </p>
+                        ))}
+                        
+                        {/* Accordion Card Metadata */}
+                        <div className="pt-4 border-t border-border/20 flex flex-wrap gap-x-8 gap-y-4">
+                          <div className="space-y-0.5">
+                            <p className="text-[8px] font-mono text-foreground/20 uppercase tracking-widest">Phase_Key</p>
+                            <p className="text-[10px] font-medium text-foreground/60">0x_{step.title.split(' ')[0].toUpperCase()}</p>
+                          </div>
+                          <div className="space-y-0.5">
+                            <p className="text-[8px] font-mono text-foreground/20 uppercase tracking-widest">Protocol</p>
+                            <p className="text-[10px] font-medium text-foreground/60">{step.protocol}</p>
+                          </div>
+                          <div className="space-y-0.5">
+                            <p className="text-[8px] font-mono text-foreground/20 uppercase tracking-widest">Status</p>
+                            <p className="text-[10px] font-medium text-foreground/60">{step.status}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop Sidebar (visible >= lg) */}
+          <div className="hidden lg:block lg:col-span-4 space-y-4">
             {steps.map((step, idx) => (
               <div
                 key={step.id}
                 onMouseEnter={() => handleManualSwitch(idx)}
+                onClick={() => handleManualSwitch(idx)}
                 className={`group relative p-6 cursor-pointer border transition-all duration-500 ${
                   activeStep === idx ? 'bg-foreground/[0.03] border-border/60' : 'border-transparent hover:bg-foreground/[0.01]'
                 }`}
@@ -156,8 +256,8 @@ export default function WorkJourney() {
             ))}
           </div>
 
-          {/* Manifesto Content Area */}
-          <div className="lg:col-span-8 min-h-[650px] flex flex-col justify-between">
+          {/* Desktop Manifesto Content Area (visible >= lg) */}
+          <div className="hidden lg:flex lg:col-span-8 min-h-[650px] flex-col justify-between">
             <div className="flex-1">
               <AnimatePresence mode="wait">
                 <motion.div

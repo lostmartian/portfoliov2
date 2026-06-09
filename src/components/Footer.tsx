@@ -67,33 +67,33 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative bg-background pt-32 pb-8 overflow-hidden">
+    <footer className="relative bg-background pt-16 md:pt-24 lg:pt-32 pb-8 overflow-hidden">
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:60px_60px]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-8 sm:px-16 space-y-24 relative z-10 flex flex-col items-center text-center border-t border-foreground/10 pt-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16 space-y-16 md:space-y-24 relative z-10 flex flex-col items-center text-center border-t border-foreground/10 pt-16 md:pt-24">
 
         {/* Philosophy Section - Dynamic */}
         {!isContactPage && (
-          <div className="space-y-12 flex flex-col items-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
+          <div className="space-y-8 md:space-y-12 flex flex-col items-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <div className="flex items-center gap-4">
               <div className="w-1.5 h-1.5 rounded-full bg-foreground/20" />
               <span className="text-[10px] font-mono text-foreground/30 uppercase tracking-[0.4em]">{content.mandate}</span>
             </div>
 
-            <div className="space-y-12 max-w-4xl">
-              <h2 className="text-3xl md:text-5xl font-light tracking-tight leading-[1.6] text-foreground/90 italic">
+            <div className="space-y-6 md:space-y-12 max-w-4xl">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-light tracking-tight leading-[1.6] text-foreground/90 italic px-2">
                 {content.quote}
               </h2>
-              <p className="text-lg md:text-xl text-foreground/40 font-light tracking-tight leading-relaxed mx-auto max-w-3xl">
+              <p className="text-sm sm:text-base md:text-xl text-foreground/40 font-light tracking-tight leading-relaxed mx-auto max-w-3xl px-4">
                 {content.text}
               </p>
             </div>
 
             <a
               href={`mailto:${CONTACT_DATA.email}`}
-              className="group inline-flex items-center gap-6 px-12 py-5 bg-foreground text-background rounded-full font-black uppercase tracking-[0.2em] text-[10px] hover:scale-105 active:scale-95 transition-all"
+              className="group inline-flex items-center gap-6 px-10 md:px-12 py-4 md:py-5 bg-foreground text-background rounded-full font-black uppercase tracking-[0.2em] text-[10px] hover:scale-105 active:scale-95 transition-all"
             >
               Initiate Contact
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -102,7 +102,7 @@ export default function Footer() {
         )}
 
         {/* Detailed Links Grid */}
-        <div className={`w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 text-center ${!isContactPage ? 'pt-24 border-t border-foreground/5' : ''}`}>
+        <div className={`w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center ${!isContactPage ? 'pt-16 md:pt-24 border-t border-foreground/5' : ''}`}>
           <div className="space-y-6 flex flex-col items-center">
             <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/20">Navigation</h4>
             <div className="flex flex-col gap-2 items-center">

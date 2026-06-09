@@ -29,25 +29,58 @@ export interface Project {
 }
 
 export const projects: Project[] = [
-  /*
   {
     slug: "ipo-allotment-engine",
     title: "IPO Allotment Engine",
     category: "Financial Engineering / SEBI Compliance / FinTech",
-    year: "2025",
+    year: "2026",
     duration: "Mar 2026 - Present",
-    description: "Developing high-precision algorithms for IPO allotment processing, ensuring absolute regulatory integrity and transparency.",
+    description: "A deterministic, scale-elastic processing platform for high-stakes IPO settlement and SEBI compliance. Engineered a high-throughput engine matching 10M+ records in under 7 seconds.",
     fullDescription: "A mission-critical system built to handle the complex mathematical logic of IPO share allotment according to SEBI's strict regulatory frameworks. The system processes millions of bids in seconds while maintaining 100% accuracy and auditability.",
-    challenge: "Processing massive volumes of heterogeneous bid data while strictly adhering to varying allotment categories and proportional representation rules, all within a high-pressure timeframe.",
-    solution: "A custom-engineered allotment engine built with high-performance logic that automates the verification, sorting, and basis of allotment generation, providing a transparent and immutable audit trail.",
+    challenge: "Ingesting, deduplicating, and reconciling millions of heterogeneous bid records within a rigid T+4 SEBI cycle, while avoiding DB write-lock contentions.",
+    solution: "Separated the control plane (AWS Step Functions) from the vectorized data plane (Polars on AWS Batch) to achieve sub-10 second processing times with 100% deterministic reproducibility.",
     type: "CODE",
     image: "/projects/ipo-datagrid.png",
     clients: [
-      { name: "JRat's Studio", link: "https://jrats.studio" }
+      { name: "JRat's Studio", link: "https://www.jrats.studio/" }
     ],
-    stack: ["Go", "Python", "PostgreSQL", "AWS", "NextJS"]
+    stack: ["Go", "Python", "PostgreSQL", "AWS", "Terraform", "NextJS"],
+    sections: [
+      {
+        title: "Deterministic Engine",
+        subtitle: "Vectorized 3-Way Reconciliation & Solvers",
+        type: "technical",
+        content: "Engineered a file-first data plane utilizing memory-mapped datasets and vectorized Polars LazyFrames to achieve SIMD-accelerated joins. Transitioned regex logic to google-re2 to ensure O(n) safety.",
+        points: [
+          "Vectorized 3-Way Hash Reconciliation",
+          "SEBI Basis of Allotment Scenario Solvers",
+          "Seed-Reproducible CSPRNG Lottery Draw"
+        ]
+      },
+      {
+        title: "Admin Control Plane",
+        subtitle: "Decoupled Management Console & Auditing",
+        type: "design",
+        content: "Built a secure operations portal with Next.js and shadcn/ui. The Go (Gin) administrative API backend integrates fine-grained Cognito OIDC RBAC and an immutable audit logging system.",
+        points: [
+          "Low-Latency Go REST API (Gin / Zap)",
+          "Stage Gate & Consensus Arbitration Hub",
+          "Immutable DB Audit Ledger with Cryptographic Checksums"
+        ]
+      },
+      {
+        title: "Scale-Elastic Infra",
+        subtitle: "Zero-Trust Dual-Region Cloud Topology",
+        type: "impact",
+        content: "Provisioned a scale-to-zero architecture using AWS Batch on Fargate and Step Functions. Hardened network boundaries with dedicated NAT IP allowlisting for stock exchanges.",
+        points: [
+          "AWS Step Functions Parent-Child Workflows",
+          "Static NAT Egress for Exchange Allowlisting",
+          "Isolated Private Aurora DB Subnets with Flyway Migrations"
+        ]
+      }
+    ]
   },
-  */
   {
     slug: "farsight",
     title: "Farsight",

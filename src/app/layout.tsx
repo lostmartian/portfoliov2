@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html
@@ -46,7 +47,7 @@ export default function RootLayout({
         >
           <div className="flex flex-col min-h-screen">
             <Navigation />
-            <div className="flex-grow pb-32 md:pb-48">
+            <div className="flex-grow pb-12 md:pb-24">
               {children}
             </div>
             <Footer />

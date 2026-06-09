@@ -1,0 +1,138 @@
+[
+  {
+    "id": 1,
+    "company": "JRat’s Studio",
+    "role": "Lead Platform Engineer, Freelance",
+    "location": "Remote",
+    "duration": "Mar'26 - Present",
+    "current": true,
+    "link": "https://www.jrats.studio/",
+    "technologies": [
+      "Go",
+      "Python",
+      "Polars",
+      "AWS",
+      "Next.js",
+      "PostgreSQL",
+      "Terraform"
+    ],
+    "summary": "Engineered an elastically scaling, deterministic IPO allotment engine processing 10M+ records in under 7 seconds, built a secure Go backend console with Cognito RBAC, and provisioned zero-trust AWS infrastructure.",
+    "achievements": [
+      "**Engineered Vectorized 3-Way Reconciliation**: Developed a memory-optimized Python pipeline utilizing Polars LazyFrames to hash-join Exchange bids, Sponsor bank confirms, and UPI mandates, matching 10M+ records in under 7 seconds under 3GB RAM.",
+      "**Built the SEBI Basis of Allotment Solver**: Programmed a mathematically strict solver executing SEBI proportionate allotment (Scenario A-D) using the Highest Remainder Method (HRM) and seeded CSPRNG lottery drawings for absolute audit reproducibility.",
+      "**Architected Zero-Trust & Scale-to-Zero Cloud**: Provisioned secure AWS VPC routing, private Aurora PostgreSQL subnets, static NAT IP allowlisting for stock exchanges, and parent-child Step Functions scaling on AWS Batch Fargate workers."
+    ]
+  },
+  {
+    "id": 2,
+    "company": "Blimze",
+    "role": "Design Consultant",
+    "location": "Remote",
+    "duration": "Feb'26 - Present",
+    "current": true,
+    "link": "https://blimze.com",
+    "technologies": [
+      "UI/UX Design",
+      "Figma",
+      "User Flow",
+      "Interactive Prototyping",
+      "Design Systems"
+    ],
+    "summary": "Served as Design Consultant advising on visual strategy, crafting high-fidelity UI/UX mockups, and architecting interactive web application flows.",
+    "achievements": [
+      "**Advised on UI/UX & Design Strategy**: Mentored product teams on design choices, ensuring standard styling guidelines, clean typography, and a unified branding architecture.",
+      "**Architected High-Fidelity Interaction Flows**: Crafted detailed wireframes, user flow diagrams, and functional mockups in Figma for complex application pages to enhance user onboarding.",
+      "**Optimized Interface Usability**: Designed intuitive page layouts and interactive states to streamline app transitions, reducing task completion friction."
+    ]
+  },
+  {
+    "id": 3,
+    "company": "Omara Technologies",
+    "role": "Founding Full-Stack AI Engineer",
+    "location": "Remote / India",
+    "duration": "Oct'24 - Jan'26",
+    "current": false,
+    "link": "https://www.omaratechnologies.com/en",
+    "technologies": [
+      "Go",
+      "Python",
+      "Next.js",
+      "PostgreSQL",
+      "Neo4j",
+      "AWS (EKS)",
+      "Docker",
+      "LLMs (Gemini)",
+      "GraphRAG",
+      "LangGraph"
+    ],
+    "summary": "Founding Full-Stack AI Engineer architecting a cloud-native PDF annotation platform, high-concurrency task engine, and hybrid Neo4j/Gemini GraphRAG pipelines.",
+    "achievements": [
+      "**Architected and Deployed a Cloud-Native PDF Annotation Platform**: Built a scalable, enterprise-grade system using **Go (Golang)** and **PostgreSQL**, leveraging **AWS Cognito** for secure RBAC and **AWS S3** for persistent document storage.",
+      "**Developed a High-Concurrency Task Engine**: Managed **100+ RESTful endpoints** with a task distribution system supporting parallel/series strategies, utilizing **Docker** and optimized for **AWS ECS/EKS**.",
+      "**Engineered Kuhn-Munkres Alignment Framework**: Resolved inter-annotator discrepancies by formulating a global optimization problem using the **Hungarian Algorithm** to minimize cost matrices derived from **Value Similarity (60%)**, **Spatial IoU (30%)**, and **Labeler Agreement (10%)**.",
+      "**Built Knowledge Graph Platform (Docunexus)**: Orchestrated an end-to-end **GraphRAG pipeline** using **Google Gemini 1.5 Pro** for structured extraction and **Neo4j** for relationship mapping across unstructured legal documents.",
+      "**Architected a Hybrid Search & GraphRAG System**: Implemented a **7-node LangGraph workflow** that executes parallel semantic vector searches and NL-to-Cypher conversions with automated source citations.",
+      "**Optimized AI Infrastructure & Costs**: Reduced LLM API operational costs by **70%** by engineering an **Intelligent Context Caching system** for Gemini that prioritized system instructions and managed token limits for batch processing."
+    ]
+  },
+  {
+    "id": 4,
+    "company": "Independent Tutoring",
+    "role": "DSA & Machine Learning Instructor",
+    "location": "Remote / India",
+    "duration": "Jan'24 - Sep'24",
+    "current": false,
+    "technologies": [
+      "Data Structures",
+      "Algorithms",
+      "Machine Learning",
+      "Python",
+      "Mentoring"
+    ],
+    "summary": "Mentored students in advanced DSA, graph algorithms, and machine learning",
+    "achievements": [
+      "Mentored and taught **Data Structures & Algorithms (DSA)** and **Machine Learning** concepts to diverse students preparing for technical interviews.",
+      "Designed and delivered **personalized curriculum** covering dynamic programming, greedy algorithms, and fundamental graph structures.",
+      "Guided students through **practical ML projects** including supervised learning, neural networks, and model optimization."
+    ]
+  },
+  {
+    "id": 5,
+    "company": "GeekforGeeks",
+    "role": "Remote Content Writer",
+    "location": "Remote / India",
+    "duration": "Oct'22 - Mar'24",
+    "current": false,
+    "technologies": [
+      "Technical Writing",
+      "Data Structures",
+      "Algorithms",
+      "Computer Vision",
+      "Data Science"
+    ],
+    "summary": "Published technical articles and created algorithmic coding problems on computer vision, data science, and advanced algorithms.",
+    "achievements": [
+      "Contributed **DSA problems and editorials** for the GeekforGeeks platform, helping thousands of learners understand complex algorithmic concepts.",
+      "Wrote **technical articles** on computer vision, data science, and advanced algorithms."
+    ]
+  },
+  {
+    "id": 6,
+    "company": "HackerEarth",
+    "role": "Remote Problem Setter",
+    "location": "Remote / India",
+    "duration": "Apr'21 - Aug'21",
+    "current": false,
+    "technologies": [
+      "Algorithm Design",
+      "Problem Setting",
+      "Competitive Programming",
+      "Test Case Generation"
+    ],
+    "summary": "Authored original algorithmic problems and comprehensive test suites for competitive programming and company recruitment drives.",
+    "achievements": [
+      "Designed and created **original algorithmic problems** for HackerEarth's problem library, used by thousands of developers.",
+      "Developed **comprehensive test cases** and edge cases to ensure problem robustness across various difficulty levels."
+    ]
+  }
+]

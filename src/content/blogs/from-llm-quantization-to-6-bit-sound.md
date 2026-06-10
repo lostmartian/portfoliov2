@@ -18,7 +18,7 @@ Standard lossy audio compression frameworks (like MP3, AAC, or Opus) are highly 
 
 The open-source code is hosted on [GitHub](https://github.com/lostmartian/audioTQ), and the official package is published as a [PyPI Package](https://pypi.org/project/audiotq/).
 
-<audio-comparison original="/blog_content/audiotq/audio1.wav" compressed="/blog_content/audiotq/audio1out.wav"></audio-comparison>
+<audio-comparison original="/blog_content/audiotq/audio1.wav" originalTitle="Original Audio" originalDesc="Uncompressed 24-bit PCM WAV (44.1 kHz)" compressed="/blog_content/audiotq/audio1out.wav" compressedTitle="AudioTQ 6-Bit Compressed" compressedDesc="Compressed to 6-bit Lloyd-Max centroids + 1-bit QJL residual"></audio-comparison>
 
 The goal was to build a zero-dependency, cache-aligned lossy audio compression codec (**AudioTQ**) running entirely on a single-threaded CPU, translating these data-oblivious quantization properties to real-time signal processing.
 

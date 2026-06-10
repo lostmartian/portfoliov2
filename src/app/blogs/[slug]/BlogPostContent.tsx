@@ -22,15 +22,19 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
 
   React.useEffect(() => {
     if (typeof window !== "undefined") {
-      (window as any).MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']],
-          displayMath: [['$$', '$$'], ['\\[', '\\]']]
-        },
-        options: {
-          enableMenu: false
-        }
-      };
+      // Initialize MathJax configuration if not already present.
+      // Crucial: check if .typesetPromise is present to avoid overwriting a fully loaded MathJax instance.
+      if (!(window as any).MathJax || typeof (window as any).MathJax.typesetPromise !== "function") {
+        (window as any).MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          },
+          options: {
+            enableMenu: false
+          }
+        };
+      }
     }
     setMounted(true);
   }, []);
@@ -100,6 +104,21 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
 
   return (
     <>
+      <Script id="mathjax-config" strategy="afterInteractive">
+        {`
+          if (!window.MathJax || typeof window.MathJax.typesetPromise !== 'function') {
+            window.MathJax = {
+              tex: {
+                inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
+                displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']]
+              },
+              options: {
+                enableMenu: false
+              }
+            };
+          }
+        `}
+      </Script>
       <Script
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
         id="MathJax-script"
@@ -179,8 +198,26 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
                 </code>
               );
             },
-            "audio-comparison": ({ original, compressed }: any) => {
-              return <AudioComparisonPlayer original={original} compressed={compressed} />;
+            "audio-comparison": ({ 
+              original, 
+              originaltitle, 
+              originaldesc, 
+              compressed, 
+              compressedtitle, 
+              compresseddesc,
+              fidelity
+            }: any) => {
+              return (
+                <AudioComparisonPlayer
+                  original={original}
+                  originalTitle={originaltitle}
+                  originalDesc={originaldesc}
+                  compressed={compressed}
+                  compressedTitle={compressedtitle}
+                  compressedDesc={compresseddesc}
+                  fidelity={fidelity}
+                />
+              );
             },
           // Custom paragraph renderer
           p: ({ children }: any) => {

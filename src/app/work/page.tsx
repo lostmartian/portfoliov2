@@ -3,7 +3,7 @@ import WorkCard from "@/components/Work/WorkCard";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata = {
-  title: "Work | Sahil Gangurde",
+  title: "Work",
   description: "A showcase of my professional experience and client projects.",
 };
 

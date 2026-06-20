@@ -32,9 +32,17 @@ function hslToRgba(h: number, s: number, l: number, a: number): string {
 export default function AbstractFlowBackground({ title, description, categories, speed: speedProp }: AbstractFlowBackgroundProps) {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
     setMounted(true);
+    const checkMobile = () => {
+      const isMobileDevice = window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      setIsMobile(isMobileDevice);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const meshStyle = useMemo(() => {
@@ -162,25 +170,32 @@ export default function AbstractFlowBackground({ title, description, categories,
     };
   }, [title, description, resolvedTheme, mounted, speedProp, categories]);
 
+  const fallbackGradient = `linear-gradient(135deg, ${meshStyle.colors[0]} 0%, ${meshStyle.colors[1]} 33%, ${meshStyle.colors[2]} 66%, ${meshStyle.colors[3]} 100%)`;
+
   // Render a clean matching fallback during SSR hydration
   if (!mounted) {
-    return <div className="absolute inset-0 w-full h-full z-0 bg-slate-100 dark:bg-[#0b0c10]" />;
+    return <div className="absolute inset-0 w-full h-full z-0" style={{ background: `linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.8) 100%)` }} />;
   }
 
   return (
-    <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none z-0">
+    <div 
+      className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none z-0"
+      style={{ background: fallbackGradient }}
+    >
       {/* Container scales up slightly on card hover for dynamic movement */}
-      <div className="w-full h-full transition-transform duration-700 ease-out group-hover:scale-105">
-        <MeshGradient
-          colors={meshStyle.colors}
-          distortion={meshStyle.distortion}
-          swirl={meshStyle.swirl}
-          speed={meshStyle.speed}
-          grainMixer={meshStyle.grainMixer}
-          grainOverlay={meshStyle.grainOverlay}
-          style={{ width: "100%", height: "100%" }}
-        />
-      </div>
+      {!isMobile && (
+        <div className="w-full h-full transition-transform duration-700 ease-out group-hover:scale-105">
+          <MeshGradient
+            colors={meshStyle.colors}
+            distortion={meshStyle.distortion}
+            swirl={meshStyle.swirl}
+            speed={meshStyle.speed}
+            grainMixer={meshStyle.grainMixer}
+            grainOverlay={meshStyle.grainOverlay}
+            style={{ width: "100%", height: "100%" }}
+          />
+        </div>
+      )}
     </div>
   );
 }

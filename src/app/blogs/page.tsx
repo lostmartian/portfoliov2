@@ -2,6 +2,12 @@ import { getBlogPosts } from "@/lib/blogs";
 import PageHeader from "@/components/PageHeader";
 import SteelBackground from "@/components/SteelBackground";
 import BlogList from "@/app/blogs/BlogList";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blogs",
+  description: "A collection of thoughts, tutorials, and deep-dives into software engineering and design.",
+};
 
 export default function BlogsPage() {
   const posts = getBlogPosts();

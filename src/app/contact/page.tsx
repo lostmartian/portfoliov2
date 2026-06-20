@@ -1,5 +1,11 @@
 import { CONTACT_DATA } from "@/config/contact";
 import PageHeader from "@/components/PageHeader";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description: "Currently accepting new inquiries and technical collaborations for mission-critical systems.",
+};
 
 export default function ContactPage() {
   return (

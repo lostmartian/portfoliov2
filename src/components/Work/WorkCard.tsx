@@ -11,7 +11,7 @@ interface WorkCardProps {
 export default function WorkCard({ project, i }: WorkCardProps) {
   return (
     <div id={project.slug} className="group relative w-full py-8 md:py-12 border-b border-border/10 hover:bg-foreground/[0.01] transition-all duration-500">
-      <div className="max-w-7xl mx-auto px-8 sm:px-16 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+      <div className="max-w-7xl mx-auto px-4 sm:px-16 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
         
         {/* 1. Archive Identity (Index & Thumbnail) */}
         <div className="lg:col-span-3 flex items-start gap-8">

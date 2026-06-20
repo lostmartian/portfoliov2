@@ -66,14 +66,14 @@ export default function IPOAllotmentPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background transition-colors duration-300 overflow-x-hidden">
 
-      <main className="max-w-7xl mx-auto px-8 pt-32 pb-32 sm:px-16">
+      <main className="max-w-7xl mx-auto px-4 pt-28 sm:pt-44 pb-32 sm:px-16">
 
         {/* ── Header ── */}
-        <div className="relative mb-24">
+        <div className="relative mb-12 sm:mb-24">
           <BackButton label="Back to System" fallback="/work" />
 
           {/* Context strip */}
-          <div className="mt-14 mb-10 flex flex-wrap items-center gap-x-4 gap-y-1.5 py-2.5 border-y border-foreground/5">
+          <div className="mt-8 sm:mt-14 mb-6 sm:mb-10 flex flex-wrap items-center gap-x-4 gap-y-1.5 py-2.5 border-y border-foreground/5">
             <span className="text-[9px] font-mono text-foreground/80 uppercase tracking-widest font-bold">JRATS.STUDIO</span>
             <span className="text-foreground/20 hidden sm:block">│</span>
             <span className="text-[9px] font-mono text-foreground/55 uppercase tracking-widest">SEBI-Reg. Category I RTA</span>
@@ -136,7 +136,7 @@ export default function IPOAllotmentPage() {
         </div>
 
         {/* ── Single Hero Image ── */}
-        <div className="relative w-full aspect-[21/9] overflow-hidden mb-32 group border border-foreground/5">
+        <div className="relative w-full aspect-[21/9] overflow-hidden mb-16 sm:mb-32 group border border-foreground/5">
           <Image
             src="/projects/ipo-datagrid.png"
             alt="Jrats Allotment Engine — Basis of Allotment Grid"
@@ -152,12 +152,12 @@ export default function IPOAllotmentPage() {
           </div>
         </div>
 
-        <div className="space-y-36 md:space-y-56">
+        <div className="space-y-20 sm:space-y-36 md:space-y-56">
 
           {/* ── 01: The Engagement ── */}
           <section>
             <SectionDivider num="01" label="The Engagement" />
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-24">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-24">
               <div className="lg:col-span-2 space-y-8">
                 <h2 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight">
                   High-stakes settlement infrastructure for India&apos;s securities market.
@@ -196,9 +196,9 @@ export default function IPOAllotmentPage() {
           {/* ── 02: Core Processing Engine ── */}
           <section>
             <SectionDivider num="02" label="Core Processing Engine" />
-            <div className="space-y-16">
+            <div className="space-y-8 sm:space-y-16">
               <div>
-                <h2 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
+                <h2 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight mb-3 sm:mb-5">
                   Reconciliation &amp; Allotment Engine
                 </h2>
                 <p className="text-foreground/40 max-w-2xl leading-relaxed">
@@ -219,7 +219,7 @@ export default function IPOAllotmentPage() {
                   </span>
                 </div>
                 <div className="p-6 md:p-10">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-center">
                     {/* Inputs */}
                     <div className="lg:col-span-4 space-y-3">
                       {pipelineInputs.map((item) => (
@@ -297,7 +297,7 @@ export default function IPOAllotmentPage() {
           {/* ── 03: SEBI BoA Solver ── */}
           <section>
             <SectionDivider num="03" label="SEBI BoA Solver" />
-            <div className="space-y-10">
+            <div className="space-y-6 sm:space-y-10">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
                   Basis of Allotment Solver
@@ -310,7 +310,7 @@ export default function IPOAllotmentPage() {
                 {solverScenarios.map((s) => (
                   <div
                     key={s.id}
-                    className="p-8 bg-background hover:bg-foreground/[0.02] transition-colors group space-y-4"
+                    className="p-6 sm:p-8 bg-background hover:bg-foreground/[0.02] transition-colors group space-y-4"
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-[8px] font-mono text-foreground/25 uppercase tracking-widest">
@@ -337,8 +337,8 @@ export default function IPOAllotmentPage() {
           {/* ── 04: Admin Control Plane ── */}
           <section>
             <SectionDivider num="04" label="Admin Control Plane" />
-            <div className="space-y-16">
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-24">
+            <div className="space-y-8 sm:space-y-16">
+              <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-24">
                 <div className="lg:col-span-2 space-y-4">
                   <h2 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight">
                     Decoupled Operations Console
@@ -398,7 +398,7 @@ export default function IPOAllotmentPage() {
               {/* Details */}
               <div className="grid grid-cols-1 md:grid-cols-3 border border-foreground/5 divide-y md:divide-y-0 md:divide-x divide-foreground/5">
                 {consoleDetails.map((d) => (
-                  <div key={d.title} className="p-8 bg-background hover:bg-foreground/[0.02] transition-colors space-y-3">
+                  <div key={d.title} className="p-6 sm:p-8 bg-background hover:bg-foreground/[0.02] transition-colors space-y-3">
                     <h4 className="text-sm font-bold uppercase tracking-tight">{d.title}</h4>
                     <p className="text-foreground/40 text-sm leading-relaxed">{d.desc}</p>
                   </div>
@@ -420,9 +420,9 @@ export default function IPOAllotmentPage() {
           {/* ── 05: Infrastructure ── */}
           <section>
             <SectionDivider num="05" label="Elastic Infrastructure" />
-            <div className="space-y-14">
+            <div className="space-y-8 sm:space-y-14">
               <div>
-                <h2 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight mb-5">
+                <h2 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight mb-3 sm:mb-5">
                   Scale-to-Zero<br />
                   <span className="text-foreground/10">with Hardened Egress</span>
                 </h2>
@@ -432,7 +432,7 @@ export default function IPOAllotmentPage() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 border border-foreground/5 divide-y md:divide-y-0 md:divide-x divide-foreground/5">
                 {infraItems.map((item) => (
-                  <div key={item.id} className="p-8 bg-background hover:bg-foreground/[0.02] transition-colors space-y-4">
+                  <div key={item.id} className="p-6 sm:p-8 bg-background hover:bg-foreground/[0.02] transition-colors space-y-4">
                     <p className="text-[9px] font-mono text-foreground/25 uppercase tracking-widest font-bold">
                       {item.id} // {item.label}
                     </p>
@@ -446,8 +446,8 @@ export default function IPOAllotmentPage() {
           {/* ── 06: Engineering Philosophy ── */}
           <section className="pb-16">
             <SectionDivider num="06" label="Engineering Philosophy" />
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-              <div className="space-y-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
+              <div className="space-y-4 sm:space-y-8">
                 <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-[1.05]">
                   Determinism<br />as an Absolute<br />
                   <span className="text-foreground/10">Requirement.</span>
@@ -484,7 +484,7 @@ export default function IPOAllotmentPage() {
             </div>
 
             {/* Closing line */}
-            <div className="mt-24 pt-12 border-t border-foreground/5">
+            <div className="mt-12 sm:mt-24 pt-6 sm:pt-12 border-t border-foreground/5">
               <p className="text-2xl md:text-3xl text-foreground/30 italic font-light text-center leading-relaxed">
                 <span className="text-foreground/70">Determinism</span> is the only currency that matters
                 when executing at scale.

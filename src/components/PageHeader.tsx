@@ -8,12 +8,12 @@ interface PageHeaderProps {
 
 export default function PageHeader({ title, subtitle, description }: PageHeaderProps) {
   return (
-    <div className="relative pt-32 pb-12 mb-12 overflow-hidden">
+    <div className="relative pt-28 sm:pt-44 pb-12 mb-12 overflow-hidden">
       {/* Structural Background */}
       <div className="absolute inset-0 grid-subtle opacity-[0.03] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background to-transparent" />
       
-      <div className="max-w-7xl mx-auto px-8 sm:px-16 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-16 relative z-10">
         <div className="flex flex-col gap-6 max-w-4xl">
           <div className="flex items-center gap-3">
             <div className="h-px w-8 bg-foreground/20" />

@@ -16,7 +16,7 @@ export default function BlogsPage() {
         description="A collection of thoughts, tutorials, and deep-dives into software engineering and design."
       />
 
-      <section className="max-w-7xl mx-auto px-8 sm:px-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-16">
         <BlogList initialPosts={posts} />
       </section>
     </main>

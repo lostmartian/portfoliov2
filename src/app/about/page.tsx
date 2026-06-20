@@ -48,8 +48,8 @@ export default function AboutPage() {
         description="Hello, I'm Sahil (lostmartian). A Full-Stack AI Engineer building systems for high-stakes intelligence."
       />
 
-      <main className="max-w-7xl mx-auto px-8 sm:px-16 pb-32 relative">
-        <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24 items-start py-12 border-b border-foreground/5 mb-32">
+      <main className="max-w-7xl mx-auto px-4 sm:px-16 pb-32 relative">
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-24 items-start py-8 md:py-12 border-b border-foreground/5 mb-16 sm:mb-32">
           {/* Left Column: Portrait */}
           <div className="md:col-span-5 lg:col-span-4">
             <div className="w-full aspect-square opacity-100 dark:opacity-80 rounded-sm overflow-hidden relative">
@@ -99,8 +99,8 @@ export default function AboutPage() {
         </div>
 
         {/* Technical Manifesto */}
-        <section className="relative z-10 w-full space-y-12 mb-64">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-24">
+        <section className="relative z-10 w-full space-y-6 md:space-y-12 mb-24 sm:mb-64">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-8 mb-12 md:mb-24">
             <div className="space-y-4">
               <h2 className="text-[10px] font-mono text-foreground/30 uppercase tracking-[0.5em]">The Manifest</h2>
               <p className="text-4xl font-black uppercase tracking-tighter">Technical Toolkit</p>
@@ -124,7 +124,7 @@ export default function AboutPage() {
         </section>
 
         {/* Validation Section */}
-        <section className="relative z-10 w-full space-y-24 mb-32">
+        <section className="relative z-10 w-full space-y-12 sm:space-y-24 mb-16 sm:mb-32">
           <div className="flex items-center gap-8 mb-16">
             <h2 className="text-[10px] font-mono text-foreground/30 uppercase tracking-[0.5em] shrink-0">Validation</h2>
             <div className="h-px w-full bg-foreground/10" />

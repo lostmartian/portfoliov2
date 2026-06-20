@@ -10,9 +10,9 @@ export default function ContactPage() {
         description="Currently accepting new inquiries and technical collaborations for mission-critical systems."
       />
 
-      <main className="max-w-7xl mx-auto w-full px-8 sm:px-16 space-y-16 py-12">
+      <main className="max-w-7xl mx-auto w-full px-4 sm:px-16 space-y-10 sm:space-y-16 py-12">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
           <div className="space-y-12">
             <div className="group">
               <p className="text-[10px] font-mono text-foreground/20 uppercase tracking-[0.3em] mb-3">Electronic Mail</p>

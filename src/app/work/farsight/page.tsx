@@ -5,12 +5,12 @@ import BackButton from "@/components/Work/BackButton";
 export default function FarsightPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background transition-colors duration-300 overflow-x-hidden">
-      <main className="max-w-7xl mx-auto px-8 pt-32 pb-16 sm:px-16 md:pb-24">
+      <main className="max-w-7xl mx-auto px-4 pt-28 sm:pt-44 pb-16 sm:px-16 md:pb-24">
         {/* Bespoke Header */}
-        <div className="relative mb-32">
+        <div className="relative mb-16 sm:mb-32">
           <BackButton label="Back to System" fallback="/work" />
 
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             <p className="text-[11px] text-foreground/40 uppercase tracking-[0.8em] font-mono font-bold">
               Omara Technologies
             </p>
@@ -22,7 +22,7 @@ export default function FarsightPage() {
             </p>
           </div>
 
-          <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-12 py-12 border-y border-foreground/5">
+          <div className="mt-12 sm:mt-24 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 sm:gap-x-12 sm:gap-y-12 py-8 sm:py-12 border-y border-foreground/5">
             <div className="space-y-2">
               <p className="text-[9px] text-foreground/20 uppercase tracking-widest font-bold">Timeline</p>
               <p className="font-mono text-sm">Oct 2024 — Jan 2025</p>
@@ -43,7 +43,7 @@ export default function FarsightPage() {
         </div>
 
         {/* Cinematic Hero */}
-        <div className="relative w-full aspect-[21/9] rounded-sm overflow-hidden mb-64 group bg-grey-900">
+        <div className="relative w-full aspect-[21/9] rounded-sm overflow-hidden mb-24 sm:mb-64 group bg-grey-900">
           <Image
             src="/projects/farsight-score.png"
             alt="Farsight"
@@ -58,12 +58,12 @@ export default function FarsightPage() {
         </div>
 
         {/* Manual Content Flow */}
-        <div className="space-y-80">
+        <div className="space-y-24 sm:space-y-80">
 
           {/* Section 01: The Core Thesis */}
           <section className="relative">
             <div className="absolute left-0 -top-32 text-[20vw] font-black opacity-[0.03] select-none pointer-events-none">01</div>
-            <div className="flex flex-col md:flex-row gap-24 items-start relative z-10">
+            <div className="flex flex-col md:flex-row gap-8 md:gap-24 items-start relative z-10">
               <div className="w-full md:w-1/3 pt-4">
                 <h2 className="text-sm font-black uppercase tracking-[0.4em] border-l-4 border-foreground pl-6">The Thesis</h2>
               </div>
@@ -86,15 +86,15 @@ export default function FarsightPage() {
           {/* Section 02: DocuNexus - The Knowledge Brain */}
           <section className="relative">
             <div className="absolute right-0 -top-32 text-[20vw] font-black opacity-[0.03] select-none pointer-events-none">02</div>
-            <div className="space-y-24 relative z-10">
-              <div className="flex flex-col md:flex-row gap-24">
+            <div className="space-y-12 md:space-y-24 relative z-10">
+              <div className="flex flex-col md:flex-row gap-8 md:gap-24">
                 <div className="w-full md:w-1/3">
                   <h2 className="text-sm font-black uppercase tracking-[0.4em] border-l-4 border-foreground pl-6">DocuNexus</h2>
-                  <p className="mt-8 text-[10px] font-mono text-foreground/30 uppercase leading-relaxed tracking-widest">
+                  <p className="mt-4 sm:mt-8 text-[10px] font-mono text-foreground/30 uppercase leading-relaxed tracking-widest">
                     Knowledge Graph Generation<br />Agentic AI Workflows
                   </p>
                 </div>
-                <div className="w-full md:w-2/3 space-y-12">
+                <div className="w-full md:w-2/3 space-y-6 md:space-y-12">
                   <h3 className="text-3xl md:text-5xl font-medium tracking-tight">The "Brain" of Document Intelligence</h3>
                   <p className="text-xl text-foreground/60 leading-relaxed">
                     DocuNexus is a powerful platform designed to extract, analyze, and visualize relationships within massive PDF repositories by converting them into structured Knowledge Graphs using Gemini 1.5 Pro and Neo4j.
@@ -104,25 +104,25 @@ export default function FarsightPage() {
 
               {/* Technical Features Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
-                <div className="p-12 border border-foreground/5 bg-foreground/[0.01] space-y-6 hover:bg-foreground/[0.03] transition-colors group">
+                <div className="p-6 md:p-12 border border-foreground/5 bg-foreground/[0.01] space-y-4 md:space-y-6 hover:bg-foreground/[0.03] transition-colors group">
                   <h4 className="text-lg font-bold uppercase tracking-tight group-hover:italic transition-all">Agentic Search Workflows</h4>
                   <p className="text-foreground/40 leading-relaxed text-sm">
                     Implemented complex search agents using <span className="text-foreground/80">LangGraph</span>, allowing for multi-step reasoning and deep document retrieval that moves beyond simple semantic search.
                   </p>
                 </div>
-                <div className="p-12 border border-foreground/5 bg-foreground/[0.01] space-y-6 hover:bg-foreground/[0.03] transition-colors group">
+                <div className="p-6 md:p-12 border border-foreground/5 bg-foreground/[0.01] space-y-4 md:space-y-6 hover:bg-foreground/[0.03] transition-colors group">
                   <h4 className="text-lg font-bold uppercase tracking-tight group-hover:italic transition-all">NL-to-Cypher Engine</h4>
                   <p className="text-foreground/40 leading-relaxed text-sm">
                     Engineered a Natural Language to Cypher query engine, enabling users to query complex graph data using plain English by bridging LLM intent with Neo4j schema awareness.
                   </p>
                 </div>
-                <div className="p-12 border border-foreground/5 bg-foreground/[0.01] space-y-6 hover:bg-foreground/[0.03] transition-colors group">
+                <div className="p-6 md:p-12 border border-foreground/5 bg-foreground/[0.01] space-y-4 md:space-y-6 hover:bg-foreground/[0.03] transition-colors group">
                   <h4 className="text-lg font-bold uppercase tracking-tight group-hover:italic transition-all">Relational Discovery</h4>
                   <p className="text-foreground/40 leading-relaxed text-sm">
                     Automated the extraction of "first-class relationships," making it possible to discover hidden links across disparate document sets (Legal, Insurance, Healthcare).
                   </p>
                 </div>
-                <div className="p-12 border border-foreground/5 bg-foreground/[0.01] space-y-6 hover:bg-foreground/[0.03] transition-colors group">
+                <div className="p-6 md:p-12 border border-foreground/5 bg-foreground/[0.01] space-y-4 md:space-y-6 hover:bg-foreground/[0.03] transition-colors group">
                   <h4 className="text-lg font-bold uppercase tracking-tight group-hover:italic transition-all">Cloud-Native Sync</h4>
                   <p className="text-foreground/40 leading-relaxed text-sm">
                     Built robust ingestion pipelines for AWS S3 and Google Drive, ensuring seamless, scalable document synchronization for enterprise clients.
@@ -135,15 +135,15 @@ export default function FarsightPage() {
           {/* Section 03: The Enterprise Labelling Platform */}
           <section className="relative">
             <div className="absolute left-0 -top-32 text-[20vw] font-black opacity-[0.03] select-none pointer-events-none">03</div>
-            <div className="space-y-24 relative z-10">
-              <div className="flex flex-col md:flex-row gap-24">
+            <div className="space-y-12 md:space-y-24 relative z-10">
+              <div className="flex flex-col md:flex-row gap-8 md:gap-24">
                 <div className="w-full md:w-1/3">
                   <h2 className="text-sm font-black uppercase tracking-[0.4em] border-l-4 border-foreground pl-6">Labeling Platform</h2>
-                  <p className="mt-8 text-[10px] font-mono text-foreground/30 uppercase leading-relaxed tracking-widest">
+                  <p className="mt-4 sm:mt-8 text-[10px] font-mono text-foreground/30 uppercase leading-relaxed tracking-widest">
                     High-Concurrency Go Backend<br />Enterprise Workflow Orchestration
                   </p>
                 </div>
-                <div className="w-full md:w-2/3 space-y-12">
+                <div className="w-full md:w-2/3 space-y-6 md:space-y-12">
                   <h3 className="text-3xl md:text-5xl font-medium tracking-tight">The Infrastructure for High-Precision Data</h3>
                   <p className="text-xl text-foreground/60 leading-relaxed">
                     To power high-stakes AI models, I built the Enterprise Labelling Platform—a comprehensive system for managing large-scale document annotation tasks with a focus on consensus, accuracy, and throughput.
@@ -152,15 +152,15 @@ export default function FarsightPage() {
               </div>
 
               {/* Technical Architecture Block */}
-              <div className="p-12 md:p-24 bg-foreground/[0.02] border border-foreground/10 rounded-3xl space-y-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
-                  <div className="space-y-6">
+              <div className="p-6 sm:p-12 md:p-24 bg-foreground/[0.02] border border-foreground/10 rounded-2xl md:rounded-3xl space-y-8 sm:space-y-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24">
+                  <div className="space-y-4 md:space-y-6">
                     <h4 className="text-xl font-bold italic tracking-tighter">Scalable Task Distribution</h4>
                     <p className="text-foreground/50 text-sm leading-relaxed">
                       Developed a custom Go-based engine supporting <span className="text-foreground font-bold italic">Parallel</span> and <span className="text-foreground font-bold italic">Series</span> distribution strategies. This allows for both high-throughput parallel cycles and strict sequential consensus reviews.
                     </p>
                   </div>
-                  <div className="space-y-6">
+                  <div className="space-y-4 md:space-y-6">
                     <h4 className="text-xl font-bold italic tracking-tighter">Consensus & Arbitration</h4>
                     <p className="text-foreground/50 text-sm leading-relaxed">
                       Implemented an automated consensus layer that identifies agreement using distance metrics, with a specialized <span className="text-foreground font-bold italic">Arbitration Hub</span> for Subject Matter Expert (SME) conflict resolution.
@@ -168,7 +168,7 @@ export default function FarsightPage() {
                   </div>
                 </div>
 
-                <div className="pt-16 border-t border-foreground/5 grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div className="pt-8 sm:pt-16 border-t border-foreground/5 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
                   <div>
                     <p className="text-[10px] text-foreground/20 uppercase tracking-widest font-bold mb-2">Backend</p>
                     <p className="text-xs font-mono text-foreground/70">Go (Gin / GORM)</p>
@@ -193,8 +193,8 @@ export default function FarsightPage() {
           {/* Section 04: Data-Centric AI & GT Scoring */}
           <section className="relative">
             <div className="absolute right-0 -top-32 text-[20vw] font-black opacity-[0.03] select-none pointer-events-none">04</div>
-            <div className="max-w-4xl mx-auto text-center space-y-16 relative z-10">
-              <div className="space-y-6">
+            <div className="max-w-4xl mx-auto text-center space-y-8 sm:space-y-16 relative z-10">
+              <div className="space-y-4 sm:space-y-6">
                 <h2 className="text-xs uppercase tracking-[0.8em] text-foreground/20 font-bold">Reliability Engineering</h2>
                 <h3 className="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-none">
                   Data-Centric <br /> <span className="text-foreground/20 italic">over</span> Model-Centric
@@ -205,7 +205,7 @@ export default function FarsightPage() {
                 I pioneered a "Data-Centric" approach at Omara, realizing that the biggest gains in AI performance came from improving the quality of the training data through the proprietary **Ground Truth (GT) Scoring Framework**.
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left pt-12">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 text-left pt-6 md:pt-12">
                 <div className="space-y-4">
                   <p className="text-xs font-mono text-foreground/20 uppercase tracking-widest font-bold">01 // Reliability</p>
                   <p className="text-sm text-foreground/80 leading-relaxed">
@@ -231,16 +231,16 @@ export default function FarsightPage() {
           {/* Section 05: Ending Notes & Philosophy */}
           <section className="relative">
             <div className="absolute left-0 -top-32 text-[20vw] font-black opacity-[0.03] select-none pointer-events-none">05</div>
-            <div className="max-w-4xl mx-auto space-y-24 relative z-10">
-              <div className="space-y-8">
+            <div className="max-w-4xl mx-auto space-y-12 sm:space-y-24 relative z-10">
+              <div className="space-y-4 sm:space-y-8">
                 <h2 className="text-sm font-black uppercase tracking-[0.4em] border-l-4 border-foreground pl-6">Ending Notes</h2>
                 <h3 className="text-4xl md:text-6xl font-bold tracking-tighter leading-tight">
                   Beyond Engineering: <br /> The <span className="text-foreground/20 italic font-light">AI-First</span> Mandate.
                 </h3>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-                <div className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+                <div className="space-y-4 md:space-y-8">
                   <p className="text-xl text-foreground/80 leading-relaxed font-light">
                     My time at Omara was defined by a single, uncompromising philosophy: <span className="text-foreground font-medium">Intelligence is the primary citizen.</span>
                   </p>
@@ -248,7 +248,7 @@ export default function FarsightPage() {
                     In most organizations, AI is a layer added at the end. For me, Farsight was the proof that AI must be the foundation. This "AI-First" approach meant that every line of Go in the backend and every Neo4j schema was architected specifically to be consumed and enhanced by autonomous agents.
                   </p>
                 </div>
-                <div className="space-y-8 pt-4">
+                <div className="space-y-4 md:space-y-8 pt-4">
                   <div className="p-8 border border-foreground/5 bg-foreground/[0.02] rounded-2xl space-y-4">
                     <p className="text-[10px] font-mono text-foreground/30 uppercase tracking-widest">Philosophy // 01</p>
                     <p className="text-sm italic text-foreground/60">"Don't build features for users; build intelligence engines that empower them."</p>
@@ -260,7 +260,7 @@ export default function FarsightPage() {
                 </div>
               </div>
 
-              <p className="text-2xl text-foreground/90 leading-relaxed italic border-t border-foreground/10 pt-16 text-center">
+              <p className="text-xl md:text-2xl text-foreground/90 leading-relaxed italic border-t border-foreground/10 pt-8 sm:pt-16 text-center">
                 Farsight stands as a testament to what happens when you stop treating AI as a tool and start treating it as the architect of the system itself.
               </p>
             </div>

@@ -15,8 +15,8 @@ export default function ProjectsPage() {
         description="An archive of experimental systems, open-source modules, and technical research."
       />
       
-      <div className="max-w-7xl mx-auto px-8 py-12 sm:px-16">
-        <div className="space-y-16">
+      <div className="max-w-7xl mx-auto px-4 py-12 sm:px-16">
+        <div className="space-y-12 sm:space-y-16">
           {githubProjects.map((project, i) => (
             <div key={i} className="group relative">
               <div className="space-y-4">

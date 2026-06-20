@@ -23,7 +23,10 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "SAHIL GANGURDE | Portfolio",
+  title: {
+    template: "%s | lostmarttian",
+    default: "Sahil Gangurde | lostmarttian",
+  },
   description: "Product Designer & Developer Portfolio",
 };
 

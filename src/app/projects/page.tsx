@@ -2,7 +2,7 @@ import { githubProjects } from "@/data/github-projects";
 import PageHeader from "@/components/PageHeader";
 
 export const metadata = {
-  title: "Projects | Sahil Gangurde",
+  title: "Projects",
   description: "A collection of my technical projects and open-source contributions.",
 };
 

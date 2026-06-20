@@ -5,6 +5,17 @@ import AbstractFlowBackground from "@/components/AbstractFlowBackground";
 import Link from "next/link";
 import BlogPostContent from "./BlogPostContent";
 
+import type { Metadata } from "next";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getBlogPostBySlug(slug);
+  return {
+    title: post ? post.title : "Blog Post",
+    description: post ? post.description : "Blog Post",
+  };
+}
+
 export async function generateStaticParams() {
   const posts = getBlogPosts();
   return posts.map((post) => ({

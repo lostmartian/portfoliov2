@@ -1,5 +1,11 @@
 import Image from "next/image";
 import BackButton from "@/components/Work/BackButton";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "IPO Allotment Engine",
+  description: "A scale-elastic processing platform for high-stakes IPO settlement and SEBI compliance.",
+};
 
 const techStack = [
   "Go", "Python", "Next.js 15", "Polars", "AWS Step Functions",

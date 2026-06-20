@@ -10,7 +10,7 @@ export default function SelectedWork() {
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background to-transparent" />
 
       {/* Ledger Headers */}
-      <div className="max-w-7xl mx-auto mb-12 space-y-4 px-8 sm:px-16">
+      <div className="max-w-7xl mx-auto mb-12 space-y-4 px-4 sm:px-16">
         <div className="flex items-center gap-3">
           <span className="w-2 h-2 bg-foreground/40 rounded-full animate-pulse" />
           <p className="text-technical">System / Selected_Outputs</p>

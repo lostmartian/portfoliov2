@@ -133,7 +133,7 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
           }
         }}
       />
-      <div className={`prose ${mounted && resolvedTheme === 'dark' ? 'prose-invert' : ''} prose-zinc w-full max-w-full overflow-hidden prose-h1:font-serif prose-h2:font-serif prose-h3:font-serif prose-p:text-foreground/70 prose-p:leading-relaxed prose-p:text-lg`}>
+      <div className="w-full max-w-full overflow-hidden font-sans">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw, rehypeHighlight]}
@@ -192,8 +192,12 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
               return <pre {...props}>{children}</pre>;
             },
             code({ className, children, ...props }: any) {
+              const isInline = !className || !className.includes("language-");
               return (
-                <code className={className} {...props}>
+                <code 
+                  className={`${className || ""} ${isInline ? "font-mono text-sm bg-foreground/[0.06] dark:bg-foreground/[0.08] px-1.5 py-0.5 rounded text-foreground font-medium" : ""}`} 
+                  {...props}
+                >
                   {children}
                 </code>
               );
@@ -258,7 +262,7 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
               }
             }
 
-            return <p className="mb-8">{children}</p>;
+            return <p className="mb-8 text-base sm:text-lg leading-relaxed text-foreground/80 font-normal tracking-normal font-sans">{children}</p>;
           },
           a: ({ href, children }: any) => {
             // Never return a DIV here to avoid "div in p" errors
@@ -268,25 +272,26 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground border-b border-foreground/20 hover:border-foreground transition-colors"
+                className="text-foreground border-b border-foreground/20 hover:border-foreground transition-colors font-sans"
               >
                 {children}
               </a>
             );
           },
-          h1: ({ children }: any) => <h1 className="text-4xl sm:text-6xl font-serif text-foreground mb-12 tracking-tight leading-tight pt-8">{children}</h1>,
-          h2: ({ children }: any) => <h2 className="text-2xl sm:text-4xl font-serif text-foreground mt-16 mb-8 tracking-tight">{children}</h2>,
-          h3: ({ children }: any) => <h3 className="text-xl sm:text-2xl font-serif text-foreground mt-12 mb-6 tracking-tight">{children}</h3>,
-          h4: ({ children }: any) => <h4 className="text-base sm:text-lg font-medium text-foreground mt-8 mb-4 tracking-tight">{children}</h4>,
-          ul: ({ children }: any) => <ul className="list-none space-y-4 my-8 pl-0">{children}</ul>,
+          h1: ({ children }: any) => <h1 className="text-4xl sm:text-5xl font-sans font-bold text-foreground mb-12 tracking-tight leading-tight pt-8">{children}</h1>,
+          h2: ({ children }: any) => <h2 className="text-2xl sm:text-3xl font-sans font-semibold text-foreground mt-16 mb-8 tracking-tight">{children}</h2>,
+          h3: ({ children }: any) => <h3 className="text-xl sm:text-2xl font-sans font-semibold text-foreground mt-12 mb-6 tracking-tight">{children}</h3>,
+          h4: ({ children }: any) => <h4 className="text-base sm:text-lg font-medium text-foreground mt-8 mb-4 tracking-tight font-sans">{children}</h4>,
+          ul: ({ children }: any) => <ul className="list-none space-y-4 my-8 pl-0 font-sans">{children}</ul>,
+          ol: ({ children }: any) => <ol className="list-decimal space-y-4 my-8 pl-6 font-sans">{children}</ol>,
           li: ({ children }: any) => (
-            <li className="flex items-start gap-4 min-w-0 w-full">
+            <li className="flex items-start gap-4 min-w-0 w-full text-base sm:text-lg leading-relaxed text-foreground/80 font-normal font-sans">
               <span className="w-1.5 h-1.5 bg-foreground/20 rounded-full mt-2.5 flex-shrink-0" />
               <span className="min-w-0 flex-1 break-words">{children}</span>
             </li>
           ),
           blockquote: ({ children }: any) => (
-            <blockquote className="border-l-2 border-border/40 pl-8 my-12 italic text-foreground/40 font-serif text-2xl leading-relaxed">
+            <blockquote className="border-l-2 border-border/40 pl-8 my-12 italic text-foreground/50 font-sans text-xl leading-relaxed">
               {children}
             </blockquote>
           ),
@@ -297,14 +302,14 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
               </table>
             </div>
           ),
-          thead: ({ children }: any) => <thead className="bg-foreground/[0.03] border-b border-border/20">{children}</thead>,
+          thead: ({ children }: any) => <thead className="bg-foreground/[0.03] border-b border-border/20 font-mono">{children}</thead>,
           th: ({ children }: any) => (
             <th className="px-6 py-4 border border-border/10 font-mono text-[10px] uppercase tracking-widest text-foreground/50">
               {children}
             </th>
           ),
           td: ({ children }: any) => (
-            <td className="px-6 py-4 border border-border/10 text-foreground/70">
+            <td className="px-6 py-4 border border-border/10 text-foreground/80 text-sm font-normal font-sans">
               {children}
             </td>
           ),

@@ -35,7 +35,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     <main className="min-h-screen bg-background pb-32">
       <SteelBackground />
 
-      <div className="relative pt-28 sm:pt-44 pb-6 sm:pb-12 border-b border-border/20 mb-6 sm:mb-12 overflow-hidden">
+      <div className="relative pt-36 sm:pt-52 pb-6 sm:pb-12 border-b border-border/20 mb-6 sm:mb-12 overflow-hidden">
         <AbstractFlowBackground title={post.title} description={post.description} categories={post.categories} speed={0} />
         <div className="absolute inset-0 bg-background/10 dark:bg-background/10 backdrop-blur-[1px] z-0" />
 

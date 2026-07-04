@@ -1,30 +1,49 @@
-import MonotoneShaderBackground from "./MonotoneShaderBackground";
+"use client";
+
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import MinimalHeroBackground from "./MinimalHeroBackground";
 import { CONTACT_DATA } from "@/config/contact";
 import { MessageSquare } from "lucide-react";
 
 const getCurrentQuarter = () => {
   const now = new Date();
   const quarter = Math.floor(now.getMonth() / 3) + 1;
-  return `Q${quarter}_${now.getFullYear()}`;
+  return `Q${quarter} ${now.getFullYear()}`;
 };
 
 export default function Hero() {
   const availability = getCurrentQuarter();
+  const [index, setIndex] = useState(0);
+
+  const systems = [
+    "financial settlement systems",
+    "intelligent knowledge graphs",
+    "enterprise AI governance portals",
+    "multi-tenant SaaS infrastructures"
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % systems.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div className="relative flex flex-col min-h-[100dvh] overflow-hidden justify-center">
-      <MonotoneShaderBackground />
+      <MinimalHeroBackground />
 
       <section className="relative w-full max-w-7xl mx-auto px-4 sm:px-16 pt-32 pb-16 flex flex-col justify-center">
-        <div className="max-w-4xl space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 ease-out">
+         <div className="max-w-4xl space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 ease-out">
 
-          <div className="inline-flex items-center gap-2.5 px-3 py-1 bg-foreground/[0.04] border border-border/30 rounded-full w-fit">
-            <span className="relative flex h-2 w-2">
+          <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-foreground/[0.04] border border-border/30 rounded-full w-fit">
+            <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-foreground/30 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-foreground/80"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-foreground/80"></span>
             </span>
-            <p className="text-[9px] font-mono uppercase tracking-[0.15em] text-foreground/80 leading-none font-bold">
-              PUNE, IN // STATUS: ACTIVE
+            <p className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.18em] text-foreground/90 leading-none font-bold">
+              PUNE, MAHARASHTRA, INDIA
             </p>
           </div>
 
@@ -34,7 +53,22 @@ export default function Hero() {
           </h1>
 
           <p className="max-w-2xl text-foreground/90 text-base sm:text-lg md:text-xl font-normal leading-relaxed tracking-tight">
-            I am a software engineer with <strong className="font-semibold text-foreground border-b border-foreground/35 pb-0.5">2+ years of professional experience</strong>. I build robust backend engines and intelligent AI systems where precision and systemic integrity are absolute requirements.
+            I am a software engineer with <strong className="font-semibold text-foreground border-b border-foreground/35 pb-0.5">2+ years of professional experience</strong>. I build robust backend engines and intelligent AI systems, specializing in{" "}
+            <span className="inline-block font-semibold text-foreground border-b border-foreground/35 pb-0.5 min-w-[240px] sm:min-w-[310px] text-left">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={index}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="inline-block"
+                >
+                  {systems[index]}
+                </motion.span>
+              </AnimatePresence>
+            </span>{" "}
+            where precision and systemic integrity are absolute requirements.
           </p>
 
           <div className="flex flex-wrap gap-x-8 gap-y-3 text-[10px] font-mono text-foreground/50 uppercase tracking-widest pt-2 border-t border-border/10">
@@ -50,11 +84,11 @@ export default function Hero() {
           </div>
 
           {/* Companies worked with */}
-          <div className="space-y-3 pt-6 border-t border-border/10">
-            <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-foreground/40 font-bold">
+          <div className="space-y-4 pt-6 border-t border-border/10">
+            <p className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.2em] text-foreground/45 font-bold">
               Collaboration history
             </p>
-            <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2 text-xs font-mono text-foreground/80 font-medium">
+            <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2 text-sm sm:text-base font-mono text-foreground/90 font-medium">
               <a
                 href="https://www.omaratechnologies.com/en"
                 target="_blank"
@@ -79,7 +113,7 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="hover:text-foreground border-b border-transparent hover:border-foreground/30 pb-0.5 transition-all duration-300"
               >
-                Jrats Studio ↗
+                JRats Studio ↗
               </a>
             </div>
           </div>

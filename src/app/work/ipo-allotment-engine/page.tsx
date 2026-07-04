@@ -72,7 +72,7 @@ export default function IPOAllotmentPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background transition-colors duration-300 overflow-x-hidden">
 
-      <main className="max-w-7xl mx-auto px-4 pt-28 sm:pt-44 pb-32 sm:px-16">
+      <main className="max-w-7xl mx-auto px-4 pt-36 sm:pt-52 pb-32 sm:px-16">
 
         {/* ── Header ── */}
         <div className="relative mb-12 sm:mb-24">

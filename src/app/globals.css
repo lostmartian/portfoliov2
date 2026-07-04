@@ -231,7 +231,7 @@
     --react-tweet-color: #c5c6c7;
     --react-tweet-border: rgba(197, 198, 199, 0.1);
   }
-  
+
   .tweet-container[data-theme='light'] {
     --react-tweet-bg: #e3e8f0;
     --react-tweet-color: #0f172a;
@@ -256,4 +256,14 @@ code {
 pre code {
   word-break: normal;
   white-space: pre !important;
+}
+
+/* Widescreen desktop centering override (narrower margins on monitors) */
+.max-w-7xl {
+  max-width: 72rem !important; /* 1152px (equivalent to max-w-6xl) for a highly-centered, premium layout */
+}
+
+/* Keep the navigation bar wider (aligned outwards) */
+.fixed.top-0.left-0 .max-w-7xl {
+  max-width: 80rem !important; /* Restore original max-w-7xl (1280px) for the navbar */
 }

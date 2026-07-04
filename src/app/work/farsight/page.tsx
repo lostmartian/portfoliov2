@@ -1,11 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import BackButton from "@/components/Work/BackButton";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Farsight",
+  description: "The central governance and intelligence portal orchestrating an enterprise-grade AI data ecosystem.",
+};
 
 export default function FarsightPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background transition-colors duration-300 overflow-x-hidden">
-      <main className="max-w-7xl mx-auto px-4 pt-28 sm:pt-44 pb-16 sm:px-16 md:pb-24">
+      <main className="max-w-7xl mx-auto px-4 pt-36 sm:pt-52 pb-16 sm:px-16 md:pb-24">
         {/* Bespoke Header */}
         <div className="relative mb-16 sm:mb-32">
           <BackButton label="Back to System" fallback="/work" />

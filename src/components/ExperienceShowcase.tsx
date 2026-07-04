@@ -83,10 +83,7 @@ export default function ExperienceShowcase() {
               <motion.div
                 key={exp.id}
                 layout
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
+                transition={{ duration: 0.3 }}
                 onClick={() => toggleExpand(exp.id)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div className="relative min-h-screen bg-background text-foreground flex flex-col">
-      <PageHeader 
+      <PageHeader
         title="Get in Touch"
         subtitle="Inquiries / Network"
         description="Currently accepting new inquiries and technical collaborations for mission-critical systems."
@@ -43,17 +43,8 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="space-y-12">
-            <div className="space-y-3">
-              <p className="text-[10px] font-mono text-foreground/20 uppercase tracking-[0.3em]">Operational Focus</p>
-              <p className="text-sm font-light text-foreground/50 leading-relaxed max-w-sm">
-                Collaborating with founders and enterprise teams to architect <span className="text-foreground/80">robust digital products</span>, intelligent AI workflows, and scalable systems. Currently open to select freelance engagements and strategic consulting.
-              </p>
-            </div>
-
-            <div className="flex gap-16">
+            <div className="flex gap-16 pt-2">
               <div className="space-y-1">
                 <p className="text-[10px] font-mono text-foreground/20 uppercase tracking-[0.3em]">Status</p>
                 <div className="flex items-center gap-2">
@@ -64,6 +55,25 @@ export default function ContactPage() {
               <div className="space-y-1">
                 <p className="text-[10px] font-mono text-foreground/20 uppercase tracking-[0.3em]">Location</p>
                 <p className="text-sm font-light text-foreground/50">{CONTACT_DATA.location}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-12">
+            <div className="space-y-3">
+              <p className="text-[10px] font-mono text-foreground/20 uppercase tracking-[0.3em]">Operational Focus</p>
+              <p className="text-sm font-light text-foreground/50 leading-relaxed max-w-sm">
+                Collaborating with founders and enterprise teams to architect <span className="text-foreground/80">robust digital products</span>, intelligent AI workflows, and scalable systems. Currently open to select freelance engagements and strategic consulting.
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <p className="text-[10px] font-mono text-foreground/20 uppercase tracking-[0.3em]">Services Offered</p>
+              <div className="text-sm font-light text-foreground/50 leading-relaxed max-w-sm space-y-1.5">
+                <p>• High-Throughput Backends (Go / Python)</p>
+                <p>• Intelligent AI &amp; GraphRAG Agents</p>
+                <p>• Scale-Elastic Infrastructure (AWS / IaC)</p>
+                <p>• Secure Multi-Tenant SaaS Architectures</p>
               </div>
             </div>
           </div>

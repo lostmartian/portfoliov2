@@ -1,5 +1,7 @@
 import { ImageResponse } from "next/og";
 import { projects } from "@/data/projects";
+import { join } from "path";
+import { readFileSync } from "fs";
 
 export const dynamic = "force-static";
 export const size = {
@@ -14,7 +16,7 @@ export default async function Image() {
   if (!project) {
     return new ImageResponse(
       (
-        <div style={{ background: "#0b0c10", width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", color: "#c5c6c7" }}>
+        <div style={{ background: "#121212", width: "1200px", height: "630px", display: "flex", alignItems: "center", justifyContent: "center", color: "#e0e0e0" }}>
           Project Not Found
         </div>
       ),
@@ -22,108 +24,127 @@ export default async function Image() {
     );
   }
 
+  const photoPath = join(process.cwd(), "public/me/profile-photo.png");
+  const photoData = readFileSync(photoPath);
+  const photoBuffer = photoData.buffer.slice(
+    photoData.byteOffset,
+    photoData.byteOffset + photoData.byteLength
+  );
+
   return new ImageResponse(
     (
       <div
         style={{
-          background: "#0b0c10",
-          width: "100%",
-          height: "100%",
+          background: "#121212",
+          width: "1200px",
+          height: "630px",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "80px",
+          flexDirection: "row",
+          alignItems: "center",
+          padding: "60px 80px",
           fontFamily: "sans-serif",
-          color: "#c5c6c7",
+          color: "#e0e0e0",
+          boxSizing: "border-box",
           position: "relative",
         }}
       >
-        {/* Dot Matrix background */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: "radial-gradient(rgba(197, 198, 199, 0.1) 1.5px, transparent 1.5px)",
-            backgroundSize: "32px 32px",
-            opacity: 0.8,
-          }}
-        />
-
-        {/* Top Header metadata */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", zIndex: 10 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <div
-              style={{
-                width: "8px",
-                height: "8px",
-                borderRadius: "50%",
-                background: "#c5c6c7",
-              }}
-            />
-            <span style={{ fontSize: "14px", fontFamily: "monospace", letterSpacing: "0.15em", fontWeight: "bold" }}>
-              SAHIL GANGURDE // SYSTEM DEPLOYMENT
-            </span>
-          </div>
-          <span style={{ fontSize: "14px", fontFamily: "monospace", opacity: 0.5 }}>
-            {project.year}
-          </span>
-        </div>
-
-        {/* Main Header / Title */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px", zIndex: 10, maxWidth: "900px", margin: "auto 0" }}>
-          <span style={{ fontSize: "12px", fontFamily: "monospace", color: "#ffffff", opacity: 0.5, letterSpacing: "0.2em" }}>
-            {project.category.toUpperCase()}
-          </span>
-          <h1
-            style={{
-              fontSize: "64px",
-              fontWeight: 500,
-              lineHeight: 1.15,
-              margin: 0,
-              color: "#ffffff",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            {project.title}
-          </h1>
-          <p
-            style={{
-              fontSize: "18px",
-              lineHeight: 1.6,
-              margin: 0,
-              opacity: 0.75,
-              maxWidth: "800px",
-            }}
-          >
-            {project.description}
-          </p>
-        </div>
-
-        {/* Footer Meta */}
+        {/* Left Column: Text Content */}
         <div
           style={{
             display: "flex",
+            flexDirection: "column",
             justifyContent: "space-between",
-            alignItems: "flex-end",
-            width: "100%",
-            borderTop: "1px solid rgba(197, 198, 199, 0.1)",
-            paddingTop: "30px",
-            zIndex: 10,
+            height: "510px",
+            width: "600px",
           }}
         >
-          <div style={{ display: "flex", gap: "40px" }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-              <span style={{ fontSize: "11px", fontFamily: "monospace", opacity: 0.4 }}>TECH STACK</span>
-              <span style={{ fontSize: "15px", fontWeight: "bold" }}>{project.stack?.slice(0, 4).join(" / ")}</span>
+          {/* Top Header metadata */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+            <span style={{ fontSize: "14px", fontFamily: "monospace", letterSpacing: "0.15em", fontWeight: "bold", color: "#e0e0e0" }}>
+              SAHIL GANGURDE // CASE STUDY
+            </span>
+            <span style={{ fontSize: "12px", fontFamily: "monospace", opacity: 0.4 }}>
+              lostmartian.in/work/ipo-allotment-engine ({project.year})
+            </span>
+          </div>
+
+          {/* Main Title & Description */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px", margin: "auto 0" }}>
+            <span style={{ fontSize: "11px", fontFamily: "monospace", color: "#e0e0e0", opacity: 0.5, letterSpacing: "0.2em" }}>
+              {project.category.toUpperCase()}
+            </span>
+            <h1
+              style={{
+                fontSize: "52px",
+                fontWeight: 700,
+                lineHeight: 1.15,
+                margin: 0,
+                color: "#ffffff",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              {project.title}
+            </h1>
+            <p
+              style={{
+                fontSize: "18px",
+                lineHeight: 1.5,
+                margin: 0,
+                opacity: 0.6,
+                maxWidth: "600px",
+              }}
+            >
+              {project.description}
+            </p>
+          </div>
+
+          {/* Footer Metadata Grid */}
+          <div
+            style={{
+              display: "flex",
+              borderTop: "1px solid rgba(224, 224, 224, 0.1)",
+              paddingTop: "20px",
+              gap: "30px",
+            }}
+          >
+            <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+              <span style={{ fontSize: "9px", fontFamily: "monospace", opacity: 0.4 }}>ROLE</span>
+              <span style={{ fontSize: "12px", fontWeight: "bold" }}>SOFTWARE ENGINEER</span>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-              <span style={{ fontSize: "11px", fontFamily: "monospace", opacity: 0.4 }}>DURATION</span>
-              <span style={{ fontSize: "15px", fontWeight: "bold" }}>{project.duration}</span>
+            <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+              <span style={{ fontSize: "9px", fontFamily: "monospace", opacity: 0.4 }}>ENGINE</span>
+              <span style={{ fontSize: "12px", fontWeight: "bold" }}>GO &amp; PYTHON / POLARS</span>
             </div>
           </div>
-          <span style={{ fontSize: "14px", fontFamily: "monospace", opacity: 0.5 }}>
-            github.com/lostmartian
-          </span>
+        </div>
+
+        {/* Right Column: Profile Photo (Absolute Positioned) */}
+        <div
+          style={{
+            position: "absolute",
+            right: "80px",
+            top: "135px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "360px",
+            height: "360px",
+            borderRadius: "20px",
+            overflow: "hidden",
+            border: "1px solid rgba(224, 224, 224, 0.15)",
+            background: "#161616",
+          }}
+        >
+          {/* @ts-ignore */}
+          <img
+            src={photoBuffer as any}
+            alt="Sahil Gangurde"
+            style={{
+              width: "360px",
+              height: "360px",
+              borderRadius: "20px",
+            }}
+          />
         </div>
       </div>
     ),

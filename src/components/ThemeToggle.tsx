@@ -22,12 +22,10 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-3 text-foreground/40 hover:text-foreground transition-all active:scale-90"
+      className="p-2 text-foreground/60 hover:text-foreground transition-colors cursor-pointer"
       aria-label="Toggle theme"
     >
-      <div className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-        theme === "dark" ? "bg-foreground border-foreground" : "bg-transparent border-foreground/40"
-      }`} />
+      {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
     </button>
   );
 }

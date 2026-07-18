@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navigation from "@/components/Navigation";
@@ -13,12 +13,6 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  weight: "400",
   subsets: ["latin"],
 });
 
@@ -76,14 +70,14 @@ export default function RootLayout({
     "sameAs": [
       "https://github.com/lostmartian",
       "https://linkedin.com/in/lostmartian",
-      "https://twitter.com/lost_martian"
+      "https://twitter.com/lost_martian_"
     ]
   };
 
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>
@@ -92,17 +86,20 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-300">
+      <body className="min-h-full bg-background text-foreground transition-colors duration-300">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem={false}
           disableTransitionOnChange
         >
-          <div className="flex flex-col min-h-screen">
-            <Navigation />
-            <div className="flex-grow pb-12 md:pb-24">
-              {children}
+
+          <div className="max-w-3xl mx-auto px-6 pt-2 pb-8 min-h-screen flex flex-col justify-between">
+            <div>
+              <Navigation />
+              <main className="py-8">
+                {children}
+              </main>
             </div>
             <Footer />
           </div>

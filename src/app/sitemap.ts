@@ -5,26 +5,34 @@ import type { MetadataRoute } from "next";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://lostmartian.in"; // Production base URL
+  const baseUrl = "https://lostmartian.in";
 
-  // Dynamic blog routes
+  // Dynamic blog post routes
   const posts = getBlogPosts();
-  const blogUrls = posts.map((post) => ({
+  const blogUrls: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${baseUrl}/blogs/${post.slug}`,
     lastModified: new Date(post.date),
+    changeFrequency: "monthly",
+    priority: 0.7,
   }));
 
-  // Dynamic work routes
-  const projectUrls = projects.map((project) => ({
+  // Dynamic work detail routes
+  const workUrls: MetadataRoute.Sitemap = projects.map((project) => ({
     url: `${baseUrl}/work/${project.slug}`,
     lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.6,
   }));
 
-  // Static routes
-  const routes = ["", "/about", "/contact", "/blogs", "/projects", "/work"].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-  }));
+  // Static routes (no /about or /contact — those pages were removed)
+  const staticRoutes: MetadataRoute.Sitemap = (
+    [
+      { url: baseUrl,                   priority: 1.0,  changeFrequency: "weekly" },
+      { url: `${baseUrl}/blogs`,        priority: 0.9,  changeFrequency: "weekly" },
+      { url: `${baseUrl}/work`,         priority: 0.8,  changeFrequency: "monthly" },
+      { url: `${baseUrl}/projects`,     priority: 0.8,  changeFrequency: "monthly" },
+    ] as const
+  ).map((r) => ({ ...r, lastModified: new Date() }));
 
-  return [...routes, ...blogUrls, ...projectUrls];
+  return [...staticRoutes, ...blogUrls, ...workUrls];
 }

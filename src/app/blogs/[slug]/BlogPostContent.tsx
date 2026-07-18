@@ -161,26 +161,25 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
                   <div className="relative group my-8 w-full max-w-full overflow-hidden">
                     {/* Code Header */}
                     <div className="flex items-center justify-between px-4 py-2 bg-foreground/[0.03] border border-border/20 border-b-0 rounded-t-lg w-full">
-                      <span className="text-[10px] font-mono text-foreground/40 uppercase tracking-widest">
+                      <span className="text-[10px] font-mono text-foreground/60 uppercase tracking-widest">
                         {language || "code"}
                       </span>
                       <button
                         onClick={(e) => {
                           navigator.clipboard.writeText(codeContent);
                           const btn = e.currentTarget;
-                          const originalText = btn.innerText;
-                          btn.innerText = "COPIED_";
-                          setTimeout(() => { btn.innerText = originalText; }, 2000);
+                          btn.innerText = "Copied ✓";
+                          setTimeout(() => { btn.innerText = "Copy ⎘"; }, 2000);
                         }}
-                        className="text-[10px] font-mono text-foreground/40 hover:text-foreground uppercase tracking-widest transition-colors cursor-pointer"
+                        className="text-[10px] font-mono text-foreground/60 hover:text-foreground uppercase tracking-widest transition-colors cursor-pointer"
                       >
-                        COPY_
+                        Copy ⎘
                       </button>
                     </div>
                     {/* Code Block */}
                     <div className="border border-border/20 rounded-b-lg overflow-hidden w-full max-w-full">
                       <pre className="!m-0 !rounded-none overflow-x-auto max-w-full w-full" {...props}>
-                        <code className={className}>
+                        <code className={`${className} text-xs font-mono`}>
                           {codeChild.props?.children}
                         </code>
                       </pre>
@@ -189,13 +188,13 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
                 );
               }
 
-              return <pre {...props}>{children}</pre>;
+              return <pre className="text-xs font-mono" {...props}>{children}</pre>;
             },
             code({ className, children, ...props }: any) {
               const isInline = !className || !className.includes("language-");
               return (
                 <code 
-                  className={`${className || ""} ${isInline ? "font-mono text-sm bg-foreground/[0.06] dark:bg-foreground/[0.08] px-1.5 py-0.5 rounded text-foreground font-medium" : ""}`} 
+                  className={`${className || ""} ${isInline ? "font-mono text-xs bg-foreground/[0.06] dark:bg-foreground/[0.08] px-1.5 py-0.5 rounded text-foreground font-medium" : ""}`} 
                   {...props}
                 >
                   {children}
@@ -262,7 +261,7 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
               }
             }
 
-            return <p className="mb-8 text-base sm:text-lg leading-relaxed text-foreground/80 font-normal tracking-normal font-sans">{children}</p>;
+            return <p className="mb-4 text-sm leading-relaxed text-foreground/80 text-justify font-sans">{children}</p>;
           },
           a: ({ href, children }: any) => {
             // Never return a DIV here to avoid "div in p" errors
@@ -278,20 +277,20 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
               </a>
             );
           },
-          h1: ({ children }: any) => <h1 className="text-4xl sm:text-5xl font-sans font-bold text-foreground mb-12 tracking-tight leading-tight pt-8">{children}</h1>,
-          h2: ({ children }: any) => <h2 className="text-2xl sm:text-3xl font-sans font-semibold text-foreground mt-16 mb-8 tracking-tight">{children}</h2>,
-          h3: ({ children }: any) => <h3 className="text-xl sm:text-2xl font-sans font-semibold text-foreground mt-12 mb-6 tracking-tight">{children}</h3>,
-          h4: ({ children }: any) => <h4 className="text-base sm:text-lg font-medium text-foreground mt-8 mb-4 tracking-tight font-sans">{children}</h4>,
-          ul: ({ children }: any) => <ul className="list-none space-y-4 my-8 pl-0 font-sans">{children}</ul>,
-          ol: ({ children }: any) => <ol className="list-decimal space-y-4 my-8 pl-6 font-sans">{children}</ol>,
+          h1: ({ children }: any) => <h1 className="text-xl font-bold text-foreground mb-4 mt-6 pt-2 font-sans">{children}</h1>,
+          h2: ({ children }: any) => <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-semibold mt-6 mb-2">{children}</h2>,
+          h3: ({ children }: any) => <h3 className="text-sm font-semibold text-foreground mt-4 mb-1.5 font-sans">{children}</h3>,
+          h4: ({ children }: any) => <h4 className="text-xs font-semibold text-foreground/80 mt-3 mb-1 font-sans">{children}</h4>,
+          ul: ({ children }: any) => <ul className="list-none space-y-2 my-4 pl-0 font-sans">{children}</ul>,
+          ol: ({ children }: any) => <ol className="list-decimal space-y-2 my-4 pl-6 font-sans">{children}</ol>,
           li: ({ children }: any) => (
-            <li className="flex items-start gap-4 min-w-0 w-full text-base sm:text-lg leading-relaxed text-foreground/80 font-normal font-sans">
-              <span className="w-1.5 h-1.5 bg-foreground/20 rounded-full mt-2.5 flex-shrink-0" />
+            <li className="flex items-start gap-2 min-w-0 w-full text-sm leading-relaxed text-foreground/80 font-sans">
+              <span className="text-xs font-mono text-foreground/30 mt-0.5">•</span>
               <span className="min-w-0 flex-1 break-words">{children}</span>
             </li>
           ),
           blockquote: ({ children }: any) => (
-            <blockquote className="border-l-2 border-border/40 pl-8 my-12 italic text-foreground/50 font-sans text-xl leading-relaxed">
+            <blockquote className="border-l-2 border-border/40 pl-4 my-4 italic text-foreground/60 font-sans text-sm leading-relaxed">
               {children}
             </blockquote>
           ),

@@ -9,12 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@paper-design/shaders-react": "^0.0.76",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.6.0",
-    "@types/three": "^0.184.0",
     "date-fns": "^4.1.0",
-    "framer-motion": "^12.38.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.11.0",
     "mermaid": "^11.14.0",
@@ -26,8 +21,7 @@
     "react-tweet": "^3.3.0",
     "rehype-highlight": "^7.0.2",
     "rehype-raw": "^7.0.0",
-    "remark-gfm": "^4.0.1",
-    "three": "^0.184.0"
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

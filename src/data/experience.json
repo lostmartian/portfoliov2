@@ -2,11 +2,17 @@
   {
     "id": 1,
     "company": "JRat’s Studio",
-    "role": "Lead Platform Engineer, Freelance",
+    "role": "Software Engineer, Freelance",
     "location": "Remote",
     "duration": "Mar'26 - Present",
     "current": true,
     "link": "https://www.jrats.studio/",
+    "homeDisplay": true,
+    "client": {
+      "name": "Niche Technology Pvt Ltd",
+      "description": "Niche Technologies Pvt. Ltd. is a SEBI-registered Category I Registrar to Issue and Share Transfer Agent (RTA) with over three decades of experience in India’s securities market.",
+      "link": "https://nichetechpl.com/"
+    },
     "technologies": [
       "Go",
       "Python",
@@ -31,6 +37,7 @@
     "duration": "Feb'26 - Present",
     "current": true,
     "link": "https://blimze.com",
+    "homeDisplay": true,
     "technologies": [
       "UI/UX Design",
       "Figma",
@@ -53,6 +60,7 @@
     "duration": "Oct'24 - Jan'26",
     "current": false,
     "link": "https://www.omaratechnologies.com/en",
+    "homeDisplay": true,
     "technologies": [
       "Go",
       "Python",
@@ -65,7 +73,7 @@
       "GraphRAG",
       "LangGraph"
     ],
-    "summary": "Founding Full-Stack AI Engineer architecting a cloud-native PDF annotation platform, high-concurrency task engine, and hybrid Neo4j/Gemini GraphRAG pipelines.",
+    "summary": "Founding Full-Stack AI Engineer architecting scale-elastic infrastructure, high-concurrency task distribution systems, and intelligent Neo4j/Gemini GraphRAG pipelines.",
     "achievements": [
       "**Architected and Deployed a Cloud-Native PDF Annotation Platform**: Built a scalable, enterprise-grade system using **Go (Golang)** and **PostgreSQL**, leveraging **AWS Cognito** for secure RBAC and **AWS S3** for persistent document storage.",
       "**Developed a High-Concurrency Task Engine**: Managed **100+ RESTful endpoints** with a task distribution system supporting parallel/series strategies, utilizing **Docker** and optimized for **AWS ECS/EKS**.",
@@ -82,6 +90,7 @@
     "location": "Remote / India",
     "duration": "Jan'24 - Sep'24",
     "current": false,
+    "homeDisplay": false,
     "technologies": [
       "Data Structures",
       "Algorithms",
@@ -103,6 +112,7 @@
     "location": "Remote / India",
     "duration": "Oct'22 - Mar'24",
     "current": false,
+    "homeDisplay": false,
     "technologies": [
       "Technical Writing",
       "Data Structures",
@@ -123,6 +133,7 @@
     "location": "Remote / India",
     "duration": "Apr'21 - Aug'21",
     "current": false,
+    "homeDisplay": false,
     "technologies": [
       "Algorithm Design",
       "Problem Setting",

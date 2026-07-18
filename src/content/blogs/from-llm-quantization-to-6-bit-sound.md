@@ -89,7 +89,7 @@ Running this pipeline on a standard single-threaded CPU requires designing aroun
 
 Odd-bit sizes typically force the CPU to waste clock cycles on heavy, non-aligned mask computations. To avoid this, we implement a highly efficient **6+1 bit packing scheme** where the 7 bits are packed straight into a standard, native 8-bit byte container (`uint8`):
 
-```
+```txt
        7       6       5       4       3       2       1       0   (Bit Index)
    ┌───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┐
    │  MSB  │       │       │       │       │  LSB  │  QJL  │  QJL  │

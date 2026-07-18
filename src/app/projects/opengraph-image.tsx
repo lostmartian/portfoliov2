@@ -1,6 +1,9 @@
 import { ImageResponse } from "next/og";
+import { join } from "path";
+import { readFileSync } from "fs";
 
 export const dynamic = "force-static";
+
 export const size = {
   width: 1200,
   height: 630,
@@ -8,105 +11,127 @@ export const size = {
 export const contentType = "image/png";
 
 export default async function Image() {
+  const photoPath = join(process.cwd(), "public/me/profile-photo.png");
+  const photoData = readFileSync(photoPath);
+  const photoBuffer = photoData.buffer.slice(
+    photoData.byteOffset,
+    photoData.byteOffset + photoData.byteLength
+  );
+
   return new ImageResponse(
     (
       <div
         style={{
-          background: "#0b0c10",
-          width: "100%",
-          height: "100%",
+          background: "#121212",
+          width: "1200px",
+          height: "630px",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "80px",
+          flexDirection: "row",
+          alignItems: "center",
+          padding: "60px 80px",
           fontFamily: "sans-serif",
-          color: "#c5c6c7",
+          color: "#e0e0e0",
+          boxSizing: "border-box",
           position: "relative",
         }}
       >
-        {/* Dot Matrix background */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: "radial-gradient(rgba(197, 198, 199, 0.1) 1.5px, transparent 1.5px)",
-            backgroundSize: "32px 32px",
-            opacity: 0.8,
-          }}
-        />
-
-        {/* Top Header metadata */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", zIndex: 10 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <div
-              style={{
-                width: "8px",
-                height: "8px",
-                borderRadius: "50%",
-                background: "#c5c6c7",
-              }}
-            />
-            <span style={{ fontSize: "14px", fontFamily: "monospace", letterSpacing: "0.15em", fontWeight: "bold" }}>
-              SAHIL GANGURDE // SELECTED PROJECTS
-            </span>
-          </div>
-          <span style={{ fontSize: "14px", fontFamily: "monospace", opacity: 0.5 }}>
-            CODE_INTEGRITY
-          </span>
-        </div>
-
-        {/* Main Header / Title */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "25px", zIndex: 10, maxWidth: "900px", margin: "auto 0" }}>
-          <h1
-            style={{
-              fontSize: "72px",
-              fontWeight: 500,
-              lineHeight: 1.1,
-              margin: 0,
-              color: "#ffffff",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Engineering Showcase.
-          </h1>
-          <p
-            style={{
-              fontSize: "22px",
-              lineHeight: 1.6,
-              margin: 0,
-              opacity: 0.8,
-              maxWidth: "800px",
-            }}
-          >
-            A selective registry of robust systems, high-performance execution solvers, intelligence portals, and developer toolkits.
-          </p>
-        </div>
-
-        {/* Footer Meta */}
+        {/* Left Column: Text Content */}
         <div
           style={{
             display: "flex",
+            flexDirection: "column",
             justifyContent: "space-between",
-            alignItems: "flex-end",
-            width: "100%",
-            borderTop: "1px solid rgba(197, 198, 199, 0.1)",
-            paddingTop: "30px",
-            zIndex: 10,
+            height: "510px",
+            width: "600px",
           }}
         >
-          <div style={{ display: "flex", gap: "40px" }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-              <span style={{ fontSize: "11px", fontFamily: "monospace", opacity: 0.4 }}>PROJECT TYPE</span>
-              <span style={{ fontSize: "15px", fontWeight: "bold" }}>AI / CODE / EXPERIMENTS</span>
+          {/* Top Header metadata */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+            <span style={{ fontSize: "14px", fontFamily: "monospace", letterSpacing: "0.15em", fontWeight: "bold", color: "#e0e0e0" }}>
+              SAHIL GANGURDE // SELECTED PROJECTS
+            </span>
+            <span style={{ fontSize: "12px", fontFamily: "monospace", opacity: 0.4 }}>
+              lostmartian.in/projects
+            </span>
+          </div>
+
+          {/* Main Title & Description */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px", margin: "auto 0" }}>
+            <h1
+              style={{
+                fontSize: "52px",
+                fontWeight: 700,
+                lineHeight: 1.15,
+                margin: 0,
+                color: "#ffffff",
+                letterSpacing: "-0.02em",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <span>Engineering</span>
+              <span>Showcase.</span>
+            </h1>
+            <p
+              style={{
+                fontSize: "18px",
+                lineHeight: 1.5,
+                margin: 0,
+                opacity: 0.6,
+                maxWidth: "600px",
+              }}
+            >
+              A selective registry of robust systems, high-performance execution solvers, intelligence portals, and developer toolkits.
+            </p>
+          </div>
+
+          {/* Footer Metadata Grid */}
+          <div
+            style={{
+              display: "flex",
+              borderTop: "1px solid rgba(224, 224, 224, 0.1)",
+              paddingTop: "20px",
+              gap: "30px",
+            }}
+          >
+            <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+              <span style={{ fontSize: "9px", fontFamily: "monospace", opacity: 0.4 }}>PROJECT TYPE</span>
+              <span style={{ fontSize: "12px", fontWeight: "bold" }}>SYSTEMS &amp; TOOLKITS</span>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-              <span style={{ fontSize: "11px", fontFamily: "monospace", opacity: 0.4 }}>REPOSITORIES</span>
-              <span style={{ fontSize: "15px", fontWeight: "bold" }}>OPEN SOURCE &amp; PROPRIETARY</span>
+            <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+              <span style={{ fontSize: "9px", fontFamily: "monospace", opacity: 0.4 }}>REGISTRY</span>
+              <span style={{ fontSize: "12px", fontWeight: "bold" }}>ACTIVE</span>
             </div>
           </div>
-          <span style={{ fontSize: "14px", fontFamily: "monospace", opacity: 0.5 }}>
-            github.com/lostmartian
-          </span>
+        </div>
+
+        {/* Right Column: Profile Photo (Absolute Positioned) */}
+        <div
+          style={{
+            position: "absolute",
+            right: "80px",
+            top: "135px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "360px",
+            height: "360px",
+            borderRadius: "20px",
+            overflow: "hidden",
+            border: "1px solid rgba(224, 224, 224, 0.15)",
+            background: "#161616",
+          }}
+        >
+          {/* @ts-ignore */}
+          <img
+            src={photoBuffer as any}
+            alt="Sahil Gangurde"
+            style={{
+              width: "360px",
+              height: "360px",
+              borderRadius: "20px",
+            }}
+          />
         </div>
       </div>
     ),

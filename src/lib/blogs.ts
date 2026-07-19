@@ -15,7 +15,9 @@ export interface BlogPost {
   readTime: string;
   youtubeId?: string;
   tweetId?: string;
+  headerImage?: string;
 }
+
 
 function calculateReadTime(content: string): string {
   const wordsPerMinute = 225;
@@ -54,6 +56,7 @@ export function getBlogPosts(): BlogPost[] {
         readTime: calculateReadTime(content),
         youtubeId: data.youtubeId,
         tweetId: data.tweetId,
+        headerImage: data.headerImage,
       } as BlogPost;
     })
     .filter((post) => !post.hidden); // Filter out hidden posts
@@ -88,5 +91,6 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
     readTime: calculateReadTime(content),
     youtubeId: data.youtubeId,
     tweetId: data.tweetId,
+    headerImage: data.headerImage,
   } as BlogPost;
 }

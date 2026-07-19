@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Blogs",
-  description: "A collection of thoughts, tutorials, and deep-dives into software engineering and design.",
+  description: "A collection of essays, deep-dives, and reflections on technology, design, and society.",
 };
 
 export default function BlogsPage() {
@@ -17,7 +17,7 @@ export default function BlogsPage() {
           Blogs
         </h1>
         <p className="text-sm text-foreground/50 leading-relaxed font-sans font-light">
-          A collection of thoughts, tutorials, and deep-dives into software engineering.
+          A collection of essays, deep-dives, and reflections on technology, design, and society.
         </p>
       </header>
       

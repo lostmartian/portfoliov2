@@ -39,6 +39,30 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     photoData.byteOffset + photoData.byteLength
   );
 
+  const isPolitics = post.categories.map(c => c.toUpperCase()).includes("POLITICS");
+  let imgSrc: any = photoBuffer;
+  if (isPolitics && post.headerImage) {
+    if (post.headerImage.startsWith("/")) {
+      try {
+        let localPath = post.headerImage;
+        if (localPath.endsWith(".webp")) {
+          localPath = localPath.substring(0, localPath.lastIndexOf(".")) + ".png";
+        }
+        const imagePath = join(process.cwd(), "public", localPath);
+        const imageData = readFileSync(imagePath);
+        imgSrc = imageData.buffer.slice(
+          imageData.byteOffset,
+          imageData.byteOffset + imageData.byteLength
+        );
+      } catch (err) {
+        console.error("Failed to load local header image for OG generation", err);
+      }
+    } else {
+      imgSrc = post.headerImage;
+    }
+  }
+
+
   return new ImageResponse(
     (
       <div
@@ -145,12 +169,13 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         >
           {/* @ts-ignore */}
           <img
-            src={photoBuffer as any}
-            alt="Sahil Gangurde"
+            src={imgSrc}
+            alt={post.title}
             style={{
               width: "360px",
               height: "360px",
               borderRadius: "20px",
+              objectFit: "cover",
             }}
           />
         </div>

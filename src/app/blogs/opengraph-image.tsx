@@ -48,7 +48,7 @@ export default async function Image() {
           {/* Top Header metadata */}
           <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
             <span style={{ fontSize: "14px", fontFamily: "monospace", letterSpacing: "0.15em", fontWeight: "bold", color: "#e0e0e0" }}>
-              SAHIL GANGURDE // BLOGS
+              SAHIL GANGURDE — BLOGS
             </span>
             <span style={{ fontSize: "12px", fontFamily: "monospace", opacity: 0.4 }}>
               lostmartian.in/blogs
@@ -69,8 +69,8 @@ export default async function Image() {
                 flexDirection: "column",
               }}
             >
-              <span>Technical Writings &amp;</span>
-              <span>Engineering Insights.</span>
+              <span>Essays, Systems, &amp;</span>
+              <span>Design Reflections.</span>
             </h1>
             <p
               style={{
@@ -81,7 +81,7 @@ export default async function Image() {
                 maxWidth: "600px",
               }}
             >
-              Deep dives into software architecture, high-performance database indexing, GraphRAG engines, and machine learning structures.
+              Deep-dives and critical essays spanning system design, software architecture, politics, and technology's role in society.
             </p>
           </div>
 
@@ -96,7 +96,7 @@ export default async function Image() {
           >
             <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
               <span style={{ fontSize: "9px", fontFamily: "monospace", opacity: 0.4 }}>CATEGORIES</span>
-              <span style={{ fontSize: "12px", fontWeight: "bold" }}>SYSTEMS &amp; ALGORITHMS</span>
+              <span style={{ fontSize: "12px", fontWeight: "bold" }}>SYSTEMS, SOCIETY, &amp; DESIGN</span>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
               <span style={{ fontSize: "9px", fontFamily: "monospace", opacity: 0.4 }}>ARCHIVE</span>

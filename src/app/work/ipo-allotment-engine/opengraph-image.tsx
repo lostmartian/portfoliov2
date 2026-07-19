@@ -61,7 +61,7 @@ export default async function Image() {
           {/* Top Header metadata */}
           <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
             <span style={{ fontSize: "14px", fontFamily: "monospace", letterSpacing: "0.15em", fontWeight: "bold", color: "#e0e0e0" }}>
-              SAHIL GANGURDE // CASE STUDY
+              SAHIL GANGURDE — CASE STUDY
             </span>
             <span style={{ fontSize: "12px", fontFamily: "monospace", opacity: 0.4 }}>
               lostmartian.in/work/ipo-allotment-engine ({project.year})
@@ -109,8 +109,9 @@ export default async function Image() {
           >
             <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
               <span style={{ fontSize: "9px", fontFamily: "monospace", opacity: 0.4 }}>ROLE</span>
-              <span style={{ fontSize: "12px", fontWeight: "bold" }}>SOFTWARE ENGINEER</span>
+              <span style={{ fontSize: "12px", fontWeight: "bold" }}>SOFTWARE ENGINEER, FREELANCE</span>
             </div>
+
             <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
               <span style={{ fontSize: "9px", fontFamily: "monospace", opacity: 0.4 }}>ENGINE</span>
               <span style={{ fontSize: "12px", fontWeight: "bold" }}>GO &amp; PYTHON / POLARS</span>

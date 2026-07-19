@@ -38,34 +38,17 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           ← Return to Blogs
         </Link>
 
-        <header className="space-y-1">
-          <h1 className="text-2xl font-bold tracking-tight text-foreground">
-            {post.title}
-          </h1>
-          <p className="text-sm text-foreground/50 leading-relaxed font-sans font-light">
-            {post.description}
-          </p>
-        </header>
-
-        {/* Metadata Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 py-4 border-y border-border/40 text-xs font-mono">
-          <div className="space-y-1">
-            <span className="text-foreground/40 uppercase tracking-wider block">Published</span>
-            <span className="text-foreground/80 font-medium">{post.date}</span>
-          </div>
-          <div className="space-y-1">
-            <span className="text-foreground/40 uppercase tracking-wider block">Read Time</span>
-            <span className="text-foreground/80 font-medium">{post.readTime}</span>
-          </div>
-          <div className="space-y-1">
-            <span className="text-foreground/40 uppercase tracking-wider block">Categories</span>
-            <span className="text-foreground/80 font-medium">{post.categories.join(", ")}</span>
-          </div>
-        </div>
       </div>
 
       <article className="pt-4">
-        <BlogPostContent content={post.content} />
+        <BlogPostContent
+          content={post.content}
+          title={post.title}
+          description={post.description}
+          date={post.date}
+          readTime={post.readTime}
+          categories={post.categories}
+        />
       </article>
     </main>
   );

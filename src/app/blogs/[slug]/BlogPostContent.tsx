@@ -10,15 +10,30 @@ import { useTheme } from "next-themes";
 import { Tweet } from "react-tweet";
 import Script from "next/script";
 import AudioComparisonPlayer from "@/components/AudioComparisonPlayer";
+import BlogAudioPlayer, { extractSpeechBlocks } from "@/components/BlogAudioPlayer";
 import "highlight.js/styles/github-dark.css";
 
 interface BlogPostContentProps {
   content: string;
+  title: string;
+  description: string;
+  date: string;
+  readTime: string;
+  categories: string[];
 }
 
-export default function BlogPostContent({ content }: BlogPostContentProps) {
+export default function BlogPostContent({
+  content,
+  title,
+  description,
+  date,
+  readTime,
+  categories,
+}: BlogPostContentProps) {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+
 
   React.useEffect(() => {
     if (typeof window !== "undefined") {
@@ -102,6 +117,60 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
     return null;
   };
 
+  const blocks = React.useMemo(() => extractSpeechBlocks(content), [content]);
+
+  // Helper to extract text from react node children
+  const getTextFromChildren = (children: any): string => {
+    if (!children) return "";
+    if (typeof children === "string") return children;
+    if (typeof children === "number") return String(children);
+    if (Array.isArray(children)) {
+      return children.map(getTextFromChildren).join("");
+    }
+    if (children && typeof children === "object" && children.props) {
+      return getTextFromChildren(children.props.children);
+    }
+    return "";
+  };
+
+  // Check if a block matches the current text chunk and return its index
+  const getBlockIndex = (children: any): number => {
+    const rawText = getTextFromChildren(children).trim();
+    if (!rawText || rawText.length < 5) return -1;
+    
+    // Clean text the same way as speech blocks
+    const cleanedText = rawText.replace(/[\*_~`]+/g, "").replace(/\s+/g, " ");
+    
+    return blocks.findIndex((block) => {
+      const cleanBlock = block.replace(/[\*_~`]+/g, "").replace(/\s+/g, " ");
+      return cleanBlock.includes(cleanedText) || cleanedText.includes(cleanBlock);
+    });
+  };
+
+  const renderReadableBlock = (
+    children: any,
+    blockIdx: number,
+    renderFn: (className: string, onClick?: () => void) => React.ReactNode
+  ) => {
+    const isActive = blockIdx !== -1 && blockIdx === activeIndex;
+    
+    const highlightClasses = isActive
+      ? "bg-amber-500/[0.04] dark:bg-amber-400/[0.04] border-l-2 border-amber-500/85 pl-3 -ml-3 transition-all duration-300 rounded-r"
+      : "transition-all duration-300 border-l-2 border-transparent";
+
+    const hoverClasses = blockIdx !== -1 
+      ? "hover:bg-foreground/[0.01] cursor-pointer" 
+      : "";
+
+    const combinedClass = `${highlightClasses} ${hoverClasses}`.trim();
+
+    const handleClick = blockIdx !== -1 ? () => {
+      setActiveIndex(blockIdx);
+    } : undefined;
+
+    return renderFn(combinedClass, handleClick);
+  };
+
   return (
     <>
       <Script id="mathjax-config" strategy="afterInteractive">
@@ -133,8 +202,45 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
           }
         }}
       />
-      <div className="w-full max-w-full overflow-hidden font-sans">
-        <ReactMarkdown
+      <div className="space-y-6">
+        <header className="space-y-1">
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">
+            {title}
+          </h1>
+          <p className="text-sm text-foreground/50 leading-relaxed font-sans font-light">
+            {description}
+          </p>
+        </header>
+
+        {/* Metadata Grid */}
+        <div className="grid grid-cols-4 gap-2 py-3 border-y border-border/40 text-[10px] sm:text-xs font-mono">
+          <div className="space-y-1 min-w-0">
+            <span className="text-foreground/40 uppercase tracking-wider block">Published</span>
+            <span className="text-foreground/80 font-medium truncate block">{date}</span>
+          </div>
+          <div className="space-y-1 min-w-0">
+            <span className="text-foreground/40 uppercase tracking-wider block">Read Time</span>
+            <span className="text-foreground/80 font-medium truncate block">{readTime}</span>
+          </div>
+          <div className="space-y-1 min-w-0">
+            <span className="text-foreground/40 uppercase tracking-wider block">Categories</span>
+            <span className="text-foreground/80 font-medium truncate block" title={categories.join(", ")}>
+              {categories.join(", ")}
+            </span>
+          </div>
+          <div className="space-y-1 min-w-0 relative">
+            <span className="text-foreground/40 uppercase tracking-wider block">Listen</span>
+            <BlogAudioPlayer
+              content={content}
+              title={title}
+              activeIndex={activeIndex}
+              onActiveIndexChange={setActiveIndex}
+            />
+          </div>
+        </div>
+
+        <div className="w-full max-w-full overflow-hidden font-sans">
+          <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw, rehypeHighlight]}
           components={{
@@ -261,7 +367,15 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
               }
             }
 
-            return <p className="mb-4 text-sm leading-relaxed text-foreground/80 text-justify font-sans">{children}</p>;
+            const blockIdx = getBlockIndex(children);
+            return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
+              <p 
+                onClick={onClick}
+                className={`mb-4 text-sm leading-relaxed text-foreground/80 text-justify font-sans ${extraClass}`.trim()}
+              >
+                {children}
+              </p>
+            ));
           },
           a: ({ href, children }: any) => {
             // Never return a DIV here to avoid "div in p" errors
@@ -277,10 +391,50 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
               </a>
             );
           },
-          h1: ({ children }: any) => <h1 className="text-xl font-bold text-foreground mb-4 mt-6 pt-2 font-sans">{children}</h1>,
-          h2: ({ children }: any) => <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-semibold mt-6 mb-2">{children}</h2>,
-          h3: ({ children }: any) => <h3 className="text-sm font-semibold text-foreground mt-4 mb-1.5 font-sans">{children}</h3>,
-          h4: ({ children }: any) => <h4 className="text-xs font-semibold text-foreground/80 mt-3 mb-1 font-sans">{children}</h4>,
+          h1: ({ children }: any) => {
+            const blockIdx = getBlockIndex(children);
+            return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
+              <h1 
+                onClick={onClick}
+                className={`text-xl font-bold text-foreground mb-4 mt-6 pt-2 font-sans ${extraClass}`.trim()}
+              >
+                {children}
+              </h1>
+            ));
+          },
+          h2: ({ children }: any) => {
+            const blockIdx = getBlockIndex(children);
+            return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
+              <h2 
+                onClick={onClick}
+                className={`text-xs font-mono uppercase tracking-wider text-foreground/40 font-semibold mt-6 mb-2 ${extraClass}`.trim()}
+              >
+                {children}
+              </h2>
+            ));
+          },
+          h3: ({ children }: any) => {
+            const blockIdx = getBlockIndex(children);
+            return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
+              <h3 
+                onClick={onClick}
+                className={`text-sm font-semibold text-foreground mt-4 mb-1.5 font-sans ${extraClass}`.trim()}
+              >
+                {children}
+              </h3>
+            ));
+          },
+          h4: ({ children }: any) => {
+            const blockIdx = getBlockIndex(children);
+            return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
+              <h4 
+                onClick={onClick}
+                className={`text-xs font-semibold text-foreground/80 mt-3 mb-1 font-sans ${extraClass}`.trim()}
+              >
+                {children}
+              </h4>
+            ));
+          },
           ul: ({ children }: any) => <ul className="list-none space-y-2 my-4 pl-0 font-sans">{children}</ul>,
           ol: ({ children }: any) => <ol className="list-decimal space-y-2 my-4 pl-6 font-sans">{children}</ol>,
           li: ({ children }: any) => (
@@ -289,11 +443,17 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
               <span className="min-w-0 flex-1 break-words">{children}</span>
             </li>
           ),
-          blockquote: ({ children }: any) => (
-            <blockquote className="border-l-2 border-border/40 pl-4 my-4 italic text-foreground/60 font-sans text-sm leading-relaxed">
-              {children}
-            </blockquote>
-          ),
+          blockquote: ({ children }: any) => {
+            const blockIdx = getBlockIndex(children);
+            return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
+              <blockquote 
+                onClick={onClick}
+                className={`border-l-2 border-border/40 pl-4 my-4 italic text-foreground/60 font-sans text-sm leading-relaxed ${extraClass}`.trim()}
+              >
+                {children}
+              </blockquote>
+            ));
+          },
           table: ({ children }: any) => (
             <div className="my-12 w-full overflow-x-auto border border-border/10">
               <table className="min-w-full w-max border-collapse text-left text-sm font-mono">
@@ -316,7 +476,8 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
       >
         {content}
       </ReactMarkdown>
-    </div>
-  </>
+        </div>
+      </div>
+    </>
 );
 }

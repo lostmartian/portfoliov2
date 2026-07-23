@@ -10,9 +10,6 @@ We often fear being a beginner because we’re afraid to look stupid. This post 
 There is a specific kind of ego that comes with being good at what you do. Once you’ve mastered a craft or established a reputation, you start to protect it. You stop wanting to look stupid. You stop wanting to be the person in the room who doesn't "get it."
 
 But lately, I’ve realized that the most dangerous place to be is the "expert" who has stopped being a student. To move forward, you have to be willing to burn the old map and embrace the **"Clean Slate."**
-
----
-
 ## Why Do We Fall?
 
 There’s a famous question from the Batman mythos: *"Why do we fall, Bruce? So that we can learn to pick ourselves back up."*
@@ -22,17 +19,11 @@ In the context of a clean slate, "falling" is the moment you admit you are a beg
 > **Failure is the tuition fee for wisdom. If you aren't falling, you aren't pushing the boundaries of what you know.**
 
 https://www.youtube.com/watch?v=HIcGuFnl7ZU
-
----
-
 ## The Power of "I Know Nothing"
 
 In my own life, I’ve reached points where the only way forward was to say three very difficult words: **"I know nothing."** Whether it’s starting a grueling 30-day challenge or navigating the uncertainty of a career transition, there is a quiet power in "Day Zero."
 
 When you admit you are a beginner, you aren't losing your status—you’re gaining your freedom. Experts are afraid to fail because they have a "height" to fall from. Beginners expect to hit the ground. And because beginners expect to fall, they are the only ones truly free to experiment, mess up, and eventually find a better way of doing things.
-
----
-
 ## The Foundation is Built in the Pit
 
 When Bruce Wayne was at his lowest, he had to climb out of "The Pit" without the safety of a rope. That is the ultimate Clean Slate. He had no gadgets, no armor, and no billionaire status—just the raw discipline of the climb.
@@ -42,9 +33,6 @@ Real progress—whether it’s a physical transformation or a mental one—alway
 - **Ask the "stupid" questions.**
 - **Accept the frustration of the first week.**
 - **Fall, learn why you fell, and get back up stronger.**
-
----
-
 ## The Lesson
 
 Don't be afraid of the transition. Whether you are switching paths, starting a new health journey, or just trying to learn something from scratch, embrace the fall.

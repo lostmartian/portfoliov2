@@ -10,7 +10,7 @@ const navLinks = [
   { name: "Work", href: "/work" },
   { name: "Blogs", href: "/blogs" },
   { name: "Projects", href: "/projects" },
-  { name: "Resume", href: "#" },
+  { name: "Readlist", href: "/readlist" },
 ];
 
 export default function Navigation() {
@@ -29,12 +29,20 @@ export default function Navigation() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const isHomeActive = pathname === "/";
+
   return (
     <header className="relative py-2 border-b border-border">
       <div className="flex justify-between items-center w-full">
         {/* Logo / Title */}
-        <Link href="/" className="text-base font-semibold tracking-tight uppercase hover:opacity-85">
+        <Link 
+          href="/" 
+          className="text-base font-semibold tracking-tight uppercase hover:opacity-85 transition-colors flex items-center gap-1.5"
+        >
           Sahil Gangurde
+          {isHomeActive && (
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400 animate-fade-in" />
+          )}
         </Link>
 
         {/* Action Controls */}
@@ -49,11 +57,14 @@ export default function Navigation() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`transition-colors hover:text-foreground ${
-                    isActive ? "text-foreground font-semibold border-b border-foreground pb-0.5" : "text-foreground/60"
+                  className={`transition-all hover:text-foreground flex items-center gap-1.5 ${
+                    isActive ? "text-foreground font-semibold" : "text-foreground/60"
                   }`}
                 >
-                  {link.name}
+                  <span>{link.name}</span>
+                  {isActive && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400" />
+                  )}
                 </Link>
               );
             })}
@@ -87,11 +98,14 @@ export default function Navigation() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className={`text-xs font-mono uppercase tracking-wider py-1 border-b border-transparent transition-all ${
-                  isActive ? "text-foreground font-semibold border-border" : "text-foreground/60"
+                className={`text-xs font-mono uppercase tracking-wider py-1 border-b border-border/10 transition-all flex items-center justify-between ${
+                  isActive ? "text-foreground font-semibold" : "text-foreground/60"
                 }`}
               >
-                {link.name}
+                <span>{link.name}</span>
+                {isActive && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400" />
+                )}
               </Link>
             );
           })}

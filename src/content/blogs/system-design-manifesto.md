@@ -18,9 +18,6 @@ Building for the future requires a balance of **minimalism** and **dense technic
 1. **Typography**: High contrast and rhythm.
 2. **Data**: Dense, scrollable, and industrial.
 3. **Media**: Interactive and theme-aware.
-
----
-
 ## H2: Advanced Diagramming (Mermaid)
 
 The system supports complex technical visualizations that automatically adapt to your chosen theme.
@@ -37,9 +34,6 @@ graph LR
     style A fill:#0000000a,stroke:#888,stroke-width:1px
     style F fill:#0000000a,stroke:#888,stroke-width:1px
 ```
-
----
-
 ## H2: Industrial Data Matrices
 
 Technical data should be presented in dense, readable tables. The system supports full-width, scrollable matrices for complex datasets.
@@ -50,9 +44,6 @@ Technical data should be presented in dense, readable tables. The system support
 | `retry_policy` | `Enum` | `EXP_BACKOFF` | Strategy for handling transient connection failures. |
 | `max_latency` | `Float` | `0.05` | Maximum allowed latency threshold before failsafe trigger. |
 | `security_level` | `String` | `AUTH_V4` | Protocol version for encrypted handshakes. |
-
----
-
 ## H2: Wide Matrix Stress Test (40 Columns)
 
 This table demonstrates the horizontal scrolling capability for massive technical datasets.
@@ -61,9 +52,6 @@ This table demonstrates the horizontal scrolling capability for massive technica
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
 | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL | VAL |
 | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA | DATA |
-
----
-
 ## H2: Multi-Language Syntax Highlighting
 
 Code blocks are optimized for readability with high-fidelity syntax highlighting.
@@ -83,9 +71,6 @@ def process_telemetry(data: dict) -> bool:
         return True
     return False
 ```
-
----
-
 ## H2: Rich Media Integration
 
 The system automatically detects URLs and renders them as interactive embeds.
@@ -104,9 +89,6 @@ You can use full URLs or direct Tweet IDs.
 **Full URL:**
 
 https://x.com/sama/status/1889059531625464090
-
----
-
 ## H2: Typographic Elements
 
 Blockquotes and lists are refined for clear information hierarchy.
@@ -119,9 +101,6 @@ Blockquotes and lists are refined for clear information hierarchy.
 
 1. **Ordered Step 1**: Sequential logic.
 2. **Ordered Step 2**: Final validation.
-
----
-
 ## H2: Footnotes & References
 
 Professional documentation requires attention to detail[^1].

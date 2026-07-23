@@ -39,9 +39,8 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     photoData.byteOffset + photoData.byteLength
   );
 
-  const isPolitics = post.categories.map(c => c.toUpperCase()).includes("POLITICS");
   let imgSrc: any = photoBuffer;
-  if (isPolitics && post.headerImage) {
+  if (post.headerImage) {
     if (post.headerImage.startsWith("/")) {
       try {
         let localPath = post.headerImage;

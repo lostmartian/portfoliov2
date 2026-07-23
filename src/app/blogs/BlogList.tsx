@@ -19,10 +19,15 @@ export default function BlogList({ initialPosts }: BlogListProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown when clicking outside
+  // Close dropdown when clicking outside, excluding the trigger button
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      const trigger = document.getElementById("filter-trigger-button");
+      if (
+        dropdownRef.current && 
+        !dropdownRef.current.contains(event.target as Node) &&
+        (!trigger || !trigger.contains(event.target as Node))
+      ) {
         setShowFilters(false);
       }
     }
@@ -94,6 +99,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
 
         {/* Minimal Filter Trigger */}
         <button
+          id="filter-trigger-button"
           onClick={() => setShowFilters((prev) => !prev)}
           className={`text-xs font-mono hover:text-foreground transition-all flex items-center gap-2 cursor-pointer px-3 py-1.5 border rounded ${showFilters || selectedCategories.length > 0
             ? "border-foreground/30 text-foreground bg-foreground/[0.03]"
@@ -189,9 +195,9 @@ export default function BlogList({ initialPosts }: BlogListProps) {
                   {post.description}
                 </p>
 
-                {/* Line 3: Categories */}
-                {post.categories.length > 0 && (
-                  <div className="flex items-center gap-2 text-[10px] font-mono pt-1">
+                {/* Line 3: Categories & Series */}
+                {(post.categories.length > 0 || post.seriesName) && (
+                  <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono pt-1">
                     {post.categories.map((cat) => (
                       <span
                         key={cat}
@@ -200,6 +206,11 @@ export default function BlogList({ initialPosts }: BlogListProps) {
                         {cat}
                       </span>
                     ))}
+                    {post.seriesName && (
+                      <span className="px-2 py-0.5 text-foreground/50 uppercase tracking-wider bg-foreground/[0.04] border border-border/10 rounded">
+                        {post.seriesName} · Part {post.seriesPart}
+                      </span>
+                    )}
                   </div>
                 )}
               </div>

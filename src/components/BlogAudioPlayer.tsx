@@ -8,6 +8,7 @@ interface BlogAudioPlayerProps {
   title: string;
   onActiveIndexChange?: (index: number | null) => void;
   activeIndex: number | null;
+  onPlayingStateChange?: (isPlaying: boolean) => void;
 }
 
 // Clean markdown content to produce readable text blocks
@@ -69,6 +70,7 @@ export default function BlogAudioPlayer({
   title,
   onActiveIndexChange,
   activeIndex,
+  onPlayingStateChange,
 }: BlogAudioPlayerProps) {
   const [blocks, setBlocks] = useState<string[]>([]);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -85,6 +87,13 @@ export default function BlogAudioPlayer({
   const spokenIndexRef = useRef<number | null>(null);
   const rateRef = useRef(1);
   const selectedVoiceRef = useRef("");
+
+  // Report playing state change to parent
+  useEffect(() => {
+    if (onPlayingStateChange) {
+      onPlayingStateChange(isPlaying);
+    }
+  }, [isPlaying, onPlayingStateChange]);
 
   // Initialize speech blocks
   useEffect(() => {

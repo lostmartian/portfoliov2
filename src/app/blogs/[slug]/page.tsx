@@ -28,6 +28,19 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound();
   }
 
+  // Find other posts in the same series
+  let seriesPosts: { slug: string; title: string; part?: number }[] = [];
+  if (post.seriesName) {
+    seriesPosts = getBlogPosts()
+      .filter((p) => p.seriesName === post.seriesName)
+      .sort((a, b) => (a.seriesPart || 0) - (b.seriesPart || 0))
+      .map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        part: p.seriesPart,
+      }));
+  }
+
   return (
     <main className="space-y-6 font-sans">
       <div className="space-y-4">
@@ -48,6 +61,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           date={post.date}
           readTime={post.readTime}
           categories={post.categories}
+          slug={slug}
+          seriesName={post.seriesName}
+          seriesPosts={seriesPosts}
+          headerImage={post.headerImage}
+          headerImageCaption={post.headerImageCaption}
         />
       </article>
     </main>

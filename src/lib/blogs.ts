@@ -16,6 +16,9 @@ export interface BlogPost {
   youtubeId?: string;
   tweetId?: string;
   headerImage?: string;
+  headerImageCaption?: string;
+  seriesName?: string;
+  seriesPart?: number;
 }
 
 
@@ -45,6 +48,9 @@ export function getBlogPosts(): BlogPost[] {
           ? [data.category]
           : ['General'];
 
+      const seriesName = data.series?.name || (typeof data.series === 'string' ? data.series : undefined);
+      const seriesPart = data.series?.part || undefined;
+
       return {
         slug: file.replace('.md', ''),
         title: data.title || 'Untitled',
@@ -57,6 +63,9 @@ export function getBlogPosts(): BlogPost[] {
         youtubeId: data.youtubeId,
         tweetId: data.tweetId,
         headerImage: data.headerImage,
+        headerImageCaption: data.headerImageCaption,
+        seriesName,
+        seriesPart,
       } as BlogPost;
     })
     .filter((post) => !post.hidden); // Filter out hidden posts
@@ -80,6 +89,9 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
       ? [data.category]
       : ['General'];
 
+  const seriesName = data.series?.name || (typeof data.series === 'string' ? data.series : undefined);
+  const seriesPart = data.series?.part || undefined;
+
   return {
     slug,
     title: data.title || 'Untitled',
@@ -92,5 +104,8 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
     youtubeId: data.youtubeId,
     tweetId: data.tweetId,
     headerImage: data.headerImage,
+    headerImageCaption: data.headerImageCaption,
+    seriesName,
+    seriesPart,
   } as BlogPost;
 }

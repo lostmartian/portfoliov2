@@ -9,6 +9,7 @@ import Mermaid from "@/components/Mermaid";
 import { useTheme } from "next-themes";
 import { Tweet } from "react-tweet";
 import Script from "next/script";
+import Link from "next/link";
 import AudioComparisonPlayer from "@/components/AudioComparisonPlayer";
 import BlogAudioPlayer, { extractSpeechBlocks } from "@/components/BlogAudioPlayer";
 import "highlight.js/styles/github-dark.css";
@@ -20,6 +21,11 @@ interface BlogPostContentProps {
   date: string;
   readTime: string;
   categories: string[];
+  slug?: string;
+  seriesName?: string;
+  seriesPosts?: { slug: string; title: string; part?: number }[];
+  headerImage?: string;
+  headerImageCaption?: string;
 }
 
 export default function BlogPostContent({
@@ -29,10 +35,16 @@ export default function BlogPostContent({
   date,
   readTime,
   categories,
+  slug = "",
+  seriesName = "",
+  seriesPosts = [],
+  headerImage,
+  headerImageCaption,
 }: BlogPostContentProps) {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+  const [isAudioPlaying, setIsAudioPlaying] = React.useState(false);
 
 
   React.useEffect(() => {
@@ -150,21 +162,31 @@ export default function BlogPostContent({
   const renderReadableBlock = (
     children: any,
     blockIdx: number,
-    renderFn: (className: string, onClick?: () => void) => React.ReactNode
+    renderFn: (className: string, onClick?: (e: React.MouseEvent) => void) => React.ReactNode
   ) => {
-    const isActive = blockIdx !== -1 && blockIdx === activeIndex;
+    const isActive = blockIdx !== -1 && blockIdx === activeIndex && isAudioPlaying;
     
     const highlightClasses = isActive
       ? "bg-amber-500/[0.04] dark:bg-amber-400/[0.04] border-l-2 border-amber-500/85 pl-3 -ml-3 transition-all duration-300 rounded-r"
       : "transition-all duration-300 border-l-2 border-transparent";
 
-    const hoverClasses = blockIdx !== -1 
+    const hoverClasses = (blockIdx !== -1 && isAudioPlaying)
       ? "hover:bg-foreground/[0.01] cursor-pointer" 
       : "";
 
     const combinedClass = `${highlightClasses} ${hoverClasses}`.trim();
 
-    const handleClick = blockIdx !== -1 ? () => {
+    const handleClick = (blockIdx !== -1 && isAudioPlaying) ? (e: React.MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        target.closest("a") || 
+        target.closest("button") || 
+        target.closest("select") || 
+        target.closest("input") || 
+        target.closest("textarea")
+      ) {
+        return;
+      }
       setActiveIndex(blockIdx);
     } : undefined;
 
@@ -235,9 +257,54 @@ export default function BlogPostContent({
               title={title}
               activeIndex={activeIndex}
               onActiveIndexChange={setActiveIndex}
+              onPlayingStateChange={setIsAudioPlaying}
             />
           </div>
         </div>
+
+        {/* Header Image */}
+        {headerImage && (
+          <div className="w-full my-6 overflow-hidden rounded-lg border border-border/20 bg-foreground/[0.01]">
+            <img
+              src={headerImage}
+              alt={headerImageCaption || ""}
+              className="w-full h-auto object-cover aspect-video"
+            />
+            {headerImageCaption && (
+              <div className="text-center text-xs text-foreground/50 font-mono tracking-wide py-3 px-6 border-t border-border/10">
+                {headerImageCaption}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Series Index UI */}
+        {seriesPosts.length > 1 && (
+          <div className="p-4 rounded-lg bg-foreground/[0.02] border border-border/20 space-y-2.5 my-6">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-foreground/40 block font-bold">
+              Series: {seriesName}
+            </span>
+            <ol className="list-none space-y-2 pl-0">
+              {seriesPosts.map((sp) => {
+                const isCurrent = sp.slug === slug;
+                return (
+                  <li key={sp.slug} className="text-xs font-mono flex items-baseline gap-2 leading-relaxed">
+                    <span className={`text-[10px] uppercase font-bold tracking-wide w-14 shrink-0 block ${isCurrent ? 'text-emerald-500' : 'text-foreground/35'}`}>
+                      {sp.part ? `Part ${sp.part}` : '•'}
+                    </span>
+                    {isCurrent ? (
+                      <span className="text-foreground font-semibold flex-1">{sp.title}</span>
+                    ) : (
+                      <Link href={`/blogs/${sp.slug}`} className="text-foreground/60 hover:text-foreground hover:underline transition-all flex-1">
+                        {sp.title}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        )}
 
         <div className="w-full max-w-full overflow-hidden font-sans">
           <ReactMarkdown

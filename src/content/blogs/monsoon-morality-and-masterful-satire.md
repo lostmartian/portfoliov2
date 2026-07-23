@@ -3,14 +3,10 @@ title: "Monsoon, Morality, and Masterful Satire: Inside the Indian Student Upris
 date: "JUL 19, 2026"
 category: "POLITICS"
 headerImage: "/blog_content/mmm-cjp/cjp-blog1.webp"
+headerImageCaption: "The rigid, monolithic architecture of governance and the judiciary collides with the hyper-monetized gears of the examination system, only for a critical leak to fracture the entire machine. Through these cracks flows the organic, decentralized surge of student resistance an unstoppable network rewriting the code of accountability."
 hidden: false
 description: "An analysis of the decentralized student revolt, the coaching-industrial complex, and the Cockroach Janta Party counter-movement."
 ---
-
-![Cockroach Janta Party Protest](/blog_content/mmm-cjp/cjp-blog1.webp)
-<p align="center" style="font-size: 12px; opacity: 0.5; margin-top: 8px; line-height: 1.5; font-family: sans-serif; max-width: 600px; margin-left: auto; margin-right: auto; text-align: center;">
-  <em>The rigid, monolithic architecture of governance and the judiciary collides with the hyper-monetized gears of the examination system, only for a critical leak to fracture the entire machine. Through these cracks flows the organic, decentralized surge of student resistance an unstoppable network rewriting the code of accountability.</em>
-</p>
 
 There is a striking, poetic friction unfolding under the heavy Delhi downpours right now. On one side of the barricades, you have the sleek, sterile architecture of institutional power, attempting to handle a systemic national crisis through dry press releases and bureaucratic damage control. On the other side, huddled under leaking blue tarpaulins at Jantar Mantar, are thousands of students sleeping on waterlogged asphalt, singing, studying by phone light, and holding the line. This isn't your grandfather’s political rally. This is a **decentralized, crowd-fueled masterpiece of modern resistance**. When a dismissive remark from the top labeled these desperate, protesting students as "cockroaches," the movement didn't retreat in shame. Instead, they took the insult, converted it into digital currency, and birthed the **Cockroach Janta Party (CJP)**. It is a stark reminder that while empires and systems built on weak foundations crumble, it is the resilient, ignored masses who survive the fallout.
 

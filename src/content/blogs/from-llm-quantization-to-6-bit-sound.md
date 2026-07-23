@@ -21,9 +21,6 @@ The open-source code is hosted on [GitHub](https://github.com/lostmartian/audioT
 <audio-comparison original="/blog_content/audiotq/audio1.wav" originalTitle="Original Audio" originalDesc="Uncompressed 24-bit PCM WAV (44.1 kHz)" compressed="/blog_content/audiotq/audio1out.wav" compressedTitle="AudioTQ 6-Bit Compressed" compressedDesc="Compressed to 6-bit Lloyd-Max centroids + 1-bit QJL residual"></audio-comparison>
 
 The goal was to build a zero-dependency, cache-aligned lossy audio compression codec (**AudioTQ**) running entirely on a single-threaded CPU, translating these data-oblivious quantization properties to real-time signal processing.
-
----
-
 ## 2. Core Architecture: The Data-Oblivious Pipeline
 
 The AudioTQ engine functions by converting volatile, high-dynamic-range audio signals into a predictable, zero-centered standard Gaussian curve. The full end-to-end processing pipeline operates as follows:
@@ -78,9 +75,6 @@ $$\Delta = E[|\text{residual}|]$$
 During decompression, we apply a bias correction:
 $$\hat{Y}\_{\text{scaled}} = c\_{\text{index}} + \text{sign}(b\_{\text{qjl}}) \cdot \Delta$$
 This effectively splits each of our 64 bins in half dynamically, raising the effective resolution of our quantizer to 7 bits (128 virtual centroids) using only 1 extra bit of storage.
-
----
-
 ## 3. CPU Bit-Packing & Data Layout
 
 Running this pipeline on a standard single-threaded CPU requires designing around hardware register cache constraints rather than high-end GPU tensor parallelization. To achieve maximum throughput, the audio signal is sliced into cache-aligned blocks of $B = 512$ samples (at $32$-bit floating-point depth, this translates to exactly $2$ KB per block, fitting comfortably inside L1 instruction/data caches).
@@ -111,9 +105,6 @@ qjl_bits[i] = packed_byte & 0x01
 ```
 
 By keeping the packed representation byte-aligned, CPU decompression throughput is maximized, operating at **~1.5 MB/s** entirely in pure Python and NumPy without requiring compiled C/C++ extensions.
-
----
-
 ## 4. Code Walkthrough: How the Engine Executes
 
 Let's examine the exact implementation structure and trace how the mathematics map directly to our Python engine code.
@@ -304,9 +295,6 @@ class TurboAudioEngine:
 
         return reconstructed_blocks
 ```
-
----
-
 ## 5. Developer Integration & Tooling
 
 To make AudioTQ accessible, we built it as a zero-dependency package with easy-to-use API hooks and command-line execution tools.
@@ -356,9 +344,6 @@ The CLI tool supports batch processing, diagnostics, and simulation utilities:
   ```bash
   tqa-sim --type square --frequency 440 --duration 2.0 --spikes 5
   ```
-
----
-
 ## 6. Engineering Post-Mortem: Smashing the 24 dB Glass Ceiling
 
 Initial system integration tests on raw 24-bit PCM WAV tracks ran into a hard performance ceiling: the Signal-to-Quantization-Noise Ratio (SQNR) hovered at **24.60 dB**, failing to satisfy our Target Fidelity metric (>30 dB). 
@@ -376,9 +361,6 @@ Tracing the signal flow revealed three subtle bugs and mathematical assumptions 
 ### Breakthrough 3: QJL Correction Calibration
 * **The Flaw**: The QJL residual correction layer initially applied a global multiplier of `1.22x` to the residual correction scale ($\Delta$), based on assumptions from high-dimensional GPU quantization papers. However, within localized, narrow quantization bins, residual error distributions behave symmetrically around zero. The `1.22x` scaling factor caused the engine to overcorrect, injecting a high-frequency tracking hiss.
 * **The Fix**: We reverted the QJL correction multiplier to its pure mathematical expectation value of exactly **`1.0`**, eliminating the tracking hiss and dropping the noise floor.
-
----
-
 ## 7. System Verification & Performance Benchmarks
 
 Once these mathematical and code-level refinements were implemented, the noise floor collapsed. Running our validation test suites generated the following performance results across two diverse datasets:
@@ -401,9 +383,6 @@ Once these mathematical and code-level refinements were implemented, the noise f
 1. **Substantial Compression**: The physical file footprint collapsed by **66.6% to 74.4%**, proving low-bit optimization on CPU.
 2. **Pristine Waveform Correlation**: The **99.95%+ Cross-Correlation** index confirms that time-domain phase alignment and wave shapes are preserved.
 3. **Extreme Transient Preservation**: The highest peak amplitude in the entire 9.25-million-sample studio track was reconstructed with a microscopic error of **0.0002**, illustrating the power of WHT Gaussianization.
-
----
-
 ## 8. Known Limitations & Failure Modes
 
 Every engineering tradeoff has its boundaries. In AudioTQ, the data-oblivious assumption creates two specific failure modes that developers must guard against.
@@ -428,9 +407,6 @@ def test_failure_hadamard_basis_alignment():
 ### 2. Silent Block Division Guard
 * **The Failure**: In silent passages, the input standard deviation is $0.0$. Attempting to compute $Y\_{\text{scaled}} = Y\_{\text{centered}} / \sigma_Y$ would cause a division-by-zero error, producing `NaN` or `Inf` arrays.
 * **The Fix**: The engine includes a threshold guard standard deviation check. Blocks with variance below $10^{-6}$ skip scaling and normalize to flat zero, reconstructing perfect silence without throwing `NaN` errors.
-
----
-
 ## 9. Conclusion
 
 By shifting the compression challenge from complex psychoacoustic filtering to data-oblivious coordinate rotation, AudioTQ proves that the deep mathematical symmetries optimized for cutting-edge Large Language Models can be successfully applied to audio signal processing. The result is a lightweight, high-performance, and mathematically elegant software architecture.

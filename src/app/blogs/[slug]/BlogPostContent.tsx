@@ -280,7 +280,7 @@ export default function BlogPostContent({
 
         {/* Series Index UI */}
         {seriesPosts.length > 1 && (
-          <div className="p-4 rounded-lg bg-foreground/[0.02] border border-border/20 space-y-2.5 my-6">
+          <div className="border-l-2 border-border/30 pl-4 py-1.5 space-y-2.5 my-8">
             <span className="text-[10px] font-mono uppercase tracking-widest text-foreground/40 block font-bold">
               Series: {seriesName}
             </span>

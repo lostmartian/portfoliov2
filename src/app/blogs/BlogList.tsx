@@ -9,7 +9,7 @@ interface BlogListProps {
   initialPosts: BlogPost[];
 }
 
-const POSTS_PER_PAGE = 6;
+const POSTS_PER_PAGE = 20;
 
 export default function BlogList({ initialPosts }: BlogListProps) {
   const [search, setSearch] = useState("");

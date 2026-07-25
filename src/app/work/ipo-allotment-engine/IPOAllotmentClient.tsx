@@ -2,14 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { 
-  Briefcase, 
-  Cpu, 
-  Database, 
-  Server, 
-  Shield, 
-  Cloud, 
-  Award, 
+import {
+  Briefcase,
+  Cpu,
+  Database,
+  Server,
+  Shield,
+  Cloud,
+  Award,
   Code,
   Activity,
   Layers,
@@ -96,8 +96,8 @@ export default function IPOAllotmentClient() {
     <div className="space-y-16 font-sans py-4">
       {/* Navigation & Header */}
       <div className="space-y-6">
-        <Link 
-          href="/work" 
+        <Link
+          href="/work"
           className="text-xs font-mono text-foreground/70 hover:text-foreground transition-colors inline-flex items-center gap-1.5"
         >
           <ArrowLeft className="w-3 shrink-0" /> Return to Work
@@ -105,7 +105,7 @@ export default function IPOAllotmentClient() {
 
         <header className="space-y-2">
           <span className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-semibold block">
-            Case Study — SEBI-Reg. Category I RTA
+            Case Study   SEBI-Reg. Category I RTA
           </span>
           <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
             IPO Allotment Engine
@@ -119,7 +119,7 @@ export default function IPOAllotmentClient() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-6 border-y border-border/20 text-xs font-mono">
           <div className="space-y-1">
             <span className="text-foreground/40 uppercase tracking-wider block">Timeline</span>
-            <span className="text-foreground/80 font-medium">Mar 2026 — Present</span>
+            <span className="text-foreground/80 font-medium">Mar 2026   Present</span>
           </div>
           <div className="space-y-1">
             <span className="text-foreground/40 uppercase tracking-wider block">Role</span>
@@ -150,7 +150,7 @@ export default function IPOAllotmentClient() {
           />
         </div>
         <p className="text-[10px] font-mono text-foreground/40 uppercase tracking-wider text-center">
-          Fig 01. — Basis of Allotment Grid &amp; Processing Flow
+          Fig 01.   Basis of Allotment Grid &amp; Processing Flow
         </p>
       </div>
 
@@ -159,7 +159,7 @@ export default function IPOAllotmentClient() {
         <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border/20 pb-2">
           01. Business Domain &amp; Core Challenge
         </h2>
-        
+
         <div className="space-y-4 text-sm text-foreground/80 leading-relaxed text-justify">
           <p>
             When a company decides to go public through an Initial Public Offering (IPO) in the Indian capital markets, it needs a neutral, regulated intermediary to manage the transaction. This intermediary is the <strong>Registrar and Transfer Agent (RTA)</strong>.
@@ -170,7 +170,7 @@ export default function IPOAllotmentClient() {
           <p>
             The RTA serves as the vital bridge connecting multiple key financial players:
           </p>
-          
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-2">
             <div className="p-4 rounded border border-border/10 bg-foreground/[0.01]">
               <span className="text-xs font-mono font-bold text-foreground/70 block uppercase">The Issuer &amp; Exchanges</span>
@@ -214,7 +214,7 @@ export default function IPOAllotmentClient() {
         <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border/20 pb-2">
           02. System Architecture &amp; Execution Flows
         </h2>
-        
+
         <div className="space-y-4 text-sm text-foreground/80 leading-relaxed text-justify">
           <p>
             The platform adopts a hybrid design: a containerized, event-driven batch processing pipeline (Data Plane) handles heavy calculations and file transformations, while a low-latency microservice (Control Plane) manages configurations, overrides, and administrative stage sign-offs.
@@ -222,7 +222,7 @@ export default function IPOAllotmentClient() {
 
           <div className="space-y-2 py-4">
             <h3 className="text-xs font-mono text-foreground/40 uppercase tracking-wider text-center">
-              Fig 02. — End-to-End System Ingestion &amp; Settlement Flow
+              Fig 02.   End-to-End System Ingestion &amp; Settlement Flow
             </h3>
             <Mermaid chart={mermaidChart} />
           </div>
@@ -283,7 +283,7 @@ export default function IPOAllotmentClient() {
         <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border/20 pb-2">
           04. Backend Microservices Architecture
         </h2>
-        
+
         <div className="space-y-4 text-sm text-foreground/80 leading-relaxed text-justify">
           <p>
             The backend control plane service is written in Go to maximize concurrency and ensure low memory footprint. By adopting Clean Architecture patterns, database, HTTP routing, and core domain logics remain decoupled:
@@ -307,7 +307,7 @@ export default function IPOAllotmentClient() {
         <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border/20 pb-2">
           05. High-Throughput Data Engine Design
         </h2>
-        
+
         <div className="space-y-4 text-sm text-foreground/80 leading-relaxed text-justify">
           <p>
             The computing engine uses Polars (compiled with Rust on Apache Arrow memory layouts) to achieve vectorization. Parallel hashing and joins process millions of files in seconds, bypassing Python&apos;s Global Interpreter Lock (GIL).
@@ -335,12 +335,12 @@ export default function IPOAllotmentClient() {
         <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border/20 pb-2">
           06. Database Schema Design &amp; Indexing
         </h2>
-        
+
         <div className="space-y-4 text-sm text-foreground/80 leading-relaxed text-justify">
           <p>
             The relational database layer runs on Amazon Aurora PostgreSQL. The schema uses SQL-first migration scripts versioned chronologically.
           </p>
-          
+
           <h3 className="text-xs font-mono uppercase text-foreground/60 font-semibold pt-2">Index Lock Mitigation</h3>
           <p>
             Standard indexing operations on large tables block database writes. In production environments, we require all migration index creation scripts to execute concurrently with strict statement timeouts, preventing database locks during high-volume intake periods.
@@ -363,7 +363,7 @@ export default function IPOAllotmentClient() {
         <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border/20 pb-2">
           07. Infrastructure as Code &amp; Cloud Topography
         </h2>
-        
+
         <div className="space-y-4 text-sm text-foreground/80 leading-relaxed text-justify">
           <p>
             Provisioned via OpenTofu / Terraform, the cloud topography isolates the primary database cluster, backend services, and execution tasks inside secure private subnets. All outbound calls route through isolated NAT Gateways with static Elastic IPs allowlisted by external exchange APIs.
@@ -387,7 +387,7 @@ export default function IPOAllotmentClient() {
         <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border/20 pb-2">
           08. Key Accomplishments &amp; Metrics
         </h2>
-        
+
         <div className="space-y-6 pt-2">
           <div className="flex gap-3">
             <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" />

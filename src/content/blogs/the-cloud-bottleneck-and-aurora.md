@@ -1,5 +1,5 @@
 ---
-title: "The Cloud Bottleneck & Why 'The Log is the Database'"
+title: "Amazon Aurora: The Cloud Bottleneck & 'The Log is the Database'"
 date: "JUL 24, 2026"
 category: "ENGINEERING"
 series:
@@ -12,7 +12,7 @@ description: "How decoupled storage and smart log offloading solved write amplif
 
 While working on a high-stakes project preparing for an IPO, our database demands scaled exponentially. We migrated to Amazon Aurora to handle the load. At first, it was just a managed service choice, but seeing how effortlessly it handled high-write traffic and replication lag left me fascinated. I decided to dive deep into the landmark **Amazon Aurora (SIGMOD '17)** paper and database internals to understand what made it tick.
 
-What I discovered is a masterclass in distributed systems engineering. The way Aurora decouples compute from storage and completely flips traditional database design on its head is beautiful. I wanted to document my own process of breaking down these breakthroughs—partly to solidify my own understanding, and hopefully, to help other developers navigate concepts like *write amplification, double-write buffers, and log-based storage* without getting lost in dense academic jargon.
+What I discovered is a masterclass in distributed systems engineering. The way Aurora decouples compute from storage and completely flips traditional database design on its head is beautiful. I wanted to document my own process of breaking down these breakthroughs partly to solidify my own understanding, and hopefully, to help other developers navigate concepts like *write amplification, double-write buffers, and log-based storage* without getting lost in dense academic jargon.
 
 Let's start with the foundational challenge: **Why traditional databases suffer in cloud environments, and the architectural paradigm shift that resolved it.**
 
@@ -22,18 +22,18 @@ To understand database architecture in the cloud, we must first establish the bo
 
 Think of a database as a gourmet restaurant:
 
-* **Compute (The Chefs & Waiters):** The database engine is responsible for interpreting and planning SQL queries (such as `SELECT` and `INSERT`), handling transaction locking, managing user access/permissions, and keeping active data pages hot in RAM within the **Buffer Cache**. This layer is volatile—if the server restarts, this cache is completely wiped.
+* **Compute (The Chefs & Waiters):** The database engine is responsible for interpreting and planning SQL queries (such as `SELECT` and `INSERT`), handling transaction locking, managing user access/permissions, and keeping active data pages hot in RAM within the **Buffer Cache**. This layer is volatile if the server restarts, this cache is completely wiped.
 * **Storage (The Pantry & Freezer):** The storage layer physically persists raw data blocks on non-volatile media (like SSDs or HDDs). It guarantees durability across system reboots and failures, and sends requested data blocks up to the Compute layer whenever they are needed.
 
 In a traditional database setup (like running MySQL on your local laptop), compute and storage share the same physical server. In a cloud environment, however, cloud providers separate these concerns: your database compute engine runs on a virtual machine (such as Amazon EC2), while the database files are stored on remote, network-attached storage servers.
 
 ## 2. Scalability: The Shift from Scale-Up to Scale-Out
 
-Historically, when a database hit its resource limits, the standard solution was **Scale-Up (Vertical Scaling)**—replacing the server with a larger one boasting more memory and a faster processor. 
+Historically, when a database hit its resource limits, the standard solution was **Scale-Up (Vertical Scaling)** replacing the server with a larger one boasting more memory and a faster processor. 
 
 However, hardware scalability has physical limits: it is impossible to scale a single server infinitely.
 
-Modern cloud architecture instead embraces **Scale-Out (Horizontal Scaling)**—clustering groups of smaller, commodity servers linked over high-speed networks.
+Modern cloud architecture instead embraces **Scale-Out (Horizontal Scaling)** clustering groups of smaller, commodity servers linked over high-speed networks.
 
 Distributing a database engine across a scale-out cloud environment changes the bottleneck equation:
 1. Disk capacity and drive speed are no longer the limiting factors, as operations are divided among many parallel storage nodes.

@@ -23,12 +23,12 @@ https://www.youtube.com/watch?v=HIcGuFnl7ZU
 
 In my own life, I’ve reached points where the only way forward was to say three very difficult words: **"I know nothing."** Whether it’s starting a grueling 30-day challenge or navigating the uncertainty of a career transition, there is a quiet power in "Day Zero."
 
-When you admit you are a beginner, you aren't losing your status—you’re gaining your freedom. Experts are afraid to fail because they have a "height" to fall from. Beginners expect to hit the ground. And because beginners expect to fall, they are the only ones truly free to experiment, mess up, and eventually find a better way of doing things.
+When you admit you are a beginner, you aren't losing your status you’re gaining your freedom. Experts are afraid to fail because they have a "height" to fall from. Beginners expect to hit the ground. And because beginners expect to fall, they are the only ones truly free to experiment, mess up, and eventually find a better way of doing things.
 ## The Foundation is Built in the Pit
 
-When Bruce Wayne was at his lowest, he had to climb out of "The Pit" without the safety of a rope. That is the ultimate Clean Slate. He had no gadgets, no armor, and no billionaire status—just the raw discipline of the climb.
+When Bruce Wayne was at his lowest, he had to climb out of "The Pit" without the safety of a rope. That is the ultimate Clean Slate. He had no gadgets, no armor, and no billionaire status just the raw discipline of the climb.
 
-Real progress—whether it’s a physical transformation or a mental one—always starts with that "Pit" energy. You strip everything back to the basics:
+Real progress whether it’s a physical transformation or a mental one always starts with that "Pit" energy. You strip everything back to the basics:
 
 - **Ask the "stupid" questions.**
 - **Accept the frustration of the first week.**

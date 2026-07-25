@@ -1,5 +1,5 @@
 ---
-title: "Surviving Data Center Fires: Durability & The 4/6 Quorum"
+title: "Amazon Aurora: Surviving Data Center Fires & The 4/6 Quorum"
 date: "JUL 25, 2026"
 category: "ENGINEERING"
 series:
@@ -35,7 +35,7 @@ While individual disk failures happen randomly, some events take down large grou
 
 To isolate cloud systems from widespread physical disasters, AWS regions are divided into **Availability Zones (AZs)**. An Availability Zone is one or more discrete physical data center buildings equipped with independent power, cooling, and network security. 
 
-While AZs are designed to be isolated from one another, a major physical disaster—such as a power grid blackout, a roof collapse, or a severe flood—can take an entire Availability Zone offline in a single instant.
+While AZs are designed to be isolated from one another, a major physical disaster such as a power grid blackout, a roof collapse, or a severe flood can take an entire Availability Zone offline in a single instant.
 
 Aurora’s durability goal was highly ambitious: the database must survive the loss of an entire Availability Zone going completely dark plus a simultaneous random disk crash in another Availability Zone, without losing data or stopping write availability.
 

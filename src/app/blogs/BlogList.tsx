@@ -3,7 +3,8 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import { BlogPost } from "@/lib/blogs";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, SlidersHorizontal, Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, SlidersHorizontal, Search, LayoutGrid, List } from "lucide-react";
+import FluidMeshHeader from "@/components/FluidMeshHeader";
 
 interface BlogListProps {
   initialPosts: BlogPost[];
@@ -17,7 +18,22 @@ export default function BlogList({ initialPosts }: BlogListProps) {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [viewMode, setViewMode] = useState<"list" | "grid">("list");
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Load view mode from localStorage on client side
+  useEffect(() => {
+    const saved = localStorage.getItem("blog-view-mode");
+    if (saved === "list" || saved === "grid") {
+      setViewMode(saved);
+    }
+  }, []);
+
+  const handleToggleView = () => {
+    const next = viewMode === "list" ? "grid" : "list";
+    setViewMode(next);
+    localStorage.setItem("blog-view-mode", next);
+  };
 
   // Close dropdown when clicking outside, excluding the trigger button
   useEffect(() => {
@@ -97,21 +113,38 @@ export default function BlogList({ initialPosts }: BlogListProps) {
           />
         </div>
 
-        {/* Minimal Filter Trigger */}
-        <button
-          id="filter-trigger-button"
-          onClick={() => setShowFilters((prev) => !prev)}
-          className={`text-xs font-mono hover:text-foreground transition-all flex items-center gap-2 cursor-pointer px-3 py-1.5 border rounded ${showFilters || selectedCategories.length > 0
-            ? "border-foreground/30 text-foreground bg-foreground/[0.03]"
-            : "border-border/50 text-foreground/50 bg-foreground/[0.01]"
+        {/* Filter and View Action Group */}
+        <div className="flex gap-2 items-center">
+          {/* Minimal Filter Trigger */}
+          <button
+            id="filter-trigger-button"
+            onClick={() => setShowFilters((prev) => !prev)}
+            className={`text-xs font-mono hover:text-foreground transition-all flex items-center gap-2 cursor-pointer px-3 py-1.5 border rounded ${
+              showFilters || selectedCategories.length > 0
+                ? "border-foreground/30 text-foreground bg-foreground/[0.03]"
+                : "border-border/50 text-foreground/50 bg-foreground/[0.01]"
             }`}
-        >
-          <SlidersHorizontal className="w-3 h-3" />
-          <span className="font-semibold">Filters</span>
-          {selectedCategories.length > 0 && (
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-          )}
-        </button>
+          >
+            <SlidersHorizontal className="w-3 h-3" />
+            <span className="font-semibold">Filters</span>
+            {selectedCategories.length > 0 && (
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            )}
+          </button>
+
+          {/* View Toggle */}
+          <button
+            onClick={handleToggleView}
+            className="text-foreground/50 hover:text-foreground hover:bg-foreground/[0.03] transition-all p-1.5 border border-border/50 rounded cursor-pointer flex items-center justify-center"
+            title={viewMode === "list" ? "Switch to Thumbnail Grid" : "Switch to List View"}
+          >
+            {viewMode === "list" ? (
+              <LayoutGrid className="w-4 h-4" />
+            ) : (
+              <List className="w-4 h-4" />
+            )}
+          </button>
+        </div>
 
         {/* Floating Dropdown Filter Box (Overlay) */}
         {showFilters && (
@@ -173,50 +206,99 @@ export default function BlogList({ initialPosts }: BlogListProps) {
         )}
       </div>
 
-      {/* Simple Vertical List of Posts */}
+      {/* List or Grid (OpenAI Style Thumbnail Cards) of Posts */}
       {paginatedPosts.length > 0 ? (
-        <div className="space-y-5 text-sm text-foreground/80 font-sans">
-          {paginatedPosts.map((post) => (
-            <div key={post.slug} className="flex items-start gap-2">
-              <span className="text-xs font-mono text-foreground/30 mt-1">•</span>
-              <div className="flex-grow space-y-1">
-                {/* Line 1: Title and Date/ReadTime */}
-                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                  <Link href={`/blogs/${post.slug}`} className="font-semibold text-foreground hover:underline">
-                    {post.title}
-                  </Link>
-                  <span className="text-xs text-foreground/40 font-mono">
-                    {post.date} &middot; {post.readTime}
-                  </span>
+        viewMode === "list" ? (
+          <div className="space-y-5 text-sm text-foreground/80 font-sans">
+            {paginatedPosts.map((post) => (
+              <div key={post.slug} className="flex items-start gap-2">
+                <span className="text-xs font-mono text-foreground/30 mt-1">•</span>
+                <div className="flex-grow space-y-1">
+                  {/* Line 1: Title and Date/ReadTime */}
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                    <Link href={`/blogs/${post.slug}`} className="font-semibold text-foreground hover:underline">
+                      {post.title}
+                    </Link>
+                    <span className="text-xs text-foreground/70 font-mono font-medium">
+                      {post.date} &middot; {post.readTime}
+                    </span>
+                  </div>
+
+                  {/* Line 2: Description */}
+                  <p className="text-foreground/70 font-light text-sm leading-relaxed">
+                    {post.description}
+                  </p>
+
+                  {/* Line 3: Categories & Series */}
+                  {(post.categories.length > 0 || post.seriesName) && (
+                    <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono pt-1">
+                      {post.categories.map((cat) => (
+                        <span
+                          key={cat}
+                          className="px-2 py-0.5 text-foreground/75 font-semibold uppercase tracking-wider bg-foreground/[0.04] border border-border/20 rounded"
+                        >
+                          {cat}
+                        </span>
+                      ))}
+                      {post.seriesName && (
+                        <span className="px-2 py-0.5 text-foreground/75 font-semibold uppercase tracking-wider bg-foreground/[0.04] border border-border/20 rounded">
+                          {post.seriesName} · Part {post.seriesPart}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 font-sans animate-in fade-in duration-200">
+            {paginatedPosts.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blogs/${post.slug}`}
+                className="group flex flex-col h-full border border-border/20 bg-foreground/[0.01] rounded-lg overflow-hidden hover:border-foreground/20 hover:bg-foreground/[0.02] transition-all duration-300 shadow-sm"
+              >
+                {/* OpenAI-Style Thumbnail Header */}
+                <div className="relative w-full aspect-video overflow-hidden border-b border-border/10 bg-foreground/[0.02]">
+                  {post.headerImage ? (
+                    <img
+                      src={post.headerImage}
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className="group-hover:scale-[1.02] transition-transform duration-500 w-full h-full">
+                      <FluidMeshHeader title={post.title} />
+                    </div>
+                  )}
                 </div>
 
-                {/* Line 2: Description */}
-                <p className="text-foreground/70 font-light text-sm leading-relaxed">
-                  {post.description}
-                </p>
+                {/* Card Body */}
+                <div className="p-4 flex flex-col justify-between flex-grow space-y-3">
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-[10px] font-mono tracking-wider text-foreground/70 font-medium uppercase">
+                      <span>{post.categories[0] || "ARTICLE"}</span>
+                      <span>{post.date}</span>
+                    </div>
+                    <h3 className="font-semibold text-sm sm:text-base leading-snug text-foreground group-hover:text-foreground/80 transition-colors">
+                      {post.title}
+                    </h3>
+                  </div>
 
-                {/* Line 3: Categories & Series */}
-                {(post.categories.length > 0 || post.seriesName) && (
-                  <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono pt-1">
-                    {post.categories.map((cat) => (
-                      <span
-                        key={cat}
-                        className="px-2 py-0.5 text-foreground/50 uppercase tracking-wider bg-foreground/[0.04] border border-border/10 rounded"
-                      >
-                        {cat}
-                      </span>
-                    ))}
+                  <div className="flex items-center justify-between text-[10px] font-mono pt-2.5 border-t border-border/10 text-foreground/60 font-medium uppercase">
+                    <span>{post.readTime}</span>
                     {post.seriesName && (
-                      <span className="px-2 py-0.5 text-foreground/50 uppercase tracking-wider bg-foreground/[0.04] border border-border/10 rounded">
+                      <span className="text-foreground/80 font-bold">
                         {post.seriesName} · Part {post.seriesPart}
                       </span>
                     )}
                   </div>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )
       ) : (
         <div className="py-12 text-center border border-dashed border-border/20 rounded">
           <p className="text-xs font-mono text-foreground/40 uppercase tracking-widest">

@@ -274,7 +274,7 @@ export default function BlogPostContent({
           ) : (
             <FluidMeshHeader title={title} />
           )}
-          <div className="text-center text-xs text-foreground/50 font-mono tracking-wide py-3 px-6 border-t border-border/10">
+          <div className="text-center text-xs sm:text-sm text-foreground/80 font-medium tracking-wide py-3.5 px-6 border-t border-border/10 leading-relaxed">
             {headerImageCaption || description}
           </div>
         </div>

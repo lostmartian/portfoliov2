@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/blogs";
 import { join } from "path";
 import { readFileSync } from "fs";
-import { getFluidGradientStyle } from "@/lib/blog-gradients";
+import { getFluidGradientData } from "@/lib/blog-gradients";
 
 export const dynamic = "force-static";
 export const size = {
@@ -62,7 +62,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     }
   }
 
-  const bgGradient = getFluidGradientStyle(post.title);
+  const data = getFluidGradientData(post.title);
 
 
   return new ImageResponse(
@@ -166,7 +166,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             borderRadius: "20px",
             overflow: "hidden",
             border: "1px solid rgba(224, 224, 224, 0.15)",
-            background: post.headerImage ? "#161616" : bgGradient,
+            background: "#161616",
           }}
         >
           {post.headerImage ? (
@@ -181,7 +181,47 @@ export default async function Image({ params }: { params: Promise<{ slug: string
                 objectFit: "cover",
               }}
             />
-          ) : null}
+          ) : (
+            <svg
+              viewBox="0 0 360 360"
+              style={{
+                width: "360px",
+                height: "360px",
+                display: "flex",
+              }}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient id="og-base-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor={data.baseColor} />
+                  <stop offset="100%" stopColor={data.linearGradientEnd} />
+                </linearGradient>
+                {data.blobs.map((blob) => (
+                  <radialGradient
+                    key={blob.id}
+                    id={`og-${blob.id}`}
+                    cx={blob.cx}
+                    cy={blob.cy}
+                    r={blob.r}
+                    fx={blob.fx}
+                    fy={blob.fy}
+                    gradientTransform={blob.transform}
+                  >
+                    <stop offset="0%" stopColor={blob.color} stopOpacity="0.85" />
+                    <stop offset="100%" stopColor={blob.color} stopOpacity="0" />
+                  </radialGradient>
+                ))}
+              </defs>
+
+              {/* Base Background Solid/Linear */}
+              <rect width="100%" height="100%" fill="url(#og-base-bg)" rx="20" ry="20" />
+
+              {/* Layered radial blobs */}
+              {data.blobs.map((blob) => (
+                <rect key={blob.id} width="100%" height="100%" fill={`url(#og-${blob.id})`} rx="20" ry="20" />
+              ))}
+            </svg>
+          )}
         </div>
       </div>
     ),

@@ -70,8 +70,15 @@ export function getBlogPosts(): BlogPost[] {
     })
     .filter((post) => !post.hidden); // Filter out hidden posts
 
-  // Sort by date descending
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  // Sort by date descending, tie-break by slug descending to ensure later projects on same day appear first
+  return posts.sort((a, b) => {
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
+    if (dateB !== dateA) {
+      return dateB - dateA;
+    }
+    return b.slug.localeCompare(a.slug);
+  });
 }
 
 export function getBlogPostBySlug(slug: string): BlogPost | null {

@@ -77,11 +77,16 @@ export default function BlogList({ initialPosts }: BlogListProps) {
       );
     });
 
-    // 3. Sorting
+    // 3. Sorting with slug tie-breaker for deterministic ordering when dates match
     result = result.sort((a, b) => {
       const dateA = new Date(a.date).getTime();
       const dateB = new Date(b.date).getTime();
-      return sortOrder === "desc" ? dateB - dateA : dateA - dateB;
+      if (dateB !== dateA) {
+        return sortOrder === "desc" ? dateB - dateA : dateA - dateB;
+      }
+      return sortOrder === "desc"
+        ? b.slug.localeCompare(a.slug)
+        : a.slug.localeCompare(b.slug);
     });
 
     return result;
@@ -278,7 +283,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
                 <div className="p-4 flex flex-col justify-between flex-grow space-y-3">
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-[10px] font-mono tracking-wider text-foreground/70 font-medium uppercase">
-                      <span>{post.categories[0] || "ARTICLE"}</span>
+                      <span>{post.categories.join(" / ") || "ARTICLE"}</span>
                       <span>{post.date}</span>
                     </div>
                     <h3 className="font-semibold text-sm sm:text-base leading-snug text-foreground group-hover:text-foreground/80 transition-colors">

@@ -62,6 +62,9 @@ export default function Home() {
             <p>
               I hold a <strong className="font-semibold text-foreground">B.Tech & M.Tech in Information Technology</strong> from IIIT Gwalior (2019-2024). Grounded in strong theoretical foundations, I specialize in combining high-throughput Go/Python backend architectures with intelligent AI orchestration, building reliable systems for regulated and high-stakes industries.
             </p>
+            <p>
+              I also run <a href="https://latentchronicle.online/" target="_blank" rel="noopener noreferrer" className="font-semibold text-foreground hover:underline">The Latent Chronicle ↗</a>, a small, auto-generated newspaper for computer science updates.
+            </p>
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <span className="text-xs font-mono text-foreground/60">
                 Applied AI • RAG &amp; GraphRAG • Agentic Systems

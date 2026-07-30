@@ -12,6 +12,7 @@ import Script from "next/script";
 import Link from "next/link";
 import AudioComparisonPlayer from "@/components/AudioComparisonPlayer";
 import BlogAudioPlayer, { extractSpeechBlocks } from "@/components/BlogAudioPlayer";
+import FluidMeshHeader from "@/components/FluidMeshHeader";
 import "highlight.js/styles/github-dark.css";
 
 interface BlogPostContentProps {
@@ -263,20 +264,20 @@ export default function BlogPostContent({
         </div>
 
         {/* Header Image */}
-        {headerImage && (
-          <div className="w-full my-6 overflow-hidden rounded-lg border border-border/20 bg-foreground/[0.01]">
+        <div className="w-full my-6 overflow-hidden rounded-lg border border-border/20 bg-foreground/[0.01]">
+          {headerImage ? (
             <img
               src={headerImage}
-              alt={headerImageCaption || ""}
+              alt={headerImageCaption || title}
               className="w-full h-auto object-cover aspect-video"
             />
-            {headerImageCaption && (
-              <div className="text-center text-xs text-foreground/50 font-mono tracking-wide py-3 px-6 border-t border-border/10">
-                {headerImageCaption}
-              </div>
-            )}
+          ) : (
+            <FluidMeshHeader title={title} />
+          )}
+          <div className="text-center text-xs text-foreground/50 font-mono tracking-wide py-3 px-6 border-t border-border/10">
+            {headerImageCaption || description}
           </div>
-        )}
+        </div>
 
         {/* Series Index UI */}
         {seriesPosts.length > 1 && (

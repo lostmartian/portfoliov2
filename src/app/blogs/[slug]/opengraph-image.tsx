@@ -2,6 +2,7 @@ import { ImageResponse } from "next/og";
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/blogs";
 import { join } from "path";
 import { readFileSync } from "fs";
+import { getFluidGradientStyle } from "@/lib/blog-gradients";
 
 export const dynamic = "force-static";
 export const size = {
@@ -60,6 +61,8 @@ export default async function Image({ params }: { params: Promise<{ slug: string
       imgSrc = post.headerImage;
     }
   }
+
+  const bgGradient = getFluidGradientStyle(post.title);
 
 
   return new ImageResponse(
@@ -149,7 +152,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           </div>
         </div>
 
-        {/* Right Column: Profile Photo (Absolute Positioned) */}
+        {/* Right Column: Dynamic Image or Gradient */}
         <div
           style={{
             position: "absolute",
@@ -163,20 +166,22 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             borderRadius: "20px",
             overflow: "hidden",
             border: "1px solid rgba(224, 224, 224, 0.15)",
-            background: "#161616",
+            background: post.headerImage ? "#161616" : bgGradient,
           }}
         >
-          {/* @ts-ignore */}
-          <img
-            src={imgSrc}
-            alt={post.title}
-            style={{
-              width: "360px",
-              height: "360px",
-              borderRadius: "20px",
-              objectFit: "cover",
-            }}
-          />
+          {post.headerImage ? (
+            /* @ts-ignore */
+            <img
+              src={imgSrc}
+              alt={post.title}
+              style={{
+                width: "360px",
+                height: "360px",
+                borderRadius: "20px",
+                objectFit: "cover",
+              }}
+            />
+          ) : null}
         </div>
       </div>
     ),

@@ -46,7 +46,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <div className="space-y-4">
         <Link 
           href="/blogs" 
-          className="text-xs font-mono text-foreground/70 hover:text-foreground transition-colors flex items-center gap-1.5"
+          className="text-xs font-mono text-foreground/70 hover:text-accent transition-colors flex items-center gap-1.5"
         >
           ← Return to Blogs
         </Link>

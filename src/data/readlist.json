@@ -4,5 +4,11 @@
     "title": "Amazon Aurora: Design Considerations for High Throughput Cloud-Native Relational Databases",
     "link": "https://cdn.amazon.science/dc/2b/4ef2b89649f9a393d37d3e042f4e/amazon-aurora-design-considerations-for-high-throughput-cloud-native-relational-databases.pdf",
     "type": "Paper"
+  },
+  {
+    "date": "2026-06-03",
+    "title": "TurboQuant: Online Vector Quantization with Near-optimal Distortion Rate",
+    "link": "https://arxiv.org/abs/2504.19874",
+    "type": "Paper"
   }
 ]

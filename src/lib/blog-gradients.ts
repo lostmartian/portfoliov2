@@ -25,24 +25,37 @@ export interface FluidGradientData {
   blobs: GradientBlob[];
 }
 
+const PALETTES = [
+  // Palette 0: Warm Sunrise (OpenAI Peach, Gold & Rose)
+  {
+    baseColor: "#ff7e5f",
+    linearGradientEnd: "#feb47b",
+    blobColors: ["#ff6b6b", "#ffe066", "#e94057", "#fbc2eb"]
+  },
+  // Palette 1: Twilight Sunset (OpenAI Deep Plum & Peach Glow)
+  {
+    baseColor: "#3f2b96",
+    linearGradientEnd: "#a8c0ff",
+    blobColors: ["#e94057", "#f27121", "#8a2387", "#ff9ff3"]
+  },
+  // Palette 2: Spring Bloom (OpenAI Sky Blue, Teal & Lavender)
+  {
+    baseColor: "#30cfd0",
+    linearGradientEnd: "#330867",
+    blobColors: ["#a1c4fd", "#c2e9fb", "#fbc2eb", "#ffe5d9"]
+  },
+  // Palette 3: Gold Meadow (OpenAI Emerald Green & Warm Apricot)
+  {
+    baseColor: "#11998e",
+    linearGradientEnd: "#38ef7d",
+    blobColors: ["#fcb69f", "#ffecd2", "#ff9a9e", "#fecfef"]
+  }
+];
+
 // Generates structural data for custom layered radial gradients inspired by ffflux & OpenAI visual layouts
 export function getFluidGradientData(title: string): FluidGradientData {
   const hash = hashString(title);
-
-  const baseHue = hash % 360;
-  const hue2 = (baseHue + 50) % 360;
-  const hue3 = (baseHue + 140) % 360;
-  const hue4 = (baseHue + 230) % 360;
-  const hue5 = (baseHue + 320) % 360;
-
-  // Ultra-vibrant poppy colors
-  const baseColor = `hsl(${baseHue}, 85%, 35%)`;
-  const linearGradientEnd = `hsl(${baseHue}, 85%, 20%)`;
-
-  const c2 = `hsl(${hue2}, 95%, 58%)`;
-  const c3 = `hsl(${hue3}, 95%, 55%)`;
-  const c4 = `hsl(${hue4}, 90%, 52%)`;
-  const c5 = `hsl(${hue5}, 90%, 50%)`;
+  const palette = PALETTES[hash % PALETTES.length];
 
   // Deterministic transform settings for 4 squashed & rotated radial gradient blobs (ellipse meshes)
   const blob1: GradientBlob = {
@@ -53,7 +66,7 @@ export function getFluidGradientData(title: string): FluidGradientData {
     fx: `${25 + (hash % 10)}%`,
     fy: `${20 + ((hash >> 2) % 10)}%`,
     transform: `rotate(${(hash % 60) - 30}) scale(1.6 0.8)`,
-    color: c2,
+    color: palette.blobColors[0],
   };
 
   const blob2: GradientBlob = {
@@ -64,7 +77,7 @@ export function getFluidGradientData(title: string): FluidGradientData {
     fx: `${55 + ((hash >> 4) % 10)}%`,
     fy: `${20 + ((hash >> 5) % 10)}%`,
     transform: `rotate(${((hash >> 6) % 60) - 30}) scale(1.5 0.7)`,
-    color: c3,
+    color: palette.blobColors[1],
   };
 
   const blob3: GradientBlob = {
@@ -75,7 +88,7 @@ export function getFluidGradientData(title: string): FluidGradientData {
     fx: `${30 + ((hash >> 8) % 10)}%`,
     fy: `${50 + ((hash >> 9) % 10)}%`,
     transform: `rotate(${((hash >> 10) % 60) - 30}) scale(1.7 0.9)`,
-    color: c4,
+    color: palette.blobColors[2],
   };
 
   const blob4: GradientBlob = {
@@ -86,12 +99,12 @@ export function getFluidGradientData(title: string): FluidGradientData {
     fx: `${60 + ((hash >> 11) % 10)}%`,
     fy: `${55 + ((hash >> 12) % 10)}%`,
     transform: `rotate(${((hash >> 13) % 60) - 30}) scale(1.4 0.8)`,
-    color: c5,
+    color: palette.blobColors[3],
   };
 
   return {
-    baseColor,
-    linearGradientEnd,
+    baseColor: palette.baseColor,
+    linearGradientEnd: palette.linearGradientEnd,
     blobs: [blob1, blob2, blob3, blob4],
   };
 }

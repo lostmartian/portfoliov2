@@ -20,10 +20,10 @@ export default function ReadlistPage() {
   return (
     <main className="space-y-6">
       <header className="space-y-1">
-        <h1 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-semibold">
+        <h1 className="text-2xl font-bold tracking-tight text-foreground">
           Readlist
         </h1>
-        <p className="text-sm text-foreground/50 leading-relaxed font-sans font-light">
+        <p className="text-sm text-foreground/75 leading-relaxed font-sans">
           An archive of books, papers, articles, and documentation I've read.
         </p>
       </header>
@@ -31,21 +31,21 @@ export default function ReadlistPage() {
       <div className="space-y-4 text-sm text-foreground/80 font-sans">
         {sortedItems.map((item, i) => (
           <div key={i} className="flex items-start gap-2">
-            <span className="text-xs font-mono text-foreground/30 mt-1">•</span>
+            <span className="text-xs font-sans text-accent/60 mt-1">•</span>
             <div className="flex-grow">
-              <span className="text-xs font-mono text-foreground/40 mr-2">
+              <span className="text-xs font-mono text-foreground/65 mr-2">
                 {item.date}
               </span>
               <a
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-foreground hover:underline"
+                className="font-medium text-foreground hover:text-accent hover:underline"
               >
                 {item.title}
               </a>
               <span className="mx-2 text-foreground/30">—</span>
-              <span className="text-xs font-mono uppercase tracking-wider text-foreground/50 bg-foreground/[0.04] px-1.5 py-0.5 border border-border/10 rounded">
+              <span className="text-[9px] font-sans font-semibold uppercase tracking-wider text-accent bg-accent/5 px-1.5 py-0.5 border border-accent/15 rounded">
                 {item.type}
               </span>
             </div>

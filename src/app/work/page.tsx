@@ -10,10 +10,10 @@ export default function WorkPage() {
   return (
     <main className="space-y-6">
       <header className="space-y-1">
-        <h1 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-semibold">
+        <h1 className="text-2xl font-bold tracking-tight text-foreground">
           Work
         </h1>
-        <p className="text-sm text-foreground/50 leading-relaxed font-sans font-light">
+        <p className="text-sm text-foreground/75 leading-relaxed font-sans">
           A curation of systems built for global clients.
         </p>
       </header>
@@ -21,11 +21,11 @@ export default function WorkPage() {
       <div className="space-y-5 text-sm text-foreground/80 font-sans">
         {projects.map((project, i) => (
           <div key={project.slug} className="flex items-start gap-2">
-            <span className="text-xs font-mono text-foreground/30 mt-1">•</span>
+            <span className="text-xs font-sans text-accent/60 mt-1">•</span>
             <div className="flex-grow space-y-1">
               {/* Line 1: Title and Duration */}
               <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                <Link href={`/work/${project.slug}`} className="font-semibold text-foreground hover:underline">
+                <Link href={`/work/${project.slug}`} className="font-semibold text-foreground hover:text-accent hover:underline">
                   {project.title} ↗
                 </Link>
                 <span className="text-xs text-foreground/40 font-mono">
@@ -35,7 +35,7 @@ export default function WorkPage() {
 
               {/* Line 2: Description */}
               {project.description && (
-                <p className="text-foreground/70 font-light text-sm leading-relaxed">
+                <p className="text-foreground/90 text-sm leading-relaxed">
                   {project.description}
                 </p>
               )}
@@ -46,7 +46,7 @@ export default function WorkPage() {
                   {project.stack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-2 py-0.5 text-[10px] font-mono rounded bg-foreground/[0.04] text-foreground/50 border border-border/10 uppercase"
+                      className="px-2 py-0.5 text-[9px] font-sans font-semibold rounded bg-accent/5 text-accent border border-accent/15 uppercase"
                     >
                       {tech}
                     </span>

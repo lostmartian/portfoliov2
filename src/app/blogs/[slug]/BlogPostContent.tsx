@@ -230,24 +230,24 @@ export default function BlogPostContent({
           <h1 className="text-2xl font-bold tracking-tight text-foreground">
             {title}
           </h1>
-          <p className="text-sm text-foreground/50 leading-relaxed font-sans font-light">
+          <p className="text-sm text-foreground/50 leading-relaxed font-sans">
             {description}
           </p>
         </header>
 
         {/* Metadata Grid */}
-        <div className="grid grid-cols-4 gap-2 py-3 border-y border-border/40 text-[10px] sm:text-xs font-mono">
+        <div className="grid grid-cols-4 gap-2 py-3 border-y border-border text-[10px] sm:text-xs font-mono">
           <div className="space-y-1 min-w-0">
-            <span className="text-foreground/40 uppercase tracking-wider block">Published</span>
-            <span className="text-foreground/80 font-medium truncate block">{date}</span>
+            <span className="text-foreground/60 uppercase tracking-wider block">Published</span>
+            <span className="text-foreground font-medium truncate block">{date}</span>
           </div>
           <div className="space-y-1 min-w-0">
-            <span className="text-foreground/40 uppercase tracking-wider block">Read Time</span>
-            <span className="text-foreground/80 font-medium truncate block">{readTime}</span>
+            <span className="text-foreground/60 uppercase tracking-wider block">Read Time</span>
+            <span className="text-foreground font-medium truncate block">{readTime}</span>
           </div>
           <div className="space-y-1 min-w-0">
-            <span className="text-foreground/40 uppercase tracking-wider block">Categories</span>
-            <span className="text-foreground/80 font-medium truncate block" title={categories.join(", ")}>
+            <span className="text-foreground/60 uppercase tracking-wider block">Categories</span>
+            <span className="text-foreground font-medium truncate block" title={categories.join(", ")}>
               {categories.join(", ")}
             </span>
           </div>
@@ -281,8 +281,8 @@ export default function BlogPostContent({
 
         {/* Series Index UI */}
         {seriesPosts.length > 1 && (
-          <div className="border-l-2 border-border/30 pl-4 py-1.5 space-y-2.5 my-8">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-foreground/40 block font-bold">
+          <div className="border-l-2 border-accent/30 pl-4 py-1.5 space-y-2.5 my-8">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-accent font-bold block">
               Series: {seriesName}
             </span>
             <ol className="list-none space-y-2 pl-0">
@@ -290,13 +290,13 @@ export default function BlogPostContent({
                 const isCurrent = sp.slug === slug;
                 return (
                   <li key={sp.slug} className="text-xs font-mono flex items-baseline gap-2 leading-relaxed">
-                    <span className={`text-[10px] uppercase font-bold tracking-wide w-14 shrink-0 block ${isCurrent ? 'text-emerald-500' : 'text-foreground/35'}`}>
+                    <span className={`text-[10px] uppercase font-bold tracking-wide w-14 shrink-0 block ${isCurrent ? 'text-accent' : 'text-foreground/35'}`}>
                       {sp.part ? `Part ${sp.part}` : '•'}
                     </span>
                     {isCurrent ? (
                       <span className="text-foreground font-semibold flex-1">{sp.title}</span>
                     ) : (
-                      <Link href={`/blogs/${sp.slug}`} className="text-foreground/60 hover:text-foreground hover:underline transition-all flex-1">
+                      <Link href={`/blogs/${sp.slug}`} className="text-foreground/60 hover:text-accent hover:underline transition-all flex-1">
                         {sp.title}
                       </Link>
                     )}
@@ -368,7 +368,7 @@ export default function BlogPostContent({
               const isInline = !className || !className.includes("language-");
               return (
                 <code 
-                  className={`${className || ""} ${isInline ? "font-mono text-xs bg-foreground/[0.06] dark:bg-foreground/[0.08] px-1.5 py-0.5 rounded text-foreground font-medium" : ""}`} 
+                  className={`${className || ""} ${isInline ? "font-mono text-xs bg-accent/5 px-1.5 py-0.5 rounded text-accent font-medium" : ""}`} 
                   {...props}
                 >
                   {children}
@@ -439,7 +439,7 @@ export default function BlogPostContent({
             return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
               <p 
                 onClick={onClick}
-                className={`mb-4 text-sm leading-relaxed text-foreground/80 text-justify font-sans ${extraClass}`.trim()}
+                className={`mb-4 text-sm leading-relaxed text-foreground text-justify font-sans ${extraClass}`.trim()}
               >
                 {children}
               </p>
@@ -453,7 +453,7 @@ export default function BlogPostContent({
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground border-b border-foreground/20 hover:border-foreground transition-colors font-sans"
+                className="text-accent border-b border-accent/20 hover:border-accent transition-colors font-sans font-medium"
               >
                 {children}
               </a>
@@ -475,7 +475,7 @@ export default function BlogPostContent({
             return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
               <h2 
                 onClick={onClick}
-                className={`text-xs font-mono uppercase tracking-wider text-foreground/40 font-semibold mt-6 mb-2 ${extraClass}`.trim()}
+                className={`text-xs font-mono uppercase tracking-wider text-accent font-semibold mt-6 mb-2 ${extraClass}`.trim()}
               >
                 {children}
               </h2>
@@ -506,8 +506,8 @@ export default function BlogPostContent({
           ul: ({ children }: any) => <ul className="list-none space-y-2 my-4 pl-0 font-sans">{children}</ul>,
           ol: ({ children }: any) => <ol className="list-decimal space-y-2 my-4 pl-6 font-sans">{children}</ol>,
           li: ({ children }: any) => (
-            <li className="flex items-start gap-2 min-w-0 w-full text-sm leading-relaxed text-foreground/80 font-sans">
-              <span className="text-xs font-mono text-foreground/30 mt-0.5">•</span>
+            <li className="flex items-start gap-2 min-w-0 w-full text-sm leading-relaxed text-foreground font-sans">
+              <span className="text-xs font-mono text-accent/60 mt-0.5">•</span>
               <span className="min-w-0 flex-1 break-words">{children}</span>
             </li>
           ),
@@ -516,7 +516,7 @@ export default function BlogPostContent({
             return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
               <blockquote 
                 onClick={onClick}
-                className={`border-l-2 border-border/40 pl-4 my-4 italic text-foreground/60 font-sans text-sm leading-relaxed ${extraClass}`.trim()}
+                className={`border-l-2 border-accent/40 pl-4 my-4 italic text-foreground/80 font-sans text-sm leading-relaxed ${extraClass}`.trim()}
               >
                 {children}
               </blockquote>
@@ -531,12 +531,12 @@ export default function BlogPostContent({
           ),
           thead: ({ children }: any) => <thead className="bg-foreground/[0.03] border-b border-border/20 font-mono">{children}</thead>,
           th: ({ children }: any) => (
-            <th className="px-6 py-4 border border-border/10 font-mono text-[10px] uppercase tracking-widest text-foreground/50">
+            <th className="px-6 py-4 border border-border/10 font-mono text-[10px] uppercase tracking-widest text-foreground/75">
               {children}
             </th>
           ),
           td: ({ children }: any) => (
-            <td className="px-6 py-4 border border-border/10 text-foreground/80 text-sm font-normal font-sans">
+            <td className="px-6 py-4 border border-border/10 text-foreground text-sm font-normal font-sans">
               {children}
             </td>
           ),

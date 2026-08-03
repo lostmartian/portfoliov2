@@ -37,18 +37,15 @@ export default function Navigation() {
         {/* Logo / Title */}
         <Link 
           href="/" 
-          className="text-base font-semibold tracking-tight uppercase hover:opacity-85 transition-colors flex items-center gap-1.5"
+          className="text-base font-semibold hover:opacity-85 transition-colors"
         >
           Sahil Gangurde
-          {isHomeActive && (
-            <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400 animate-fade-in" />
-          )}
         </Link>
 
         {/* Action Controls */}
         <div className="flex items-center gap-4">
           {/* Desktop Nav Links */}
-          <nav className="hidden sm:flex items-center gap-6 text-xs font-mono uppercase tracking-wider">
+          <nav className="hidden sm:flex items-center gap-6 text-sm font-sans font-medium">
             {navLinks.map((link) => {
               const isActive =
                 link.href !== "#" &&
@@ -57,14 +54,11 @@ export default function Navigation() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`transition-all hover:text-foreground flex items-center gap-1.5 ${
-                    isActive ? "text-foreground font-semibold" : "text-foreground/60"
+                  className={`relative pb-1.5 transition-all hover:text-accent flex items-center gap-1.5 ${
+                    isActive ? "text-accent font-semibold after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:rounded-full after:bg-accent" : "text-foreground/85"
                   }`}
                 >
                   <span>{link.name}</span>
-                  {isActive && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400" />
-                  )}
                 </Link>
               );
             })}
@@ -75,7 +69,7 @@ export default function Navigation() {
           {/* Mobile Menu Icon Toggle */}
           <button
             onClick={() => setIsOpen((prev) => !prev)}
-            className="flex sm:hidden p-1 text-foreground/60 hover:text-foreground cursor-pointer focus:outline-none"
+            className="flex sm:hidden p-1 text-foreground/80 hover:text-foreground cursor-pointer focus:outline-none"
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -98,14 +92,13 @@ export default function Navigation() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className={`text-xs font-mono uppercase tracking-wider py-1 border-b border-border/10 transition-all flex items-center justify-between ${
-                  isActive ? "text-foreground font-semibold" : "text-foreground/60"
+                className={`text-sm font-sans font-medium py-1.5 border-b border-border/10 transition-all flex items-center justify-between ${
+                  isActive ? "text-accent font-semibold" : "text-foreground/85 hover:text-accent"
                 }`}
               >
-                <span>{link.name}</span>
-                {isActive && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400" />
-                )}
+                <span className={`relative pb-1 ${isActive ? "after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:rounded-full after:bg-accent" : ""}`}>
+                  {link.name}
+                </span>
               </Link>
             );
           })}

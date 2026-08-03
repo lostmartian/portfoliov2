@@ -114,7 +114,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
               setSearch(e.target.value);
               setCurrentPage(1);
             }}
-            className="w-full bg-foreground/[0.02] border border-border/50 rounded py-1.5 pl-9 pr-4 text-sm placeholder:text-foreground/30 text-foreground focus:outline-none focus:border-foreground/30 transition-all font-sans"
+            className="w-full bg-foreground/[0.02] border border-border/50 rounded py-1.5 pl-9 pr-4 text-sm placeholder:text-foreground/30 text-foreground focus:outline-none focus:border-accent transition-all font-sans"
           />
         </div>
 
@@ -124,23 +124,23 @@ export default function BlogList({ initialPosts }: BlogListProps) {
           <button
             id="filter-trigger-button"
             onClick={() => setShowFilters((prev) => !prev)}
-            className={`text-xs font-mono hover:text-foreground transition-all flex items-center gap-2 cursor-pointer px-3 py-1.5 border rounded ${
+            className={`text-xs font-mono hover:text-accent transition-all flex items-center gap-2 cursor-pointer px-3 py-1.5 border rounded ${
               showFilters || selectedCategories.length > 0
-                ? "border-foreground/30 text-foreground bg-foreground/[0.03]"
+                ? "border-accent text-accent bg-accent/5"
                 : "border-border/50 text-foreground/50 bg-foreground/[0.01]"
             }`}
           >
             <SlidersHorizontal className="w-3 h-3" />
             <span className="font-semibold">Filters</span>
             {selectedCategories.length > 0 && (
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
             )}
           </button>
 
           {/* View Toggle */}
           <button
             onClick={handleToggleView}
-            className="text-foreground/50 hover:text-foreground hover:bg-foreground/[0.03] transition-all p-1.5 border border-border/50 rounded cursor-pointer flex items-center justify-center"
+            className="text-foreground/50 hover:text-accent hover:bg-accent/5 transition-all p-1.5 border border-border/50 rounded cursor-pointer flex items-center justify-center"
             title={viewMode === "list" ? "Switch to Thumbnail Grid" : "Switch to List View"}
           >
             {viewMode === "list" ? (
@@ -168,8 +168,8 @@ export default function BlogList({ initialPosts }: BlogListProps) {
                     key={order}
                     onClick={() => setSortOrder(order)}
                     className={`text-left py-0.5 text-xs font-mono transition-all cursor-pointer ${sortOrder === order
-                      ? "text-foreground font-semibold"
-                      : "text-foreground/50 hover:text-foreground"
+                      ? "text-accent font-semibold"
+                      : "text-foreground/50 hover:text-accent"
                       }`}
                   >
                     {order === "desc" ? "• Latest First" : "• Oldest First"}
@@ -196,8 +196,8 @@ export default function BlogList({ initialPosts }: BlogListProps) {
                         setCurrentPage(1);
                       }}
                       className={`text-left py-0.5 text-xs font-mono transition-all uppercase tracking-wider cursor-pointer flex items-center justify-between ${isSelected
-                        ? "text-emerald-500 dark:text-emerald-400 font-semibold"
-                        : "text-foreground/50 hover:text-foreground"
+                        ? "text-accent font-semibold"
+                        : "text-foreground/50 hover:text-accent"
                         }`}
                     >
                       <span>• {cat}</span>
@@ -217,20 +217,20 @@ export default function BlogList({ initialPosts }: BlogListProps) {
           <div className="space-y-5 text-sm text-foreground/80 font-sans">
             {paginatedPosts.map((post) => (
               <div key={post.slug} className="flex items-start gap-2">
-                <span className="text-xs font-mono text-foreground/30 mt-1">•</span>
+                <span className="text-xs font-mono text-accent/60 mt-1">•</span>
                 <div className="flex-grow space-y-1">
                   {/* Line 1: Title and Date/ReadTime */}
                   <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                    <Link href={`/blogs/${post.slug}`} className="font-semibold text-foreground hover:underline">
+                    <Link href={`/blogs/${post.slug}`} className="font-semibold text-foreground hover:text-accent hover:underline">
                       {post.title}
                     </Link>
-                    <span className="text-xs text-foreground/70 font-mono font-medium">
+                    <span className="text-xs text-foreground/85 font-mono font-medium">
                       {post.date} &middot; {post.readTime}
                     </span>
                   </div>
 
                   {/* Line 2: Description */}
-                  <p className="text-foreground/70 font-light text-sm leading-relaxed">
+                  <p className="text-foreground/90 text-sm leading-relaxed">
                     {post.description}
                   </p>
 
@@ -240,13 +240,13 @@ export default function BlogList({ initialPosts }: BlogListProps) {
                       {post.categories.map((cat) => (
                         <span
                           key={cat}
-                          className="px-2 py-0.5 text-foreground/75 font-semibold uppercase tracking-wider bg-foreground/[0.04] border border-border/20 rounded"
+                          className="px-2 py-0.5 text-accent font-semibold uppercase tracking-wider bg-accent/5 border border-accent/15 rounded"
                         >
                           {cat}
                         </span>
                       ))}
                       {post.seriesName && (
-                        <span className="px-2 py-0.5 text-foreground/75 font-semibold uppercase tracking-wider bg-foreground/[0.04] border border-border/20 rounded">
+                        <span className="px-2 py-0.5 text-accent font-semibold uppercase tracking-wider bg-accent/5 border border-accent/15 rounded">
                           {post.seriesName} · Part {post.seriesPart}
                         </span>
                       )}
@@ -262,18 +262,18 @@ export default function BlogList({ initialPosts }: BlogListProps) {
               <Link
                 key={post.slug}
                 href={`/blogs/${post.slug}`}
-                className="group flex flex-col h-full border border-border/20 bg-foreground/[0.01] rounded-lg overflow-hidden hover:border-foreground/20 hover:bg-foreground/[0.02] transition-all duration-300 shadow-sm"
+                className="group flex flex-col h-full bg-foreground/[0.01] border border-border rounded-lg overflow-hidden hover:bg-accent/[0.01] transition-all duration-300"
               >
                 {/* OpenAI-Style Thumbnail Header */}
-                <div className="relative w-full aspect-video overflow-hidden border-b border-border/10 bg-foreground/[0.02]">
+                <div className="relative w-full aspect-video overflow-hidden bg-foreground/[0.02] border-b border-border">
                   {post.headerImage ? (
                     <img
                       src={post.headerImage}
                       alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                      className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="group-hover:scale-[1.02] transition-transform duration-500 w-full h-full">
+                    <div className="w-full h-full">
                       <FluidMeshHeader title={post.title} />
                     </div>
                   )}
@@ -286,18 +286,9 @@ export default function BlogList({ initialPosts }: BlogListProps) {
                       <span>{post.categories.join(" / ") || "ARTICLE"}</span>
                       <span>{post.date}</span>
                     </div>
-                    <h3 className="font-semibold text-sm sm:text-base leading-snug text-foreground group-hover:text-foreground/80 transition-colors">
-                      {post.title}
+                    <h3 className="font-semibold text-sm sm:text-base leading-snug text-foreground group-hover:text-accent transition-colors">
+                      {post.title} {post.seriesPart && `· Part ${post.seriesPart}`}
                     </h3>
-                  </div>
-
-                  <div className="flex items-center justify-between text-[10px] font-mono pt-2.5 border-t border-border/10 text-foreground/60 font-medium uppercase">
-                    <span>{post.readTime}</span>
-                    {post.seriesName && (
-                      <span className="text-foreground/80 font-bold">
-                        {post.seriesName} · Part {post.seriesPart}
-                      </span>
-                    )}
                   </div>
                 </div>
               </Link>
@@ -318,17 +309,17 @@ export default function BlogList({ initialPosts }: BlogListProps) {
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((prev) => prev - 1)}
-            className="p-2 bg-foreground/[0.02] border border-border disabled:opacity-20 hover:bg-foreground/[0.04] rounded transition-colors cursor-pointer"
+            className="p-2 bg-foreground/[0.02] border border-border disabled:opacity-20 hover:text-accent hover:border-accent hover:bg-accent/5 rounded transition-colors cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
-          <span className="text-xs font-mono text-foreground/50 uppercase tracking-widest">
+          <span className="text-xs font-mono text-foreground/75 uppercase tracking-widest">
             Page {currentPage} of {totalPages}
           </span>
           <button
             disabled={currentPage === totalPages}
             onClick={() => setCurrentPage((prev) => prev + 1)}
-            className="p-2 bg-foreground/[0.02] border border-border disabled:opacity-20 hover:bg-foreground/[0.04] rounded transition-colors cursor-pointer"
+            className="p-2 bg-foreground/[0.02] border border-border disabled:opacity-20 hover:text-accent hover:border-accent hover:bg-accent/5 rounded transition-colors cursor-pointer"
           >
             <ChevronRight className="w-4 h-4" />
           </button>

@@ -34,8 +34,8 @@
     "company": "Blimze",
     "role": "Design Consultant",
     "location": "Remote",
-    "duration": "Feb'26 - Present",
-    "current": true,
+    "duration": "Feb'26 - May'26",
+    "current": false,
     "link": "https://blimze.com",
     "homeDisplay": true,
     "technologies": [

@@ -13,10 +13,10 @@ export default function BlogsPage() {
   return (
     <main className="space-y-6">
       <header className="space-y-1">
-        <h1 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-semibold">
+        <h1 className="text-2xl font-bold tracking-tight text-foreground">
           Blogs
         </h1>
-        <p className="text-sm text-foreground/50 leading-relaxed font-sans font-light">
+        <p className="text-sm text-foreground/75 leading-relaxed font-sans">
           A collection of essays, deep-dives, and reflections on technology, design, and society.
         </p>
       </header>

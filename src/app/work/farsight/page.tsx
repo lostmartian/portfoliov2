@@ -26,13 +26,13 @@ export default function FarsightPage() {
           <h1 className="text-2xl font-bold tracking-tight text-foreground">
             Farsight
           </h1>
-          <p className="text-sm text-foreground/50 leading-relaxed font-sans font-light">
+          <p className="text-sm text-foreground/50 leading-relaxed font-sans">
             The central governance and intelligence portal orchestrating an enterprise-grade AI data ecosystem.
           </p>
         </header>
 
         {/* Metadata Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-4 border-y border-border/40 text-xs font-mono">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-4 border-y border-border text-xs font-mono">
           <div className="space-y-1">
             <span className="text-foreground/40 uppercase tracking-wider block">Timeline</span>
             <span className="text-foreground/80 font-medium">Oct 2024 — Jan 2025</span>
@@ -54,7 +54,7 @@ export default function FarsightPage() {
 
       {/* Hero Image */}
       <div className="space-y-2">
-        <div className="relative w-full aspect-[16/9] rounded border border-border/40 overflow-hidden bg-foreground/[0.02]">
+        <div className="relative w-full aspect-[16/9] rounded border border-border overflow-hidden bg-foreground/[0.02]">
           <Image
             src="/projects/farsight-score.png"
             alt="Farsight GT Scoring Intelligence Dashboard"
@@ -75,7 +75,7 @@ export default function FarsightPage() {
           <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-semibold">
             The Thesis
           </h2>
-          <p className="text-base font-light leading-relaxed text-foreground italic border-l-2 border-border/40 pl-4">
+          <p className="text-base leading-relaxed text-foreground italic border-l-2 border-border pl-4">
             Transforming <span className="text-foreground/50 italic">dark data</span> into actionable intelligence through systematic governance.
           </p>
           <div className="text-sm text-foreground/80 leading-relaxed text-justify space-y-3 pt-1">
@@ -88,7 +88,7 @@ export default function FarsightPage() {
           </div>
         </section>
 
-        <hr className="border-border/40" />
+        <hr className="border-border" />
 
         {/* Section 02: DocuNexus */}
         <section className="space-y-3">
@@ -134,7 +134,7 @@ export default function FarsightPage() {
           </div>
         </section>
 
-        <hr className="border-border/40" />
+        <hr className="border-border" />
 
         {/* Section 03: Labeling Platform */}
         <section className="space-y-3">
@@ -166,7 +166,7 @@ export default function FarsightPage() {
           </div>
         </section>
 
-        <hr className="border-border/40" />
+        <hr className="border-border" />
 
         {/* Section 04: Reliability Engineering */}
         <section className="space-y-3">
@@ -205,7 +205,7 @@ export default function FarsightPage() {
           </div>
         </section>
 
-        <hr className="border-border/40" />
+        <hr className="border-border" />
 
         {/* Section 05: Ending Notes */}
         <section className="space-y-4">
@@ -220,17 +220,17 @@ export default function FarsightPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-            <div className="p-4 border border-border/40 rounded bg-foreground/[0.02] text-xs">
+            <div className="p-4 border border-border rounded bg-foreground/[0.02] text-xs">
               <span className="font-mono text-foreground/40 uppercase block">Philosophy // 01</span>
               <p className="italic text-foreground/70 mt-1">"Don't build features for users; build intelligence engines that empower them."</p>
             </div>
-            <div className="p-4 border border-border/40 rounded bg-foreground/[0.02] text-xs">
+            <div className="p-4 border border-border rounded bg-foreground/[0.02] text-xs">
               <span className="font-mono text-foreground/40 uppercase block">Philosophy // 02</span>
               <p className="italic text-foreground/70 mt-1">"Data is noise until it's governed by Ground Truth."</p>
             </div>
           </div>
 
-          <p className="text-sm font-light italic border-t border-border/40 pt-4 text-center text-foreground/60">
+          <p className="text-sm italic border-t border-border pt-4 text-center text-foreground/60">
             Farsight stands as a testament to what happens when you stop treating AI as a tool and start treating it as the architect of the system itself.
           </p>
         </section>

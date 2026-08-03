@@ -110,13 +110,13 @@ export default function IPOAllotmentClient() {
           <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
             IPO Allotment Engine
           </h1>
-          <p className="text-lg text-foreground/60 leading-relaxed font-sans font-light max-w-2xl">
+          <p className="text-lg text-foreground/60 leading-relaxed font-sans max-w-2xl">
             A scale-elastic processing platform for high-stakes IPO settlement, data reconciliation, and SEBI compliance.
           </p>
         </header>
 
         {/* Metadata Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-6 border-y border-border/20 text-xs font-mono">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-6 border-y border-border text-xs font-mono">
           <div className="space-y-1">
             <span className="text-foreground/40 uppercase tracking-wider block">Timeline</span>
             <span className="text-foreground/80 font-medium">Mar 2026   Present</span>
@@ -140,7 +140,7 @@ export default function IPOAllotmentClient() {
 
       {/* Hero Graphic */}
       <div className="space-y-2">
-        <div className="relative w-full aspect-[16/9] rounded border border-border/20 overflow-hidden bg-foreground/[0.01]">
+        <div className="relative w-full aspect-[16/9] rounded border border-border overflow-hidden bg-foreground/[0.01]">
           <Image
             src="/projects/ipo-datagrid.png"
             alt="Basis of Allotment Grid & Processing Flow"
@@ -156,7 +156,7 @@ export default function IPOAllotmentClient() {
 
       {/* Case Study Section 1: Business Domain */}
       <section className="space-y-4">
-        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border/20 pb-2">
+        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border pb-2">
           01. Business Domain &amp; Core Challenge
         </h2>
 
@@ -172,13 +172,11 @@ export default function IPOAllotmentClient() {
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-2">
-            <div className="p-4 rounded border border-border/10 bg-foreground/[0.01]">
-              <span className="text-xs font-mono font-bold text-foreground/70 block uppercase">The Issuer &amp; Exchanges</span>
-              <p className="text-xs text-foreground/50 mt-1">
-                Bridges the company seeking to list shares with the Stock Exchanges (BSE &amp; NSE) where broker networks submit customer orders.
-              </p>
+            <div className="p-4 rounded border border-border bg-foreground/[0.01]">
+              <span className="font-semibold text-foreground/80 block">Allotment Registrar API</span>
+              <p className="text-foreground/60 mt-1">Direct endpoint ingestion layer processing JSON payload requests.</p>
             </div>
-            <div className="p-4 rounded border border-border/10 bg-foreground/[0.01]">
+            <div className="p-4 rounded border border-border bg-foreground/[0.01]">
               <span className="text-xs font-mono font-bold text-foreground/70 block uppercase">Payment &amp; Depositories</span>
               <p className="text-xs text-foreground/50 mt-1">
                 Interfaces with Depositories (NSDL &amp; CDSL) holding demat vaults and Payment Networks (SCSB Banks &amp; NPCI UPI) holding bid capital.
@@ -211,7 +209,7 @@ export default function IPOAllotmentClient() {
 
       {/* Case Study Section 2: Architecture */}
       <section className="space-y-4">
-        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border/20 pb-2">
+        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border pb-2">
           02. System Architecture &amp; Execution Flows
         </h2>
 
@@ -255,7 +253,7 @@ export default function IPOAllotmentClient() {
 
       {/* Case Study Section 3: Tech Stack */}
       <section className="space-y-4">
-        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border/20 pb-2">
+        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border pb-2">
           03. Technology Stack Mapping
         </h2>
         <div className="space-y-6 pt-2">
@@ -280,7 +278,7 @@ export default function IPOAllotmentClient() {
 
       {/* Case Study Section 4: Go Backend */}
       <section className="space-y-4">
-        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border/20 pb-2">
+        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border pb-2">
           04. Backend Microservices Architecture
         </h2>
 
@@ -304,7 +302,7 @@ export default function IPOAllotmentClient() {
 
       {/* Case Study Section 5: Python Algorithms */}
       <section className="space-y-4">
-        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border/20 pb-2">
+        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border pb-2">
           05. High-Throughput Data Engine Design
         </h2>
 
@@ -332,7 +330,7 @@ export default function IPOAllotmentClient() {
 
       {/* Case Study Section 6: Database */}
       <section className="space-y-4">
-        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border/20 pb-2">
+        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border pb-2">
           06. Database Schema Design &amp; Indexing
         </h2>
 
@@ -360,7 +358,7 @@ export default function IPOAllotmentClient() {
 
       {/* Case Study Section 7: IaC */}
       <section className="space-y-4">
-        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border/20 pb-2">
+        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border pb-2">
           07. Infrastructure as Code &amp; Cloud Topography
         </h2>
 
@@ -384,7 +382,7 @@ export default function IPOAllotmentClient() {
 
       {/* Case Study Section 8: Ending Notes */}
       <section className="space-y-4">
-        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border/20 pb-2">
+        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border pb-2">
           08. Key Accomplishments &amp; Metrics
         </h2>
 

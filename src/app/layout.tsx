@@ -94,7 +94,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
 
-          <div className="max-w-3xl mx-auto px-6 pt-2 pb-8 min-h-screen flex flex-col justify-between">
+          <div className="max-w-5xl mx-auto px-6 pt-2 pb-8 min-h-screen flex flex-col justify-between">
             <div>
               <Navigation />
               <main className="py-8">

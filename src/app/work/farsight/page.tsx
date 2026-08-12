@@ -3,13 +3,62 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Farsight",
-  description: "The central governance and intelligence portal orchestrating an enterprise-grade AI data ecosystem.",
+  title: "Farsight — AI Governance & Intelligence Portal | Sahil Gangurde",
+  description:
+    "The central governance and intelligence portal orchestrating an enterprise-grade AI data ecosystem by Sahil Gangurde.",
+  alternates: {
+    canonical: "https://lostmartian.in/work/farsight",
+  },
+  openGraph: {
+    title: "Farsight — AI Governance & Intelligence Portal | Sahil Gangurde",
+    description:
+      "The central governance and intelligence portal orchestrating an enterprise-grade AI data ecosystem.",
+    url: "https://lostmartian.in/work/farsight",
+    siteName: "Sahil Gangurde | lostmartian",
+    locale: "en_US",
+    type: "article",
+    images: [
+      {
+        url: "https://lostmartian.in/work/farsight/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Farsight | Sahil Gangurde",
+        type: "image/png",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Farsight — AI Governance & Intelligence Portal | Sahil Gangurde",
+    description:
+      "The central governance and intelligence portal orchestrating an enterprise-grade AI data ecosystem.",
+    creator: "@lost_martian_",
+    site: "@lost_martian_",
+    images: ["https://lostmartian.in/work/farsight/opengraph-image"],
+  },
 };
 
 export default function FarsightPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    headline: "Farsight — AI Governance & Intelligence Portal",
+    description:
+      "The central governance and intelligence portal orchestrating an enterprise-grade AI data ecosystem.",
+    url: "https://lostmartian.in/work/farsight",
+    author: {
+      "@type": "Person",
+      name: "Sahil Gangurde",
+      url: "https://lostmartian.in",
+    },
+  };
+
   return (
     <div className="space-y-8 font-sans">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Header Block */}
       <div className="space-y-4">
         <Link 

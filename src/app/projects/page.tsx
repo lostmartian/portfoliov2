@@ -1,14 +1,84 @@
 import { githubProjects } from "@/data/github-projects";
 import { Star } from "lucide-react";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Projects",
-  description: "A collection of my technical projects and open-source contributions.",
+export const metadata: Metadata = {
+  title: "Open Source & Technical Projects | Sahil Gangurde",
+  description:
+    "An archive of experimental systems, open-source modules, and technical research in AI engineering, backend pipelines, and distributed systems by Sahil Gangurde.",
+  alternates: {
+    canonical: "https://lostmartian.in/projects",
+  },
+  keywords: [
+    "Open Source Projects",
+    "GitHub Projects",
+    "AI Engineering",
+    "Backend Systems",
+    "Software Architecture",
+    "Sahil Gangurde",
+    "lostmartian",
+  ],
+  openGraph: {
+    title: "Open Source & Technical Projects | Sahil Gangurde",
+    description:
+      "An archive of experimental systems, open-source modules, and technical research in AI engineering, backend pipelines, and distributed systems by Sahil Gangurde.",
+    url: "https://lostmartian.in/projects",
+    siteName: "Sahil Gangurde | lostmartian",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "https://lostmartian.in/projects/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Projects | Sahil Gangurde",
+        type: "image/png",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Open Source & Technical Projects | Sahil Gangurde",
+    description:
+      "An archive of experimental systems, open-source modules, and technical research by Sahil Gangurde.",
+    creator: "@lost_martian_",
+    site: "@lost_martian_",
+    images: ["https://lostmartian.in/projects/opengraph-image"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function ProjectsPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Open Source & Technical Projects | Sahil Gangurde",
+    description:
+      "An archive of experimental systems, open-source modules, and technical research by Sahil Gangurde.",
+    url: "https://lostmartian.in/projects",
+    author: {
+      "@type": "Person",
+      name: "Sahil Gangurde",
+      url: "https://lostmartian.in",
+    },
+  };
+
   return (
     <main className="space-y-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="space-y-1">
         <h1 className="text-2xl font-bold tracking-tight text-foreground">
           Technical Projects
@@ -17,7 +87,7 @@ export default function ProjectsPage() {
           An archive of experimental systems, open-source modules, and technical research.
         </p>
       </header>
-      
+
       <div className="space-y-5 text-sm text-foreground/80 font-sans">
         {githubProjects.map((project, i) => (
           <div key={i} className="flex items-start gap-2">
@@ -25,7 +95,12 @@ export default function ProjectsPage() {
             <div className="flex-grow space-y-1">
               {/* Line 1: Title and Year */}
               <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                <a href={project.html_url} target="_blank" rel="noopener noreferrer" className="font-semibold text-foreground hover:text-accent hover:underline">
+                <a
+                  href={project.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-foreground hover:text-accent hover:underline"
+                >
                   {project.name} ↗
                 </a>
                 <span className="text-xs text-foreground/40 font-mono">

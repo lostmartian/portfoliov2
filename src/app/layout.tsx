@@ -35,6 +35,14 @@ export const metadata: Metadata = {
     title: "Freelance Full-Stack AI & Backend Engineer | Sahil Gangurde",
     description: "Specializing in high-throughput financial settlement engines, GraphRAG platforms, and secure multi-tenant SaaS. Available for contracts and consulting.",
   },
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({

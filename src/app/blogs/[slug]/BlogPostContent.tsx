@@ -239,7 +239,9 @@ export default function BlogPostContent({
         <div className="grid grid-cols-4 gap-2 py-3 border-y border-border text-[10px] sm:text-xs font-mono">
           <div className="space-y-1 min-w-0">
             <span className="text-foreground/60 uppercase tracking-wider block">Published</span>
-            <span className="text-foreground font-medium truncate block">{date}</span>
+            <time dateTime={new Date(date).toISOString()} className="text-foreground font-medium truncate block">
+              {date}
+            </time>
           </div>
           <div className="space-y-1 min-w-0">
             <span className="text-foreground/60 uppercase tracking-wider block">Read Time</span>

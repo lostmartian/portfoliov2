@@ -1,0 +1,28 @@
+{
+  "lastUpdated": "2026-08-12T18:27:27.859Z",
+  "year": 2026,
+  "totalContributions": 365,
+  "summary": {
+    "totalCommits": 256,
+    "totalPRs": 107,
+    "totalRepositories": 17,
+    "clientAndOrgContributions": 192,
+    "publicContributions": 258
+  },
+  "prs": {
+    "public": {
+      "merged": 0,
+      "open": 2,
+      "closed": 0,
+      "total": 2
+    },
+    "externalClientOrgs": {
+      "merged": 92,
+      "open": 8,
+      "closed": 5,
+      "total": 105,
+      "clientOrgsCount": 3,
+      "privateReposCount": 9
+    }
+  }
+}

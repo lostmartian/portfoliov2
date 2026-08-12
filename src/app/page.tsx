@@ -2,6 +2,7 @@ import Image from "next/image";
 import { TECHNICAL_TOOLKIT, VALIDATION_STATS } from "@/config/about";
 import experiencesData from "@/data/experience.json";
 import { CONTACT_DATA } from "@/config/contact";
+import ExternalContributions from "@/components/ExternalContributions";
 
 interface ExperienceItem {
   id: number;
@@ -126,6 +127,11 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <hr className="border-border" />
+
+      {/* 3. Open Source Contributions Section */}
+      <ExternalContributions />
 
       <hr className="border-border" />
 

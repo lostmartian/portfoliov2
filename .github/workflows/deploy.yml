@@ -3,6 +3,8 @@ name: Deploy Next.js site to Pages
 on:
   push:
     branches: ["main"]
+  schedule:
+    - cron: "30 22 * * *" # Runs daily at 4:00 AM IST (22:30 UTC)
   workflow_dispatch:
 
 permissions:
@@ -46,6 +48,11 @@ jobs:
       
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      
+      - name: Sync Public & Private GitHub Stats
+        env:
+          GH_STATS_PAT: ${{ secrets.GH_STATS_PAT }}
+        run: node scripts/fetch-github-stats.mjs
       
       - name: Build with Next.js
         run: pnpm run build

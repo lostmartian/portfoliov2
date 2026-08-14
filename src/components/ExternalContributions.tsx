@@ -1,8 +1,16 @@
 "use client";
 
-import { useEffect, useState, useMemo, useRef } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { GitPullRequest, GitMerge, ExternalLink, Lock, GitBranch, Activity } from "lucide-react";
 import stats from "@/data/github-stats.json";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+} from "recharts";
 
 interface PullRequest {
   id: number;
@@ -42,68 +50,22 @@ interface ContributionData {
   contributions: ContributionDay[];
 }
 
-interface WeekPoint {
-  index: number;
-  label: string;
-  startDate: string;
-  endDate: string;
+interface ChartPoint {
+  week: string;
   count: number;
-  xPercent: number;
-  yPercent: number;
-}
-
-interface MonthMarker {
-  name: string;
-  shortName: string;
-  xPercent: number;
-  isQuarterly: boolean;
+  startDate: string;
 }
 
 const PR_CACHE_KEY = "gh_external_prs_2026_only_v19";
 const CONTRIBS_CACHE_KEY = "gh_contribs_2026_only_v19";
 const CACHE_TTL = 15 * 60 * 1000; // 15 minutes
 
-function getSmoothPath(points: { x: number; y: number }[]): string {
-  if (points.length === 0) return "";
-  if (points.length === 1) return `M ${points[0].x} ${points[0].y}`;
-
-  let path = `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`;
-
-  for (let i = 0; i < points.length - 1; i++) {
-    const p0 = points[i === 0 ? 0 : i - 1];
-    const p1 = points[i];
-    const p2 = points[i + 1];
-    const p3 = points[i + 2 < points.length ? i + 2 : i + 1];
-
-    const cp1x = p1.x + (p2.x - p0.x) / 6;
-    const cp1y = p1.y + (p2.y - p0.y) / 6;
-
-    const cp2x = p2.x - (p3.x - p1.x) / 6;
-    const cp2y = p2.y - (p3.y - p1.y) / 6;
-
-    path += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
-  }
-
-  return path;
-}
-
 export default function ExternalContributions() {
   const [prs, setPrs] = useState<PullRequest[]>([]);
   const [contribData, setContribData] = useState<ContributionData | null>(null);
   const [loadingPrs, setLoadingPrs] = useState(true);
   const [loadingContribs, setLoadingContribs] = useState(true);
-  const [activePoint, setActivePoint] = useState<WeekPoint | null>(null);
   const [filter, setFilter] = useState<"all" | "merged" | "open" | "draft" | "closed">("all");
-  const [mounted, setMounted] = useState(false);
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
-  // Trigger draw-in animation on mount asynchronously to prevent cascading renders warning
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setMounted(true);
-    }, 0);
-    return () => clearTimeout(timer);
-  }, []);
 
   // Fetch 2026 Public PRs Only
   useEffect(() => {
@@ -213,116 +175,29 @@ export default function ExternalContributions() {
     fetchContributions();
   }, []);
 
-  // Filter contributions and compute line graph for 2026 (Jan 1, 2026 onwards)
-  const { linePath, areaPath, points, monthMarkers, baselineY, viewBoxHeight, total2026Contributions } = useMemo(() => {
+  // Build chart data for 2026 (Jan 1, 2026 onwards) — weekly buckets
+  const { chartData, total2026Contributions } = useMemo(() => {
     if (!contribData?.contributions || contribData.contributions.length === 0) {
-      return {
-        linePath: "",
-        areaPath: "",
-        points: [],
-        monthMarkers: [],
-        baselineY: 100,
-        viewBoxHeight: 120,
-        total2026Contributions: stats.totalContributions,
-      };
+      return { chartData: [] as ChartPoint[], total2026Contributions: stats.totalContributions };
     }
 
     const daily2026 = contribData.contributions.filter((d) => d.date >= "2026-01-01");
     const sum2026 = daily2026.reduce((acc, curr) => acc + curr.count, 0);
 
-    const weeklyBuckets: { startDate: string; endDate: string; count: number; month: string }[] = [];
-
+    const buckets: ChartPoint[] = [];
     for (let i = 0; i < daily2026.length; i += 7) {
       const chunk = daily2026.slice(i, i + 7);
       const sum = chunk.reduce((acc, curr) => acc + curr.count, 0);
       const start = chunk[0]?.date || "";
-      const end = chunk[chunk.length - 1]?.date || start;
-      const month = new Date(start).toLocaleDateString("en-US", { month: "short" });
-      weeklyBuckets.push({ startDate: start, endDate: end, count: sum, month });
+      const label = new Date(start).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+      buckets.push({ week: label, count: sum, startDate: start });
     }
 
-    const viewBoxWidth = 1000;
-    const vbHeight = 120;
-    const paddingTop = 8;
-    const baseLine = 102;
-    const usableHeight = baseLine - paddingTop;
-
-    const maxCount = Math.max(...weeklyBuckets.map((w) => w.count), 4);
-
-    const calculatedPoints: WeekPoint[] = weeklyBuckets.map((w, idx) => {
-      const xPercent = (idx / Math.max(1, weeklyBuckets.length - 1)) * 100;
-      const y = baseLine - (w.count / maxCount) * usableHeight;
-      const yPercent = (y / vbHeight) * 100;
-
-      return {
-        index: idx,
-        label: w.month,
-        startDate: w.startDate,
-        endDate: w.endDate,
-        count: w.count,
-        xPercent,
-        yPercent,
-      };
-    });
-
-    const svgPoints = calculatedPoints.map((p) => ({
-      x: (p.xPercent / 100) * viewBoxWidth,
-      y: (p.yPercent / 100) * vbHeight,
-    }));
-
-    const smoothLine = getSmoothPath(svgPoints);
-    const smoothArea = `${smoothLine} L ${viewBoxWidth} ${baseLine} L 0 ${baseLine} Z`;
-
-    const markers: MonthMarker[] = [];
-    let lastSeenMonth = "";
-
-    daily2026.forEach((day, index) => {
-      const monthName = new Date(day.date).toLocaleDateString("en-US", { month: "short" });
-      if (monthName !== lastSeenMonth) {
-        lastSeenMonth = monthName;
-        const xPercent = (index / Math.max(1, daily2026.length - 1)) * 100;
-        markers.push({
-          name: monthName,
-          shortName: monthName.slice(0, 1),
-          xPercent,
-          isQuarterly: markers.length % 2 === 0,
-        });
-      }
-    });
-
     return {
-      linePath: smoothLine,
-      areaPath: smoothArea,
-      points: calculatedPoints,
-      monthMarkers: markers,
-      baselineY: baseLine,
-      viewBoxHeight: vbHeight,
+      chartData: buckets,
       total2026Contributions: sum2026 > 0 ? sum2026 : stats.totalContributions,
     };
   }, [contribData]);
-
-  // Touch and Mouse tracking
-  const updateActivePointFromClientX = (clientXCoord: number) => {
-    if (!containerRef.current || points.length === 0) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const relativeX = Math.max(0, Math.min(rect.width, clientXCoord - rect.left));
-    const ratio = relativeX / rect.width;
-    const targetIndex = Math.min(
-      points.length - 1,
-      Math.max(0, Math.round(ratio * (points.length - 1)))
-    );
-    setActivePoint(points[targetIndex]);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    updateActivePointFromClientX(e.clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (e.touches.length > 0) {
-      updateActivePointFromClientX(e.touches[0].clientX);
-    }
-  };
 
   // Filter public PR list based on selected filter
   const filteredPrs = useMemo(() => {
@@ -367,10 +242,10 @@ export default function ExternalContributions() {
 
       {/* 2. Bento Grid Layout */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
+
         {/* Bento Card 1: Interactive Contribution Graph (2/3 width) */}
-        <div className="md:col-span-2 border border-border bg-card-bg rounded-xs p-5 flex flex-col justify-between relative overflow-visible group shadow-xs">
-          <div className="flex items-center justify-between gap-2 mb-3">
+        <div className="md:col-span-2 border border-border bg-card-bg rounded-xs p-5 flex flex-col justify-between relative group shadow-xs">
+          <div className="flex items-center justify-between gap-2 mb-4">
             <div className="space-y-0.5">
               <span className="text-[10px] font-sans uppercase tracking-wider text-foreground/60 block font-bold">Cadence Visualization</span>
               <h3 className="text-sm font-semibold tracking-tight text-foreground flex items-center gap-1.5">
@@ -379,166 +254,62 @@ export default function ExternalContributions() {
               </h3>
             </div>
             <span className="text-[10px] font-sans text-foreground/65 italic hidden sm:inline">
-              Hover curve for weekly count
+              Hover for weekly count
             </span>
           </div>
 
-          <div className="relative pt-6">
-            {loadingContribs ? (
-              <div className="h-28 w-full animate-pulse bg-foreground/5 rounded-xs" />
-            ) : (
-              <div className="space-y-1 relative overflow-visible">
-                <div
-                  ref={containerRef}
-                  className="w-full relative h-28 sm:h-36 cursor-crosshair select-none touch-pan-y overflow-visible"
-                  onMouseMove={handleMouseMove}
-                  onMouseLeave={() => setActivePoint(null)}
-                  onTouchStart={handleTouchMove}
-                  onTouchMove={handleTouchMove}
-                  onTouchEnd={() => setActivePoint(null)}
-                >
-                  <svg
-                    viewBox={`0 0 1000 ${viewBoxHeight}`}
-                    preserveAspectRatio="none"
-                    className="w-full h-full block overflow-visible"
-                  >
-                    <defs>
-                      <linearGradient id="freeFlowGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.22" />
-                        <stop offset="85%" stopColor="var(--accent)" stopOpacity="0.02" />
-                        <stop offset="100%" stopColor="var(--accent)" stopOpacity="0.0" />
-                      </linearGradient>
-                      <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="4" result="blur" />
-                        <feMerge>
-                          <feMergeNode in="blur" />
-                          <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                      </filter>
-                    </defs>
-
-                    {/* Millimeter Grid Backdrop */}
-                    {monthMarkers.map((m, idx) => {
-                      const x = (m.xPercent / 100) * 1000;
-                      return (
-                        <line
-                          key={`v-grid-${idx}`}
-                          x1={x}
-                          y1={6}
-                          x2={x}
-                          y2={baselineY}
-                          stroke="currentColor"
-                          strokeOpacity="0.16"
-                          strokeDasharray="2 2"
-                        />
-                      );
-                    })}
-                    <line
-                      x1="0"
-                      y1={baselineY / 3}
-                      x2="1000"
-                      y2={baselineY / 3}
-                      stroke="currentColor"
-                      strokeOpacity="0.16"
-                      strokeDasharray="2 2"
-                    />
-                    <line
-                      x1="0"
-                      y1={(baselineY * 2) / 3}
-                      x2="1000"
-                      y2={(baselineY * 2) / 3}
-                      stroke="currentColor"
-                      strokeOpacity="0.16"
-                      strokeDasharray="2 2"
-                    />
-
-                    {/* Baseline */}
-                    <line
-                      x1="0"
-                      y1={baselineY}
-                      x2="1000"
-                      y2={baselineY}
-                      stroke="currentColor"
-                      strokeOpacity="0.3"
-                      strokeDasharray="3 3"
-                    />
-
-                    {/* Area fill under curve */}
-                    {areaPath && <path d={areaPath} fill="url(#freeFlowGradient)" />}
-
-                    {/* The smooth graph curve line */}
-                    {linePath && (
-                      <path
-                        d={linePath}
-                        fill="none"
-                        stroke="var(--accent)"
-                        strokeWidth="2.5"
-                        vectorEffect="non-scaling-stroke"
-                        className="transition-all duration-300"
-                        style={{
-                          strokeDasharray: 1200,
-                          strokeDashoffset: mounted ? 0 : 1200,
-                          transition: "stroke-dashoffset 1.8s cubic-bezier(0.25, 1, 0.5, 1)",
-                        }}
-                      />
-                    )}
-                  </svg>
-
-                  {/* Active Tooltip and vertical guide bar */}
-                  {activePoint && (
-                    <>
-                      <div
-                        className="absolute top-0 bottom-0 pointer-events-none -translate-x-1/2 z-20"
-                        style={{ left: `${activePoint.xPercent}%` }}
-                      >
-                        {/* Guide Line */}
-                        <div
-                          className="w-[1.5px] border-l border-dashed border-accent/40 mx-auto"
-                          style={{ height: `${(baselineY / viewBoxHeight) * 100}%` }}
-                        />
-                        {/* Focal Point Indicator */}
-                        <div
-                          className="absolute w-3.5 h-3.5 rounded-full -translate-x-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none"
-                          style={{ top: `${activePoint.yPercent}%`, left: "50%" }}
-                        >
-                          <span className="absolute w-3.5 h-3.5 rounded-full bg-accent/30 animate-ping" />
-                          <span className="w-2.5 h-2.5 rounded-full bg-accent ring-2 ring-background shadow-xs" />
-                        </div>
+          {loadingContribs ? (
+            <div className="h-36 w-full animate-pulse bg-foreground/5 rounded-xs" />
+          ) : (
+            <ResponsiveContainer width="100%" height={144}>
+              <AreaChart data={chartData} margin={{ top: 4, right: 4, left: -32, bottom: 0 }}>
+                <defs>
+                  <linearGradient id="contribGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="var(--accent)" stopOpacity={0.22} />
+                    <stop offset="90%" stopColor="var(--accent)" stopOpacity={0.02} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid
+                  strokeDasharray="2 2"
+                  stroke="currentColor"
+                  strokeOpacity={0.1}
+                  vertical={false}
+                />
+                <XAxis
+                  dataKey="week"
+                  tick={{ fontSize: 9, fill: "currentColor", opacity: 0.55, fontFamily: "var(--font-sans)" }}
+                  tickLine={false}
+                  axisLine={{ stroke: "currentColor", strokeOpacity: 0.15 }}
+                  interval="preserveStartEnd"
+                />
+                <Tooltip
+                  cursor={{ stroke: "var(--accent)", strokeWidth: 1, strokeDasharray: "3 3", strokeOpacity: 0.5 }}
+                  content={({ active, payload }) => {
+                    if (!active || !payload?.length) return null;
+                    const d = payload[0].payload as ChartPoint;
+                    return (
+                      <div className="bg-background/95 backdrop-blur-sm border border-border/80 px-2.5 py-1.5 rounded shadow-md text-[10px] font-mono text-foreground min-w-[110px]">
+                        <div className="font-bold text-accent">{d.count} contributions</div>
+                        <div className="text-[9px] text-foreground/55 mt-0.5 uppercase tracking-tight">Wk of {d.week}</div>
                       </div>
-
-                      {/* Tooltip Card */}
-                      <div
-                        className="absolute bg-background/95 backdrop-blur-xs border border-border/80 p-2 rounded shadow-md text-[10px] font-mono text-foreground pointer-events-none -translate-x-1/2 -top-12 z-30 transition-all duration-100 min-w-[120px] text-center"
-                        style={{
-                          left: `${Math.max(8, Math.min(92, activePoint.xPercent))}%`,
-                        }}
-                      >
-                        <div className="font-bold text-accent">{activePoint.count} Contributions</div>
-                        <div className="text-[9px] text-foreground/60 mt-0.5 uppercase tracking-tight">
-                          Wk of {new Date(activePoint.startDate).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-
-                {/* X Axis Month Labels */}
-                <div className="relative w-full h-5 select-none pointer-events-none overflow-hidden pt-1.5 border-t border-border/15">
-                  {monthMarkers.map((m, idx) => (
-                    <span
-                      key={idx}
-                      className="absolute top-0 font-sans text-[9px] uppercase tracking-wider text-foreground/70 -translate-x-1/2 whitespace-nowrap"
-                      style={{
-                        left: `${Math.max(3, Math.min(97, m.xPercent))}%`,
-                      }}
-                    >
-                      {m.name}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
+                    );
+                  }}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="count"
+                  stroke="var(--accent)"
+                  strokeWidth={2}
+                  fill="url(#contribGradient)"
+                  dot={false}
+                  activeDot={{ r: 4, fill: "var(--accent)", strokeWidth: 2, stroke: "var(--background)" }}
+                  isAnimationActive={true}
+                  animationDuration={1200}
+                  animationEasing="ease-out"
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          )}
         </div>
 
         {/* Bento Card 2: Main metrics panel (1/3 width) */}

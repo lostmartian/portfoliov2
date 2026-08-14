@@ -12,6 +12,35 @@ interface BlogListProps {
 
 const POSTS_PER_PAGE = 20;
 
+const formatDate = (dateStr: string) => {
+  if (!dateStr) return "";
+  
+  // Manual parse of "MMM DD, YYYY" for iOS Safari compatibility
+  const parts = dateStr.trim().split(/\s+/);
+  if (parts.length === 3) {
+    const monthName = parts[0].toUpperCase().replace(/,/g, "");
+    const day = parts[1].replace(/,/g, "").padStart(2, "0");
+    const year = parts[2].trim();
+    
+    const months: Record<string, string> = {
+      JAN: "01", FEB: "02", MAR: "03", APR: "04", MAY: "05", JUN: "06",
+      JUL: "07", AUG: "08", SEP: "09", OCT: "10", NOV: "11", DEC: "12"
+    };
+    
+    const month = months[monthName.substring(0, 3)];
+    if (month && !isNaN(Number(day)) && !isNaN(Number(year))) {
+      return `${day}/${month}/${year}`;
+    }
+  }
+
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return dateStr;
+  const day = String(d.getDate()).padStart(2, "0");
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const year = d.getFullYear();
+  return `${day}/${month}/${year}`;
+};
+
 export default function BlogList({ initialPosts }: BlogListProps) {
   const [search, setSearch] = useState("");
   const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc");
@@ -199,7 +228,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
                         ? "text-accent font-semibold"
                         : "text-foreground/50 hover:text-accent"
                         }`}
-                    >
+                      >
                       <span>• {cat}</span>
                       {isSelected && <span className="text-[9px]">✓</span>}
                     </button>
@@ -214,44 +243,36 @@ export default function BlogList({ initialPosts }: BlogListProps) {
       {/* List or Grid (OpenAI Style Thumbnail Cards) of Posts */}
       {paginatedPosts.length > 0 ? (
         viewMode === "list" ? (
-          <div className="space-y-5 text-sm text-foreground/80 font-sans">
+          <div className="space-y-4 text-sm text-foreground/80 font-sans">
             {paginatedPosts.map((post) => (
               <div key={post.slug} className="flex items-start gap-2">
-                <span className="text-xs font-mono text-accent/60 mt-1">•</span>
-                <div className="flex-grow space-y-1">
-                  {/* Line 1: Title and Date/ReadTime */}
-                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                    <Link href={`/blogs/${post.slug}`} className="font-semibold text-foreground hover:text-accent hover:underline">
+                <span className="text-xs font-mono text-accent/60 mt-1.5">•</span>
+                <div className="flex-grow">
+                  {/* Desktop Grid Layout (Aligned Columns) */}
+                  <div className="hidden sm:grid sm:grid-cols-[90px_90px_8px_1fr] gap-x-2 items-baseline">
+                    <span className="text-[10px] font-sans uppercase tracking-wider text-accent/85 font-bold select-none truncate pr-1">
+                      {post.categories[0] || "ARTICLE"}
+                    </span>
+                    <span className="text-xs sm:text-[13px] text-foreground/60 font-sans select-none">
+                      {formatDate(post.date)}
+                    </span>
+                    <span className="text-foreground/45 font-sans text-xs select-none text-center">-</span>
+                    <Link href={`/blogs/${post.slug}`} className="font-semibold text-foreground hover:text-accent hover:underline leading-snug">
                       {post.title}
                     </Link>
-                    <span className="text-xs text-foreground/85 font-mono font-medium">
-                      {post.date} &middot; {post.readTime}
-                    </span>
                   </div>
 
-                  {/* Line 2: Description */}
-                  <p className="text-foreground/90 text-sm leading-relaxed">
-                    {post.description}
-                  </p>
-
-                  {/* Line 3: Categories & Series */}
-                  {(post.categories.length > 0 || post.seriesName) && (
-                    <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono pt-1">
-                      {post.categories.map((cat) => (
-                        <span
-                          key={cat}
-                          className="px-2 py-0.5 text-accent font-semibold uppercase tracking-wider bg-accent/5 border border-accent/15 rounded"
-                        >
-                          {cat}
-                        </span>
-                      ))}
-                      {post.seriesName && (
-                        <span className="px-2 py-0.5 text-accent font-semibold uppercase tracking-wider bg-accent/5 border border-accent/15 rounded">
-                          {post.seriesName} · Part {post.seriesPart}
-                        </span>
-                      )}
+                  {/* Mobile Stacked Layout (Full Width Title) */}
+                  <div className="sm:hidden flex flex-col gap-0.5">
+                    <div className="flex items-center gap-1.5 text-[9px] font-sans uppercase tracking-wider font-bold select-none">
+                      <span className="text-accent/85">{post.categories[0] || "ARTICLE"}</span>
+                      <span className="text-foreground/30 font-normal">&bull;</span>
+                      <span className="text-foreground/50 font-normal">{formatDate(post.date)}</span>
                     </div>
-                  )}
+                    <Link href={`/blogs/${post.slug}`} className="font-semibold text-sm leading-snug text-foreground hover:text-accent hover:underline block">
+                      {post.title}
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}

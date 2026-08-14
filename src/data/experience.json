@@ -22,7 +22,7 @@
       "PostgreSQL",
       "Terraform"
     ],
-    "summary": "Engineered an elastically scaling, deterministic IPO allotment engine processing 10M+ records in under 7 seconds, built a secure Go backend console with Cognito RBAC, and provisioned zero-trust AWS infrastructure.",
+    "summary": "Developing secure, SEBI-compliant financial technology systems, optimizing high-performance data reconciliation pipelines, and architecting zero-trust AWS cloud infrastructure.",
     "achievements": [
       "**Engineered Vectorized 3-Way Reconciliation**: Developed a memory-optimized Python pipeline utilizing Polars LazyFrames to hash-join Exchange bids, Sponsor bank confirms, and UPI mandates, matching 10M+ records in under 7 seconds under 3GB RAM.",
       "**Built the SEBI Basis of Allotment Solver**: Programmed a mathematically strict solver executing SEBI proportionate allotment (Scenario A-D) using the Highest Remainder Method (HRM) and seeded CSPRNG lottery drawings for absolute audit reproducibility.",

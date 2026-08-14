@@ -37,7 +37,9 @@ export default function Navigation() {
         {/* Logo / Title */}
         <Link 
           href="/" 
-          className="text-base font-semibold hover:opacity-85 transition-colors"
+          className={`text-base font-semibold transition-colors ${
+            isHomeActive ? "text-accent" : "text-foreground hover:opacity-85"
+          }`}
         >
           Sahil Gangurde
         </Link>
@@ -54,8 +56,8 @@ export default function Navigation() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`relative pb-1.5 transition-all hover:text-accent flex items-center gap-1.5 ${
-                    isActive ? "text-accent font-semibold after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:rounded-full after:bg-accent" : "text-foreground/85"
+                  className={`transition-colors hover:text-accent flex items-center gap-1.5 py-1 ${
+                    isActive ? "text-accent font-semibold" : "text-foreground/85"
                   }`}
                 >
                   <span>{link.name}</span>
@@ -96,7 +98,7 @@ export default function Navigation() {
                   isActive ? "text-accent font-semibold" : "text-foreground/85 hover:text-accent"
                 }`}
               >
-                <span className={`relative pb-1 ${isActive ? "after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:rounded-full after:bg-accent" : ""}`}>
+                <span>
                   {link.name}
                 </span>
               </Link>

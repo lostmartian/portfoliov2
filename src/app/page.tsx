@@ -2,7 +2,7 @@ import Image from "next/image";
 import { TECHNICAL_TOOLKIT, VALIDATION_STATS } from "@/config/about";
 import experiencesData from "@/data/experience.json";
 import { CONTACT_DATA } from "@/config/contact";
-import ExternalContributions from "@/components/ExternalContributions";
+import Link from "next/link";
 
 interface ExperienceItem {
   id: number;
@@ -64,7 +64,7 @@ export default function Home() {
               My work spans engineering <strong className="font-semibold text-foreground">deterministic financial engines</strong> processing millions of records under strict compliance, to orchestrating legal <strong className="font-semibold text-foreground">Knowledge Graphs </strong> using Neo4j and LLMs. I hold an Integrated B.Tech &amp; M.Tech in IT from IIIT Gwalior.
             </p>
             <p>
-              I also build and run <a href="https://latentchronicle.online/" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent hover:underline">The Latent Chronicle ↗</a>, an automated computer science newspaper, and spend my free time contributing to <strong className="font-semibold text-foreground">open source</strong> as a newfound hobby.
+              I also build and run <a href="https://latentchronicle.online/" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent hover:underline">The Latent Chronicle ↗</a>, an automated computer science newspaper, and spend my free time contributing to <Link href="/oss-contributions" className="font-semibold text-accent hover:underline">open source</Link> as a newfound hobby.
             </p>
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <span className="text-xs font-sans font-medium text-foreground/65">
@@ -178,68 +178,91 @@ export default function Home() {
 
       <hr className="border-border" />
 
-      {/* 3. Open Source Contributions Section */}
-      <ExternalContributions />
-
-      <hr className="border-border" />
-
       {/* 4. Experience Section */}
       <section className="space-y-4">
         <h2 className="text-xs font-sans font-bold uppercase tracking-wider text-accent">
           Experience
         </h2>
-        <div className="space-y-3 text-sm text-foreground">
+        <div className="text-sm text-foreground">
           {experiences.map((exp) => {
             const empType = getEmploymentType(exp.role);
             const roleName = cleanRole(exp.role);
             return (
-              <div key={exp.id} className="flex items-start gap-2">
-                <span className="text-xs font-sans text-accent/60 mt-0.5">•</span>
-                <div className="flex-grow space-y-1">
-                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                    <div className="text-foreground">
-                      <span className="font-semibold text-foreground">
-                        {exp.link ? (
-                          <a href={exp.link} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
-                            {exp.company} ↗
-                          </a>
-                        ) : (
-                          exp.company
-                        )}
-                      </span>
-                      <span className="text-foreground/50 mx-2">|</span>
-                      <span>{roleName}</span>
-                      <span className="text-[10px] font-sans font-semibold text-accent bg-accent/5 border border-accent/15 px-1.5 py-0.5 rounded ml-2 uppercase">
-                        {empType}
-                      </span>
-                    </div>
-                    <div className="text-xs text-foreground/40 font-mono">
-                      {exp.duration}
-                    </div>
+              <div
+                key={exp.id}
+                className={`pl-4 py-3.5 border-l-2 transition-colors ${
+                  exp.current
+                    ? "border-accent"
+                    : "border-border hover:border-accent/40"
+                }`}
+              >
+                {/* Top row: company + badge | duration */}
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-1 sm:gap-4">
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 min-w-0">
+                    <span className="font-semibold text-foreground leading-tight">
+                      {exp.link ? (
+                        <a
+                          href={exp.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-accent hover:underline"
+                        >
+                          {exp.company} ↗
+                        </a>
+                      ) : (
+                        exp.company
+                      )}
+                    </span>
+                    <span className="text-[10px] font-sans font-bold text-accent bg-accent/5 border border-accent/15 px-1.5 py-0.5 rounded-xs uppercase tracking-wider">
+                      {empType}
+                    </span>
                   </div>
 
-                  {/* Summary one-liner */}
-                  {exp.summary && (
-                    <p className="text-xs text-foreground/80 leading-relaxed font-sans max-w-2xl text-justify">
-                      {exp.summary}
-                    </p>
-                  )}
-
-                  {/* Client Info (if present) */}
-                  {exp.client && (
-                    <div className="pl-4 text-xs space-y-1 text-foreground/90">
-                      <div className="flex items-baseline gap-2">
-                        <span className="font-semibold text-foreground/90">Client:</span>
-                        <a href={exp.client.link} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-medium">
-                          {exp.client.name} ↗
-                        </a>
-                      </div>
-                      <p className="text-foreground/80 leading-relaxed max-w-xl text-justify">
-                        {exp.client.description}
-                      </p>
-                    </div>
-                  )}
+                  {/* Duration + pulsing live dot */}
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    {exp.current && (
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-60" />
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
+                      </span>
+                    )}
+                    <span className="text-xs text-foreground/65 font-mono tabular-nums">
+                      {exp.duration}
+                    </span>
+                  </div>
                 </div>
+
+                {/* Role subtitle */}
+                <p className="text-sm text-foreground/70 font-sans mt-0.5 mb-2">
+                  {roleName}
+                </p>
+
+                {/* Summary */}
+                {exp.summary && (
+                  <p className="text-sm text-foreground/80 leading-relaxed font-sans max-w-2xl">
+                    {exp.summary}
+                  </p>
+                )}
+
+                {/* Client callout */}
+                {exp.client && (
+                  <div className="mt-2.5 pl-3 border-l border-border/60 space-y-0.5">
+                    <div className="flex flex-wrap items-baseline gap-1.5">
+                      <span className="text-[10px] font-sans text-foreground/65 uppercase tracking-wider font-bold">Client</span>
+                      <a
+                        href={exp.client.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-accent hover:underline font-medium font-sans"
+                      >
+                        {exp.client.name} ↗
+                      </a>
+                    </div>
+                    <p className="text-xs text-foreground/75 leading-relaxed font-sans max-w-xl">
+                      {exp.client.description}
+                    </p>
+                  </div>
+                )}
               </div>
             );
           })}
@@ -310,6 +333,17 @@ export default function Home() {
               <span className="text-foreground/85">
                 High-Throughput Backends (Go / Python), Intelligent AI &amp; GraphRAG Agents, Scale-Elastic Infrastructure (AWS / IaC), Secure Multi-Tenant SaaS Architectures
               </span>
+            </div>
+          </div>
+
+          {/* OSS Contributions */}
+          <div className="flex items-start gap-2">
+            <span className="text-xs font-sans text-accent/60 mt-0.5">•</span>
+            <div className="flex-1">
+              <span className="font-semibold text-foreground">OSS Contributions:</span>{" "}
+              <Link href="/oss-contributions" className="text-accent hover:underline">
+                View GitHub contributions, public PRs &amp; live stats →
+              </Link>
             </div>
           </div>
         </div>

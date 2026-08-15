@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 const navLinks = [
+  { name: "Open Source", href: "/oss-contributions" },
   { name: "Work", href: "/work" },
   { name: "Blogs", href: "/blogs" },
   { name: "Projects", href: "/projects" },

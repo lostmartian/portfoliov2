@@ -10,6 +10,24 @@ export interface GithubRepo {
 
 export const githubProjects: GithubRepo[] = [
   {
+    name: "agentdiff",
+    description: "Compare AI agent execution paths (trajectories) side-by-side. Detect trajectory drift, redundant tool loops, and resource regressions in CI/CD.",
+    html_url: "https://github.com/lostmartian/agentdiff",
+    language: "Python",
+    stargazers_count: 0,
+    created_at: "2026-08-16T17:34:16Z",
+    topics: ["ai-agents", "ai-evals", "evals", "llm-testing", "python", "regression-testing"]
+  },
+  {
+    name: "audioTQ",
+    description: "Porting TurboQuant's LLM weight-quantization mechanics (Hadamard rotations + Lloyd-Max centroids) to localized CPU audio processing.",
+    html_url: "https://github.com/lostmartian/audioTQ",
+    language: "Python",
+    stargazers_count: 1,
+    created_at: "2026-06-09T19:25:10Z",
+    topics: ["audio-compression", "python", "quantization", "turboquant"]
+  },
+  {
     name: "AgenticFinance-RAG",
     description: "Agentic RAG for SEC filings and news synthesis using LangGraph, Gemini 3.0, and PostgreSQL.",
     html_url: "https://github.com/lostmartian/AgenticFinance-RAG",

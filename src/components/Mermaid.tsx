@@ -32,8 +32,17 @@ export default function Mermaid({ chart }: { chart: string }) {
       securityLevel: "loose",
       fontFamily: "var(--font-mono)",
       themeVariables: {
-        lineColor: currentTheme === "dark" ? "#ffffff20" : "#00000080",
-        primaryColor: currentTheme === "dark" ? "#ffffff" : "#000000",
+        lineColor: currentTheme === "dark" ? "#a8a29e" : "#57534e",
+        primaryColor: currentTheme === "dark" ? "#f5f5f4" : "#292524",
+        primaryBorderColor: currentTheme === "dark" ? "#44403c" : "#ccbfa9",
+        primaryTextColor: currentTheme === "dark" ? "#f5f5f4" : "#292524",
+        secondaryColor: currentTheme === "dark" ? "#292524" : "#fdfbf7",
+        tertiaryColor: currentTheme === "dark" ? "#1c1917" : "#faedd8",
+        background: currentTheme === "dark" ? "#1c1917" : "#fdfbf7",
+        mainBkg: currentTheme === "dark" ? "#292524" : "#fdfbf7",
+        nodeBorder: currentTheme === "dark" ? "#57534e" : "#a8a29e",
+        clusterBkg: currentTheme === "dark" ? "#292524" : "#faedd8",
+        edgeLabelBackground: currentTheme === "dark" ? "#1c1917" : "#ffffff",
       }
     });
 
@@ -78,7 +87,7 @@ export default function Mermaid({ chart }: { chart: string }) {
   }
 
   return (
-    <div className="relative group my-8 border border-border/20 bg-foreground/[0.02] rounded-lg overflow-hidden w-full max-w-full">
+    <div className="relative group my-8 border border-border bg-card-bg rounded-lg overflow-hidden w-full max-w-full shadow-sm">
       {/* Overlay Toolbar */}
       <div className="absolute right-3 top-3 z-10 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-background/80 dark:bg-background/90 backdrop-blur border border-border/40 p-1.5 rounded-md shadow-sm">
         <button

@@ -334,10 +334,10 @@ export default function BlogPostContent({
                 }
 
                 return (
-                  <div className="relative group my-8 w-full max-w-full overflow-hidden">
+                  <div className="relative group my-8 w-full max-w-full overflow-hidden rounded-lg border border-[#30363d] shadow-sm">
                     {/* Code Header */}
-                    <div className="flex items-center justify-between px-4 py-2 bg-foreground/[0.03] border border-border/20 border-b-0 rounded-t-lg w-full">
-                      <span className="text-[10px] font-mono text-foreground/60 uppercase tracking-widest">
+                    <div className="flex items-center justify-between px-4 py-2 bg-[#161b22] border-b border-[#30363d] w-full">
+                      <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">
                         {language || "code"}
                       </span>
                       <button
@@ -347,14 +347,14 @@ export default function BlogPostContent({
                           btn.innerText = "Copied ✓";
                           setTimeout(() => { btn.innerText = "Copy ⎘"; }, 2000);
                         }}
-                        className="text-[10px] font-mono text-foreground/60 hover:text-foreground uppercase tracking-widest transition-colors cursor-pointer"
+                        className="text-[10px] font-mono text-zinc-400 hover:text-zinc-100 uppercase tracking-widest transition-colors cursor-pointer"
                       >
                         Copy ⎘
                       </button>
                     </div>
                     {/* Code Block */}
-                    <div className="border border-border/20 rounded-b-lg overflow-hidden w-full max-w-full">
-                      <pre className="!m-0 !rounded-none overflow-x-auto max-w-full w-full" {...props}>
+                    <div className="overflow-hidden w-full max-w-full bg-[#0d1117]">
+                      <pre className="!m-0 !rounded-none overflow-x-auto max-w-full w-full bg-[#0d1117] !bg-[#0d1117]" {...props}>
                         <code className={`${className} text-xs font-mono`}>
                           {codeChild.props?.children}
                         </code>

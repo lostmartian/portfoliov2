@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { TECHNICAL_TOOLKIT, VALIDATION_STATS } from "@/config/about";
 import experiencesData from "@/data/experience.json";
 import { CONTACT_DATA } from "@/config/contact";
 import Link from "next/link";
+import PortraitWithSus from "@/components/PortraitWithSus";
 
 interface ExperienceItem {
   id: number;
@@ -51,7 +51,7 @@ export default function Home() {
             </h1>
 
             {/* Bio */}
-            <div className="max-w-xl space-y-4 text-[15px] sm:text-base text-foreground/85 leading-relaxed">
+            <div className="max-w-xl space-y-4 text-[15px] sm:text-base text-foreground/85 leading-relaxed text-justify">
               <p>
                 I specialize in scale-elastic backend infrastructure, high-throughput Go/Python
                 architectures, and agentic AI systems. With 2+ years of experience, I build reliable
@@ -66,17 +66,17 @@ export default function Home() {
               </p>
               <p>
                 I also build and run{" "}
-                <a href="https://latentchronicle.online/" target="_blank" rel="noopener noreferrer" className="text-foreground underline decoration-border underline-offset-4 hover:decoration-accent hover:text-accent transition-colors">The Latent Chronicle ↗</a>, an automated computer science newspaper, and contribute to{" "}
-                <a href="https://github.com/BerriAI/litellm" target="_blank" rel="noopener noreferrer" className="text-foreground underline decoration-border underline-offset-4 hover:decoration-accent hover:text-accent transition-colors">LiteLLM ↗</a>{" "}
+                <a href="https://latentchronicle.online/" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">The Latent Chronicle ↗</a>, an automated computer science newspaper, and contribute to{" "}
+                <a href="https://github.com/BerriAI/litellm" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">LiteLLM ↗</a>{" "}
                 and{" "}
-                <a href="https://github.com/confident-ai/deepeval" target="_blank" rel="noopener noreferrer" className="text-foreground underline decoration-border underline-offset-4 hover:decoration-accent hover:text-accent transition-colors">DeepEval ↗</a>. Recently shipped{" "}
-                <a href="https://agentdiff.lostmartian.in/" target="_blank" rel="noopener noreferrer" className="text-foreground underline decoration-border underline-offset-4 hover:decoration-accent hover:text-accent transition-colors">agentdiff ↗</a>, a tool to compare AI agent execution trajectories in CI/CD.
+                <a href="https://github.com/confident-ai/deepeval" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">DeepEval ↗</a>. Recently shipped{" "}
+                <a href="https://agentdiff.lostmartian.in/" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">agentdiff ↗</a>, a tool to compare AI agent execution trajectories in CI/CD.
               </p>
             </div>
 
             {/* Meta row */}
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-foreground/70">
-              <div><span className="text-foreground/45 mr-1.5">Loc</span> Pune, India</div>
+              <div><span className="text-foreground/45 mr-1.5">Location</span> Pune, India</div>
               <div><span className="text-foreground/45 mr-1.5">Focus</span> AI / Backend / Cloud</div>
             </div>
 
@@ -96,30 +96,9 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right: Portrait, minimal studio frame */}
+          {/* Right: Portrait — contrast-boosted, sus dog on hover */}
           <div className="md:col-span-4 flex justify-center md:justify-end">
-            <figure className="group relative w-full max-w-[280px]">
-              {/* Frame */}
-              <div className="relative aspect-[4/5] overflow-hidden border border-border bg-card-bg shadow-[0_20px_60px_-24px_rgba(0,0,0,0.35)]">
-                <Image
-                  src="/me/profile-photo.png"
-                  alt="Sahil Gangurde"
-                  fill
-                  sizes="(max-width: 768px) 70vw, 280px"
-                  className="object-cover grayscale-[0.35] contrast-[1.02] transition-all duration-700 group-hover:grayscale-0"
-                  priority
-                />
-                {/* Subtle vignette */}
-                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/15 via-transparent to-transparent" />
-              </div>
-
-              {/* Caption strip */}
-              <figcaption className="mt-4">
-                <span className="text-sm text-foreground/60">
-                  Chasing sunsets, debugging threads.
-                </span>
-              </figcaption>
-            </figure>
+            <PortraitWithSus />
           </div>
         </div>
       </section>
@@ -155,90 +134,82 @@ export default function Home() {
             Experience
           </h2>
         </div>
-        <div>
+        <div className="divide-y divide-border/60 border-y border-border/60">
           {experiences.map((exp) => {
             const empType = getEmploymentType(exp.role);
             const roleName = cleanRole(exp.role);
             return (
-              <div
+              <article
                 key={exp.id}
-                className={`pl-5 py-5 border-l transition-colors relative ${
-                  exp.current
-                    ? "border-accent"
-                    : "border-border hover:border-accent/40"
-                }`}
+                className="group relative py-6 transition-colors"
               >
-                {exp.current && (
-                  <span className="absolute -left-[3.5px] top-7 w-[7px] h-[7px] rounded-full bg-accent ring-4 ring-background" />
-                )}
-                {/* Top row: company + badge | duration */}
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-1 sm:gap-4">
-                  <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 min-w-0">
-                    <span className="font-semibold text-foreground leading-tight">
+                {/* Header row */}
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5 sm:gap-4">
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 min-w-0">
+                    <span className="text-xs font-semibold text-accent/70 tabular-nums shrink-0 pt-0.5">
+                      {String(experiences.indexOf(exp) + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="text-lg font-semibold text-foreground leading-tight">
                       {exp.link ? (
                         <a
                           href={exp.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="hover:text-accent transition-colors"
+                          className="text-foreground group-hover:text-accent transition-colors decoration-accent/40 underline-offset-4 group-hover:underline"
                         >
                           {exp.company} ↗
                         </a>
                       ) : (
                         exp.company
                       )}
-                    </span>
-                    <span className="text-[10px] font-sans font-bold text-accent bg-accent/5 border border-accent/15 px-1.5 py-0.5 rounded-xs uppercase tracking-wider">
-                      {empType}
+                    </h3>
+                    <span className="text-[15px] text-foreground/60">
+                      {roleName}
                     </span>
                   </div>
 
-                  {/* Duration */}
-                  <div className="flex items-center gap-1.5 shrink-0">
-                    {exp.current && (
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-60" />
-                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
-                      </span>
-                    )}
-                    <span className="text-sm text-foreground/70">
+                  <div className="flex items-center gap-2.5 sm:pl-8 shrink-0">
+                    <span className="text-[10px] font-semibold text-accent/90 uppercase tracking-wider">
+                      {empType}
+                    </span>
+                    <span className="text-foreground/25">·</span>
+                    <span className="text-sm text-foreground/60 tabular-nums flex items-center gap-1.5">
+                      {exp.current && (
+                        <span className="relative flex h-1.5 w-1.5">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-60" />
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
+                        </span>
+                      )}
                       {exp.duration}
                     </span>
                   </div>
                 </div>
 
-                {/* Role subtitle */}
-                <p className="text-[15px] text-foreground/75 mt-0.5 mb-2">
-                  {roleName}
-                </p>
-
                 {/* Summary */}
                 {exp.summary && (
-                  <p className="text-[15px] text-foreground/85 leading-relaxed max-w-none">
+                  <p className="text-[15px] text-foreground/80 leading-relaxed mt-2.5 max-w-3xl sm:pl-8">
                     {exp.summary}
                   </p>
                 )}
 
                 {/* Client callout */}
                 {exp.client && (
-                  <div className="mt-3 pl-3 border-l border-border/60 space-y-0.5">
-                    <div className="flex flex-wrap items-baseline gap-1.5">
-                      <span className="text-xs text-foreground/65 uppercase tracking-wider font-bold">Client</span>
-                      <a
-                        href={exp.client.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[15px] text-accent hover:underline font-medium"
-                      >
-                        {exp.client.name} ↗
-                      </a>
-                    </div>
-                    <p className="text-sm text-foreground/80 leading-relaxed max-w-none">
-                      {exp.client.description}
-                    </p>
-                  </div>
+                  <p className="mt-3 text-sm sm:pl-8">
+                    <span className="text-[10px] uppercase tracking-wider text-foreground/50 font-bold mr-2">
+                      Building for
+                    </span>
+                    <a
+                      href={exp.client.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent hover:underline font-semibold"
+                    >
+                      {exp.client.name} ↗
+                    </a>
+                    <span className="text-foreground/75"> — {exp.client.description}</span>
+                  </p>
                 )}
-              </div>
+              </article>
             );
           })}
         </div>

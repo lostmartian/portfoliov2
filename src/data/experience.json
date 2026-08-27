@@ -8,6 +8,11 @@
     "current": true,
     "link": "https://first500days.com/",
     "homeDisplay": true,
+    "client": {
+      "name": "AYUVA",
+      "description": "AYUVA is a UK-based, AI-powered healthcare navigation and care coordination platform that helps patients organize records, understand their care journey, and prepare for appointments. Built NHS-ready with HIPAA/GDPR-grade security and patient-controlled consent.",
+      "link": "https://ayuvaxai.com/"
+    },
     "technologies": [
       "Python",
       "FastAPI",
@@ -17,7 +22,7 @@
       "Docker",
       "NestJS Integration"
     ],
-    "summary": "Building the AI API layer for a UK-based patient care navigation platform, covering symptom triage, medical report interpretation, care journey generation, and a guarded health assistant.",
+    "summary": "Building the AI API layer for AYUVA, a UK healthcare navigation platform, covering symptom triage, medical report interpretation, care journey generation, and a guarded health assistant.",
     "achievements": [
       "**Engineering 4-AI-Endpoint FastAPI Service**: Delivering schema-locked APIs for Symptom Navigation, Medical Report Interpreter (with OCR pipeline), Care Journey Generator, and a stateless Health Q&A Assistant, using OpenAI Structured Outputs for guaranteed JSON compliance.",
       "**Implementing Clinical Safety Guardrails**: Hardcoded middleware overrides that force emergency routing on critical keywords, verbatim medical disclaimers on every response, and clinical-redirect behavior for out-of-scope health questions.",

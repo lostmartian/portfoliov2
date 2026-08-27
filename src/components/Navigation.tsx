@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./ThemeToggle";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import HedgehogLine from "./HedgehogLine";
 
 const navLinks = [
   { name: "Open Source", href: "/oss-contributions" },
@@ -33,7 +34,8 @@ export default function Navigation() {
   const isHomeActive = pathname === "/";
 
   return (
-    <header className="relative py-2 border-b border-border">
+    <header className="relative py-2 border-b border-border overflow-visible">
+      <HedgehogLine />
       <div className="flex justify-between items-center w-full">
         {/* Logo / Title */}
         <Link 

@@ -130,7 +130,7 @@ export default function OSSContributionsPage() {
           .map((item: GitHubSearchItem) => {
             const repo = item.repository_url.replace("https://api.github.com/repos/", "");
             const isMerged = Boolean(item.pull_request?.merged_at);
-            const isDraft = Boolean(item.draft);
+            const isDraft = Boolean(item.draft) && item.state === "open";
             return {
               id: item.id,
               title: item.title,
@@ -196,30 +196,28 @@ export default function OSSContributionsPage() {
     <main className="space-y-6">
       {/* 1. Header */}
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold tracking-tight text-foreground">
-          OSS Contributions
+        <h1 className="text-[1.75rem] sm:text-[2.4rem] font-bold tracking-tight leading-tight text-foreground">
+          Open source, in public.
         </h1>
-        <p className="text-sm text-foreground/75 leading-relaxed font-sans">
+        <p className="text-[15px] text-foreground/75 leading-relaxed max-w-xl">
           A unified timeline tracking upstream open-source code upgrades, core features, and verified enterprise integrations.
         </p>
       </header>
 
-      <hr className="border-border" />
-
       {/* 2. Unified Overview Metrics */}
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2.5 text-xs sm:text-sm text-foreground/80 font-sans py-1">
         <div className="flex items-baseline gap-1.5">
-          <span className="font-semibold text-accent font-mono text-lg sm:text-xl leading-none">{stats.summary.publicContributions}</span>
+          <span className="font-bold text-accent text-lg sm:text-xl leading-none tabular-nums">{stats.summary.publicContributions}</span>
           <span>open source commits</span>
         </div>
-        <span className="hidden sm:inline text-border/60">•</span>
+        <span className="hidden sm:inline text-foreground/25">·</span>
         <div className="flex items-baseline gap-1.5">
-          <span className="font-semibold text-accent font-mono text-lg sm:text-xl leading-none">{privatePrs.merged}</span>
+          <span className="font-bold text-accent text-lg sm:text-xl leading-none tabular-nums">{privatePrs.merged}</span>
           <span>enterprise PRs merged</span>
         </div>
-        <span className="hidden sm:inline text-border/60">•</span>
+        <span className="hidden sm:inline text-foreground/25">·</span>
         <div className="flex items-baseline gap-1.5">
-          <span className="font-semibold text-accent font-mono text-lg sm:text-xl leading-none">{privatePrs.clientOrgsCount}</span>
+          <span className="font-bold text-accent text-lg sm:text-xl leading-none tabular-nums">{privatePrs.clientOrgsCount}</span>
           <span>partner organizations</span>
         </div>
       </div>
@@ -229,16 +227,16 @@ export default function OSSContributionsPage() {
       {/* 3. Unified Activity Timeline */}
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <h2 className="text-xs font-sans font-bold uppercase tracking-wider text-accent">
+          <h2 className="text-sm font-sans font-bold uppercase tracking-wider text-accent">
             Upstream Pull Requests (2026)
           </h2>
 
-          <div className="flex items-center gap-1 bg-foreground/[0.03] border border-border/30 rounded-xs p-0.5 overflow-x-auto max-w-full scrollbar-none">
+          <div className="flex items-center gap-1 border border-border/60 rounded-full p-0.5 overflow-x-auto max-w-full scrollbar-none">
             {(["all", "merged", "open", "draft", "closed"] as const).map((mode) => (
               <button
                 key={mode}
                 onClick={() => setFilter(mode)}
-                className={`px-2 py-0.5 text-[9px] font-sans uppercase tracking-wider rounded-xs transition-all cursor-pointer flex items-center gap-1 shrink-0 ${
+                className={`px-3 py-1 text-xs font-sans uppercase tracking-wide rounded-full transition-all cursor-pointer flex items-center gap-1.5 shrink-0 ${
                   filter === mode
                     ? "bg-accent text-accent-foreground font-semibold shadow-xs"
                     : "text-foreground/70 hover:text-foreground hover:bg-foreground/[0.04]"
@@ -246,7 +244,7 @@ export default function OSSContributionsPage() {
               >
                 <span>{mode}</span>
                 <span
-                  className={`text-[8px] font-sans font-semibold px-1 rounded-full ${
+                  className={`text-[10px] font-sans font-semibold px-1.5 rounded-full ${
                     filter === mode
                       ? "bg-accent-foreground/20 text-accent-foreground"
                       : "bg-foreground/[0.08] text-foreground/60"
@@ -270,7 +268,7 @@ export default function OSSContributionsPage() {
             ))}
           </div>
         ) : filteredPrs.length === 0 ? (
-          <div className="text-sm text-foreground/60 py-10 text-center italic font-sans border border-dashed border-border/60 rounded">
+          <div className="text-sm text-foreground/60 py-10 text-center italic font-sans border-y border-border/60">
             No pull requests found matching the &quot;{filter}&quot; filter.
           </div>
         ) : (
@@ -283,12 +281,12 @@ export default function OSSContributionsPage() {
               // Colors based on state
               const dotColorClass =
                 pr.state === "merged"
-                  ? "bg-purple-500 ring-4 ring-purple-500/10"
+                  ? "bg-[#8250df] ring-4 ring-[#8250df]/10"
                   : pr.state === "open"
-                  ? "bg-emerald-500 ring-4 ring-emerald-500/10"
+                  ? "bg-[#1a7f37] ring-4 ring-[#1a7f37]/10"
                   : pr.state === "draft"
-                  ? "bg-stone-400 ring-4 ring-stone-400/10"
-                  : "bg-red-400 ring-4 ring-red-400/10";
+                  ? "bg-[#656d76] ring-4 ring-[#656d76]/10"
+                  : "bg-[#cf222e] ring-4 ring-[#cf222e]/10";
 
               return (
                 <div key={pr.id} className="relative group transition-colors">
@@ -311,28 +309,28 @@ export default function OSSContributionsPage() {
                         href={pr.repoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs font-mono font-semibold text-accent hover:underline"
+                        className="text-sm font-semibold text-accent hover:underline"
                       >
                         {pr.repo}
                       </a>
-                      <span className="text-foreground/45 text-[10px] font-mono">#{pr.number}</span>
+                      <span className="text-foreground/45 text-xs">#{pr.number}</span>
                       
                       <span
-                        className={`inline-flex items-center gap-0.5 text-[8px] font-sans font-bold px-1 py-0.2 border rounded-xs uppercase tracking-wider select-none ${
+                        className={`inline-flex items-center text-[10px] font-sans font-bold uppercase tracking-wider select-none ${
                           pr.state === "merged"
-                            ? "bg-purple-500/5 text-purple-700 dark:text-purple-400 border-purple-500/15"
+                            ? "text-[#8250df]"
                             : pr.state === "open"
-                            ? "bg-emerald-500/5 text-emerald-700 dark:text-emerald-400 border-emerald-500/15"
+                            ? "text-[#1a7f37]"
                             : pr.state === "draft"
-                            ? "bg-stone-500/5 text-stone-600 dark:text-stone-400 border-stone-500/15"
-                            : "bg-red-500/5 text-red-700 dark:text-red-400 border-red-500/15"
+                            ? "text-[#656d76]"
+                            : "text-[#cf222e]"
                         }`}
                       >
                         {pr.state}
                       </span>
                     </div>
 
-                    <div className="text-xs text-foreground/50 font-mono tabular-nums sm:text-right">
+                    <div className="text-sm text-foreground/55 tabular-nums sm:text-right">
                       {new Date(pr.createdAt).toLocaleDateString("en-US", {
                         month: "short",
                         day: "numeric",
@@ -372,12 +370,9 @@ export default function OSSContributionsPage() {
 
                       {/* Tech Tags */}
                       <div className="flex flex-wrap gap-1.5 pt-1">
-                        {prDetails.tech.map((t) => (
-                          <span
-                            key={t}
-                            className="text-[9px] font-mono text-foreground/60 border border-border/20 px-2 py-0.5 rounded-xs bg-foreground/[0.01]"
-                          >
-                            {t}
+                        {prDetails.tech.map((t, i) => (
+                          <span key={t} className="text-[13px] text-foreground/55">
+                            {t}{i < prDetails.tech.length - 1 && <span className="text-foreground/25"> ·</span>}
                           </span>
                         ))}
                       </div>

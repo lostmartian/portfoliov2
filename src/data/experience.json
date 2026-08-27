@@ -1,5 +1,30 @@
 [
   {
+    "id": 7,
+    "company": "First500days",
+    "role": "AI Engineer, Freelance",
+    "location": "Remote / UK",
+    "duration": "Aug'26 - Present",
+    "current": true,
+    "link": "https://first500days.com/",
+    "homeDisplay": true,
+    "technologies": [
+      "Python",
+      "FastAPI",
+      "OpenAI Structured Outputs",
+      "OCR",
+      "Pydantic",
+      "Docker",
+      "NestJS Integration"
+    ],
+    "summary": "Building the AI API layer for a UK-based patient care navigation platform, covering symptom triage, medical report interpretation, care journey generation, and a guarded health assistant.",
+    "achievements": [
+      "**Engineering 4-AI-Endpoint FastAPI Service**: Delivering schema-locked APIs for Symptom Navigation, Medical Report Interpreter (with OCR pipeline), Care Journey Generator, and a stateless Health Q&A Assistant, using OpenAI Structured Outputs for guaranteed JSON compliance.",
+      "**Implementing Clinical Safety Guardrails**: Hardcoded middleware overrides that force emergency routing on critical keywords, verbatim medical disclaimers on every response, and clinical-redirect behavior for out-of-scope health questions.",
+      "**Syncing Contracts with Client Platform**: Aligning Pydantic schemas 1:1 with the client's NestJS modular monolith DTOs so the AI service drops in as an upstream microservice behind their JWT gateway."
+    ]
+  },
+  {
     "id": 1,
     "company": "JRat’s Studio",
     "role": "Software Engineer, Freelance",

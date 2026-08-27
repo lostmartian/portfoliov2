@@ -16,7 +16,7 @@ import {
   ArrowRight,
   CheckCircle2,
   Lock,
-  ArrowLeft
+  ChevronLeft
 } from "lucide-react";
 import Mermaid from "@/components/Mermaid";
 
@@ -98,40 +98,40 @@ export default function IPOAllotmentClient() {
       <div className="space-y-6">
         <Link
           href="/work"
-          className="text-xs font-mono text-foreground/70 hover:text-foreground transition-colors inline-flex items-center gap-1.5"
+          className="text-sm text-foreground/70 hover:text-accent transition-colors inline-flex items-center gap-1.5"
         >
-          <ArrowLeft className="w-3 shrink-0" /> Return to Work
+          <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" /> Return to Work
         </Link>
 
         <header className="space-y-2">
-          <span className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-semibold block">
-            Case Study   SEBI-Reg. Category I RTA
+          <span className="text-sm text-accent font-semibold block">
+            Case Study — SEBI-Reg. Category I RTA
           </span>
-          <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+          <h1 className="text-[1.75rem] sm:text-[2.4rem] font-bold tracking-tight leading-tight text-foreground">
             IPO Allotment Engine
           </h1>
-          <p className="text-lg text-foreground/60 leading-relaxed font-sans max-w-2xl">
+          <p className="text-[15px] sm:text-base text-foreground/75 leading-relaxed max-w-xl">
             A scale-elastic processing platform for high-stakes IPO settlement, data reconciliation, and SEBI compliance.
           </p>
         </header>
 
         {/* Metadata Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-6 border-y border-border text-xs font-mono">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-5 border-y border-border/60 divide-x divide-border/40 [&>div]:px-4 [&>div:first-child]:pl-0">
           <div className="space-y-1">
-            <span className="text-foreground/40 uppercase tracking-wider block">Timeline</span>
-            <span className="text-foreground/80 font-medium">Mar 2026   Present</span>
+            <span className="text-xs uppercase tracking-wider text-foreground/45 block">Timeline</span>
+            <span className="text-sm text-foreground/85 font-medium">Mar 2026   Present</span>
           </div>
           <div className="space-y-1">
-            <span className="text-foreground/40 uppercase tracking-wider block">Role</span>
-            <span className="text-foreground/80 font-medium">Software Engineer, Freelance</span>
+            <span className="text-xs uppercase tracking-wider text-foreground/45 block">Role</span>
+            <span className="text-sm text-foreground/85 font-medium">Software Engineer, Freelance</span>
           </div>
           <div className="space-y-1">
-            <span className="text-foreground/40 uppercase tracking-wider block">Peak Ingestion</span>
-            <span className="text-foreground/80 font-medium">10M+ Applications</span>
+            <span className="text-xs uppercase tracking-wider text-foreground/45 block">Peak Ingestion</span>
+            <span className="text-sm text-foreground/85 font-medium">10M+ Applications</span>
           </div>
           <div className="space-y-1">
-            <span className="text-foreground/40 uppercase tracking-wider block">Core Stack</span>
-            <span className="text-foreground/80 font-medium">Go / Python / Polars</span>
+            <span className="text-xs uppercase tracking-wider text-foreground/45 block">Core Stack</span>
+            <span className="text-sm text-foreground/85 font-medium">Go / Python / Polars</span>
           </div>
         </div>
 
@@ -149,18 +149,18 @@ export default function IPOAllotmentClient() {
             priority
           />
         </div>
-        <p className="text-[10px] font-mono text-foreground/40 uppercase tracking-wider text-center">
+        <p className="text-xs text-foreground/45 text-center">
           Fig 01.   Basis of Allotment Grid &amp; Processing Flow
         </p>
       </div>
 
       {/* Case Study Section 1: Business Domain */}
       <section className="space-y-4">
-        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border pb-2">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-accent">
           01. Business Domain &amp; Core Challenge
         </h2>
 
-        <div className="space-y-4 text-sm text-foreground/80 leading-relaxed text-justify">
+        <div className="space-y-4 text-[15px] text-foreground/85 leading-relaxed">
           <p>
             When a company decides to go public through an Initial Public Offering (IPO) in the Indian capital markets, it needs a neutral, regulated intermediary to manage the transaction. This intermediary is the <strong>Registrar and Transfer Agent (RTA)</strong>.
           </p>
@@ -173,18 +173,18 @@ export default function IPOAllotmentClient() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-2">
             <div className="p-4 rounded border border-border bg-foreground/[0.01]">
-              <span className="font-semibold text-foreground/80 block">Allotment Registrar API</span>
-              <p className="text-foreground/60 mt-1">Direct endpoint ingestion layer processing JSON payload requests.</p>
+              <span className="font-semibold text-foreground block">Allotment Registrar API</span>
+              <p className="text-foreground/75 mt-1">Direct endpoint ingestion layer processing JSON payload requests.</p>
             </div>
             <div className="p-4 rounded border border-border bg-foreground/[0.01]">
-              <span className="text-xs font-mono font-bold text-foreground/70 block uppercase">Payment &amp; Depositories</span>
-              <p className="text-xs text-foreground/50 mt-1">
+              <span className="font-semibold text-foreground block">Payment &amp; Depositories</span>
+              <p className="text-sm text-foreground/75 mt-1">
                 Interfaces with Depositories (NSDL &amp; CDSL) holding demat vaults and Payment Networks (SCSB Banks &amp; NPCI UPI) holding bid capital.
               </p>
             </div>
           </div>
 
-          <h3 className="text-xs font-mono uppercase text-foreground/60 font-semibold pt-2">The Engineering Problem</h3>
+          <h3 className="text-base font-semibold text-foreground pt-2">The Engineering Problem</h3>
           <p>
             During an IPO bidding window, RTAs face massive spikes where millions of bids arrive on the evening of the bidding close. With India&apos;s shift towards a strict <strong>T+3 listing timeline</strong>, the RTA has an extremely narrow window (typically overnight) to ingest, validate format structure, deduplicate duplicate PAN bids, perform three-way payment reconciliations, and execute the Basis of Allotment (BOA).
           </p>
@@ -192,8 +192,8 @@ export default function IPOAllotmentClient() {
             Because any financial allocation error, share mismatch, or delayed bank release triggers immediate regulatory penalties and audits, there is <strong>zero error tolerance</strong>.
           </p>
 
-          <h3 className="text-xs font-mono uppercase text-foreground/60 font-semibold pt-2">Regulatory Constraints</h3>
-          <ul className="space-y-3 text-xs text-foreground/70 pl-4 list-disc">
+          <h3 className="text-base font-semibold text-foreground pt-2">Regulatory Constraints</h3>
+          <ul className="space-y-2.5 text-[14px] text-foreground/85 pl-5 list-disc">
             <li>
               <strong>ASBA (Applications Supported by Blocked Amount):</strong> Bidders funds are blocked at SCSBs or NPCI. Post-allotment, the platform triggers debit signals for successful lots and release signals for unallotted funds.
             </li>
@@ -209,27 +209,27 @@ export default function IPOAllotmentClient() {
 
       {/* Case Study Section 2: Architecture */}
       <section className="space-y-4">
-        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border pb-2">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-accent">
           02. System Architecture &amp; Execution Flows
         </h2>
 
-        <div className="space-y-4 text-sm text-foreground/80 leading-relaxed text-justify">
+        <div className="space-y-4 text-[15px] text-foreground/85 leading-relaxed">
           <p>
             The platform adopts a hybrid design: a containerized, event-driven batch processing pipeline (Data Plane) handles heavy calculations and file transformations, while a low-latency microservice (Control Plane) manages configurations, overrides, and administrative stage sign-offs.
           </p>
 
           <div className="space-y-2 py-4">
-            <h3 className="text-xs font-mono text-foreground/40 uppercase tracking-wider text-center">
+            <h3 className="text-xs text-foreground/45 text-center">
               Fig 02.   End-to-End System Ingestion &amp; Settlement Flow
             </h3>
             <Mermaid chart={mermaidChart} />
           </div>
 
-          <h3 className="text-xs font-mono uppercase text-foreground/60 font-semibold">The Ingest &amp; Processing Pipeline Flow</h3>
+          <h3 className="text-base font-semibold text-foreground">The Ingest &amp; Processing Pipeline Flow</h3>
           <p>
             Every business day during an active IPO, the batch execution executes sequentially:
           </p>
-          <ol className="space-y-3 text-xs text-foreground/70 pl-4 list-decimal">
+          <ol className="space-y-2.5 text-[14px] text-foreground/85 pl-5 list-decimal">
             <li>
               <strong>Trigger &amp; Dispatch:</strong> A cron-based orchestration system fires daily at set timeframes (interim and final close), querying active IPO statuses and invoking the compute pipeline.
             </li>
@@ -244,7 +244,7 @@ export default function IPOAllotmentClient() {
             </li>
           </ol>
 
-          <h3 className="text-xs font-mono uppercase text-foreground/60 font-semibold pt-2">The Administrative Control Path</h3>
+          <h3 className="text-base font-semibold text-foreground pt-2">The Administrative Control Path</h3>
           <p>
             To manage configurations or execute manual overrides, administrative staff authenticate via the Admin Portal utilizing Multi-Factor Authentication. Requests hit the secure API Gateway, which validates JWT claims before forwarding traffic to the containerized backend.
           </p>
@@ -253,19 +253,19 @@ export default function IPOAllotmentClient() {
 
       {/* Case Study Section 3: Tech Stack */}
       <section className="space-y-4">
-        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border pb-2">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-accent">
           03. Technology Stack Mapping
         </h2>
         <div className="space-y-6 pt-2">
           {Object.entries(techStack).map(([layerName, items]) => (
             <div key={layerName} className="space-y-1.5">
-              <h3 className="text-xs font-mono uppercase text-foreground/40 font-bold tracking-wider">
+              <h3 className="text-sm font-semibold text-foreground capitalize">
                 {layerName} Layer
               </h3>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1.5 text-xs text-foreground/70 pl-4 list-disc">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-[14px] text-foreground/85 pl-5 list-disc">
                 {items.map((item) => (
                   <li key={item.name} className="leading-relaxed">
-                    <span className="font-semibold text-foreground/80">{item.name}</span>: <span className="text-foreground/50">{item.desc}</span>
+                    <span className="font-semibold text-foreground/80">{item.name}</span>: <span className="text-foreground/75">{item.desc}</span>
                   </li>
                 ))}
               </ul>
@@ -278,22 +278,22 @@ export default function IPOAllotmentClient() {
 
       {/* Case Study Section 4: Go Backend */}
       <section className="space-y-4">
-        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border pb-2">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-accent">
           04. Backend Microservices Architecture
         </h2>
 
-        <div className="space-y-4 text-sm text-foreground/80 leading-relaxed text-justify">
+        <div className="space-y-4 text-[15px] text-foreground/85 leading-relaxed">
           <p>
             The backend control plane service is written in Go to maximize concurrency and ensure low memory footprint. By adopting Clean Architecture patterns, database, HTTP routing, and core domain logics remain decoupled:
           </p>
-          <ul className="space-y-2 text-xs text-foreground/75 pl-4 list-disc">
+          <ul className="space-y-2 text-[14px] text-foreground/85 pl-5 list-disc">
             <li><strong>API Presentation Layer</strong> handles HTTP routing, JSON serialization, and request binding.</li>
             <li><strong>Middleware Interceptors</strong> validate JSON Web Tokens, evaluate user roles (Admin vs. Standard Operator), and capture before/after snapshots for audits.</li>
             <li><strong>Business Service Layer</strong> handles allotment state gates, parameter updates, and coordinates multi-table mutations inside single database transactions.</li>
             <li><strong>Repository Layer</strong> executes raw parameterized SQL statements directly to connection pools, avoiding the overhead of heavy Object-Relational Mappers (ORMs).</li>
           </ul>
 
-          <h3 className="text-xs font-mono uppercase text-foreground/60 font-semibold pt-2">Transactional Safety</h3>
+          <h3 className="text-base font-semibold text-foreground pt-2">Transactional Safety</h3>
           <p>
             Multi-row database operations execute within explicit transaction boundaries. If a write fails or audit-trail logging encounters an error, database transactions roll back automatically to maintain state consistency.
           </p>
@@ -302,26 +302,26 @@ export default function IPOAllotmentClient() {
 
       {/* Case Study Section 5: Python Algorithms */}
       <section className="space-y-4">
-        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border pb-2">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-accent">
           05. High-Throughput Data Engine Design
         </h2>
 
-        <div className="space-y-4 text-sm text-foreground/80 leading-relaxed text-justify">
+        <div className="space-y-4 text-[15px] text-foreground/85 leading-relaxed">
           <p>
             The computing engine uses Polars (compiled with Rust on Apache Arrow memory layouts) to achieve vectorization. Parallel hashing and joins process millions of files in seconds, bypassing Python&apos;s Global Interpreter Lock (GIL).
           </p>
 
-          <h3 className="text-xs font-mono uppercase text-foreground/60 font-semibold pt-2">Linear-Time Format Checks</h3>
+          <h3 className="text-base font-semibold text-foreground pt-2">Linear-Time Format Checks</h3>
           <p>
             Standard regular expression engines risk CPU execution halts if input files contains maliciously crafted strings (Regular Expression Denial of Service, or ReDoS). We mitigate this by using <strong>Google-RE2</strong>, which guarantees linear-time $O(N)$ execution bounds during heavy application surges.
           </p>
 
-          <h3 className="text-xs font-mono uppercase text-foreground/60 font-semibold pt-2">Deduplication &amp; Multiplicity Audits</h3>
+          <h3 className="text-base font-semibold text-foreground pt-2">Deduplication &amp; Multiplicity Audits</h3>
           <p>
             Window functions partition bids over Permanent Account Number (PAN) profiles. If an investor submits bids under restricted categories (such as Retail or Employees) across multiple applications or broker accounts, the engine group-wise flags all associated bids for rejection to enforce SEBI mandates.
           </p>
 
-          <h3 className="text-xs font-mono uppercase text-foreground/60 font-semibold pt-2">Deterministic Basis of Allotment Solver</h3>
+          <h3 className="text-base font-semibold text-foreground pt-2">Deterministic Basis of Allotment Solver</h3>
           <p>
             To prevent pseudo-random seed manipulation, the solver reverses application ID digits to shuffle rows uniformly before sorting. Cycle indices match pre-configured magic numbers to distribute shares cyclically, ensuring absolute lottery reproducibility during tiebreaker draws.
           </p>
@@ -330,22 +330,22 @@ export default function IPOAllotmentClient() {
 
       {/* Case Study Section 6: Database */}
       <section className="space-y-4">
-        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border pb-2">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-accent">
           06. Database Schema Design &amp; Indexing
         </h2>
 
-        <div className="space-y-4 text-sm text-foreground/80 leading-relaxed text-justify">
+        <div className="space-y-4 text-[15px] text-foreground/85 leading-relaxed">
           <p>
             The relational database layer runs on Amazon Aurora PostgreSQL. The schema uses SQL-first migration scripts versioned chronologically.
           </p>
 
-          <h3 className="text-xs font-mono uppercase text-foreground/60 font-semibold pt-2">Index Lock Mitigation</h3>
+          <h3 className="text-base font-semibold text-foreground pt-2">Index Lock Mitigation</h3>
           <p>
             Standard indexing operations on large tables block database writes. In production environments, we require all migration index creation scripts to execute concurrently with strict statement timeouts, preventing database locks during high-volume intake periods.
           </p>
 
-          <h3 className="text-xs font-mono uppercase text-foreground/60 font-semibold pt-2">Storage Optimizations</h3>
-          <ul className="space-y-1.5 text-xs text-foreground/70 pl-4 list-disc">
+          <h3 className="text-base font-semibold text-foreground pt-2">Storage Optimizations</h3>
+          <ul className="space-y-2 text-[14px] text-foreground/85 pl-5 list-disc">
             <li>
               <strong>Custom Enum Types:</strong> Fields like category flags or classification rules store enums (occupying only 4 bytes), reducing disk/RAM sizing footprint by gigabytes compared to raw string columns across millions of transaction rows.
             </li>
@@ -358,22 +358,22 @@ export default function IPOAllotmentClient() {
 
       {/* Case Study Section 7: IaC */}
       <section className="space-y-4">
-        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border pb-2">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-accent">
           07. Infrastructure as Code &amp; Cloud Topography
         </h2>
 
-        <div className="space-y-4 text-sm text-foreground/80 leading-relaxed text-justify">
+        <div className="space-y-4 text-[15px] text-foreground/85 leading-relaxed">
           <p>
             Provisioned via OpenTofu / Terraform, the cloud topography isolates the primary database cluster, backend services, and execution tasks inside secure private subnets. All outbound calls route through isolated NAT Gateways with static Elastic IPs allowlisted by external exchange APIs.
           </p>
 
-          <h3 className="text-xs font-mono uppercase text-foreground/60 font-semibold pt-2">Cognito User Sync Lambda Flow</h3>
+          <h3 className="text-base font-semibold text-foreground pt-2">Cognito User Sync Lambda Flow</h3>
           <p>
             To prevent credential synchronization discrepancies, user provisioning triggers a sync task to register user records inside the relational database, resolving DB connection details dynamically from Secrets Manager using secure KMS keys.
           </p>
 
 
-          <h3 className="text-xs font-mono uppercase text-foreground/60 font-semibold pt-2">Batch Orchestration</h3>
+          <h3 className="text-base font-semibold text-foreground pt-2">Batch Orchestration</h3>
           <p>
             A workflow state machine coordinates the lifecycle: triggering exchange ingestion connectors, running parallel batch verification tasks, evaluating ingestion statuses, and executing the Basis of Allotment scripts.
           </p>
@@ -382,55 +382,55 @@ export default function IPOAllotmentClient() {
 
       {/* Case Study Section 8: Ending Notes */}
       <section className="space-y-4">
-        <h2 className="text-xs font-mono uppercase tracking-wider text-foreground/40 font-bold border-b border-border pb-2">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-accent">
           08. Key Accomplishments &amp; Metrics
         </h2>
 
         <div className="space-y-6 pt-2">
           <div className="flex gap-3">
-            <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-accent mt-0.5 shrink-0" />
             <div className="space-y-1">
-              <span className="text-xs font-mono font-bold text-foreground/80 uppercase">In-Memory Engine Throughput</span>
-              <p className="text-xs text-foreground/50 leading-relaxed">
+              <span className="text-[15px] font-semibold text-foreground block">In-Memory Engine Throughput</span>
+              <p className="text-sm text-foreground/80 leading-relaxed">
                 Engineered a vectorized 3-way data reconciliation engine in Python utilizing <strong>Polars</strong> (Rust-backed multi-threaded engine) and <strong>Apache Arrow</strong>, achieving a throughput of <strong>1.6M+ records/second</strong> (reconciling 10M records in <strong>6.34 seconds</strong>) and bypassing Python’s GIL to meet strict T+3 regulatory timelines.
               </p>
             </div>
           </div>
 
           <div className="flex gap-3 border-t border-border/10 pt-4">
-            <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-accent mt-0.5 shrink-0" />
             <div className="space-y-1">
-              <span className="text-xs font-mono font-bold text-foreground/80 uppercase">ReDoS Risk Mitigation</span>
-              <p className="text-xs text-foreground/50 leading-relaxed">
+              <span className="text-[15px] font-semibold text-foreground block">ReDoS Risk Mitigation</span>
+              <p className="text-sm text-foreground/80 leading-relaxed">
                 Mitigated Regular Expression Denial of Service (ReDoS) vulnerability risks during high-volume data validation by integrating <strong>Google-RE2</strong>, guaranteeing linear-time $O(N)$ execution bounds for pattern matching across millions of investor identifiers.
               </p>
             </div>
           </div>
 
           <div className="flex gap-3 border-t border-border/10 pt-4">
-            <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-accent mt-0.5 shrink-0" />
             <div className="space-y-1">
-              <span className="text-xs font-mono font-bold text-foreground/80 uppercase">Database Contention Minimization</span>
-              <p className="text-xs text-foreground/50 leading-relaxed">
+              <span className="text-[15px] font-semibold text-foreground block">Database Contention Minimization</span>
+              <p className="text-sm text-foreground/80 leading-relaxed">
                 Designed and optimized system-wide duplicate PAN detection routines using a multi-strategy architecture (including out-of-core <strong>External Merge Sort</strong> for RAM-constrained environments and <strong>Polars Streaming</strong>), reducing database lock contention by <strong>80%</strong> on high-frequency transactions.
               </p>
             </div>
           </div>
 
           <div className="flex gap-3 border-t border-border/10 pt-4">
-            <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-0.5 shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-accent mt-0.5 shrink-0" />
             <div className="space-y-1">
-              <span className="text-xs font-mono font-bold text-foreground/80 uppercase">Zero-Lock Live Database Indexing</span>
-              <p className="text-xs text-foreground/50 leading-relaxed">
+              <span className="text-[15px] font-semibold text-foreground block">Zero-Lock Live Database Indexing</span>
+              <p className="text-sm text-foreground/80 leading-relaxed">
                 Reduced database index-creation query lock times to zero by establishing schema governance policies requiring `CREATE INDEX CONCURRENTLY` for Flyway migrations on large live transaction tables.
               </p>
             </div>
           </div>
         </div>
 
-        <div className="p-4 border border-border/20 rounded bg-foreground/[0.01] space-y-2 mt-6">
-          <span className="text-xs font-mono font-bold text-foreground/70">KEY TECHNOLOGIES</span>
-          <p className="text-[11px] font-mono text-foreground/40 leading-relaxed">
+        <div className="p-4 border border-border/60 rounded bg-card-bg space-y-2 mt-6">
+          <span className="text-xs uppercase tracking-wider text-accent font-semibold block">KEY TECHNOLOGIES</span>
+          <p className="text-sm text-foreground/75 leading-relaxed">
             Go (Golang), Python, Next.js, Polars, PostgreSQL, AWS Amplify, AWS Cognito, AWS Batch, AWS Step Functions, SQL Parameters (pgx), Google-RE2, Apache Arrow, Vectorized Operations, REST APIs, System Design, Role-Based Access Control (RBAC), Data Reconciliation, Flyway Migrations, Concurrent Indexing, Multithreading, SIMD Parallelism.
           </p>
         </div>

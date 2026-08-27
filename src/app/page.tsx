@@ -39,173 +39,148 @@ export default function Home() {
   const experiences = (experiencesData as ExperienceItem[]).filter(exp => exp.homeDisplay !== false);
 
   return (
-    <div className="space-y-10 font-sans">
-      {/* 1. Profile Section */}
-      <section className="space-y-6">
-        {/* Open to Opportunities Badge */}
-        {/* <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400 dark:bg-amber-400/10 border border-amber-500 dark:border-amber-400/40 text-black dark:text-amber-300">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black dark:bg-amber-400 opacity-60" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-black dark:bg-amber-300" />
-          </span>
-          <span className="text-[10px] font-mono font-bold uppercase tracking-widest">
-            Open to Opportunities &mdash; Applied AI &bull; RAG &bull; Agentic Systems &bull; Backend Roles
-          </span>
-        </div> */}
-        <h2 className="text-xs font-sans font-bold uppercase tracking-wider text-accent">
-          Profile
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-          <div className="md:col-span-2 space-y-4 text-sm text-foreground leading-relaxed text-justify">
-            <p>
-              I am a <strong className="font-semibold text-foreground">Backend &amp; AI Engineer</strong> specializing in scale-elastic backend infrastructure, high-throughput Go/Python architectures, and agentic AI systems. With 2+ years of experience, I build reliable software for high-stakes, regulated industries.
-            </p>
-            <p>
-              My work spans engineering <strong className="font-semibold text-foreground">deterministic financial engines</strong> processing millions of records under strict compliance, to orchestrating legal <strong className="font-semibold text-foreground">Knowledge Graphs </strong> using Neo4j and LLMs. I hold an Integrated B.Tech &amp; M.Tech in IT from IIIT Gwalior.
-            </p>
-            <p>
-              I also build and run <a href="https://latentchronicle.online/" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent hover:underline">The Latent Chronicle ↗</a>, an automated computer science newspaper, and am a contributor to <a href="https://github.com/BerriAI/litellm" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent hover:underline">LiteLLM ↗</a> and <a href="https://github.com/confident-ai/deepeval" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent hover:underline">DeepEval ↗</a> in my spare time. I recently shipped <a href="https://agentdiff.lostmartian.in/" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent hover:underline">agentdiff ↗</a>, a tool to compare AI agent execution trajectories and catch drift and redundant tool loops in CI/CD.
-            </p>
-            <div className="pt-2 flex flex-wrap items-center gap-3">
-              <span className="text-xs font-sans font-medium text-foreground/65">
-                Applied AI • RAG &amp; GraphRAG • Agentic Systems
-              </span>
+    <div className="font-sans">
+      {/* ============ HERO ============ */}
+      <section className="pt-10 pb-14 md:pt-16 md:pb-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 items-center">
+          {/* Left: Identity */}
+          <div className="md:col-span-8 space-y-7">
+            {/* Headline - single sentence */}
+            <h1 className="text-[1.75rem] sm:text-[2.4rem] lg:text-[2.9rem] font-bold tracking-tight leading-tight text-foreground">
+              Backend &amp; AI Engineer building systems that hold.
+            </h1>
+
+            {/* Bio */}
+            <div className="max-w-xl space-y-4 text-[15px] sm:text-base text-foreground/85 leading-relaxed">
+              <p>
+                I specialize in scale-elastic backend infrastructure, high-throughput Go/Python
+                architectures, and agentic AI systems. With 2+ years of experience, I build reliable
+                software for high-stakes, regulated industries.
+              </p>
+              <p>
+                My work spans engineering{" "}
+                <strong className="font-semibold text-foreground">deterministic financial engines</strong>{" "}
+                processing millions of records under strict compliance, to orchestrating legal{" "}
+                <strong className="font-semibold text-foreground">Knowledge Graphs</strong> using Neo4j
+                and LLMs. I hold an Integrated B.Tech &amp; M.Tech in IT from IIIT Gwalior.
+              </p>
+              <p>
+                I also build and run{" "}
+                <a href="https://latentchronicle.online/" target="_blank" rel="noopener noreferrer" className="text-foreground underline decoration-border underline-offset-4 hover:decoration-accent hover:text-accent transition-colors">The Latent Chronicle ↗</a>, an automated computer science newspaper, and contribute to{" "}
+                <a href="https://github.com/BerriAI/litellm" target="_blank" rel="noopener noreferrer" className="text-foreground underline decoration-border underline-offset-4 hover:decoration-accent hover:text-accent transition-colors">LiteLLM ↗</a>{" "}
+                and{" "}
+                <a href="https://github.com/confident-ai/deepeval" target="_blank" rel="noopener noreferrer" className="text-foreground underline decoration-border underline-offset-4 hover:decoration-accent hover:text-accent transition-colors">DeepEval ↗</a>. Recently shipped{" "}
+                <a href="https://agentdiff.lostmartian.in/" target="_blank" rel="noopener noreferrer" className="text-foreground underline decoration-border underline-offset-4 hover:decoration-accent hover:text-accent transition-colors">agentdiff ↗</a>, a tool to compare AI agent execution trajectories in CI/CD.
+              </p>
+            </div>
+
+            {/* Meta row */}
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-foreground/70">
+              <div><span className="text-foreground/45 mr-1.5">Loc</span> Pune, India</div>
+              <div><span className="text-foreground/45 mr-1.5">Focus</span> AI / Backend / Cloud</div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <a
+                href={`mailto:${CONTACT_DATA.email}`}
+                className="inline-flex items-center h-10 px-6 bg-foreground text-background rounded-full text-sm font-medium hover:bg-accent hover:text-white transition-colors duration-300"
+              >
+                Get in touch
+              </a>
+              <Link
+                href="/work"
+                className="inline-flex items-center h-10 px-6 border border-border rounded-full text-sm font-medium text-foreground/80 hover:border-accent/50 hover:text-accent transition-colors duration-300"
+              >
+                View work
+              </Link>
             </div>
           </div>
-          <div className="md:col-span-1 flex justify-center md:justify-end w-full">
-            <div className="relative w-full max-w-[240px] p-3 bg-[#fdfbf7] border border-border shadow-sm rounded-sm rotate-[-3.5deg]">
-              {/* Crimson Drawing Board Push Pin */}
-              <div
-                className="absolute top-1.5 left-[47%] -translate-x-1/2 w-4 h-4 rounded-full z-20 border border-stone-850/10 shadow-[1.5px_2.5px_4px_rgba(0,0,0,0.5)] bg-[radial-gradient(circle_at_30%_30%,#ff8fa3_0%,#d9383a_50%,#800f1c_100%)]"
-              />
-              <div className="relative aspect-square w-full overflow-hidden bg-foreground/[0.02] border border-border/10">
+
+          {/* Right: Portrait, minimal studio frame */}
+          <div className="md:col-span-4 flex justify-center md:justify-end">
+            <figure className="group relative w-full max-w-[280px]">
+              {/* Frame */}
+              <div className="relative aspect-[4/5] overflow-hidden border border-border bg-card-bg shadow-[0_20px_60px_-24px_rgba(0,0,0,0.35)]">
                 <Image
                   src="/me/profile-photo.png"
                   alt="Sahil Gangurde"
                   fill
-                  className="object-cover"
+                  sizes="(max-width: 768px) 70vw, 280px"
+                  className="object-cover grayscale-[0.35] contrast-[1.02] transition-all duration-700 group-hover:grayscale-0"
                   priority
                 />
-                {/* Iridescent light leak / prism shader overlays */}
-                <div
-                  className="absolute inset-0 pointer-events-none mix-blend-color-dodge opacity-95 bg-gradient-to-tr from-transparent via-accent/40 via-pink-500/30 to-yellow-400/80"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none mix-blend-color-burn opacity-40 bg-gradient-to-br from-indigo-500/30 via-transparent to-black"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none mix-blend-overlay opacity-50 bg-gradient-to-bl from-cyan-400/30 to-transparent"
-                />
+                {/* Subtle vignette */}
+                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/15 via-transparent to-transparent" />
               </div>
-              {/* Polaroid Bottom Margin Caption with hand-drawn animated colorful doodles */}
-              <div className="relative pt-5 pb-2 flex items-center justify-center">
-                {/* Colorful Smiling Starfish Doodle (Left - Daytime, Animated) */}
-                <svg className="absolute left-0.5 bottom-1 w-9 h-9 pointer-events-none animate-starfish-wiggle doodle-transition transform opacity-100 scale-100 translate-y-0 dark:opacity-0 dark:scale-75 dark:translate-y-6" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M 12 3 Q 13.5 7.5 14.5 9.5 Q 18 9.5 21 10 Q 18 12.5 16.5 14.5 Q 17.25 18 18 21 Q 14.5 19 12 17.5 Q 9.5 19 6 21 Q 6.75 18 7.5 14.5 Q 6 12.5 3 10 Q 6 9.5 9.5 9.5 Q 10.5 7.5 12 3 Z" stroke="#ea580c" fill="#ffedd5" />
-                  <circle cx="10" cy="12" r="0.6" fill="#ea580c" />
-                  <circle cx="14" cy="12" r="0.6" fill="#ea580c" />
-                  <path d="M 11 14 Q 12 15 13 14" stroke="#ea580c" />
-                </svg>
 
-                {/* Sleeping Starfish Doodle (Left - Nighttime, Animated) */}
-                <svg className="absolute left-0.5 bottom-1 w-9 h-9 pointer-events-none animate-starfish-sleep doodle-transition transform opacity-0 scale-75 translate-y-6 dark:opacity-100 dark:scale-100 dark:translate-y-0" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M 12 3 Q 13.5 7.5 14.5 9.5 Q 18 9.5 21 10 Q 18 12.5 16.5 14.5 Q 17.25 18 18 21 Q 14.5 19 12 17.5 Q 9.5 19 6 21 Q 6.75 18 7.5 14.5 Q 6 12.5 3 10 Q 6 9.5 9.5 9.5 Q 10.5 7.5 12 3 Z" stroke="#6366f1" fill="#c7d2fe" />
-                  <path d="M 9.5 12 Q 10 13 10.5 12" stroke="#4f46e5" />
-                  <path d="M 13.5 12 Q 14 13 14.5 12" stroke="#4f46e5" />
-                  <path d="M 11.5 14 Q 12 14.7 12.5 14" stroke="#4f46e5" />
-                  <text x="16" y="8" className="text-[6px] font-sans font-extrabold fill-indigo-500 select-none animate-pulse">z</text>
-                  <text x="18" y="5" className="text-[8px] font-sans font-extrabold fill-indigo-400 select-none animate-pulse delay-100">Z</text>
-                </svg>
-
-                {/* Text container in normal flow holding the absolute paragraphs */}
-                <div className="relative w-full h-9 flex items-center justify-center">
-                  {/* Day Mode Caption Text */}
-                  <p className="text-xs font-sans font-semibold text-stone-900 text-center leading-normal px-10 select-none doodle-transition opacity-100 dark:opacity-0 absolute inset-0 flex items-center justify-center">
-                    Chasing sunsets and debugging threads.
-                  </p>
-
-                  {/* Night Mode Caption Text */}
-                  <p className="text-xs font-sans font-semibold text-stone-900 text-center leading-normal px-10 select-none doodle-transition opacity-0 dark:opacity-100 absolute inset-0 flex items-center justify-center">
-                    Catching stars and debugging threads.
-                  </p>
-                </div>
-
-                {/* Colorful Sun Doodle (Right - Daytime, Animated) */}
-                <svg className="absolute right-0.5 bottom-1 w-9 h-9 pointer-events-none animate-sun-spin doodle-transition transform opacity-100 scale-100 translate-y-0 rotate-0 dark:opacity-0 dark:scale-75 dark:translate-y-8 dark:rotate-[-45deg]" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round">
-                  <circle cx="12" cy="12" r="5" stroke="#f59e0b" fill="#fef08a" />
-                  <path d="M 12 3 L 12 5" stroke="#f59e0b" />
-                  <path d="M 12 19 L 12 21" stroke="#f59e0b" />
-                  <path d="M 3 12 L 5 12" stroke="#f59e0b" />
-                  <path d="M 19 12 L 21 12" stroke="#f59e0b" />
-                  <path d="M 5.6 5.6 L 7.1 7.1" stroke="#f59e0b" />
-                  <path d="M 16.9 16.9 L 18.4 18.4" stroke="#f59e0b" />
-                  <path d="M 5.6 18.4 L 7.1 16.9" stroke="#f59e0b" />
-                  <path d="M 16.9 7.1 L 18.4 5.6" stroke="#f59e0b" />
-                </svg>
-
-                {/* Colorful Crescent Moon Doodle (Right - Nighttime, Animated) */}
-                <svg className="absolute right-0.5 bottom-1 w-9 h-9 pointer-events-none animate-moon-sway doodle-transition transform opacity-0 scale-75 translate-y-8 rotate-[45deg] dark:opacity-100 dark:scale-100 dark:translate-y-0 dark:rotate-0" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M 12 3 A 9 9 0 1 0 21 12 A 6 6 0 0 1 12 3 Z" stroke="#64748b" fill="#e2e8f0" />
-                  <path d="M 9.5 10.5 Q 10 11.5 10.5 10.5" stroke="#475569" />
-                  <path d="M 10 13 Q 10.75 14 11.5 13" stroke="#475569" />
-                  <path d="M 17 5 L 17.3 6 M 19 3 L 19.5 4.5 M 15 8 L 15.5 9" stroke="#94a3b8" strokeWidth="1.2" />
-                </svg>
-              </div>
-            </div>
+              {/* Caption strip */}
+              <figcaption className="mt-4">
+                <span className="text-sm text-foreground/60">
+                  Chasing sunsets, debugging threads.
+                </span>
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>
 
-      <hr className="border-border" />
 
-      {/* 2. Toolkit Section */}
-      <section className="space-y-4">
-        <h2 className="text-xs font-sans font-bold uppercase tracking-wider text-accent">
-          Technical Toolkit
-        </h2>
-        <div className="space-y-2 text-sm text-foreground">
+      {/* ============ TOOLKIT ============ */}
+      <section className="pt-2 pb-10 md:pb-14 space-y-6">
+        <div className="flex items-baseline justify-between">
+          <h2 className="text-sm font-sans font-bold uppercase tracking-wider text-accent">
+            Technical Toolkit
+          </h2>
+        </div>
+        <div className="divide-y divide-border/60 border-y border-border/60">
           {TECHNICAL_TOOLKIT.map((item) => (
-            <div key={item.index} className="flex items-start gap-2">
-              <span className="text-xs font-sans text-accent/60 mt-0.5">•</span>
-              <div className="flex-grow space-y-1">
-                <span className="font-semibold text-foreground">{item.title}:</span>{" "}
-                <span className="text-foreground/80">{item.list.join(", ")}</span>
+            <div key={item.index} className="flex items-start gap-5 py-4 group">
+              <span className="text-xs text-foreground/40 mt-1 w-6 shrink-0 group-hover:text-accent transition-colors">
+                {item.index}
+              </span>
+              <div className="flex-grow grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-1 sm:gap-6 items-start">
+                <span className="text-[15px] font-semibold text-foreground">{item.title}</span>
+                <span className="text-[15px] text-foreground/75 leading-relaxed">{item.list.join(", ")}</span>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      <hr className="border-border" />
 
-      {/* 4. Experience Section */}
-      <section className="space-y-4">
-        <h2 className="text-xs font-sans font-bold uppercase tracking-wider text-accent">
-          Experience
-        </h2>
-        <div className="text-sm text-foreground">
+      {/* ============ EXPERIENCE ============ */}
+      <section className="pt-2 pb-10 md:pb-14 space-y-6">
+        <div className="flex items-baseline justify-between">
+          <h2 className="text-sm font-sans font-bold uppercase tracking-wider text-accent">
+            Experience
+          </h2>
+        </div>
+        <div>
           {experiences.map((exp) => {
             const empType = getEmploymentType(exp.role);
             const roleName = cleanRole(exp.role);
             return (
               <div
                 key={exp.id}
-                className={`pl-4 py-3.5 border-l-2 transition-colors ${
+                className={`pl-5 py-5 border-l transition-colors relative ${
                   exp.current
                     ? "border-accent"
                     : "border-border hover:border-accent/40"
                 }`}
               >
+                {exp.current && (
+                  <span className="absolute -left-[3.5px] top-7 w-[7px] h-[7px] rounded-full bg-accent ring-4 ring-background" />
+                )}
                 {/* Top row: company + badge | duration */}
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-1 sm:gap-4">
-                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 min-w-0">
+                  <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 min-w-0">
                     <span className="font-semibold text-foreground leading-tight">
                       {exp.link ? (
                         <a
                           href={exp.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-accent hover:underline"
+                          className="hover:text-accent transition-colors"
                         >
                           {exp.company} ↗
                         </a>
@@ -218,7 +193,7 @@ export default function Home() {
                     </span>
                   </div>
 
-                  {/* Duration + pulsing live dot */}
+                  {/* Duration */}
                   <div className="flex items-center gap-1.5 shrink-0">
                     {exp.current && (
                       <span className="relative flex h-1.5 w-1.5">
@@ -226,39 +201,39 @@ export default function Home() {
                         <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
                       </span>
                     )}
-                    <span className="text-xs text-foreground/65 font-mono tabular-nums">
+                    <span className="text-sm text-foreground/70">
                       {exp.duration}
                     </span>
                   </div>
                 </div>
 
                 {/* Role subtitle */}
-                <p className="text-sm text-foreground/70 font-sans mt-0.5 mb-2">
+                <p className="text-[15px] text-foreground/75 mt-0.5 mb-2">
                   {roleName}
                 </p>
 
                 {/* Summary */}
                 {exp.summary && (
-                  <p className="text-sm text-foreground/80 leading-relaxed font-sans max-w-2xl">
+                  <p className="text-[15px] text-foreground/85 leading-relaxed max-w-none">
                     {exp.summary}
                   </p>
                 )}
 
                 {/* Client callout */}
                 {exp.client && (
-                  <div className="mt-2.5 pl-3 border-l border-border/60 space-y-0.5">
+                  <div className="mt-3 pl-3 border-l border-border/60 space-y-0.5">
                     <div className="flex flex-wrap items-baseline gap-1.5">
-                      <span className="text-[10px] font-sans text-foreground/65 uppercase tracking-wider font-bold">Client</span>
+                      <span className="text-xs text-foreground/65 uppercase tracking-wider font-bold">Client</span>
                       <a
                         href={exp.client.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-accent hover:underline font-medium font-sans"
+                        className="text-[15px] text-accent hover:underline font-medium"
                       >
                         {exp.client.name} ↗
                       </a>
                     </div>
-                    <p className="text-xs text-foreground/75 leading-relaxed font-sans max-w-xl">
+                    <p className="text-sm text-foreground/80 leading-relaxed max-w-none">
                       {exp.client.description}
                     </p>
                   </div>
@@ -269,14 +244,15 @@ export default function Home() {
         </div>
       </section>
 
-      <hr className="border-border" />
 
-      {/* 5. Contact Section */}
-      <section id="contact" className="space-y-4">
-        <h2 className="text-xs font-sans font-bold uppercase tracking-wider text-accent">
-          Contact
-        </h2>
-        <div className="space-y-3 text-sm text-foreground">
+      {/* ============ CONTACT ============ */}
+      <section id="contact" className="pt-2 pb-10 md:pb-14 space-y-6">
+        <div className="flex items-baseline justify-between">
+          <h2 className="text-sm font-sans font-bold uppercase tracking-wider text-accent">
+            Contact
+          </h2>
+        </div>
+        <div className="space-y-3 text-[15px] text-foreground">
           {/* Email */}
           <div className="flex items-start gap-2">
             <span className="text-xs font-sans text-accent/60 mt-0.5">•</span>

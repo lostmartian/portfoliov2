@@ -60,35 +60,30 @@ export default function ReadlistPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold tracking-tight text-foreground">
-          Readlist
+        <h1 className="text-[1.75rem] sm:text-[2.4rem] font-bold tracking-tight leading-tight text-foreground">
+          A running record of what I read.
         </h1>
-        <p className="text-sm text-foreground/75 leading-relaxed font-sans">
+        <p className="text-[15px] text-foreground/75 leading-relaxed">
           An archive of books, papers, articles, and documentation I&apos;ve read.
         </p>
       </header>
 
-      <div className="space-y-4 text-sm text-foreground/80 font-sans">
+      <div className="divide-y divide-border/60 border-y border-border/60">
         {sortedItems.map((item, i) => (
-          <div key={i} className="flex items-start gap-2">
-            <span className="text-xs font-sans text-accent/60 mt-1">•</span>
-            <div className="flex-grow space-y-0.5">
-              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-foreground hover:text-accent hover:underline"
-                >
-                  {item.title} ↗
-                </a>
-                <div className="flex items-center gap-2 text-xs font-mono text-foreground/40">
-                  <span className="uppercase text-[10px] tracking-wider bg-foreground/5 px-1.5 py-0.5 rounded text-foreground/60">
-                    {item.type}
-                  </span>
-                  <span>{item.date}</span>
-                </div>
-              </div>
+          <div key={i} className="py-4 group flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+            <a
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[15px] font-semibold text-foreground group-hover:text-accent transition-colors"
+            >
+              {item.title} ↗
+            </a>
+            <div className="flex items-center gap-3 shrink-0">
+              <span className="text-xs uppercase tracking-wide text-accent/80 font-semibold">
+                {item.type}
+              </span>
+              <span className="text-sm text-foreground/55 tabular-nums">{item.date}</span>
             </div>
           </div>
         ))}

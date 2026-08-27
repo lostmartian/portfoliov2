@@ -5,7 +5,9 @@
 @theme {
   /* Define font families */
   --font-sans: var(--font-geist-sans), system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), monospace;
+  /* Mono falls back to Inter sitewide; real code blocks (highlight.js/mermaid)
+     target .font-mono element selectors below and keep JetBrains Mono */
+  --font-mono: var(--font-geist-sans), system-ui, sans-serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -18,56 +20,111 @@
 }
 
 :root {
-  --background: #faedd8;
-  --foreground: #292524;
-  --border: #ccbfa9;
-  --accent: #b91c1c;
-  --accent-hover: #991b1b;
+  /* Porcelain + deep ink-blue (near-mono, one quiet hue) */
+  --background: #ffffff;
+  --foreground: #18181b;
+  --border: #e4e4e7;
+  --accent: #1e3a5f;
+  --accent-hover: #152c4a;
   --accent-foreground: #ffffff;
-  --accent-subtle: #fee2e2;
-  --card-bg: #fdfbf7;
+  --accent-subtle: #eff3f7;
+  --card-bg: #fafbfb;
 }
 
 .dark {
-  --background: #1c1917;
-  --foreground: #f5f5f4;
-  --border: #44403c;
-  --accent: #f87171;
-  --accent-hover: #fca5a5;
-  --accent-foreground: #ffffff;
-  --accent-subtle: #450a0a;
-  --card-bg: #292524;
+  --background: #0d0f12;
+  --foreground: #ececec;
+  --border: #26282c;
+  --accent: #8fa8c4;
+  --accent-hover: #b4c6da;
+  --accent-foreground: #0d0f12;
+  --accent-subtle: #171c23;
+  --card-bg: #121417;
 }
 
 @layer base {
   body {
     @apply bg-background text-foreground transition-colors duration-300;
     font-family: var(--font-sans);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
-  /* Vintage Paper Grain Overlay */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    opacity: 0.1;
-    pointer-events: none;
-    z-index: 9999;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  strong, b {
+    font-weight: 600;
   }
-}
 
-.dark body::before {
-  opacity: 0.06;
 }
 
 /* Custom styling for block code elements to ensure no wrapping for syntax formatting */
 pre code {
   word-break: normal;
   white-space: pre !important;
+}
+
+/* ─── Premium solid surfaces: code blocks, mermaid, tweets, media ── */
+
+/* Mermaid diagram surface: solid bg in both themes */
+.mermaid-chart svg {
+  background: var(--card-bg) !important;
+}
+.dark .mermaid-chart svg {
+  background: #12151a !important;
+}
+
+/* Kill stray transparency on SVG internals */
+.mermaid-chart svg .background,
+.mermaid-chart svg rect.background {
+  fill: transparent !important;
+}
+
+/* GitHub-style code block palette driven by theme tokens (no opacity tricks) */
+pre[class*="hljs"],
+pre code.hljs {
+  background: #f7f9fa !important;
+  color: #334155;
+}
+.dark pre[class*="hljs"],
+.dark pre code.hljs {
+  background: #101318 !important;
+  color: #cbd5e1;
+}
+
+/* highlight.js token colors - light (Notion-like soft palette) */
+.hljs-keyword, .hljs-selector-tag, .hljs-literal, .hljs-section, .hljs-doctag, .hljs-type, .hljs-name, .hljs-strong { color: #1e3a5f; font-weight: 600; }
+.hljs-string, .hljs-title, .hljs-attr, .hljs-attribute, .hljs-template-tag, .hljs-addition { color: #4a5a6a; }
+.hljs-comment, .hljs-quote, .hljs-deletion, .hljs-meta { color: #94a3b8; font-style: italic; }
+.hljs-number, .hljs-regexp, .hljs-link, .hljs-selector-attr, .hljs-selector-pseudo { color: #b45309; }
+.hljs-built_in, .hljs-builtin-name, .hljs-symbol, .hljs-bullet, .hljs-variable, .hljs-selector-id, .hljs-selector-class { color: #57534e; }
+.hljs-emphasis { font-style: italic; }
+
+/* highlight.js token colors - dark */
+.dark .hljs-keyword, .dark .hljs-selector-tag, .dark .hljs-literal, .dark .hljs-section, .dark .hljs-doctag, .dark .hljs-type, .dark .hljs-name, .dark .hljs-strong { color: #b9cbde; font-weight: 600; }
+.dark .hljs-string, .dark .hljs-title, .dark .hljs-attr, .dark .hljs-attribute, .dark .hljs-template-tag, .dark .hljs-addition { color: #d4d4d8; }
+.dark .hljs-comment, .dark .hljs-quote, .dark .hljs-deletion, .dark .hljs-meta { color: #64748b; font-style: italic; }
+.dark .hljs-number, .dark .hljs-regexp, .dark .hljs-link, .dark .hljs-selector-attr, .dark .hljs-selector-pseudo { color: #a1a1aa; }
+.dark .hljs-built_in, .dark .hljs-builtin-name, .dark .hljs-symbol, .dark .hljs-bullet, .dark .hljs-variable, .dark .hljs-selector-id, .dark .hljs-selector-class { color: #d4d4d8; }
+.dark .hljs-emphasis { font-style: italic; }
+
+/* Readability overrides: legibility floor for muted text.
+   Anything at 65% opacity or below in body copy is hard to read;
+   this nudges the common washed-out tiers up. */
+:root:not(.dark) .text-foreground\/30 { color: color-mix(in srgb, var(--foreground) 45%, transparent); }
+:root:not(.dark) .text-foreground\/40 { color: color-mix(in srgb, var(--foreground) 50%, transparent); }
+:root:not(.dark) .text-foreground\/45 { color: color-mix(in srgb, var(--foreground) 55%, transparent); }
+:root:not(.dark) .text-foreground\/50 { color: color-mix(in srgb, var(--foreground) 60%, transparent); }
+
+.dark .text-foreground\/30 { color: color-mix(in srgb, var(--foreground) 55%, transparent); }
+.dark .text-foreground\/40 { color: color-mix(in srgb, var(--foreground) 60%, transparent); }
+
+/* Restore real mono font ONLY inside code blocks and diagrams */
+pre, code:not([class*="inline"]),
+pre span, pre code span,
+.mermaid-chart,
+.mermaid-chart text,
+.mermaid-chart tspan {
+  font-family: var(--font-geist-mono), monospace !important;
 }
 
 /* React Tweet Theme Overrides */

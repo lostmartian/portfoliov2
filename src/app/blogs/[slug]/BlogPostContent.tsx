@@ -13,7 +13,7 @@ import Link from "next/link";
 import AudioComparisonPlayer from "@/components/AudioComparisonPlayer";
 import BlogAudioPlayer, { extractSpeechBlocks } from "@/components/BlogAudioPlayer";
 import FluidMeshHeader from "@/components/FluidMeshHeader";
-import "highlight.js/styles/github-dark.css";
+import "./hljs-theme.css";
 
 interface BlogPostContentProps {
   content: string;
@@ -227,34 +227,34 @@ export default function BlogPostContent({
       />
       <div className="space-y-6">
         <header className="space-y-1">
-          <h1 className="text-2xl font-bold tracking-tight text-foreground">
+          <h1 className="text-[1.75rem] sm:text-[2.4rem] font-bold tracking-tight leading-tight text-foreground">
             {title}
           </h1>
-          <p className="text-sm text-foreground/50 leading-relaxed font-sans">
+          <p className="text-[15px] text-foreground/70 leading-relaxed max-w-xl">
             {description}
           </p>
         </header>
 
         {/* Metadata Grid */}
-        <div className="grid grid-cols-4 gap-2 py-3 border-y border-border text-[10px] sm:text-xs font-mono">
+        <div className="grid grid-cols-4 gap-2 py-4 border-y border-border/60 divide-x divide-border/40 [&>div]:px-3 [&>div:first-child]:pl-0 [&>div:last-child]:pr-0">
           <div className="space-y-1 min-w-0">
-            <span className="text-foreground/60 uppercase tracking-wider block">Published</span>
-            <time dateTime={new Date(date).toISOString()} className="text-foreground font-medium truncate block">
+            <span className="text-[11px] uppercase tracking-wider text-foreground/45 block">Published</span>
+            <time dateTime={new Date(date).toISOString()} className="text-sm text-foreground/85 font-medium truncate block">
               {date}
             </time>
           </div>
           <div className="space-y-1 min-w-0">
-            <span className="text-foreground/60 uppercase tracking-wider block">Read Time</span>
-            <span className="text-foreground font-medium truncate block">{readTime}</span>
+            <span className="text-[11px] uppercase tracking-wider text-foreground/45 block">Read Time</span>
+            <span className="text-sm text-foreground/85 font-medium truncate block">{readTime}</span>
           </div>
           <div className="space-y-1 min-w-0">
-            <span className="text-foreground/60 uppercase tracking-wider block">Categories</span>
-            <span className="text-foreground font-medium truncate block" title={categories.join(", ")}>
+            <span className="text-[11px] uppercase tracking-wider text-foreground/45 block">Categories</span>
+            <span className="text-sm text-foreground/85 font-medium truncate block" title={categories.join(", ")}>
               {categories.join(", ")}
             </span>
           </div>
           <div className="space-y-1 min-w-0 relative">
-            <span className="text-foreground/40 uppercase tracking-wider block">Listen</span>
+            <span className="text-[11px] uppercase tracking-wider text-foreground/35 block">Listen</span>
             <BlogAudioPlayer
               content={content}
               title={title}
@@ -276,7 +276,7 @@ export default function BlogPostContent({
           ) : (
             <FluidMeshHeader title={title} />
           )}
-          <div className="text-center text-xs sm:text-sm text-foreground/80 font-medium tracking-wide py-3.5 px-6 border-t border-border/10 leading-relaxed">
+          <div className="text-center text-sm text-foreground/70 py-3.5 px-6 border-t border-border/10 leading-relaxed">
             {headerImageCaption || description}
           </div>
         </div>
@@ -284,15 +284,15 @@ export default function BlogPostContent({
         {/* Series Index UI */}
         {seriesPosts.length > 1 && (
           <div className="border-l-2 border-accent/30 pl-4 py-1.5 space-y-2.5 my-8">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-accent font-bold block">
+            <span className="text-xs uppercase tracking-wider text-accent font-bold block">
               Series: {seriesName}
             </span>
             <ol className="list-none space-y-2 pl-0">
               {seriesPosts.map((sp) => {
                 const isCurrent = sp.slug === slug;
                 return (
-                  <li key={sp.slug} className="text-xs font-mono flex items-baseline gap-2 leading-relaxed">
-                    <span className={`text-[10px] uppercase font-bold tracking-wide w-14 shrink-0 block ${isCurrent ? 'text-accent' : 'text-foreground/35'}`}>
+                  <li key={sp.slug} className="text-sm flex items-baseline gap-2 leading-relaxed">
+                    <span className={`text-xs uppercase font-bold tracking-wide w-16 shrink-0 block ${isCurrent ? 'text-accent' : 'text-foreground/40'}`}>
                       {sp.part ? `Part ${sp.part}` : '•'}
                     </span>
                     {isCurrent ? (
@@ -334,10 +334,10 @@ export default function BlogPostContent({
                 }
 
                 return (
-                  <div className="relative group my-8 w-full max-w-full overflow-hidden rounded-lg border border-[#30363d] shadow-sm">
+                  <div className="relative group my-8 w-full max-w-full overflow-hidden rounded-xl border border-border shadow-[0_1px_3px_rgba(15,23,42,0.05)]">
                     {/* Code Header */}
-                    <div className="flex items-center justify-between px-4 py-2 bg-[#161b22] border-b border-[#30363d] w-full">
-                      <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">
+                    <div className="flex items-center justify-between px-4 py-2.5 bg-[#eef1f4] dark:bg-[#151a20] border-b border-border w-full">
+                      <span className="text-xs text-foreground/55 uppercase tracking-wide font-medium">
                         {language || "code"}
                       </span>
                       <button
@@ -347,15 +347,15 @@ export default function BlogPostContent({
                           btn.innerText = "Copied ✓";
                           setTimeout(() => { btn.innerText = "Copy ⎘"; }, 2000);
                         }}
-                        className="text-[10px] font-mono text-zinc-400 hover:text-zinc-100 uppercase tracking-widest transition-colors cursor-pointer"
+                        className="text-xs text-foreground/55 hover:text-accent transition-colors cursor-pointer"
                       >
                         Copy ⎘
                       </button>
                     </div>
                     {/* Code Block */}
-                    <div className="overflow-hidden w-full max-w-full bg-[#0d1117]">
-                      <pre className="!m-0 !rounded-none overflow-x-auto max-w-full w-full bg-[#0d1117] !bg-[#0d1117]" {...props}>
-                        <code className={`${className} text-xs font-mono`}>
+                    <div className="overflow-hidden w-full max-w-full bg-[#f7f9fa] dark:bg-[#101318]">
+                      <pre className="!m-0 !rounded-none overflow-x-auto max-w-full w-full !bg-transparent px-4 py-4" {...props}>
+                        <code className={`${className} text-[13px] [font-family:var(--font-geist-mono)]`}>
                           {codeChild.props?.children}
                         </code>
                       </pre>
@@ -364,13 +364,13 @@ export default function BlogPostContent({
                 );
               }
 
-              return <pre className="text-xs font-mono" {...props}>{children}</pre>;
+              return <pre className="text-[13px] [font-family:var(--font-geist-mono)] px-4 py-4" {...props}>{children}</pre>;
             },
             code({ className, children, ...props }: any) {
               const isInline = !className || !className.includes("language-");
               return (
                 <code 
-                  className={`${className || ""} ${isInline ? "font-mono text-xs bg-accent/5 px-1.5 py-0.5 rounded text-accent font-medium" : ""}`} 
+                  className={`${className || ""} ${isInline ? "[font-family:var(--font-geist-mono)] text-[13px] bg-accent/5 px-1.5 py-0.5 rounded text-accent font-medium" : ""}`} 
                   {...props}
                 >
                   {children}
@@ -441,7 +441,7 @@ export default function BlogPostContent({
             return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
               <p 
                 onClick={onClick}
-                className={`mb-4 text-sm leading-relaxed text-foreground text-justify font-sans ${extraClass}`.trim()}
+                className={`mb-4 text-[15px] leading-relaxed text-foreground/90 ${extraClass}`.trim()}
               >
                 {children}
               </p>
@@ -477,7 +477,7 @@ export default function BlogPostContent({
             return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
               <h2 
                 onClick={onClick}
-                className={`text-xs font-mono uppercase tracking-wider text-accent font-semibold mt-6 mb-2 ${extraClass}`.trim()}
+                className={`text-sm uppercase tracking-wider text-accent font-semibold mt-8 mb-2 ${extraClass}`.trim()}
               >
                 {children}
               </h2>
@@ -488,7 +488,7 @@ export default function BlogPostContent({
             return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
               <h3 
                 onClick={onClick}
-                className={`text-sm font-semibold text-foreground mt-4 mb-1.5 font-sans ${extraClass}`.trim()}
+                className={`text-base font-semibold text-foreground mt-5 mb-2 ${extraClass}`.trim()}
               >
                 {children}
               </h3>
@@ -499,7 +499,7 @@ export default function BlogPostContent({
             return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
               <h4 
                 onClick={onClick}
-                className={`text-xs font-semibold text-foreground/80 mt-3 mb-1 font-sans ${extraClass}`.trim()}
+                className={`text-sm font-semibold text-foreground/85 mt-4 mb-1 ${extraClass}`.trim()}
               >
                 {children}
               </h4>
@@ -508,8 +508,8 @@ export default function BlogPostContent({
           ul: ({ children }: any) => <ul className="list-none space-y-2 my-4 pl-0 font-sans">{children}</ul>,
           ol: ({ children }: any) => <ol className="list-decimal space-y-2 my-4 pl-6 font-sans">{children}</ol>,
           li: ({ children }: any) => (
-            <li className="flex items-start gap-2 min-w-0 w-full text-sm leading-relaxed text-foreground font-sans">
-              <span className="text-xs font-mono text-accent/60 mt-0.5">•</span>
+            <li className="flex items-start gap-2 min-w-0 w-full text-[15px] leading-relaxed text-foreground/90">
+              <span className="text-xs text-accent/60 mt-1">•</span>
               <span className="min-w-0 flex-1 break-words">{children}</span>
             </li>
           ),
@@ -518,7 +518,7 @@ export default function BlogPostContent({
             return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
               <blockquote 
                 onClick={onClick}
-                className={`border-l-2 border-accent/40 pl-4 my-4 italic text-foreground/80 font-sans text-sm leading-relaxed ${extraClass}`.trim()}
+                className={`border-l-2 border-accent/40 pl-4 my-4 italic text-foreground/80 text-[15px] leading-relaxed ${extraClass}`.trim()}
               >
                 {children}
               </blockquote>
@@ -526,19 +526,19 @@ export default function BlogPostContent({
           },
           table: ({ children }: any) => (
             <div className="my-12 w-full overflow-x-auto border border-border/10">
-              <table className="min-w-full w-max border-collapse text-left text-sm font-mono">
+              <table className="min-w-full w-max border-collapse text-left text-sm">
                 {children}
               </table>
             </div>
           ),
-          thead: ({ children }: any) => <thead className="bg-foreground/[0.03] border-b border-border/20 font-mono">{children}</thead>,
+          thead: ({ children }: any) => <thead className="bg-foreground/[0.03] border-b border-border/20">{children}</thead>,
           th: ({ children }: any) => (
-            <th className="px-6 py-4 border border-border/10 font-mono text-[10px] uppercase tracking-widest text-foreground/75">
+            <th className="px-6 py-4 border border-border/10 text-xs uppercase tracking-wide text-foreground/70 font-semibold">
               {children}
             </th>
           ),
           td: ({ children }: any) => (
-            <td className="px-6 py-4 border border-border/10 text-foreground text-sm font-normal font-sans">
+            <td className="px-6 py-4 border border-border/10 text-foreground text-sm font-normal">
               {children}
             </td>
           ),

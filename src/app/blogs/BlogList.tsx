@@ -153,7 +153,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
           <button
             id="filter-trigger-button"
             onClick={() => setShowFilters((prev) => !prev)}
-            className={`text-xs font-mono hover:text-accent transition-all flex items-center gap-2 cursor-pointer px-3 py-1.5 border rounded ${
+            className={`text-sm hover:text-accent transition-all flex items-center gap-2 cursor-pointer px-4 py-2 border rounded-full ${
               showFilters || selectedCategories.length > 0
                 ? "border-accent text-accent bg-accent/5"
                 : "border-border/50 text-foreground/50 bg-foreground/[0.01]"
@@ -188,7 +188,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
           >
             {/* Sorting Option */}
             <div className="space-y-1.5">
-              <span className="text-[9px] font-mono uppercase tracking-widest text-foreground/40 block font-semibold">
+              <span className="text-xs uppercase tracking-wider text-foreground/45 block font-semibold">
                 Sort Order
               </span>
               <div className="flex flex-col gap-1">
@@ -196,7 +196,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
                   <button
                     key={order}
                     onClick={() => setSortOrder(order)}
-                    className={`text-left py-0.5 text-xs font-mono transition-all cursor-pointer ${sortOrder === order
+                    className={`text-left py-0.5 text-sm transition-all cursor-pointer ${sortOrder === order
                       ? "text-accent font-semibold"
                       : "text-foreground/50 hover:text-accent"
                       }`}
@@ -209,7 +209,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
 
             {/* Domain Category Filter */}
             <div className="space-y-1.5">
-              <span className="text-[9px] font-mono uppercase tracking-widest text-foreground/40 block font-semibold">
+              <span className="text-xs uppercase tracking-wider text-foreground/45 block font-semibold">
                 Domain
               </span>
               <div className="flex flex-col gap-1">
@@ -224,7 +224,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
                         );
                         setCurrentPage(1);
                       }}
-                      className={`text-left py-0.5 text-xs font-mono transition-all uppercase tracking-wider cursor-pointer flex items-center justify-between ${isSelected
+                      className={`text-left py-0.5 text-sm transition-all cursor-pointer flex items-center justify-between ${isSelected
                         ? "text-accent font-semibold"
                         : "text-foreground/50 hover:text-accent"
                         }`}
@@ -243,36 +243,33 @@ export default function BlogList({ initialPosts }: BlogListProps) {
       {/* List or Grid (OpenAI Style Thumbnail Cards) of Posts */}
       {paginatedPosts.length > 0 ? (
         viewMode === "list" ? (
-          <div className="space-y-4 text-sm text-foreground/80 font-sans">
+          <div className="divide-y divide-border/60">
             {paginatedPosts.map((post) => (
-              <div key={post.slug} className="flex items-start gap-2">
-                <span className="text-xs font-mono text-accent/60 mt-1.5">•</span>
-                <div className="flex-grow">
-                  {/* Desktop Grid Layout (Aligned Columns) */}
-                  <div className="hidden sm:grid sm:grid-cols-[90px_90px_8px_1fr] gap-x-2 items-baseline">
-                    <span className="text-[10px] font-sans uppercase tracking-wider text-accent/85 font-bold select-none truncate pr-1">
-                      {post.categories[0] || "ARTICLE"}
-                    </span>
-                    <span className="text-xs sm:text-[13px] text-foreground/60 font-sans select-none">
-                      {formatDate(post.date)}
-                    </span>
-                    <span className="text-foreground/45 font-sans text-xs select-none text-center">-</span>
-                    <Link href={`/blogs/${post.slug}`} className="font-semibold text-foreground hover:text-accent hover:underline leading-snug">
-                      {post.title}
-                    </Link>
-                  </div>
+              <div key={post.slug} className="py-4 first:pt-1 last:pb-1 group">
+                {/* Desktop Grid Layout (Aligned Columns) */}
+                <div className="hidden sm:grid sm:grid-cols-[90px_90px_8px_1fr] gap-x-3 items-baseline">
+                  <span className="text-[11px] uppercase tracking-wider text-accent/85 font-bold select-none truncate pr-1">
+                    {post.categories[0] || "Article"}
+                  </span>
+                  <span className="text-sm text-foreground/55 select-none tabular-nums">
+                    {formatDate(post.date)}
+                  </span>
+                  <span className="text-foreground/30 select-none text-center">—</span>
+                  <Link href={`/blogs/${post.slug}`} className="text-[15px] font-semibold text-foreground group-hover:text-accent transition-colors leading-snug">
+                    {post.title}
+                  </Link>
+                </div>
 
-                  {/* Mobile Stacked Layout (Full Width Title) */}
-                  <div className="sm:hidden flex flex-col gap-0.5">
-                    <div className="flex items-center gap-1.5 text-[9px] font-sans uppercase tracking-wider font-bold select-none">
-                      <span className="text-accent/85">{post.categories[0] || "ARTICLE"}</span>
-                      <span className="text-foreground/30 font-normal">&bull;</span>
-                      <span className="text-foreground/50 font-normal">{formatDate(post.date)}</span>
-                    </div>
-                    <Link href={`/blogs/${post.slug}`} className="font-semibold text-sm leading-snug text-foreground hover:text-accent hover:underline block">
-                      {post.title}
-                    </Link>
+                {/* Mobile Stacked Layout (Full Width Title) */}
+                <div className="sm:hidden flex flex-col gap-1">
+                  <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-bold select-none">
+                    <span className="text-accent/85">{post.categories[0] || "Article"}</span>
+                    <span className="text-foreground/30 font-normal">&bull;</span>
+                    <span className="text-foreground/50 font-normal">{formatDate(post.date)}</span>
                   </div>
+                  <Link href={`/blogs/${post.slug}`} className="font-semibold text-[15px] leading-snug text-foreground group-hover:text-accent transition-colors block">
+                    {post.title}
+                  </Link>
                 </div>
               </div>
             ))}
@@ -303,7 +300,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
                 {/* Card Body */}
                 <div className="p-4 flex flex-col justify-between flex-grow space-y-3">
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between text-[10px] font-mono tracking-wider text-foreground/70 font-medium uppercase">
+                    <div className="flex items-center justify-between text-[11px] tracking-wide text-foreground/55 font-medium uppercase">
                       <span>{post.categories.join(" / ") || "ARTICLE"}</span>
                       <span>{post.date}</span>
                     </div>
@@ -318,7 +315,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
         )
       ) : (
         <div className="py-12 text-center border border-dashed border-border/20 rounded">
-          <p className="text-xs font-mono text-foreground/40 uppercase tracking-widest">
+          <p className="text-sm text-foreground/50">
             No matching blogs found
           </p>
         </div>
@@ -326,21 +323,21 @@ export default function BlogList({ initialPosts }: BlogListProps) {
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-6 pt-6 border-t border-border/20">
+        <div className="flex items-center justify-center gap-6 pt-8 border-t border-border/60">
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((prev) => prev - 1)}
-            className="p-2 bg-foreground/[0.02] border border-border disabled:opacity-20 hover:text-accent hover:border-accent hover:bg-accent/5 rounded transition-colors cursor-pointer"
+            className="p-2 border border-border disabled:opacity-20 hover:text-accent hover:border-accent transition-colors cursor-pointer rounded-full"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
-          <span className="text-xs font-mono text-foreground/75 uppercase tracking-widest">
+          <span className="text-sm text-foreground/70">
             Page {currentPage} of {totalPages}
           </span>
           <button
             disabled={currentPage === totalPages}
             onClick={() => setCurrentPage((prev) => prev + 1)}
-            className="p-2 bg-foreground/[0.02] border border-border disabled:opacity-20 hover:text-accent hover:border-accent hover:bg-accent/5 rounded transition-colors cursor-pointer"
+            className="p-2 border border-border disabled:opacity-20 hover:text-accent hover:border-accent transition-colors cursor-pointer rounded-full"
           >
             <ChevronRight className="w-4 h-4" />
           </button>

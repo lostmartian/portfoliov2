@@ -91,10 +91,10 @@ export default function BlogsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdCollection) }}
       />
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold tracking-tight text-foreground">
-          Blogs
+        <h1 className="text-[1.75rem] sm:text-[2.4rem] font-bold tracking-tight leading-tight text-foreground">
+          Writing on systems and craft.
         </h1>
-        <p className="text-sm text-foreground/75 leading-relaxed font-sans">
+        <p className="text-[15px] text-foreground/75 leading-relaxed">
           A collection of essays, deep-dives, and reflections on technology, design, and society.
         </p>
       </header>

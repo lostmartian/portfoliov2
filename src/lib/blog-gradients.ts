@@ -26,29 +26,29 @@ export interface FluidGradientData {
 }
 
 const PALETTES = [
-  // Palette 0: Warm Sunrise (OpenAI Peach, Gold & Rose)
+  // Palette 0: Porcelain Mist (indigo on silver)
   {
-    baseColor: "#ff7e5f",
-    linearGradientEnd: "#feb47b",
-    blobColors: ["#ff6b6b", "#ffe066", "#e94057", "#fbc2eb"]
+    baseColor: "#eef2ff",
+    linearGradientEnd: "#c7d2fe",
+    blobColors: ["#a5b4fc", "#818cf8", "#e0e7ff", "#c4b5fd"]
   },
-  // Palette 1: Twilight Sunset (OpenAI Deep Plum & Peach Glow)
+  // Palette 1: Slate Dusk (deep indigo night)
   {
-    baseColor: "#3f2b96",
-    linearGradientEnd: "#a8c0ff",
-    blobColors: ["#e94057", "#f27121", "#8a2387", "#ff9ff3"]
+    baseColor: "#1e1b4b",
+    linearGradientEnd: "#4f46e5",
+    blobColors: ["#6366f1", "#818cf8", "#312e81", "#a5b4fc"]
   },
-  // Palette 2: Spring Bloom (OpenAI Sky Blue, Teal & Lavender)
+  // Palette 2: Periwinkle Bloom (soft cool light)
   {
-    baseColor: "#30cfd0",
-    linearGradientEnd: "#330867",
-    blobColors: ["#a1c4fd", "#c2e9fb", "#fbc2eb", "#ffe5d9"]
+    baseColor: "#e0e7ff",
+    linearGradientEnd: "#f5f3ff",
+    blobColors: ["#c7d2fe", "#ddd6fe", "#bfdbfe", "#e9d5ff"]
   },
-  // Palette 3: Gold Meadow (OpenAI Emerald Green & Warm Apricot)
+  // Palette 3: Deep Current (ink blue with violet undertone)
   {
-    baseColor: "#11998e",
-    linearGradientEnd: "#38ef7d",
-    blobColors: ["#fcb69f", "#ffecd2", "#ff9a9e", "#fecfef"]
+    baseColor: "#0f172a",
+    linearGradientEnd: "#3730a3",
+    blobColors: ["#4f46e5", "#7c3aed", "#1e293b", "#6366f1"]
   }
 ];
 

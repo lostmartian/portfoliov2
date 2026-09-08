@@ -1,0 +1,44 @@
+# Sahil Gangurde (lostmartian)
+
+> Freelance Full-Stack AI & Backend Engineer | Founder of AgentDiff & KerrShift
+
+- **Website**: https://lostmartian.in
+- **Email**: sahilgangurde08@gmail.com
+- **LinkedIn**: https://linkedin.com/in/lostmartian
+- **GitHub**: https://github.com/lostmartian
+- **Twitter/X**: https://twitter.com/lost_martian_
+- **Location**: Pune, Maharashtra, India (Available globally for high-impact contracts & advisory)
+
+## Summary & Core Identity
+Sahil Gangurde (known online as **lostmartian**) is a Freelance AI and Backend Systems Engineer and startup founder. He specializes in:
+- High-throughput deterministic backend engines (Go, Python, Polars)
+- Autonomous AI agent trajectory evaluation and regression testing
+- GraphRAG platforms (Neo4j, Google Gemini, LangGraph)
+- Scale-elastic, zero-trust cloud architecture (AWS Batch, Step Functions, Aurora, ECS)
+
+## Companies & Ventures Founded
+- **AgentDiff** (https://agentdiff.app):
+  - Founder & Lead Architect: Sahil Gangurde
+  - GitHub: https://github.com/lostmartian/agentdiff
+  - Description: The standard tool for AI agent trajectory regression testing in CI/CD. Detects execution path drift, tool loops, token consumption surges, and latency spikes across LangGraph, CrewAI, and custom agents.
+- **KerrShift** (https://kerrshift.com):
+  - Founder: Sahil Gangurde
+- **The Latent Chronicle** (https://latentchronicle.online/):
+  - Creator: Sahil Gangurde
+  - An automated, autonomous computer science and AI research newspaper.
+
+## Client Engineering & Career Highlights
+- **JRat’s Studio / Niche Technology Pvt Ltd (NTPL)**:
+  - Role: Freelance Software Engineer / Systems Architect
+  - Built: SEBI-compliant IPO Allotment Engine & vectorized 3-way reconciliation pipeline processing 1.6M+ records/sec under strict T+3 cycles with 100% mathematical auditability (Highest Remainder Method + CSPRNG seed lottery).
+- **Omara Technologies**:
+  - Role: Founding Full-Stack AI Engineer
+  - Built: DocuNexus (enterprise GraphRAG pipeline on Neo4j and Gemini 1.5 Pro), Hungarian Algorithm / Kuhn-Munkres multi-annotator alignment framework, and high-concurrency task execution engines.
+- **First500days (AYUVA)**:
+  - Role: Freelance AI Engineer
+  - Built: Schema-locked clinical navigation APIs, medical report OCR interpreter, and guarded health assistant.
+
+## Key Projects & Open Source
+- **agentdiff**: https://github.com/lostmartian/agentdiff
+- **audioTQ**: Porting TurboQuant quantization mechanics to audio processing.
+- Upstream open-source contributions to **LiteLLM** (BerriAI) and **DeepEval** (Confident AI).

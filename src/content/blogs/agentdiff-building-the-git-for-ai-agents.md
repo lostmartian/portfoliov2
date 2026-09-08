@@ -3,10 +3,10 @@ title: "Introducing AgentDiff: Catch Silent Agent Regressions Before They Ship"
 date: "AUG 24, 2026"
 category: ["PRODUCT", "ENGINEERING"]
 hidden: false
-description: "Introducing AgentDiff by Sahil Gangurde, founder of AgentDiff. A simple pre-release announcement for trajectory regression testing that helps AI agents avoid silent failures in CI. Live at agentdiff.lostmartian.in."
+description: "Introducing AgentDiff by Sahil Gangurde, founder of AgentDiff. A simple pre-release announcement for trajectory regression testing that helps AI agents avoid silent failures in CI. Live at agentdiff.app."
 ---
 
-AgentDiff is now live in pre-release at [agentdiff.lostmartian.in](https://agentdiff.lostmartian.in).
+AgentDiff is now live in pre-release at [agentdiff.app](https://agentdiff.app).
 
 You can try it today with `pip install agent-trajectory-diff`. It is open source, MIT licensed, runs 100 percent locally, and needs no API keys to compare runs.
 
@@ -89,8 +89,8 @@ This is a pre-release, version 0.3.0, and I am opening it early to get feedback.
 
 Here is where to start:
 
-* Live site: [agentdiff.lostmartian.in](https://agentdiff.lostmartian.in)
-* Docs: [agentdiff.lostmartian.in/docs](https://agentdiff.lostmartian.in/docs)
+* Live site: [agentdiff.app](https://agentdiff.app)
+* Docs: [agentdiff.app/docs](https://agentdiff.app/docs)
 * GitHub: [github.com/lostmartian/agentdiff](https://github.com/lostmartian/agentdiff)
 * PyPI: [pypi.org/project/agent-trajectory-diff](https://pypi.org/project/agent-trajectory-diff)
 * Cookbooks: [github.com/lostmartian/agentdiff/tree/main/cookbooks](https://github.com/lostmartian/agentdiff/tree/main/cookbooks)

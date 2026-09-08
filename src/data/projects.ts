@@ -35,10 +35,10 @@ export const projects: Project[] = [
     category: "Financial Engineering / SEBI Compliance / FinTech",
     year: "2026",
     duration: "Mar 2026 - Present",
-    description: "A deterministic, scale-elastic processing platform for high-stakes IPO settlement and SEBI compliance. Engineered a high-throughput engine matching 10M+ records in under 7 seconds.",
+    description: "A deterministic, scale-elastic processing platform for high-stakes IPO settlement and SEBI compliance. Engineered a vectorized 3-way reconciliation engine processing 1.6M+ records/sec under strict T+3 regulatory cycles.",
     fullDescription: "A mission-critical system built to handle the complex mathematical logic of IPO share allotment according to SEBI's strict regulatory frameworks. The system processes millions of bids in seconds while maintaining 100% accuracy and auditability.",
-    challenge: "Ingesting, deduplicating, and reconciling millions of heterogeneous bid records within a rigid T+4 SEBI cycle, while avoiding DB write-lock contentions.",
-    solution: "Separated the control plane (AWS Step Functions) from the vectorized data plane (Polars on AWS Batch) to achieve sub-10 second processing times with 100% deterministic reproducibility.",
+    challenge: "Ingesting, deduplicating, and reconciling millions of heterogeneous bid records within a rigid T+3 SEBI cycle, while avoiding DB write-lock contentions.",
+    solution: "Separated the control plane (AWS Step Functions) from the vectorized data plane (Polars on AWS Batch) to achieve 1.6M+ records/sec throughput with 100% deterministic reproducibility.",
     type: "CODE",
     image: "/projects/ipo-datagrid.png",
     clients: [

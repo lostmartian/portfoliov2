@@ -2,18 +2,31 @@ import type { Metadata } from "next";
 import IPOAllotmentClient from "./IPOAllotmentClient";
 
 export const metadata: Metadata = {
-  title: "Scale-Elastic IPO Allotment Engine | Sahil Gangurde",
+  title: "SEBI IPO Allotment Engine | JRat's Studio & NTPL | Sahil Gangurde",
   description:
-    "A scale-elastic processing platform for high-stakes IPO settlement, distributed reconciliation, and SEBI compliance by Sahil Gangurde.",
+    "A deterministic, SEBI-compliant IPO Allotment Engine engineered by Sahil Gangurde (Freelance AI & Backend Engineer) for JRat’s Studio & Niche Technology Pvt Ltd (NTPL). Processes 1.6M+ records/sec under strict T+3 cycles with vectorized Polars and AWS Batch.",
   alternates: {
     canonical: "https://lostmartian.in/work/ipo-allotment-engine",
   },
+  keywords: [
+    "Sahil Gangurde",
+    "JRat's Studio",
+    "Jrats Studio",
+    "NTPL",
+    "Niche Technology Pvt Ltd",
+    "Niche Technologies",
+    "SEBI IPO Allotment Engine",
+    "AI Freelancer",
+    "Backend Engineer Freelance",
+    "Vectorized Reconciliation",
+    "High Throughput FinTech"
+  ],
   openGraph: {
-    title: "Scale-Elastic IPO Allotment Engine | Sahil Gangurde",
+    title: "SEBI IPO Allotment Engine | JRat's Studio & NTPL | Sahil Gangurde",
     description:
-      "A scale-elastic processing platform for high-stakes IPO settlement and distributed reconciliation.",
+      "Engineered by Sahil Gangurde for JRat’s Studio & Niche Technology Pvt Ltd (NTPL). High-throughput vectorized reconciliation processing 1.6M+ records/sec.",
     url: "https://lostmartian.in/work/ipo-allotment-engine",
-    siteName: "Sahil Gangurde | lostmartian",
+    siteName: "Sahil Gangurde Portfolio",
     locale: "en_US",
     type: "article",
     images: [
@@ -21,7 +34,7 @@ export const metadata: Metadata = {
         url: "https://lostmartian.in/work/ipo-allotment-engine/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "IPO Allotment Engine | Sahil Gangurde",
+        alt: "IPO Allotment Engine by Sahil Gangurde for JRat's Studio and NTPL",
         type: "image/png",
       },
     ],

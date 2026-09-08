@@ -5,7 +5,6 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import Neko from "@/components/Neko";
 
 const geistSans = Inter({
   variable: "--font-geist-sans",
@@ -22,21 +21,63 @@ const geistMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://lostmartian.in"),
   title: {
-    template: "%s | lostmartian",
-    default: "Freelance Full-Stack AI & Backend Engineer | Sahil Gangurde",
+    template: "%s | Sahil Gangurde (lostmartian)",
+    default: "Sahil Gangurde | Freelance AI & Backend Engineer | Founder of AgentDiff & KerrShift",
   },
-  description: "Freelance Full-Stack AI & Backend Engineer specializing in high-throughput financial settlement engines, GraphRAG platforms, and secure multi-tenant SaaS. Available for contracts and consulting.",
+  description: "Sahil Gangurde (lostmartian) is an elite Freelance AI & Backend Engineer, and Founder of AgentDiff (agentdiff.app) & KerrShift (kerrshift.com). Ex-Founding Full-Stack AI Engineer at Omara Technologies, Software Engineer at JRat's Studio building mission-critical SEBI financial engines for Niche Technologies (NTPL). Specializing in High-Throughput Go/Python, Agentic AI, and GraphRAG.",
+  keywords: [
+    "Sahil Gangurde",
+    "Sahil Gangurde portfolio",
+    "lostmartian",
+    "AI freelancer",
+    "Freelance AI Engineer",
+    "Freelance Backend Engineer",
+    "AI engineer freelance",
+    "Senior AI Consultant",
+    "Full-Stack AI Engineer",
+    "Omara Technology",
+    "Omara Technologies Sahil Gangurde",
+    "Founding Engineer Omara Technologies",
+    "JRat's Studio",
+    "Jrats Studio Sahil Gangurde",
+    "NTPL",
+    "Niche Technology Pvt Ltd",
+    "Niche Technologies",
+    "NTPL IPO Allotment Engine",
+    "SEBI Allotment Engine",
+    "Founder of AgentDiff",
+    "AgentDiff founder",
+    "agentdiff.app",
+    "Founder of KerrShift",
+    "KerrShift founder",
+    "kerrshift.com",
+    "AI agent regression testing",
+    "agent trajectory testing",
+    "Go AI engineer",
+    "Python AI engineer",
+    "GraphRAG Neo4j engineer",
+    "Pune AI engineer India",
+    "IIIT Gwalior Sahil Gangurde"
+  ],
+  authors: [{ name: "Sahil Gangurde", url: "https://lostmartian.in" }],
+  creator: "Sahil Gangurde",
+  publisher: "Sahil Gangurde",
+  alternates: {
+    canonical: "https://lostmartian.in",
+  },
   openGraph: {
-    title: "Freelance Full-Stack AI & Backend Engineer | Sahil Gangurde",
-    description: "Specializing in high-throughput financial settlement engines, GraphRAG platforms, and secure multi-tenant SaaS. Available for contracts and consulting.",
+    title: "Sahil Gangurde | Freelance AI & Backend Engineer | Founder of AgentDiff & KerrShift",
+    description: "Portfolio of Sahil Gangurde (lostmartian) — Freelance AI Engineer & Founder of AgentDiff & KerrShift. Engineering high-concurrency systems for Omara Technologies, JRat's Studio, and NTPL.",
     url: "https://lostmartian.in",
-    type: "website",
+    siteName: "Sahil Gangurde Portfolio",
+    type: "profile",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Freelance Full-Stack AI & Backend Engineer | Sahil Gangurde",
-    description: "Specializing in high-throughput financial settlement engines, GraphRAG platforms, and secure multi-tenant SaaS. Available for contracts and consulting.",
+    title: "Sahil Gangurde | Freelance AI & Backend Engineer | Founder of AgentDiff & KerrShift",
+    description: "Portfolio of Sahil Gangurde (lostmartian) — Freelance AI Engineer & Founder of AgentDiff & KerrShift. Systems engineering for Omara Technologies, JRat's Studio, and NTPL.",
+    creator: "@lost_martian_",
   },
   icons: {
     icon: [
@@ -55,33 +96,121 @@ export default function RootLayout({
 }>) {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Sahil Gangurde",
-    "url": "https://lostmartian.in",
-    "image": "https://lostmartian.in/og-image.png",
-    "jobTitle": "Freelance Full-Stack AI & Backend Engineer",
-    "knowsAbout": [
-      "Software Engineering",
-      "Backend Development",
-      "Artificial Intelligence",
-      "GraphRAG",
-      "Large Language Models",
-      "Financial Technology",
-      "Cloud Computing",
-      "Go",
-      "Python",
-      "Next.js"
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Pune",
-      "addressRegion": "Maharashtra",
-      "addressCountry": "India"
-    },
-    "sameAs": [
-      "https://github.com/lostmartian",
-      "https://linkedin.com/in/lostmartian",
-      "https://twitter.com/lost_martian_"
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://lostmartian.in/#person",
+        "name": "Sahil Gangurde",
+        "alternateName": ["lostmartian", "Sahil"],
+        "url": "https://lostmartian.in",
+        "image": "https://lostmartian.in/og-image.png",
+        "jobTitle": "Freelance Full-Stack AI & Backend Engineer, Founder",
+        "description": "Sahil Gangurde is a Freelance AI & Backend Engineer and founder of AgentDiff and KerrShift. He has engineered systems for Omara Technologies, JRat's Studio, and Niche Technologies (NTPL).",
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Indian Institute of Information Technology and Management, Gwalior (IIIT Gwalior)",
+          "url": "https://www.iiitm.ac.in/"
+        },
+        "hasOccupation": [
+          {
+            "@type": "Occupation",
+            "name": "Freelance AI Engineer",
+            "description": "Architecting autonomous agents, GraphRAG systems, and AI evaluators."
+          },
+          {
+            "@type": "Occupation",
+            "name": "Freelance Backend Engineer",
+            "description": "Building high-throughput Go and Python financial engines and scale-elastic infrastructure."
+          }
+        ],
+        "founder": [
+          {
+            "@type": "Organization",
+            "name": "AgentDiff",
+            "url": "https://agentdiff.app",
+            "sameAs": [
+              "https://www.linkedin.com/company/agentdiff",
+              "https://github.com/lostmartian/agentdiff"
+            ]
+          },
+          {
+            "@type": "Organization",
+            "name": "KerrShift",
+            "url": "https://kerrshift.com"
+          }
+        ],
+        "worksFor": [
+          {
+            "@type": "Organization",
+            "name": "First500days",
+            "url": "https://first500days.com/"
+          },
+          {
+            "@type": "Organization",
+            "name": "JRat's Studio",
+            "url": "https://www.jrats.studio/"
+          }
+        ],
+        "knowsAbout": [
+          "AI Freelance Engineering",
+          "Backend Freelance Engineering",
+          "Omara Technologies Architecture",
+          "JRat's Studio Software Engineering",
+          "NTPL Niche Technology Pvt Ltd SEBI Compliance",
+          "AgentDiff AI Agent Testing",
+          "KerrShift Platforms",
+          "High-Throughput Go (Golang)",
+          "Python FastAPI & Polars",
+          "GraphRAG (Neo4j & Gemini)",
+          "Large Language Models (LLMs)",
+          "Financial Settlement Engines",
+          "AWS Cloud Infrastructure (Batch, Step Functions, ECS, Aurora)"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Pune",
+          "addressRegion": "Maharashtra",
+          "addressCountry": "India"
+        },
+        "sameAs": [
+          "https://github.com/lostmartian",
+          "https://linkedin.com/in/lostmartian",
+          "https://twitter.com/lost_martian_",
+          "https://agentdiff.app",
+          "https://kerrshift.com",
+          "https://latentchronicle.online/"
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://agentdiff.app/#organization",
+        "name": "AgentDiff",
+        "url": "https://agentdiff.app",
+        "founder": {
+          "@id": "https://lostmartian.in/#person"
+        },
+        "description": "AI agent trajectory and execution path regression testing tool for CI/CD, founded by Sahil Gangurde."
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://kerrshift.com/#organization",
+        "name": "KerrShift",
+        "url": "https://kerrshift.com",
+        "founder": {
+          "@id": "https://lostmartian.in/#person"
+        },
+        "description": "Technology platform founded by Sahil Gangurde."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://lostmartian.in/#website",
+        "url": "https://lostmartian.in",
+        "name": "Sahil Gangurde Portfolio | Freelance AI & Backend Engineer",
+        "description": "Official website and portfolio of Sahil Gangurde (lostmartian) — Freelance AI Engineer, Founder of AgentDiff and KerrShift.",
+        "publisher": {
+          "@id": "https://lostmartian.in/#person"
+        }
+      }
     ]
   };
 
@@ -114,7 +243,6 @@ export default function RootLayout({
             </div>
             <Footer />
           </div>
-          <Neko />
         </ThemeProvider>
       </body>
     </html>

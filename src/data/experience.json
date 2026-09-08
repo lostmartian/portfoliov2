@@ -54,7 +54,7 @@
     ],
     "summary": "Developing secure, SEBI-compliant financial technology systems, optimizing high-performance data reconciliation pipelines, and architecting zero-trust AWS cloud infrastructure.",
     "achievements": [
-      "**Engineered Vectorized 3-Way Reconciliation**: Developed a memory-optimized Python pipeline utilizing Polars LazyFrames to hash-join Exchange bids, Sponsor bank confirms, and UPI mandates, matching 10M+ records in under 7 seconds under 3GB RAM.",
+      "**Engineered Vectorized 3-Way Reconciliation**: Developed a memory-optimized Python pipeline utilizing Polars LazyFrames to hash-join Exchange bids, Sponsor bank confirms, and UPI mandates, achieving 1.6M+ records/sec throughput under 3GB RAM.",
       "**Built the SEBI Basis of Allotment Solver**: Programmed a mathematically strict solver executing SEBI proportionate allotment (Scenario A-D) using the Highest Remainder Method (HRM) and seeded CSPRNG lottery drawings for absolute audit reproducibility.",
       "**Architected Zero-Trust & Scale-to-Zero Cloud**: Provisioned secure AWS VPC routing, private Aurora PostgreSQL subnets, static NAT IP allowlisting for stock exchanges, and parent-child Step Functions scaling on AWS Batch Fargate workers."
     ]

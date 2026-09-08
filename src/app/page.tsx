@@ -47,37 +47,33 @@ export default function Home() {
           <div className="md:col-span-8 space-y-7">
             {/* Headline - single sentence */}
             <h1 className="text-[1.75rem] sm:text-[2.4rem] lg:text-[2.9rem] font-bold tracking-tight leading-tight text-foreground">
-              Backend &amp; AI Engineer building systems that hold.
+              Freelance AI &amp; Backend Engineer building systems that hold.
             </h1>
 
             {/* Bio */}
             <div className="max-w-xl space-y-4 text-[15px] sm:text-base text-foreground/85 leading-relaxed text-justify">
               <p>
-                I specialize in scale-elastic backend infrastructure, high-throughput Go/Python
-                architectures, and agentic AI systems. With 2+ years of experience, I build reliable
-                software for high-stakes, regulated industries.
+                I am an independent AI freelancer and backend architect specializing in scale-elastic infrastructure, high-throughput Go/Python systems, and agentic AI. With 2+ years of experience, I build reliable software for high-stakes, regulated industries.
               </p>
               <p>
-                My work spans engineering{" "}
-                <strong className="font-semibold text-foreground">deterministic financial engines</strong>{" "}
-                processing millions of records under strict compliance, to orchestrating legal{" "}
-                <strong className="font-semibold text-foreground">Knowledge Graphs</strong> using Neo4j
-                and LLMs. I hold an Integrated B.Tech &amp; M.Tech in IT from IIIT Gwalior.
+                My track record spans consulting with <strong className="font-semibold text-foreground">JRat’s Studio</strong> to engineer SEBI-compliant <strong className="font-semibold text-foreground">IPO Allotment &amp; settlement engines</strong> for <strong className="font-semibold text-foreground">Niche Technology Pvt Ltd (NTPL)</strong> processing 1.6M+ records/sec under strict T+3 cycles, to serving as Founding Full-Stack AI Engineer at <strong className="font-semibold text-foreground">Omara Technologies</strong> architecting enterprise GraphRAG pipelines with Neo4j and Gemini. I hold an Integrated B.Tech &amp; M.Tech in IT from IIIT Gwalior.
               </p>
               <p>
-                I also build and run{" "}
-                <a href="https://latentchronicle.online/" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">The Latent Chronicle ↗</a>, an automated computer science newspaper, and contribute to{" "}
+                I am also the founder of{" "}
+                <a href="https://agentdiff.app/" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">AgentDiff ↗</a> (AI agent trajectory regression testing in CI/CD) and{" "}
+                <a href="https://kerrshift.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">KerrShift ↗</a>. I build and run{" "}
+                <a href="https://latentchronicle.online/" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">The Latent Chronicle ↗</a>, an automated computer science newspaper, and contribute upstream to{" "}
                 <a href="https://github.com/BerriAI/litellm" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">LiteLLM ↗</a>{" "}
                 and{" "}
-                <a href="https://github.com/confident-ai/deepeval" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">DeepEval ↗</a>. Recently shipped{" "}
-                <a href="https://agentdiff.lostmartian.in/" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">agentdiff ↗</a>, a tool to compare AI agent execution trajectories in CI/CD.
+                <a href="https://github.com/confident-ai/deepeval" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">DeepEval ↗</a>.
               </p>
             </div>
 
             {/* Meta row */}
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-foreground/70">
-              <div><span className="text-foreground/45 mr-1.5">Location</span> Pune, India</div>
-              <div><span className="text-foreground/45 mr-1.5">Focus</span> AI / Backend / Cloud</div>
+              <div><span className="text-foreground/45 mr-1.5">Role</span> Freelance AI / Systems Architect</div>
+              <div><span className="text-foreground/45 mr-1.5">Location</span> Pune, India (Global Remote)</div>
+              <div><span className="text-foreground/45 mr-1.5">Key Clients &amp; Ventures</span> AgentDiff · KerrShift · Omara · JRat’s Studio · NTPL</div>
             </div>
 
             <div className="flex flex-wrap items-center gap-3 pt-1">
@@ -249,6 +245,12 @@ export default function Home() {
               <a href={CONTACT_DATA.twitter} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
                 X / Twitter ↗
               </a>
+              <a href="https://agentdiff.app" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                AgentDiff ↗
+              </a>
+              <a href="https://kerrshift.com" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                KerrShift ↗
+              </a>
             </div>
           </div>
 
@@ -267,7 +269,7 @@ export default function Home() {
             <div className="flex-1">
               <span className="font-semibold text-foreground">Operational Focus:</span>{" "}
               <span className="text-foreground/85">
-                Collaborating with founders and enterprise teams to architect robust digital products, intelligent AI workflows, and scalable systems.
+                Founder of AgentDiff (agentdiff.app) and KerrShift (kerrshift.com). Collaborating with founders and enterprise teams to architect robust digital products, intelligent AI workflows, and scalable systems.
               </span>
             </div>
           </div>

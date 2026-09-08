@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./ThemeToggle";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
-import HedgehogLine from "./HedgehogLine";
 
 const navLinks = [
   { name: "Open Source", href: "/oss-contributions" },
@@ -35,14 +34,12 @@ export default function Navigation() {
 
   return (
     <header className="relative py-2 border-b border-border overflow-visible">
-      <HedgehogLine />
       <div className="flex justify-between items-center w-full">
         {/* Logo / Title */}
-        <Link 
-          href="/" 
-          className={`text-base font-semibold transition-colors ${
-            isHomeActive ? "text-accent" : "text-foreground hover:opacity-85"
-          }`}
+        <Link
+          href="/"
+          className={`text-base font-semibold transition-colors ${isHomeActive ? "text-accent" : "text-foreground hover:opacity-85"
+            }`}
         >
           Sahil Gangurde
         </Link>
@@ -59,9 +56,8 @@ export default function Navigation() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`transition-colors hover:text-accent flex items-center gap-1.5 py-1 ${
-                    isActive ? "text-accent font-semibold" : "text-foreground/85"
-                  }`}
+                  className={`transition-colors hover:text-accent flex items-center gap-1.5 py-1 ${isActive ? "text-accent font-semibold" : "text-foreground/85"
+                    }`}
                 >
                   <span>{link.name}</span>
                 </Link>
@@ -97,9 +93,8 @@ export default function Navigation() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className={`text-sm font-sans font-medium py-1.5 border-b border-border/10 transition-all flex items-center justify-between ${
-                  isActive ? "text-accent font-semibold" : "text-foreground/85 hover:text-accent"
-                }`}
+                className={`text-sm font-sans font-medium py-1.5 border-b border-border/10 transition-all flex items-center justify-between ${isActive ? "text-accent font-semibold" : "text-foreground/85 hover:text-accent"
+                  }`}
               >
                 <span>
                   {link.name}

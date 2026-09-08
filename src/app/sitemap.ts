@@ -27,11 +27,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Core static routes (all weekly)
   const staticRoutes: MetadataRoute.Sitemap = (
     [
-      { url: baseUrl,               priority: 1.0,  changeFrequency: "weekly" },
-      { url: `${baseUrl}/blogs`,    priority: 0.9,  changeFrequency: "weekly" },
-      { url: `${baseUrl}/work`,     priority: 0.8,  changeFrequency: "weekly" },
-      { url: `${baseUrl}/projects`, priority: 0.8,  changeFrequency: "weekly" },
-      { url: `${baseUrl}/readlist`, priority: 0.7,  changeFrequency: "weekly" },
+      { url: baseUrl,                      priority: 1.0,  changeFrequency: "weekly" },
+      { url: `${baseUrl}/blogs`,           priority: 0.9,  changeFrequency: "weekly" },
+      { url: `${baseUrl}/work`,            priority: 0.85, changeFrequency: "weekly" },
+      { url: `${baseUrl}/oss-contributions`, priority: 0.85, changeFrequency: "weekly" },
+      { url: `${baseUrl}/projects`,        priority: 0.8,  changeFrequency: "weekly" },
+      { url: `${baseUrl}/readlist`,        priority: 0.7,  changeFrequency: "weekly" },
     ] as const
   ).map((r) => ({ ...r, lastModified: new Date() }));
 

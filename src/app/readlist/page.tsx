@@ -34,6 +34,12 @@ interface ReadlistItem {
   type: string;
 }
 
+function formatYear(dateStr: string): string {
+  if (!dateStr) return "";
+  const match = dateStr.match(/\b\d{4}\b/);
+  return match ? match[0] : dateStr.slice(0, 4);
+}
+
 export default function ReadlistPage() {
   const sortedItems = [...(readlistData as ReadlistItem[])].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -83,7 +89,9 @@ export default function ReadlistPage() {
               <span className="text-xs uppercase tracking-wide text-accent/80 font-semibold">
                 {item.type}
               </span>
-              <span className="text-sm text-foreground/55 tabular-nums">{item.date}</span>
+              <span className="text-sm text-foreground/55 tabular-nums">
+                {formatYear(item.date)}
+              </span>
             </div>
           </div>
         ))}

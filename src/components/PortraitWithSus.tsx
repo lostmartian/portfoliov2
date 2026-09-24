@@ -14,7 +14,7 @@ export default function PortraitWithSus() {
   return (
     <figure className="group relative w-full max-w-[280px] select-none">
       <div
-        className="relative aspect-[4/5] overflow-hidden border border-border bg-card-bg shadow-[0_20px_60px_-24px_rgba(0,0,0,0.35)] cursor-pointer"
+        className="relative aspect-[4/5] overflow-hidden border border-border bg-card-bg cursor-pointer"
         onMouseEnter={() => setSus(true)}
         onMouseLeave={() => setSus(false)}
         onClick={() => setSus((v) => !v)}
@@ -22,7 +22,7 @@ export default function PortraitWithSus() {
         aria-pressed={sus}
         aria-label={sus ? "Show portrait" : "Show the sus dog"}
       >
-        {/* Real photo — contrast lifted */}
+        {/* Real photo */}
         <Image
           src="/me/profile-photo.png"
           alt="Sahil Gangurde"
@@ -31,7 +31,6 @@ export default function PortraitWithSus() {
           className="object-cover transition-opacity duration-200"
           style={{
             opacity: sus ? 0 : 1,
-            filter: "contrast(1.18) saturate(1.08) brightness(1.02)",
           }}
           priority
         />
@@ -44,7 +43,6 @@ export default function PortraitWithSus() {
           className="object-cover transition-all duration-200"
           style={{
             opacity: sus ? 1 : 0,
-            filter: "saturate(1.15)",
           }}
         />
       </div>

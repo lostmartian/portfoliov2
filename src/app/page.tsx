@@ -47,21 +47,18 @@ export default function Home() {
           <div className="md:col-span-8 space-y-7">
             {/* Headline - single sentence */}
             <h1 className="text-[1.75rem] sm:text-[2.4rem] lg:text-[2.9rem] font-bold tracking-tight leading-tight text-foreground">
-              Freelance AI &amp; Backend Engineer building systems that hold.
+              Freelance AI &amp; Backend Engineer building reliable, scalable systems.
             </h1>
 
             {/* Bio */}
-            <div className="max-w-xl space-y-4 text-[15px] sm:text-base text-foreground/85 leading-relaxed text-justify">
+            <div className="max-w-xl space-y-4 text-[15px] sm:text-base text-foreground/85 leading-relaxed">
               <p>
-                I am an independent AI freelancer and backend architect specializing in scale-elastic infrastructure, high-throughput Go/Python systems, and agentic AI. With 2+ years of experience, I build reliable software for high-stakes, regulated industries.
+                I am an independent AI and backend engineer specializing in high-throughput Go/Python architectures, scale-elastic infrastructure, and agentic AI workflows. I partner with founders and engineering teams to build reliable, production-grade systems.
               </p>
               <p>
-                My track record spans consulting with <strong className="font-semibold text-foreground">JRat’s Studio</strong> to engineer SEBI-compliant <strong className="font-semibold text-foreground">IPO Allotment &amp; settlement engines</strong> for <strong className="font-semibold text-foreground">Niche Technology Pvt Ltd (NTPL)</strong> processing 1.6M+ records/sec under strict T+3 cycles, to serving as Founding Full-Stack AI Engineer at <strong className="font-semibold text-foreground">Omara Technologies</strong> architecting enterprise GraphRAG pipelines with Neo4j and Gemini. I hold an Integrated B.Tech &amp; M.Tech in IT from IIIT Gwalior.
-              </p>
-              <p>
-                I am also the founder of{" "}
+                I am the founder of{" "}
                 <a href="https://agentdiff.app/" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">AgentDiff ↗</a> (AI agent trajectory regression testing in CI/CD) and{" "}
-                <a href="https://kerrshift.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">KerrShift ↗</a>. I build and run{" "}
+                <a href="https://kerrshift.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">KerrShift ↗</a>. I also build and run{" "}
                 <a href="https://latentchronicle.online/" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">The Latent Chronicle ↗</a>, an automated computer science newspaper, and contribute upstream to{" "}
                 <a href="https://github.com/BerriAI/litellm" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">LiteLLM ↗</a>{" "}
                 and{" "}

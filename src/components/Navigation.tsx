@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ThemeToggle } from "./ThemeToggle";
+// import { ThemeToggle } from "./ThemeToggle";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
@@ -65,7 +65,7 @@ export default function Navigation() {
             })}
           </nav>
 
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
 
           {/* Mobile Menu Icon Toggle */}
           <button

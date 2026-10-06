@@ -73,9 +73,10 @@ export default function Home() {
 
             {/* Meta row */}
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-foreground/70">
-              <div><span className="text-foreground/45 mr-1.5">Role</span> Freelance AI / Systems Architect</div>
+              <div><span className="text-foreground/45 mr-1.5">Role</span> Freelance AI &amp; Backend Engineer</div>
               <div><span className="text-foreground/45 mr-1.5">Location</span> Pune, India (Global Remote)</div>
               <div><span className="text-foreground/45 mr-1.5">Key Clients &amp; Ventures</span> AgentDiff · KerrShift · Omara · JRat’s Studio · NTPL</div>
+              <div><span className="text-foreground/45 mr-1.5">Open To</span> Freelance Projects · SDE Hiring · Consulting · AI Mentorship</div>
             </div>
 
             <div className="flex flex-wrap items-center gap-3 pt-1">
@@ -283,13 +284,24 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Services */}
+          {/* Services & Engagement Models */}
           <div className="flex items-start gap-2">
             <span className="text-xs font-sans text-accent/60 mt-0.5">•</span>
             <div className="flex-1">
-              <span className="font-semibold text-foreground">Services Offered:</span>{" "}
+              <span className="font-semibold text-foreground">Hiring &amp; Engagement Modes:</span>{" "}
               <span className="text-foreground/85">
-                High-Throughput Backends (Go / Python), Intelligent AI &amp; GraphRAG Agents, Scale-Elastic Infrastructure (AWS / IaC), Secure Multi-Tenant SaaS Architectures
+                Available for <strong>Freelance &amp; Project-Basis AI Engineering</strong> (agents, GraphRAG, evaluators), <strong>Full-Time &amp; Contract SDE 1 / SDE 2 Roles</strong> (high-throughput Go/Python backend architectures), <strong>Senior AI Consulting</strong>, and <strong>1-on-1 AI Technical Mentorship &amp; Teaching</strong>.
+              </span>
+            </div>
+          </div>
+
+          {/* Core Specializations */}
+          <div className="flex items-start gap-2">
+            <span className="text-xs font-sans text-accent/60 mt-0.5">•</span>
+            <div className="flex-1">
+              <span className="font-semibold text-foreground">Core Specializations:</span>{" "}
+              <span className="text-foreground/85">
+                High-Throughput Backends (Go / Python), Mission-Critical SEBI Financial Settlement Engines, Autonomous Agent CI/CD Gates (AgentDiff), Scale-Elastic AWS Infrastructure, and Transformer Systems Architecture.
               </span>
             </div>
           </div>

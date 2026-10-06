@@ -24,17 +24,41 @@ export const metadata: Metadata = {
     template: "%s | Sahil Gangurde (lostmartian)",
     default: "Sahil Gangurde | Freelance AI & Backend Engineer | Founder of AgentDiff & KerrShift",
   },
-  description: "Sahil Gangurde (lostmartian) is an elite Freelance AI & Backend Engineer, and Founder of AgentDiff (agentdiff.app) & KerrShift (kerrshift.com). Ex-Founding Full-Stack AI Engineer at Omara Technologies, Software Engineer at JRat's Studio building mission-critical SEBI financial engines for Niche Technologies (NTPL). Specializing in High-Throughput Go/Python, Agentic AI, and GraphRAG.",
+  description: "Sahil Gangurde (lostmartian) is an elite Freelance AI & Backend Engineer, SDE 2 Systems Architect, and Founder of AgentDiff & KerrShift based in Pune, India. Available for hire: freelance projects, senior AI consulting, full-time and contract SDE roles, and 1-on-1 AI technical mentorship. Specializing in high-throughput Go/Python systems, agentic AI workflows, and GraphRAG.",
   keywords: [
     "Sahil Gangurde",
     "Sahil Gangurde portfolio",
     "lostmartian",
+    "Pune AI engineer",
+    "hire AI engineer Pune",
+    "AI engineer Pune hire",
+    "Pune AI consultant",
+    "AI consultant Pune",
+    "Pune software engineer",
+    "Pune software engineer hire",
+    "backend engineer Pune",
+    "hire backend engineer Pune",
     "AI freelancer",
     "Freelance AI Engineer",
     "Freelance Backend Engineer",
     "AI engineer freelance",
+    "hire freelance AI developer",
+    "project basis AI engineer",
+    "contract AI engineer",
     "Senior AI Consultant",
     "Full-Stack AI Engineer",
+    "software engineer hire",
+    "backend AI software hire",
+    "SDE 1 backend",
+    "SDE 2 backend",
+    "SDE2 AI engineer",
+    "SDE backend engineer hire",
+    "teach AI",
+    "AI teacher",
+    "AI mentor",
+    "AI tutor Pune",
+    "learn AI engineering mentor",
+    "1 on 1 AI coaching",
     "Omara Technology",
     "Omara Technologies Sahil Gangurde",
     "Founding Engineer Omara Technologies",
@@ -108,8 +132,8 @@ export default function RootLayout({
         "alternateName": ["lostmartian", "Sahil"],
         "url": "https://lostmartian.in",
         "image": "https://lostmartian.in/og-image.png",
-        "jobTitle": "Freelance Full-Stack AI & Backend Engineer, Founder",
-        "description": "Sahil Gangurde is a Freelance AI & Backend Engineer and founder of AgentDiff and KerrShift. He has engineered systems for Omara Technologies, JRat's Studio, and Niche Technologies (NTPL).",
+        "jobTitle": "Freelance Full-Stack AI & Backend Engineer, SDE 2 Systems Architect, Founder & Educator",
+        "description": "Sahil Gangurde (lostmartian) is an elite Freelance AI & Backend Engineer, SDE 2 Systems Architect, and Founder of AgentDiff & KerrShift based in Pune, India. Available for hire: freelance projects, senior AI consulting, full-time and contract SDE roles, and 1-on-1 AI technical mentorship.",
         "alumniOf": {
           "@type": "EducationalOrganization",
           "name": "Indian Institute of Information Technology and Management, Gwalior (IIIT Gwalior)",
@@ -118,18 +142,66 @@ export default function RootLayout({
         "hasOccupation": [
           {
             "@type": "Occupation",
-            "name": "Freelance AI Engineer",
-            "description": "Architecting autonomous agents, GraphRAG systems, and AI evaluators."
+            "name": "Freelance AI Engineer & Systems Architect",
+            "description": "Architecting autonomous agents, GraphRAG systems, and AI evaluators on a contract or project basis."
           },
           {
             "@type": "Occupation",
-            "name": "Freelance Backend Engineer",
-            "description": "Building high-throughput Go and Python financial engines and scale-elastic infrastructure."
+            "name": "Freelance Backend Engineer & SDE 2",
+            "description": "Building high-throughput Go and Python financial engines, SEBI allotment systems, and scale-elastic infrastructure."
           },
           {
             "@type": "Occupation",
-            "name": "Technical Educator & Systems Architect",
-            "description": "Creator of Sahil Gangurde Tech (@sahilgangurdetech) publishing first-principles engineering deep dives into Attention mechanisms, GPU systems, and autonomous AI agents."
+            "name": "Senior AI Consultant & Systems Advisor",
+            "description": "Enterprise AI architecture review, prompt drift auditing, trajectory evaluation via AgentDiff, and token cost optimization."
+          },
+          {
+            "@type": "Occupation",
+            "name": "Software Development Engineer (SDE 1 / SDE 2 / Backend AI)",
+            "description": "Production software engineering across Go, Python, distributed databases (Aurora, Neo4j), and cloud infrastructure (AWS)."
+          },
+          {
+            "@type": "Occupation",
+            "name": "AI Technical Educator & 1-on-1 Mentor",
+            "description": "Teaching first-principles deep learning, Attention mechanisms, GPU execution, and production AI agent engineering to teams and individuals."
+          }
+        ],
+        "makesOffer": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Freelance AI Engineering (Project Basis)",
+              "description": "Autonomous agents, GraphRAG pipelines, LLM evaluators, and production deployments."
+            },
+            "areaServed": ["Pune, Maharashtra, India", "Global Remote"]
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "High-Throughput Backend Engineering (SDE 1 / SDE 2 / Contract / Full-Time)",
+              "description": "Concurrency-critical Go and Python financial engines, distributed systems, and AWS cloud architectures."
+            },
+            "areaServed": ["Pune, Maharashtra, India", "Global Remote"]
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AI Architecture Consulting & Auditing",
+              "description": "Evaluation pipelines, CI/CD regression gates, and performance optimization."
+            },
+            "areaServed": ["Pune, Maharashtra, India", "Global Remote"]
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "1-on-1 AI Technical Mentorship & Educational Coaching",
+              "description": "Hands-on instruction in deep learning mathematics, transformer mechanics, GPU bottlenecks, and building AI projects from first principles."
+            },
+            "areaServed": ["Pune, Maharashtra, India", "Global Remote"]
           }
         ],
         "creator": [

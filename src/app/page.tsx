@@ -3,6 +3,7 @@ import experiencesData from "@/data/experience.json";
 import { CONTACT_DATA } from "@/config/contact";
 import Link from "next/link";
 import PortraitWithSus from "@/components/PortraitWithSus";
+import YouTubeSection from "@/components/YouTubeSection";
 
 interface ExperienceItem {
   id: number;
@@ -63,6 +64,10 @@ export default function Home() {
                 <a href="https://github.com/BerriAI/litellm" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">LiteLLM ↗</a>{" "}
                 and{" "}
                 <a href="https://github.com/confident-ai/deepeval" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">DeepEval ↗</a>.
+              </p>
+              <p>
+                I also publish first-principles technical breakdowns of AI internals and GPU systems on my YouTube channel,{" "}
+                <a href="https://www.youtube.com/@sahilgangurdetech" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">Sahil Gangurde Tech ↗</a>.
               </p>
             </div>
 
@@ -209,6 +214,10 @@ export default function Home() {
       </section>
 
 
+      {/* ============ YOUTUBE CHANNEL ============ */}
+      <YouTubeSection />
+
+
       {/* ============ CONTACT ============ */}
       <section id="contact" className="pt-2 pb-10 md:pb-14 space-y-6">
         <div className="flex items-baseline justify-between">
@@ -241,6 +250,9 @@ export default function Home() {
               </a>
               <a href={CONTACT_DATA.twitter} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
                 X / Twitter ↗
+              </a>
+              <a href={CONTACT_DATA.youtube} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                YouTube ↗
               </a>
               <a href="https://agentdiff.app" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
                 AgentDiff ↗

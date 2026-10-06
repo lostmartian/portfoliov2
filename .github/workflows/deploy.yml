@@ -53,6 +53,9 @@ jobs:
         env:
           GH_STATS_PAT: ${{ secrets.GH_STATS_PAT }}
         run: node scripts/fetch-github-stats.mjs
+
+      - name: Sync YouTube Videos
+        run: node scripts/fetch-youtube-videos.mjs
       
       - name: Build with Next.js
         run: pnpm run build

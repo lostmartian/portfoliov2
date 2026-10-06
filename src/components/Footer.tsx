@@ -18,6 +18,9 @@ export default function Footer() {
         <a href={CONTACT_DATA.twitter} target="_blank" rel="noopener noreferrer" className="hover:text-foreground">
           X / Twitter
         </a>
+        <a href={CONTACT_DATA.youtube} target="_blank" rel="noopener noreferrer" className="hover:text-foreground text-red-500/80 hover:text-red-500">
+          YouTube
+        </a>
       </div>
     </footer>
   );

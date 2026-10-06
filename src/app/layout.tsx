@@ -56,8 +56,12 @@ export const metadata: Metadata = {
     "Go AI engineer",
     "Python AI engineer",
     "GraphRAG Neo4j engineer",
-    "Pune AI engineer India",
-    "IIIT Gwalior Sahil Gangurde"
+    "IIIT Gwalior Sahil Gangurde",
+    "Sahil Gangurde Tech",
+    "sahilgangurdetech",
+    "Sahil Gangurde YouTube",
+    "Attention Is All You Need systems breakdown",
+    "GPU memory systems transformer"
   ],
   authors: [{ name: "Sahil Gangurde", url: "https://lostmartian.in" }],
   creator: "Sahil Gangurde",
@@ -121,6 +125,16 @@ export default function RootLayout({
             "@type": "Occupation",
             "name": "Freelance Backend Engineer",
             "description": "Building high-throughput Go and Python financial engines and scale-elastic infrastructure."
+          },
+          {
+            "@type": "Occupation",
+            "name": "Technical Educator & Systems Architect",
+            "description": "Creator of Sahil Gangurde Tech (@sahilgangurdetech) publishing first-principles engineering deep dives into Attention mechanisms, GPU systems, and autonomous AI agents."
+          }
+        ],
+        "creator": [
+          {
+            "@id": "https://www.youtube.com/@sahilgangurdetech#channel"
           }
         ],
         "founder": [
@@ -154,6 +168,9 @@ export default function RootLayout({
         "knowsAbout": [
           "AI Freelance Engineering",
           "Backend Freelance Engineering",
+          "Sahil Gangurde Tech (@sahilgangurdetech)",
+          "Transformer Attention Mechanisms & GPU Systems",
+          "Deep Learning Architecture Mathematics",
           "Omara Technologies Architecture",
           "JRat's Studio Software Engineering",
           "NTPL Niche Technology Pvt Ltd SEBI Compliance",
@@ -176,10 +193,22 @@ export default function RootLayout({
           "https://github.com/lostmartian",
           "https://linkedin.com/in/lostmartian",
           "https://twitter.com/lost_martian_",
+          "https://www.youtube.com/@sahilgangurdetech",
+          "https://www.youtube.com/channel/UCtaWm5UMqhiBtgHzKzkOabw",
           "https://agentdiff.app",
           "https://kerrshift.com",
           "https://latentchronicle.online/"
         ]
+      },
+      {
+        "@type": "VideoChannel",
+        "@id": "https://www.youtube.com/@sahilgangurdetech#channel",
+        "name": "Sahil Gangurde Tech",
+        "url": "https://www.youtube.com/@sahilgangurdetech",
+        "description": "First-principles engineering deep dives into Autonomous AI Agents, Attention Mechanisms, GPU Memory limits, and Scaled Systems.",
+        "author": {
+          "@id": "https://lostmartian.in/#person"
+        }
       },
       {
         "@type": "Organization",
@@ -221,6 +250,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Sahil Gangurde Tech (@sahilgangurdetech) Video Feed"
+          href="https://www.youtube.com/feeds/videos.xml?channel_id=UCtaWm5UMqhiBtgHzKzkOabw"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

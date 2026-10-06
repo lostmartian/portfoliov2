@@ -10,6 +10,7 @@ const navLinks = [
   { name: "Open Source", href: "/oss-contributions" },
   { name: "Work", href: "/work" },
   { name: "Blogs", href: "/blogs" },
+  { name: "Videos", href: "/videos" },
   { name: "Projects", href: "/projects" },
   { name: "Readlist", href: "/readlist" },
 ];

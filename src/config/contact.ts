@@ -4,6 +4,7 @@ export const CONTACT_DATA = {
   linkedin: "https://linkedin.com/in/lostmartian",
   github: "https://github.com/lostmartian",
   twitter: "https://twitter.com/lost_martian_",
+  youtube: "https://www.youtube.com/@sahilgangurdetech",
   location: "Remote / Onsite across India (bag packed, coordinates welcome)",
   status: "Available",
   responseLatency: "< 24H"

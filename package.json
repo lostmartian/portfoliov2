@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "rm -rf out && next build",
+    "sync:youtube": "node scripts/fetch-youtube-videos.mjs",
     "start": "next start",
     "lint": "eslint"
   },

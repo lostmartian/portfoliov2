@@ -1,0 +1,34 @@
+{
+  "channel": {
+    "id": "UCtaWm5UMqhiBtgHzKzkOabw",
+    "name": "Sahil Gangurde Tech",
+    "handle": "@sahilgangurdetech",
+    "url": "https://www.youtube.com/@sahilgangurdetech",
+    "subscribeUrl": "https://www.youtube.com/@sahilgangurdetech?sub_confirmation=1",
+    "description": "First-principles deep dives into Autonomous AI Agents, Production LLM Systems, High-Throughput Backends (Go & Python), and GPU Memory Systems.",
+    "bannerTagline": "Deep Dives into AI Engineering, Agentic Trajectories & Scaled Systems",
+    "lastSynced": "2026-10-06T18:30:55.960Z",
+    "videoCount": 1
+  },
+  "videos": [
+    {
+      "id": "kBvLpoYivDs",
+      "title": "How Attention Actually Works: Math, GPU Memory, and Systems",
+      "description": "A complete, first-principles breakdown of the Attention mechanism from \"Attention Is All You Need\"—moving past surface-level intuition down to the linear algebra, GPU execution, and real production bottlenecks.\n\nIn this deep dive, we trace:\n• Why recurrent architectures failed at scale (and how parallel matrix ops fixed it)\n• Tokenization, dense vector embeddings, and sinusoidal positional encodings\n• Query, Key, and Value: decoupling search intent from content payloads\n• The \"Softmax Killer\": variance scaling and gradient preservation\n• Single-Head limitations vs. Multi-Head parallel subspaces\n• Causal masking mechanics for autoregressive token generation\n• Production systems limits: O(N²) quadratic scaling, memory bandwidth bounds, and KV Cache bloat\n\n---\n\nAbout Me:\nFreelance AI & Systems Architect specializing in high-throughput Go/Python backends, GraphRAG, and scale-elastic infrastructure.\nFounder of AgentDiff (AI agent CI/CD regression testing) and upstream contributor to LiteLLM & DeepEval.\nPartnering with founders and engineering teams globally to ship reliable, production-grade systems.\n\n🌐 Portfolio & Projects: https://lostmartian.in/\n🐙 GitHub: https://github.com/lostmartian\n💼 LinkedIn: https://www.linkedin.com/in/lostmartian/\n🐦 X / Twitter: https://x.com/lost_martian_\n\nIf you found this trace valuable, subscribe for upcoming deep dives into FlashAttention, KV Caching, and systems-level LLM optimizations.",
+      "publishedAt": "2026-10-06T14:57:16+00:00",
+      "updatedAt": "2026-10-06T15:21:33+00:00",
+      "url": "https://www.youtube.com/watch?v=kBvLpoYivDs",
+      "embedUrl": "https://www.youtube.com/embed/kBvLpoYivDs?si=lNIyEmuuEj8ESe7K",
+      "thumbnailUrl": "https://i4.ytimg.com/vi/kBvLpoYivDs/hqdefault.jpg",
+      "views": 4,
+      "tags": [
+        "Attention",
+        "GPU Systems",
+        "Deep Learning",
+        "AgentDiff",
+        "AI Agents"
+      ],
+      "featured": true
+    }
+  ]
+}

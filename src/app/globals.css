@@ -123,8 +123,8 @@
   letter-spacing: 0;
 }
 
-/* Small caption: "SELECTED WORK" */
-.label {
+/* Small caption: "SELECTED WORK". Not inside SVGs: Mermaid gives its own diagram text the class "label". */
+.label:not(svg *) {
   font-family: var(--font-body), system-ui, sans-serif;
   font-size: 11px;
   font-weight: 500;
@@ -409,7 +409,7 @@ html, body { overflow-x: clip; }
 @keyframes smoke { from { opacity: 0.8; transform: translate(0, 4px) scale(0.6); } to { opacity: 0; transform: translate(-6px, -8px) scale(1.4); } }
 .signal { animation: signal 1.8s ease-in-out infinite; }
 @keyframes signal { 0%, 100% { opacity: 0.2; } 40% { opacity: 1; } }
-.node { animation: node 2.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.pulse-node { animation: node 2.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
 @keyframes node { 50% { transform: scale(1.5); opacity: 0.6; } }
 .led { animation: led 1.2s steps(2, jump-none) infinite; }
 @keyframes led { 50% { opacity: 0.15; } }
@@ -534,7 +534,7 @@ html.lenis, html.lenis body { height: auto; }
   .pulse-dot::after, .sway, .turn, .turn-slow, .fly, .steam, .wave, .scroll-progress { animation: none !important; }
   .cursor-dot { display: none; }
   .wheel-spin, .bell-swing, .waves, .boat-bob, .boat-sail, .boat-wake, .boat-canvas, .beam, .fall, .rain, .toy-train, .nilgiri, .taxi, .ecg, .bubble,
-  .twinkle, .train-bob, .smoke, .signal, .node, .led, .flag { animation: none !important; }
+  .twinkle, .train-bob, .smoke, .signal, .pulse-node, .led, .flag { animation: none !important; }
   .collage-card { transition: none; }
   .village-piece * { transition: none !important; }
   .curtain { display: none; }

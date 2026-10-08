@@ -1347,7 +1347,7 @@ export default function JourneyFilm({ className = "" }: { className?: string }) 
       <g transform={`translate(${C[3] - 80} ${G - 58})`}>
         <path d="M-18 0 L0 -12 L18 0 M-18 0 L18 0" fill="none" stroke="var(--leaf)" strokeWidth="1.2" opacity={f.nodes ? 1 : 0.35} />
         {[[-18, 0], [0, -12], [18, 0]].map(([x, y], i) => (
-          <circle key={i} className={i < f.nodes ? "node" : ""} cx={x} cy={y} r="3.2" fill={i < f.nodes ? "var(--leaf)" : "var(--background)"} stroke="var(--leaf)" strokeWidth="1.2" />
+          <circle key={i} className={i < f.nodes ? "pulse-node" : ""} cx={x} cy={y} r="3.2" fill={i < f.nodes ? "var(--leaf)" : "var(--background)"} stroke="var(--leaf)" strokeWidth="1.2" />
         ))}
       </g>
 

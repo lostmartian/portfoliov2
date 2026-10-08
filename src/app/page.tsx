@@ -1,9 +1,22 @@
-import { TECHNICAL_TOOLKIT, VALIDATION_STATS } from "@/config/about";
+import type { CSSProperties } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import experiencesData from "@/data/experience.json";
 import { CONTACT_DATA } from "@/config/contact";
-import Link from "next/link";
-import PortraitWithSus from "@/components/PortraitWithSus";
+import { projects } from "@/data/projects";
+import AboutCollage from "@/components/about/AboutCollage";
+import ServicesExplorer from "@/components/home/ServicesExplorer";
+import ToolShelf from "@/components/home/ToolShelf";
+import WorkIndex from "@/components/WorkIndex";
 import YouTubeSection from "@/components/YouTubeSection";
+import Section from "@/components/ui/Section";
+import CopyEmail from "@/components/ui/CopyEmail";
+import Magnetic from "@/components/ui/Magnetic";
+import { devaNum } from "@/components/ui/deva";
+import { Border, DanceCircle } from "@/components/warli/Warli";
+import HeroLandscape from "@/components/warli/HeroLandscape";
+import VillageGrowth from "@/components/warli/VillageGrowth";
 
 interface ExperienceItem {
   id: number;
@@ -15,20 +28,13 @@ interface ExperienceItem {
   current?: boolean;
   link?: string;
   homeDisplay?: boolean;
-  client?: {
-    name: string;
-    description: string;
-    link: string;
-  };
+  client?: { name: string; description: string; link: string };
 }
 
 function getEmploymentType(role: string): string {
   const r = role.toLowerCase();
-  if (r.includes("freelance")) return "Freelance";
-  if (r.includes("consultant")) return "Freelance";
-  if (r.includes("instructor")) return "Freelance";
-  if (r.includes("writer")) return "Contract";
-  if (r.includes("setter")) return "Contract";
+  if (r.includes("freelance") || r.includes("consultant") || r.includes("instructor")) return "Freelance";
+  if (r.includes("writer") || r.includes("setter")) return "Contract";
   return "Full-time";
 }
 
@@ -36,284 +42,221 @@ function cleanRole(role: string): string {
   return role.replace(/,\s*Freelance/gi, "").trim();
 }
 
+const d = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
+
+const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
+
 export default function Home() {
-  const experiences = (experiencesData as ExperienceItem[]).filter(exp => exp.homeDisplay !== false);
+  const experiences = (experiencesData as ExperienceItem[]).filter((e) => e.homeDisplay !== false);
 
   return (
-    <div className="font-sans">
+    <div className="space-y-40 md:space-y-56">
       {/* ============ HERO ============ */}
-      <section className="pt-10 pb-14 md:pt-16 md:pb-20">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 items-center">
-          {/* Left: Identity */}
-          <div className="md:col-span-8 space-y-7">
-            {/* Headline - single sentence */}
-            <h1 className="text-[1.75rem] sm:text-[2.4rem] lg:text-[2.9rem] font-bold tracking-tight leading-tight text-foreground">
-              Freelance AI &amp; Backend Engineer building reliable, scalable systems.
-            </h1>
+      <section id="hero" className="relative isolate min-h-[calc(100svh-72px)] flex flex-col">
+        <HeroLandscape />
 
-            {/* Bio */}
-            <div className="max-w-xl space-y-4 text-[15px] sm:text-base text-foreground/85 leading-relaxed">
-              <p>
-                I am an independent AI and backend engineer specializing in high-throughput Go/Python architectures, scale-elastic infrastructure, and agentic AI workflows. I partner with founders and engineering teams to build reliable, production-grade systems.
-              </p>
-              <p>
-                I am the founder of{" "}
-                <a href="https://agentdiff.app/" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">AgentDiff ↗</a> (AI agent trajectory regression testing in CI/CD) and{" "}
-                <a href="https://kerrshift.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">KerrShift ↗</a>. I also build and run{" "}
-                <a href="https://latentchronicle.online/" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">The Latent Chronicle ↗</a>, an automated computer science newspaper, and contribute upstream to{" "}
-                <a href="https://github.com/BerriAI/litellm" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">LiteLLM ↗</a>{" "}
-                and{" "}
-                <a href="https://github.com/confident-ai/deepeval" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">DeepEval ↗</a>.
-              </p>
-              <p>
-                I also publish first-principles technical breakdowns of AI internals and GPU systems on my YouTube channel,{" "}
-                <a href="https://www.youtube.com/@sahilgangurdetech" target="_blank" rel="noopener noreferrer" className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors">Sahil Gangurde Tech ↗</a>.
-              </p>
-            </div>
+        <div className="relative flex-1 flex flex-col items-center justify-center text-center pt-[5svh] pb-[clamp(120px,20svh,240px)]">
+          <a href="#about-me" className="rise group inline-flex items-center gap-3 rounded-full border border-border bg-card-bg/80 pl-1.5 pr-5 py-1.5 transition-colors hover:border-accent" style={d(80)}>
+            <span className="relative h-10 w-10 sm:h-11 sm:w-11 shrink-0 overflow-hidden rounded-full bg-[#f7f1e6] ring-2 ring-background">
+              <Image src="/me/headshot.jpg" alt="Sahil Gangurde" fill sizes="44px" priority className="object-cover object-[50%_30%] scale-125 mix-blend-multiply transition-transform duration-500 group-hover:scale-[1.35]" />
+            </span>
+            <span className="deva text-accent text-xl sm:text-2xl leading-none">नमस्कार!</span>
+            <span className="text-base sm:text-lg">I&apos;m Sahil.</span>
+            <span className="hidden sm:inline text-sm text-muted transition-colors group-hover:text-accent">about me ↓</span>
+          </a>
 
-            {/* Meta row */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-foreground/70">
-              <div><span className="text-foreground/45 mr-1.5">Role</span> Freelance AI &amp; Backend Engineer</div>
-              <div><span className="text-foreground/45 mr-1.5">Location</span> Pune, India (Global Remote)</div>
-              <div><span className="text-foreground/45 mr-1.5">Key Clients &amp; Ventures</span> AgentDiff · KerrShift · Omara · JRat’s Studio · NTPL</div>
-              <div><span className="text-foreground/45 mr-1.5">Open To</span> Freelance Projects · SDE Hiring · Consulting · AI Mentorship</div>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3 pt-1">
-              <a
-                href={`mailto:${CONTACT_DATA.email}`}
-                className="inline-flex items-center h-10 px-6 bg-foreground text-background rounded-full text-sm font-medium hover:bg-accent hover:text-white transition-colors duration-300"
-              >
-                Get in touch
-              </a>
-              <Link
-                href="/work"
-                className="inline-flex items-center h-10 px-6 border border-border rounded-full text-sm font-medium text-foreground/80 hover:border-accent/50 hover:text-accent transition-colors duration-300"
-              >
-                View work
-              </Link>
-            </div>
-          </div>
-
-          {/* Right: Portrait — contrast-boosted, sus dog on hover */}
-          <div className="md:col-span-4 flex justify-center md:justify-end">
-            <PortraitWithSus />
-          </div>
-        </div>
-      </section>
-
-
-      {/* ============ TOOLKIT ============ */}
-      <section className="pt-2 pb-10 md:pb-14 space-y-6">
-        <div className="flex items-baseline justify-between">
-          <h2 className="text-sm font-sans font-bold uppercase tracking-wider text-accent">
-            Technical Toolkit
-          </h2>
-        </div>
-        <div className="divide-y divide-border/60 border-y border-border/60">
-          {TECHNICAL_TOOLKIT.map((item) => (
-            <div key={item.index} className="flex items-start gap-5 py-4 group">
-              <span className="text-xs text-foreground/40 mt-1 w-6 shrink-0 group-hover:text-accent transition-colors">
-                {item.index}
+          <h1 className="mt-5 sm:mt-6 text-[clamp(3rem,min(9.6vw,14svh),11.5rem)] leading-[0.9] tracking-[-0.035em]">
+            <span className="mask-line">
+              <span className="mask-inner justify-center" style={d(160)}>I build AI that thinks</span>
+            </span>
+            <span className="mask-line">
+              <span className="mask-inner justify-center" style={d(260)}>
+                &amp; backends that
+                <span className="relative serif text-accent">
+                  last.
+                  <svg viewBox="0 0 300 20" preserveAspectRatio="none" className="scribble absolute left-[2%] -bottom-[0.04em] w-[96%] h-[0.12em] overflow-visible" aria-hidden="true">
+                    <path d="M2 12 C 40 4, 70 18, 110 10 S 180 4, 220 11 S 280 14, 298 7" pathLength={1} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+                  </svg>
+                </span>
               </span>
-              <div className="flex-grow grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-1 sm:gap-6 items-start">
-                <span className="text-[15px] font-semibold text-foreground">{item.title}</span>
-                <span className="text-[15px] text-foreground/75 leading-relaxed">{item.list.join(", ")}</span>
-              </div>
+            </span>
+          </h1>
+
+          <p className="rise mt-6 2xl:mt-9 max-w-[38rem] text-[17px] sm:text-lg leading-relaxed text-foreground/85" style={d(480)}>
+            An engineer from Pune. By day I build backends and AI agents for founders and teams, and right now I&apos;m
+            building <a href="https://agentdiff.app/" {...ext} className="ink-link">AgentDiff</a>. By weekend I paint and cook.
+          </p>
+
+          <div className="rise mt-6 2xl:mt-9 flex flex-col items-center gap-3.5" style={d(580)}>
+            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
+              <Magnetic>
+                <a
+                  href={`mailto:${CONTACT_DATA.email}?subject=${encodeURIComponent("Project enquiry")}`}
+                  className="flourish group inline-flex items-center gap-3 h-14 pl-7 pr-2.5 rounded-full bg-foreground text-background text-base hover:bg-accent hover:text-accent-foreground transition-colors duration-300"
+                >
+                  Start a project
+                  <span className="grid place-items-center h-10 w-10 rounded-full bg-background text-foreground transition-transform duration-500 group-hover:rotate-45">
+                    <ArrowUpRight className="w-4 h-4" />
+                  </span>
+                </a>
+              </Magnetic>
+              <CopyEmail email={CONTACT_DATA.email} />
             </div>
-          ))}
+            <p className="flex items-center gap-2.5 text-sm text-muted">
+              <span className="pulse-dot h-2 w-2 rounded-full bg-leaf" aria-hidden="true" />
+              Available for new work · I reply within a day
+            </p>
+          </div>
         </div>
       </section>
 
+      <div className="relative space-y-40 md:space-y-56">
+        <VillageGrowth className="hidden lg:block absolute left-0 top-0 bottom-0 w-[calc((100%-27.5rem)/6+2.5rem)] max-w-[230px] !mt-0" />
+
+      {/* ============ ABOUT ============ */}
+      <Section id="about-me" index={1} mr="ओळख" label="About" title={<>Hi, I&apos;m <span className="serif text-accent">Sahil.</span></>}>
+        <div className="grid grid-cols-1 xl:grid-cols-9 gap-x-14 gap-y-16 items-start">
+          <div className="xl:col-span-4 space-y-6 text-[17px] sm:text-lg leading-[1.8] text-foreground/85 max-w-2xl">
+            <p>
+              I&apos;m an engineer from Pune. I did a five-year dual degree in Information Technology at IIIT Gwalior, and I&apos;ve
+              spent the years since building systems that have to hold: share allotments that can&apos;t be wrong, AI that
+              enterprises have to trust.
+            </p>
+            <p>
+              These days I freelance for founders and teams, and I&apos;m building{" "}
+              <a href="https://agentdiff.app/" {...ext} className="ink-link text-foreground">AgentDiff</a>, a tool that catches AI
+              agents quietly getting worse.
+            </p>
+            <p className="text-muted">
+              I care about how things feel to use, not just whether they pass the tests. Away from the keyboard I paint, cook, and explain AI internals on{" "}
+              <a href="https://www.youtube.com/@sahilgangurdetech" {...ext} className="ink-link text-foreground">YouTube</a>.
+            </p>
+            <p className="font-display italic text-2xl text-foreground pt-2">
+              Say hi: <a href="#contact" className="ink-link">let&apos;s talk</a>.
+            </p>
+          </div>
+          <div className="xl:col-span-5">
+            <AboutCollage />
+          </div>
+        </div>
+      </Section>
+
+      {/* ============ SELECTED WORK ============ */}
+      <Section index={2} mr="काम" label="Selected work" title={<>Built for <span className="serif text-accent">production.</span></>} href="/work" hrefLabel="All case studies">
+        <WorkIndex
+          items={projects.slice(0, 4).map((p) => ({
+            href: `/work/${p.slug}`,
+            title: p.title,
+            meta: p.category.split("/")[0].trim(),
+            year: p.year,
+            description: p.description,
+            cover: p.slug,
+            stack: p.stack,
+          }))}
+        />
+      </Section>
+
+      {/* ============ SERVICES ============ */}
+      <Section index={3} mr="सेवा" label="Services" title={<>How I can <span className="serif text-accent">help.</span></>}>
+        <ServicesExplorer />
+      </Section>
 
       {/* ============ EXPERIENCE ============ */}
-      <section className="pt-2 pb-10 md:pb-14 space-y-6">
-        <div className="flex items-baseline justify-between">
-          <h2 className="text-sm font-sans font-bold uppercase tracking-wider text-accent">
-            Experience
-          </h2>
-        </div>
-        <div className="divide-y divide-border/60 border-y border-border/60">
+      <Section index={4} mr="अनुभव" label="Experience" title={<>Where I&apos;ve <span className="serif text-accent">shipped.</span></>}>
+        <ol className="border-t border-border">
           {experiences.map((exp) => {
-            const empType = getEmploymentType(exp.role);
-            const roleName = cleanRole(exp.role);
+            const Row = exp.link ? "a" : "div";
             return (
-              <article
-                key={exp.id}
-                className="group relative py-6 transition-colors"
-              >
-                {/* Header row */}
-                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5 sm:gap-4">
-                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 min-w-0">
-                    <span className="text-xs font-semibold text-accent/70 tabular-nums shrink-0 pt-0.5">
-                      {String(experiences.indexOf(exp) + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="text-lg font-semibold text-foreground leading-tight">
-                      {exp.link ? (
-                        <a
-                          href={exp.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-foreground group-hover:text-accent transition-colors decoration-accent/40 underline-offset-4 group-hover:underline"
-                        >
-                          {exp.company} ↗
-                        </a>
-                      ) : (
-                        exp.company
-                      )}
-                    </h3>
-                    <span className="text-[15px] text-foreground/60">
-                      {roleName}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-2.5 sm:pl-8 shrink-0">
-                    <span className="text-[10px] font-semibold text-accent/90 uppercase tracking-wider">
-                      {empType}
-                    </span>
-                    <span className="text-foreground/25">·</span>
-                    <span className="text-sm text-foreground/60 tabular-nums flex items-center gap-1.5">
-                      {exp.current && (
-                        <span className="relative flex h-1.5 w-1.5">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-60" />
-                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
-                        </span>
-                      )}
+              <li key={exp.id}>
+                <Row
+                  {...(exp.link ? { href: exp.link, ...ext } : {})}
+                  className="group ink-row grid grid-cols-1 md:grid-cols-[180px_1fr_auto] gap-x-8 gap-y-3 py-10 border-b border-border"
+                >
+                  <div className="space-y-2 pt-2">
+                    <p className="label flex items-center gap-2">
+                      {exp.current && <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-leaf" aria-hidden="true" />}
                       {exp.duration}
-                    </span>
+                    </p>
+                    <p className="label">{getEmploymentType(exp.role)}</p>
                   </div>
-                </div>
-
-                {/* Summary */}
-                {exp.summary && (
-                  <p className="text-[15px] text-foreground/80 leading-relaxed mt-2.5 max-w-3xl sm:pl-8">
-                    {exp.summary}
-                  </p>
-                )}
-
-                {/* Client callout */}
-                {exp.client && (
-                  <p className="mt-3 text-sm sm:pl-8">
-                    <span className="text-[10px] uppercase tracking-wider text-foreground/50 font-bold mr-2">
-                      Building for
+                  <div className="space-y-3">
+                    <h3 className="text-3xl sm:text-4xl leading-tight transition-colors duration-300 group-hover:text-accent">
+                      {exp.company}
+                    </h3>
+                    <p className="serif text-xl text-foreground/70">{cleanRole(exp.role)}</p>
+                    {exp.summary && <p className="text-[16px] text-muted leading-relaxed max-w-2xl">{exp.summary}</p>}
+                    {exp.client && (
+                      <p className="text-sm text-muted max-w-2xl">
+                        Building for <span className="text-foreground">{exp.client.name}</span>: {exp.client.description}
+                      </p>
+                    )}
+                  </div>
+                  {exp.link && (
+                    <span className="hidden md:grid place-items-center h-11 w-11 rounded-full border border-border transition-all duration-500 group-hover:bg-accent group-hover:border-accent group-hover:text-accent-foreground group-hover:rotate-45">
+                      <ArrowUpRight className="w-4 h-4" />
                     </span>
-                    <a
-                      href={exp.client.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-accent hover:underline font-semibold"
-                    >
-                      {exp.client.name} ↗
-                    </a>
-                    <span className="text-foreground/75"> — {exp.client.description}</span>
-                  </p>
-                )}
-              </article>
+                  )}
+                </Row>
+              </li>
             );
           })}
-        </div>
-      </section>
+        </ol>
+      </Section>
 
+      {/* ============ TOOLKIT ============ */}
+      <Section index={5} mr="साधनं" label="Toolkit" title={<>Tools of the <span className="serif text-accent">trade.</span></>} href="/uses" hrefLabel="Everything I use">
+        <ToolShelf />
+      </Section>
 
-      {/* ============ YOUTUBE CHANNEL ============ */}
-      <YouTubeSection />
+      {/* ============ VIDEOS ============ */}
+      <YouTubeSection index={6} />
 
+      </div>
 
       {/* ============ CONTACT ============ */}
-      <section id="contact" className="pt-2 pb-10 md:pb-14 space-y-6">
-        <div className="flex items-baseline justify-between">
-          <h2 className="text-sm font-sans font-bold uppercase tracking-wider text-accent">
-            Contact
-          </h2>
-        </div>
-        <div className="space-y-3 text-[15px] text-foreground">
-          {/* Email */}
-          <div className="flex items-start gap-2">
-            <span className="text-xs font-sans text-accent/60 mt-0.5">•</span>
-            <div className="flex-1">
-              <span className="font-semibold text-foreground">Email:</span>{" "}
-              <a href={`mailto:${CONTACT_DATA.email}`} className="text-accent hover:underline">
-                {CONTACT_DATA.displayEmail}
-              </a>
+      <section id="contact" data-village="Contact" data-village-mr="संपर्क" className="bleed relative overflow-hidden bg-accent text-accent-foreground">
+        <Border className="text-accent-foreground/30" />
+        <div className="w-full px-5 sm:px-8 lg:px-12 2xl:px-20 py-24 md:py-36 relative">
+          <DanceCircle className="absolute right-[-120px] top-1/2 -translate-y-1/2 w-[620px] text-accent-foreground/20 pointer-events-none hidden md:block" />
+          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-x-10">
+            <div className="lg:col-span-2 flex lg:flex-col items-baseline gap-3 lg:gap-2 mb-8">
+              <span className="deva text-3xl lg:text-5xl leading-none">{devaNum(8)}</span>
+              <span className="deva text-lg leading-none opacity-85">संपर्क</span>
+              <span className="label !text-accent-foreground/90 lg:mt-2">Contact</span>
             </div>
-          </div>
-
-          {/* Network */}
-          <div className="flex items-start gap-2">
-            <span className="text-xs font-sans text-accent/60 mt-0.5">•</span>
-            <div className="flex-1 flex flex-wrap gap-x-4">
-              <span className="font-semibold text-foreground mr-2">Network:</span>
-              <a href={CONTACT_DATA.linkedin} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
-                LinkedIn ↗
-              </a>
-              <a href={CONTACT_DATA.github} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
-                GitHub ↗
-              </a>
-              <a href={CONTACT_DATA.twitter} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
-                X / Twitter ↗
-              </a>
-              <a href={CONTACT_DATA.youtube} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
-                YouTube ↗
-              </a>
-              <a href="https://agentdiff.app" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
-                AgentDiff ↗
-              </a>
-              <a href="https://kerrshift.com" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
-                KerrShift ↗
-              </a>
-            </div>
-          </div>
-
-          {/* Status & Location */}
-          <div className="flex items-start gap-2">
-            <span className="text-xs font-sans text-accent/60 mt-0.5">•</span>
-            <div className="flex-1">
-              <span className="font-semibold text-foreground">Status &amp; Location:</span>{" "}
-              <span className="text-foreground/90">{CONTACT_DATA.status}</span> in <span className="text-foreground/90">{CONTACT_DATA.location}</span>
-            </div>
-          </div>
-
-          {/* Operational Focus */}
-          <div className="flex items-start gap-2">
-            <span className="text-xs font-sans text-accent/60 mt-0.5">•</span>
-            <div className="flex-1">
-              <span className="font-semibold text-foreground">Operational Focus:</span>{" "}
-              <span className="text-foreground/85">
-                Founder of AgentDiff (agentdiff.app) and KerrShift (kerrshift.com). Collaborating with founders and enterprise teams to architect robust digital products, intelligent AI workflows, and scalable systems.
-              </span>
-            </div>
-          </div>
-
-          {/* Services & Engagement Models */}
-          <div className="flex items-start gap-2">
-            <span className="text-xs font-sans text-accent/60 mt-0.5">•</span>
-            <div className="flex-1">
-              <span className="font-semibold text-foreground">Hiring &amp; Engagement Modes:</span>{" "}
-              <span className="text-foreground/85">
-                Available for <strong>Freelance &amp; Project-Basis AI Engineering</strong> (agents, GraphRAG, evaluators), <strong>Full-Time &amp; Contract SDE 1 / SDE 2 Roles</strong> (high-throughput Go/Python backend architectures), <strong>Senior AI Consulting</strong>, and <strong>1-on-1 AI Technical Mentorship &amp; Teaching</strong>.
-              </span>
-            </div>
-          </div>
-
-          {/* Core Specializations */}
-          <div className="flex items-start gap-2">
-            <span className="text-xs font-sans text-accent/60 mt-0.5">•</span>
-            <div className="flex-1">
-              <span className="font-semibold text-foreground">Core Specializations:</span>{" "}
-              <span className="text-foreground/85">
-                High-Throughput Backends (Go / Python), Mission-Critical SEBI Financial Settlement Engines, Autonomous Agent CI/CD Gates (AgentDiff), Scale-Elastic AWS Infrastructure, and Transformer Systems Architecture.
-              </span>
-            </div>
-          </div>
-
-          {/* OSS Contributions */}
-          <div className="flex items-start gap-2">
-            <span className="text-xs font-sans text-accent/60 mt-0.5">•</span>
-            <div className="flex-1">
-              <span className="font-semibold text-foreground">OSS Contributions:</span>{" "}
-              <Link href="/oss-contributions" className="text-accent hover:underline">
-                View GitHub contributions, public PRs &amp; live stats →
-              </Link>
+            <div className="lg:col-start-3 lg:col-span-8 space-y-10">
+              <h2 className="text-[3.2rem] sm:text-7xl lg:text-8xl leading-[0.95]">
+                Have a hard problem? <span className="serif">Let&apos;s talk.</span>
+              </h2>
+              <p className="text-lg text-accent-foreground/80 leading-relaxed max-w-xl">
+                Open to freelance &amp; project-basis AI engineering, full-time &amp; contract SDE roles, senior AI consulting
+                and 1-on-1 mentorship. Remote, or onsite across India.
+              </p>
+              <div className="flex flex-wrap items-center gap-4">
+                <Magnetic>
+                  <a
+                    href={`mailto:${CONTACT_DATA.email}`}
+                    className="flourish group inline-flex items-center gap-2 h-14 px-7 rounded-full bg-accent-foreground text-accent text-[15px] hover:bg-foreground hover:text-background transition-colors duration-300"
+                  >
+                    {CONTACT_DATA.displayEmail}
+                    <ArrowUpRight className="nudge w-4 h-4" />
+                  </a>
+                </Magnetic>
+                <div className="[&_button]:h-14 [&_button]:px-6 [&_button]:border-accent-foreground/40 [&_button]:text-accent-foreground [&_button:hover]:border-accent-foreground">
+                  <CopyEmail email={CONTACT_DATA.email} />
+                </div>
+              </div>
+              <p className="flex flex-wrap gap-x-7 gap-y-2 text-[15px] text-accent-foreground/85 pt-4">
+                {[
+                  ["LinkedIn", CONTACT_DATA.linkedin],
+                  ["GitHub", CONTACT_DATA.github],
+                  ["X / Twitter", CONTACT_DATA.twitter],
+                  ["YouTube", CONTACT_DATA.youtube],
+                ].map(([name, href]) => (
+                  <a key={name} href={href} {...ext} className="link-u">{name} ↗</a>
+                ))}
+                <Link href="/oss-contributions" className="link-u">Open source →</Link>
+              </p>
             </div>
           </div>
         </div>

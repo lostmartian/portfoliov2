@@ -12,7 +12,9 @@ import Script from "next/script";
 import Link from "next/link";
 import AudioComparisonPlayer from "@/components/AudioComparisonPlayer";
 import BlogAudioPlayer, { extractSpeechBlocks } from "@/components/BlogAudioPlayer";
-import FluidMeshHeader from "@/components/FluidMeshHeader";
+import ContentsRail from "@/components/reading/ContentsRail";
+import { extractHeadings, slugify } from "@/components/reading/headings";
+import { BackLink } from "@/components/reading/BackLink";
 import "./hljs-theme.css";
 
 interface BlogPostContentProps {
@@ -131,6 +133,7 @@ export default function BlogPostContent({
   };
 
   const blocks = React.useMemo(() => extractSpeechBlocks(content), [content]);
+  const headings = React.useMemo(() => extractHeadings(content), [content]);
 
   // Helper to extract text from react node children
   const getTextFromChildren = (children: any): string => {
@@ -225,62 +228,56 @@ export default function BlogPostContent({
           }
         }}
       />
-      <div className="space-y-6">
-        <header className="space-y-1">
-          <h1 className="text-[1.75rem] sm:text-[2.4rem] font-bold tracking-tight leading-tight text-foreground">
-            {title}
-          </h1>
-          <p className="text-[15px] text-foreground/70 leading-relaxed max-w-xl">
-            {description}
-          </p>
+      <div>
+        <header className="pt-10 pb-12 md:pt-16 md:pb-16 grid grid-cols-1 lg:grid-cols-12 gap-x-10">
+          <div className="lg:col-span-2 mb-8 lg:mb-0">
+            <BackLink />
+          </div>
+          <div className="lg:col-span-9 space-y-8">
+            <p className="rise label flex flex-wrap items-center gap-x-3 gap-y-1">
+              {categories.map((c) => (
+                <span key={c} className="text-accent">{c}</span>
+              ))}
+              <span aria-hidden="true">·</span>
+              <time dateTime={new Date(date).toISOString()}>{date}</time>
+              <span aria-hidden="true">·</span>
+              <span>{readTime}</span>
+            </p>
+            <h1 className="rise text-[2.8rem] sm:text-6xl lg:text-7xl leading-[0.98] text-foreground max-w-5xl" style={{ "--d": "80ms" } as React.CSSProperties}>
+              {title}
+            </h1>
+            <p className="rise text-lg sm:text-xl text-muted leading-relaxed max-w-3xl" style={{ "--d": "160ms" } as React.CSSProperties}>
+              {description}
+            </p>
+            <div className="rise flex flex-wrap items-center gap-4 border-t border-border pt-5" style={{ "--d": "240ms" } as React.CSSProperties}>
+              <span className="label">Listen</span>
+              <BlogAudioPlayer
+                content={content}
+                title={title}
+                activeIndex={activeIndex}
+                onActiveIndexChange={setActiveIndex}
+                onPlayingStateChange={setIsAudioPlaying}
+              />
+            </div>
+          </div>
         </header>
 
-        {/* Metadata Grid */}
-        <div className="grid grid-cols-4 gap-2 py-4 border-y border-border/60 divide-x divide-border/40 [&>div]:px-3 [&>div:first-child]:pl-0 [&>div:last-child]:pr-0">
-          <div className="space-y-1 min-w-0">
-            <span className="text-[11px] uppercase tracking-wider text-foreground/45 block">Published</span>
-            <time dateTime={new Date(date).toISOString()} className="text-sm text-foreground/85 font-medium truncate block">
-              {date}
-            </time>
-          </div>
-          <div className="space-y-1 min-w-0">
-            <span className="text-[11px] uppercase tracking-wider text-foreground/45 block">Read Time</span>
-            <span className="text-sm text-foreground/85 font-medium truncate block">{readTime}</span>
-          </div>
-          <div className="space-y-1 min-w-0">
-            <span className="text-[11px] uppercase tracking-wider text-foreground/45 block">Categories</span>
-            <span className="text-sm text-foreground/85 font-medium truncate block" title={categories.join(", ")}>
-              {categories.join(", ")}
-            </span>
-          </div>
-          <div className="space-y-1 min-w-0 relative">
-            <span className="text-[11px] uppercase tracking-wider text-foreground/35 block">Listen</span>
-            <BlogAudioPlayer
-              content={content}
-              title={title}
-              activeIndex={activeIndex}
-              onActiveIndexChange={setActiveIndex}
-              onPlayingStateChange={setIsAudioPlaying}
-            />
-          </div>
-        </div>
+        {headerImage && (
+          <figure className="mb-16 grid grid-cols-1 lg:grid-cols-12 gap-x-10"><div className="lg:col-start-3 lg:col-span-9">
+            <div className="border border-border p-1.5 bg-card-bg">
+              <img src={headerImage} alt={headerImageCaption || title} className="w-full h-auto object-cover aspect-video" />
+            </div>
+            {headerImageCaption && <figcaption className="mt-3 text-[13px] text-muted">{headerImageCaption}</figcaption>}
+          </div></figure>
+        )}
 
-        {/* Header Image */}
-        <div className="w-full my-6 overflow-hidden rounded-lg border border-border/20 bg-foreground/[0.01]">
-          {headerImage ? (
-            <img
-              src={headerImage}
-              alt={headerImageCaption || title}
-              className="w-full h-auto object-cover aspect-video"
-            />
-          ) : (
-            <FluidMeshHeader title={title} />
-          )}
-          <div className="text-center text-sm text-foreground/70 py-3.5 px-6 border-t border-border/10 leading-relaxed">
-            {headerImageCaption || description}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-10">
+        <aside className="hidden lg:block lg:col-span-3 xl:col-span-2 order-2 lg:order-1">
+          <div className="sticky top-28 max-h-[calc(100svh-8rem)] overflow-y-auto pr-2" data-lenis-prevent>
+            {headings.length > 1 && <ContentsRail headings={headings} articleId="article-body" />}
           </div>
-        </div>
-
+        </aside>
+        <div id="article-body" className="lg:col-span-9 xl:col-start-4 xl:col-span-7 order-1 lg:order-2 min-w-0">
         {/* Series Index UI */}
         {seriesPosts.length > 1 && (
           <div className="border-l-2 border-accent/30 pl-4 py-1.5 space-y-2.5 my-8">
@@ -292,13 +289,13 @@ export default function BlogPostContent({
                 const isCurrent = sp.slug === slug;
                 return (
                   <li key={sp.slug} className="text-sm flex items-baseline gap-2 leading-relaxed">
-                    <span className={`text-xs uppercase font-bold tracking-wide w-16 shrink-0 block ${isCurrent ? 'text-accent' : 'text-foreground/40'}`}>
+                    <span className={`text-xs uppercase font-bold tracking-wide w-16 shrink-0 block ${isCurrent ? 'text-accent' : 'text-muted'}`}>
                       {sp.part ? `Part ${sp.part}` : '•'}
                     </span>
                     {isCurrent ? (
                       <span className="text-foreground font-semibold flex-1">{sp.title}</span>
                     ) : (
-                      <Link href={`/blogs/${sp.slug}`} className="text-foreground/60 hover:text-accent hover:underline transition-all flex-1">
+                      <Link href={`/blogs/${sp.slug}`} className="text-muted hover:text-accent hover:underline transition-all flex-1">
                         {sp.title}
                       </Link>
                     )}
@@ -337,7 +334,7 @@ export default function BlogPostContent({
                   <div className="relative group my-8 w-full max-w-full overflow-hidden rounded-xl border border-border shadow-[0_1px_3px_rgba(15,23,42,0.05)]">
                     {/* Code Header */}
                     <div className="flex items-center justify-between px-4 py-2.5 bg-[#eef1f4] dark:bg-[#151a20] border-b border-border w-full">
-                      <span className="text-xs text-foreground/55 uppercase tracking-wide font-medium">
+                      <span className="text-xs text-muted uppercase tracking-wide font-medium">
                         {language || "code"}
                       </span>
                       <button
@@ -347,7 +344,7 @@ export default function BlogPostContent({
                           btn.innerText = "Copied ✓";
                           setTimeout(() => { btn.innerText = "Copy ⎘"; }, 2000);
                         }}
-                        className="text-xs text-foreground/55 hover:text-accent transition-colors cursor-pointer"
+                        className="text-xs text-muted hover:text-accent transition-colors cursor-pointer"
                       >
                         Copy ⎘
                       </button>
@@ -441,7 +438,7 @@ export default function BlogPostContent({
             return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
               <p 
                 onClick={onClick}
-                className={`mb-4 text-[15px] leading-relaxed text-foreground/90 ${extraClass}`.trim()}
+                className={`mb-6 text-[17px] sm:text-[18px] leading-[1.85] text-foreground/90 ${extraClass}`.trim()}
               >
                 {children}
               </p>
@@ -455,7 +452,7 @@ export default function BlogPostContent({
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent border-b border-accent/20 hover:border-accent transition-colors font-sans font-medium"
+                className="ink-link text-foreground"
               >
                 {children}
               </a>
@@ -466,7 +463,7 @@ export default function BlogPostContent({
             return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
               <h1 
                 onClick={onClick}
-                className={`text-xl font-bold text-foreground mb-4 mt-6 pt-2 font-sans ${extraClass}`.trim()}
+                className={`font-display text-4xl text-foreground mb-5 mt-12 ${extraClass}`.trim()}
               >
                 {children}
               </h1>
@@ -476,8 +473,9 @@ export default function BlogPostContent({
             const blockIdx = getBlockIndex(children);
             return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
               <h2 
+                id={slugify(getTextFromChildren(children))}
                 onClick={onClick}
-                className={`text-sm uppercase tracking-wider text-accent font-semibold mt-8 mb-2 ${extraClass}`.trim()}
+                className={`scroll-mt-28 font-display text-3xl sm:text-4xl leading-tight text-foreground mt-16 mb-5 pt-6 border-t border-border ${extraClass}`.trim()}
               >
                 {children}
               </h2>
@@ -487,8 +485,9 @@ export default function BlogPostContent({
             const blockIdx = getBlockIndex(children);
             return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
               <h3 
+                id={slugify(getTextFromChildren(children))}
                 onClick={onClick}
-                className={`text-base font-semibold text-foreground mt-5 mb-2 ${extraClass}`.trim()}
+                className={`scroll-mt-28 font-display text-2xl leading-snug text-foreground mt-10 mb-3 ${extraClass}`.trim()}
               >
                 {children}
               </h3>
@@ -508,8 +507,8 @@ export default function BlogPostContent({
           ul: ({ children }: any) => <ul className="list-none space-y-2 my-4 pl-0 font-sans">{children}</ul>,
           ol: ({ children }: any) => <ol className="list-decimal space-y-2 my-4 pl-6 font-sans">{children}</ol>,
           li: ({ children }: any) => (
-            <li className="flex items-start gap-2 min-w-0 w-full text-[15px] leading-relaxed text-foreground/90">
-              <span className="text-xs text-accent/60 mt-1">•</span>
+            <li className="flex items-start gap-3 min-w-0 w-full text-[17px] leading-[1.75] text-foreground/90">
+              <span className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rotate-45 bg-accent" aria-hidden="true" />
               <span className="min-w-0 flex-1 break-words">{children}</span>
             </li>
           ),
@@ -518,7 +517,7 @@ export default function BlogPostContent({
             return renderReadableBlock(children, blockIdx, (extraClass, onClick) => (
               <blockquote 
                 onClick={onClick}
-                className={`border-l-2 border-accent/40 pl-4 my-4 italic text-foreground/80 text-[15px] leading-relaxed ${extraClass}`.trim()}
+                className={`border-l-2 border-accent pl-6 my-10 font-display italic text-2xl leading-snug text-foreground/85 ${extraClass}`.trim()}
               >
                 {children}
               </blockquote>
@@ -546,6 +545,8 @@ export default function BlogPostContent({
       >
         {content}
       </ReactMarkdown>
+        </div>
+        </div>
         </div>
       </div>
     </>

@@ -34,6 +34,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       { url: `${baseUrl}/oss-contributions`, priority: 0.85, changeFrequency: "weekly" },
       { url: `${baseUrl}/projects`,        priority: 0.8,  changeFrequency: "weekly" },
       { url: `${baseUrl}/readlist`,        priority: 0.7,  changeFrequency: "weekly" },
+      { url: `${baseUrl}/now`,             priority: 0.6,  changeFrequency: "monthly" },
+      { url: `${baseUrl}/uses`,            priority: 0.4,  changeFrequency: "monthly" },
+      { url: `${baseUrl}/resume`,          priority: 0.7,  changeFrequency: "monthly" },
     ] as const
   ).map((r) => ({ ...r, lastModified: new Date() }));
 

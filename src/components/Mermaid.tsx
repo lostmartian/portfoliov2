@@ -80,7 +80,7 @@ export default function Mermaid({ chart }: { chart: string }) {
 
   if (!mounted) {
     return (
-      <div className="py-12 bg-card-bg border border-border my-8 animate-pulse flex items-center justify-center text-xs text-foreground/40 rounded-lg">
+      <div className="py-12 bg-card-bg border border-border my-8 animate-pulse flex items-center justify-center text-xs text-muted rounded-lg">
         LOADING_DIAGRAM...
       </div>
     );
@@ -92,14 +92,14 @@ export default function Mermaid({ chart }: { chart: string }) {
       <div className="absolute right-3 top-3 z-10 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-background border border-border p-1.5 rounded-lg shadow-sm">
         <button
           onClick={() => setIsFullscreen(true)}
-          className="p-1.5 hover:bg-accent-subtle rounded-md text-foreground/60 hover:text-accent cursor-pointer transition-colors"
+          className="p-1.5 hover:bg-accent-subtle rounded-md text-muted hover:text-accent cursor-pointer transition-colors"
           title="View Fullscreen"
         >
           <Maximize2 className="w-3.5 h-3.5" />
         </button>
         <button
           onClick={handleDownload}
-          className="p-1.5 hover:bg-accent-subtle rounded-md text-foreground/60 hover:text-accent cursor-pointer transition-colors"
+          className="p-1.5 hover:bg-accent-subtle rounded-md text-muted hover:text-accent cursor-pointer transition-colors"
           title="Download SVG"
         >
           <Download className="w-3.5 h-3.5" />
@@ -114,7 +114,7 @@ export default function Mermaid({ chart }: { chart: string }) {
 
       {/* Caption block */}
       {caption && (
-        <div className="text-center text-sm text-foreground/60 pb-4 px-6 border-t border-border pt-3">
+        <div className="text-center text-sm text-muted pb-4 px-6 border-t border-border pt-3">
           {caption}
         </div>
       )}
@@ -134,14 +134,14 @@ export default function Mermaid({ chart }: { chart: string }) {
             <div className="absolute right-4 top-4 z-10 flex items-center gap-1 bg-background border border-border p-1.5 rounded-lg shadow-md">
               <button
                 onClick={handleDownload}
-                className="p-1.5 hover:bg-accent-subtle rounded-md text-foreground/60 hover:text-accent cursor-pointer transition-colors"
+                className="p-1.5 hover:bg-accent-subtle rounded-md text-muted hover:text-accent cursor-pointer transition-colors"
                 title="Download SVG"
               >
                 <Download className="w-3.5 h-3.5" />
               </button>
               <button
                 onClick={() => setIsFullscreen(false)}
-                className="p-1.5 hover:bg-accent-subtle rounded-md text-foreground/60 hover:text-accent cursor-pointer transition-colors"
+                className="p-1.5 hover:bg-accent-subtle rounded-md text-muted hover:text-accent cursor-pointer transition-colors"
                 title="Close Fullscreen"
               >
                 <X className="w-3.5 h-3.5" />

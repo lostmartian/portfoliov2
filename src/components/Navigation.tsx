@@ -2,107 +2,131 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-// import { ThemeToggle } from "./ThemeToggle";
-import { Menu, X } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
+import Magnetic from "./ui/Magnetic";
+import { devaNum } from "./ui/deva";
 
-const navLinks = [
-  { name: "Open Source", href: "/oss-contributions" },
+const links = [
   { name: "Work", href: "/work" },
-  { name: "Blogs", href: "/blogs" },
-  { name: "Videos", href: "/videos" },
   { name: "Projects", href: "/projects" },
+  { name: "Writing", href: "/blogs" },
+  { name: "Videos", href: "/videos" },
+];
+
+const more = [
+  { name: "Open Source", href: "/oss-contributions" },
   { name: "Readlist", href: "/readlist" },
+  { name: "Now", href: "/now" },
+  { name: "Uses", href: "/uses" },
+  { name: "Résumé", href: "/resume" },
 ];
 
 export default function Navigation() {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [overDark, setOverDark] = useState(false);
 
-  // Close dropdown on click outside
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    // Night sections (Farsight, the 404 sky) mark themselves data-nav="dark"; the bar flips to match.
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+      const y = 36;
+      setOverDark(
+        [...document.querySelectorAll<HTMLElement>('[data-nav="dark"]')].some((el) => {
+          const r = el.getBoundingClientRect();
+          return r.top <= y && r.bottom >= y;
+        })
+      );
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [pathname]);
 
-  const isHomeActive = pathname === "/";
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <header className="relative py-2 border-b border-border overflow-visible">
-      <div className="flex justify-between items-center w-full">
-        {/* Logo / Title */}
-        <Link
-          href="/"
-          className={`text-base font-semibold transition-colors ${isHomeActive ? "text-accent" : "text-foreground hover:opacity-85"
-            }`}
-        >
-          Sahil Gangurde
+    <header
+      className={`sticky top-0 z-50 bleed transition-colors duration-500 ${overDark && !open ? "nav-dark text-foreground" : ""} ${
+        scrolled || open ? "bg-background/85 backdrop-blur-md" : "bg-transparent"
+      }`}
+    >
+      <div className={`w-full px-5 sm:px-8 lg:px-12 2xl:px-20 grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center h-[72px] border-b transition-colors duration-500 ${scrolled ? "border-border" : "border-transparent"}`}>
+        <Link href="/" className="group flex items-baseline gap-2.5 w-fit" onClick={() => setOpen(false)}>
+          <span className="font-display text-2xl leading-none">Sahil Gangurde</span>
+          <span className="deva text-accent text-sm leading-none -translate-x-1 opacity-0 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0">साहिल</span>
         </Link>
 
-        {/* Action Controls */}
-        <div className="flex items-center gap-4">
-          {/* Desktop Nav Links */}
-          <nav className="hidden sm:flex items-center gap-6 text-sm font-sans font-medium">
-            {navLinks.map((link) => {
-              const isActive =
-                link.href !== "#" &&
-                (pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href)));
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={`transition-colors hover:text-accent flex items-center gap-1.5 py-1 ${isActive ? "text-accent font-semibold" : "text-foreground/85"
-                    }`}
-                >
-                  <span>{link.name}</span>
-                </Link>
-              );
-            })}
-          </nav>
+        <nav className="hidden lg:flex items-center gap-7 text-[14px]">
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className={`relative py-1 transition-colors ${isActive(l.href) ? "text-accent" : "text-foreground/70 hover:text-foreground"}`}
+            >
+              <span className={isActive(l.href) ? "" : "link-u"}>{l.name}</span>
+              {isActive(l.href) && <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-accent" aria-hidden="true" />}
+            </Link>
+          ))}
+        </nav>
 
-          {/* <ThemeToggle /> */}
-
-          {/* Mobile Menu Icon Toggle */}
+        <div className="flex items-center justify-end gap-2">
           <button
-            onClick={() => setIsOpen((prev) => !prev)}
-            className="flex sm:hidden p-1 text-foreground/80 hover:text-foreground cursor-pointer focus:outline-none"
-            aria-label="Toggle menu"
+            onClick={() => window.dispatchEvent(new Event("open-palette"))}
+            className="group h-8 px-2.5 inline-flex items-center gap-1.5 border border-border-strong text-[12px] text-muted hover:text-accent hover:border-accent transition-colors cursor-pointer"
+            aria-label="Open command palette"
           >
-            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            <span className="deva text-[13px] leading-none">शोध</span>
+            <kbd className="hidden sm:inline font-sans">⌘K</kbd>
+          </button>
+          <ThemeToggle />
+          <Magnetic className="hidden sm:inline-block">
+            <Link
+              href="/#contact"
+              className="flourish group inline-flex items-center gap-1.5 h-10 pl-5 pr-4 rounded-full border border-foreground text-[13px] hover:bg-foreground hover:text-background transition-colors duration-300"
+            >
+              Let&apos;s talk
+              <ArrowUpRight className="nudge w-3.5 h-3.5" />
+            </Link>
+          </Magnetic>
+          <button
+            onClick={() => setOpen((o) => !o)}
+            className="lg:hidden relative h-10 w-10 cursor-pointer"
+            aria-label="Toggle menu"
+            aria-expanded={open}
+          >
+            <span className={`absolute left-2.5 right-2.5 h-px bg-foreground transition-all duration-300 ${open ? "top-1/2 rotate-45" : "top-[16px]"}`} />
+            <span className={`absolute left-2.5 right-2.5 h-px bg-foreground transition-all duration-300 ${open ? "top-1/2 -rotate-45" : "top-[24px]"}`} />
           </button>
         </div>
       </div>
 
-      {/* Mobile Dropdown Overlay Menu */}
-      {isOpen && (
-        <div
-          ref={dropdownRef}
-          className="absolute left-0 right-0 top-full mt-1.5 z-50 p-4 border border-border/40 rounded bg-background shadow-lg flex flex-col gap-3 sm:hidden animate-in fade-in slide-in-from-top-1 duration-100"
-        >
-          {navLinks.map((link) => {
-            const isActive =
-              link.href !== "#" &&
-              (pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href)));
-            return (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`text-sm font-sans font-medium py-1.5 border-b border-border/10 transition-all flex items-center justify-between ${isActive ? "text-accent font-semibold" : "text-foreground/85 hover:text-accent"
-                  }`}
-              >
-                <span>
-                  {link.name}
-                </span>
-              </Link>
-            );
-          })}
+      {open && (
+        <div className="fixed inset-x-0 top-[72px] bottom-0 z-40 bg-background px-6 pt-6 overflow-y-auto lg:hidden">
+          <ul>
+            {[...links, ...more].map((l, i) => (
+              <li key={l.href} className="rise border-b border-border" style={{ "--d": `${i * 40}ms` } as React.CSSProperties}>
+                <Link
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className={`flex items-baseline justify-between py-4 font-display text-4xl ${isActive(l.href) ? "text-accent" : ""}`}
+                >
+                  {l.name}
+                  <span className="deva text-muted text-base">{devaNum(i + 1)}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </header>

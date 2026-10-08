@@ -247,13 +247,13 @@ export default function ExternalContributions() {
         <div className="md:col-span-2 border border-border bg-card-bg rounded-xs p-5 flex flex-col justify-between relative group shadow-xs">
           <div className="flex items-center justify-between gap-2 mb-4">
             <div className="space-y-0.5">
-              <span className="text-[10px] font-sans uppercase tracking-wider text-foreground/60 block font-bold">Cadence Visualization</span>
+              <span className="text-[10px] font-sans uppercase tracking-wider text-muted block font-bold">Cadence Visualization</span>
               <h3 className="text-sm font-semibold tracking-tight text-foreground flex items-center gap-1.5">
                 <Activity className="w-3.5 h-3.5 text-accent" />
                 <span>Weekly Contribution Graph (2026 YTD)</span>
               </h3>
             </div>
-            <span className="text-[10px] font-sans text-foreground/65 italic hidden sm:inline">
+            <span className="text-[10px] font-sans text-muted italic hidden sm:inline">
               Hover for weekly count
             </span>
           </div>
@@ -290,7 +290,7 @@ export default function ExternalContributions() {
                     return (
                       <div className="bg-background/95 backdrop-blur-sm border border-border/80 px-2.5 py-1.5 rounded shadow-md text-[10px] font-mono text-foreground min-w-[110px]">
                         <div className="font-bold text-accent">{d.count} contributions</div>
-                        <div className="text-[9px] text-foreground/55 mt-0.5 uppercase tracking-tight">Wk of {d.week}</div>
+                        <div className="text-[9px] text-muted mt-0.5 uppercase tracking-tight">Wk of {d.week}</div>
                       </div>
                     );
                   }}
@@ -315,7 +315,7 @@ export default function ExternalContributions() {
         {/* Bento Card 2: Main metrics panel (1/3 width) */}
         <div className="md:col-span-1 border border-border bg-card-bg rounded-xs p-5 flex flex-col justify-between group shadow-xs">
           <div className="space-y-0.5">
-            <span className="text-[10px] font-sans uppercase tracking-wider text-foreground/60 block font-bold">Contributions YTD</span>
+            <span className="text-[10px] font-sans uppercase tracking-wider text-muted block font-bold">Contributions YTD</span>
             <h3 className="text-sm font-semibold tracking-tight text-foreground">
               Engineering Aggregates
             </h3>
@@ -323,28 +323,28 @@ export default function ExternalContributions() {
 
           <div className="grid grid-cols-2 gap-3.5 my-5">
             <div className="border border-border/40 p-3 bg-foreground/[0.03] dark:bg-foreground/[0.04] rounded-xs flex flex-col justify-center transition-colors hover:border-accent/30">
-              <span className="text-[9px] font-sans uppercase tracking-wider text-foreground/65 font-bold">Total Work</span>
+              <span className="text-[9px] font-sans uppercase tracking-wider text-muted font-bold">Total Work</span>
               <span className="text-xl sm:text-2xl font-bold font-mono text-accent mt-0.5 leading-none">
                 {total2026Contributions.toLocaleString()}
               </span>
               <span className="text-[8px] font-sans text-foreground/70 mt-0.5 uppercase tracking-wide">Contributions YTD</span>
             </div>
             <div className="border border-border/40 p-3 bg-foreground/[0.03] dark:bg-foreground/[0.04] rounded-xs flex flex-col justify-center transition-colors hover:border-accent/30">
-              <span className="text-[9px] font-sans uppercase tracking-wider text-foreground/65 font-bold">Commits</span>
+              <span className="text-[9px] font-sans uppercase tracking-wider text-muted font-bold">Commits</span>
               <span className="text-xl sm:text-2xl font-bold font-mono text-foreground mt-0.5 leading-none">
                 {stats.summary.totalCommits}
               </span>
               <span className="text-[8px] font-sans text-foreground/70 mt-0.5 uppercase tracking-wide">Commits Pushed</span>
             </div>
             <div className="border border-border/40 p-3 bg-foreground/[0.03] dark:bg-foreground/[0.04] rounded-xs flex flex-col justify-center transition-colors hover:border-accent/30">
-              <span className="text-[9px] font-sans uppercase tracking-wider text-foreground/65 font-bold">PRs Created</span>
+              <span className="text-[9px] font-sans uppercase tracking-wider text-muted font-bold">PRs Created</span>
               <span className="text-xl sm:text-2xl font-bold font-mono text-foreground mt-0.5 leading-none">
                 {stats.summary.totalPRs}
               </span>
               <span className="text-[8px] font-sans text-foreground/70 mt-0.5 uppercase tracking-wide">Pull Requests</span>
             </div>
             <div className="border border-border/40 p-3 bg-foreground/[0.03] dark:bg-foreground/[0.04] rounded-xs flex flex-col justify-center transition-colors hover:border-accent/30">
-              <span className="text-[9px] font-sans uppercase tracking-wider text-foreground/65 font-bold">Codebases</span>
+              <span className="text-[9px] font-sans uppercase tracking-wider text-muted font-bold">Codebases</span>
               <span className="text-xl sm:text-2xl font-bold font-mono text-foreground mt-0.5 leading-none">
                 {stats.summary.totalRepositories}
               </span>
@@ -352,7 +352,7 @@ export default function ExternalContributions() {
             </div>
           </div>
 
-          <p className="text-[9px] text-foreground/60 leading-relaxed font-sans">
+          <p className="text-[9px] text-muted leading-relaxed font-sans">
             Metrics combine public open-source and restricted enterprise commits. Updated daily.
           </p>
         </div>
@@ -360,7 +360,7 @@ export default function ExternalContributions() {
         {/* Bento Card 3: Private Enterprise Showcase (1/3 width) */}
         <div className="md:col-span-1 border border-border bg-card-bg rounded-xs p-5 flex flex-col justify-between relative overflow-hidden group shadow-xs">
           <div className="space-y-0.5">
-            <div className="flex items-center gap-1.5 text-[10px] font-sans uppercase tracking-wider text-foreground/60 font-bold">
+            <div className="flex items-center gap-1.5 text-[10px] font-sans uppercase tracking-wider text-muted font-bold">
               <Lock className="w-3.5 h-3.5 text-accent" />
               <span>Proprietary Work</span>
             </div>
@@ -390,7 +390,7 @@ export default function ExternalContributions() {
             </div>
           </div>
 
-          <p className="text-[9px] text-foreground/60 leading-relaxed z-10 font-sans">
+          <p className="text-[9px] text-muted leading-relaxed z-10 font-sans">
             Restricted systems and proprietary client repositories subject to NDA. Verified via local commit parity.
           </p>
 
@@ -417,7 +417,7 @@ export default function ExternalContributions() {
         <div className="md:col-span-2 border border-border bg-card-bg rounded-xs p-5 space-y-4 flex flex-col justify-between group shadow-xs">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="space-y-0.5">
-              <span className="text-[10px] font-sans uppercase tracking-wider text-foreground/60 block font-semibold">Upstream Submissions</span>
+              <span className="text-[10px] font-sans uppercase tracking-wider text-muted block font-semibold">Upstream Submissions</span>
               <h3 className="text-sm font-semibold tracking-tight text-foreground flex items-center gap-1.5">
                 <GitBranch className="w-3.5 h-3.5 text-accent" />
                 <span>Pull Request Activity Feed (2026)</span>
@@ -441,7 +441,7 @@ export default function ExternalContributions() {
                     className={`text-[8px] font-sans font-semibold px-1 rounded-full ${
                       filter === mode
                         ? "bg-accent-foreground/20 text-accent-foreground"
-                        : "bg-foreground/[0.08] text-foreground/60"
+                        : "bg-foreground/[0.08] text-muted"
                     }`}
                   >
                     {counts[mode]}
@@ -556,16 +556,16 @@ export default function ExternalContributions() {
                             href={pr.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-foreground/65 hover:text-foreground/90 transition-colors"
+                            className="text-muted hover:text-foreground/90 transition-colors"
                           >
                             #{pr.number}
                           </a>
                         </div>
 
-                        <span className="text-foreground/35 text-[10px]">&bull;</span>
+                        <span className="text-muted text-[10px]">&bull;</span>
 
                         {/* Date */}
-                        <span className="text-[10px] text-foreground/60 font-mono">
+                        <span className="text-[10px] text-muted font-mono">
                           {new Date(pr.createdAt).toLocaleDateString("en-US", {
                             month: "short",
                             day: "numeric",

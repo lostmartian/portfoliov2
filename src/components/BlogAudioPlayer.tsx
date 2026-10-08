@@ -313,7 +313,7 @@ export default function BlogAudioPlayer({
       <select
         value={rate}
         onChange={(e) => handleRateChange(parseFloat(e.target.value))}
-        className="bg-transparent border-none text-foreground/50 hover:text-foreground outline-none font-mono cursor-pointer text-[9px] sm:text-[10px] hidden sm:inline-block"
+        className="bg-transparent border-none text-muted hover:text-foreground outline-none font-mono cursor-pointer text-[9px] sm:text-[10px] hidden sm:inline-block"
       >
         <option value="1" className="bg-background text-foreground text-[10px]">1.0x</option>
         <option value="1.25" className="bg-background text-foreground text-[10px]">1.25x</option>

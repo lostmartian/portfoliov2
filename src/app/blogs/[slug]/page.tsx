@@ -185,8 +185,12 @@ export default async function BlogPostPage({
       }));
   }
 
+  const visible = getBlogPosts().filter((p) => !p.hidden);
+  const at = visible.findIndex((p) => p.slug === slug);
+  const next = visible.length > 1 && at !== -1 ? visible[(at + 1) % visible.length] : null;
+
   return (
-    <main className="space-y-6 font-sans">
+    <main className="font-sans">
       {/* Google Structured Data / JSON-LD Script Tags */}
       <script
         type="application/ld+json"
@@ -197,16 +201,7 @@ export default async function BlogPostPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumbs) }}
       />
 
-      <div className="space-y-4">
-        <Link
-          href="/blogs"
-          className="text-xs font-mono text-foreground/70 hover:text-accent transition-colors flex items-center gap-1.5"
-        >
-          ← Return to Blogs
-        </Link>
-      </div>
-
-      <article className="pt-4">
+      <article>
         <BlogPostContent
           content={post.content}
           title={post.title}
@@ -221,6 +216,21 @@ export default async function BlogPostPage({
           headerImageCaption={post.headerImageCaption}
         />
       </article>
+
+      {next && (
+        <section className="mt-32 grid grid-cols-1 lg:grid-cols-12 gap-x-10 border-t border-border pt-10">
+          <p className="lg:col-span-2 label mb-6">Keep reading</p>
+          <Link href={`/blogs/${next.slug}`} className="group lg:col-span-9 block">
+            <p className="label text-accent mb-4">{next.categories.join(" · ")}</p>
+            <h2 className="text-4xl sm:text-6xl leading-[1] transition-colors duration-500 group-hover:text-accent">{next.title}</h2>
+            <p className="mt-5 text-lg text-muted leading-relaxed max-w-3xl">{next.description}</p>
+            <span className="mt-6 inline-flex items-center gap-2 text-[15px]">
+              <span className="link-u">Read it</span>
+              <span className="nudge" aria-hidden="true">↗</span>
+            </span>
+          </Link>
+        </section>
+      )}
     </main>
   );
 }

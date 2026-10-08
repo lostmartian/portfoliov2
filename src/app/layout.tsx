@@ -1,14 +1,37 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Instrument_Serif, Tiro_Devanagari_Marathi } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import Cursor from "@/components/ui/Cursor";
+import SmoothScroll from "@/components/ui/SmoothScroll";
+import PageTransition from "@/components/ui/PageTransition";
+import CommandPalette, { type PaletteItem } from "@/components/ui/CommandPalette";
+import { getBlogPosts } from "@/lib/blogs";
+import { projects } from "@/data/projects";
+import { VIDEO_CHAPTERS } from "@/data/video-chapters";
+import { CONTACT_DATA } from "@/config/contact";
 
-const geistSans = Inter({
-  variable: "--font-geist-sans",
+const bodyFont = Inter({
+  variable: "--font-body",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const serifFont = Instrument_Serif({
+  variable: "--font-serif-face",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const devaFont = Tiro_Devanagari_Marathi({
+  variable: "--font-deva-face",
+  subsets: ["devanagari", "latin"],
+  weight: "400",
   display: "swap",
 });
 
@@ -116,6 +139,37 @@ export const metadata: Metadata = {
     apple: "/icon.png",
   },
 };
+
+function paletteItems(): PaletteItem[] {
+  const pages: PaletteItem[] = [
+    { group: "Pages", label: "Home", hint: "नमस्कार", href: "/" },
+    { group: "Pages", label: "Work", hint: "काम", href: "/work" },
+    { group: "Pages", label: "Projects", hint: "प्रकल्प", href: "/projects" },
+    { group: "Pages", label: "Writing", hint: "लेखन", href: "/blogs" },
+    { group: "Pages", label: "Videos", hint: "चलचित्र", href: "/videos" },
+    { group: "Pages", label: "Open source", hint: "मुक्त स्रोत", href: "/oss-contributions" },
+    { group: "Pages", label: "Readlist", hint: "वाचन", href: "/readlist" },
+    { group: "Pages", label: "Now", hint: "सध्या", href: "/now" },
+    { group: "Pages", label: "Uses", hint: "वापर", href: "/uses" },
+    { group: "Pages", label: "Résumé", hint: "परिचय", href: "/resume" },
+    { group: "Pages", label: "Contact", hint: "संपर्क", href: "/#contact" },
+  ];
+  const cases = projects.map((p) => ({ group: "Case studies", label: p.title, hint: p.story?.client, href: `/work/${p.slug}` }));
+  const posts = getBlogPosts()
+    .filter((p) => !p.hidden)
+    .map((p) => ({ group: "Writing", label: p.title, hint: p.categories[0], href: `/blogs/${p.slug}` }));
+  const chapters = Object.entries(VIDEO_CHAPTERS).flatMap(([id, chs]) =>
+    chs.map((c) => ({ group: "Video chapters", label: c.title, hint: c.time, href: `https://www.youtube.com/watch?v=${id}&t=${c.seconds}s`, external: true }))
+  );
+  const actions: PaletteItem[] = [
+    { group: "Actions", label: "Copy email address", hint: CONTACT_DATA.email, action: "copy-email" },
+    { group: "Actions", label: "Toggle day / night", action: "toggle-theme" },
+    { group: "Actions", label: "GitHub", href: CONTACT_DATA.github, external: true },
+    { group: "Actions", label: "LinkedIn", href: CONTACT_DATA.linkedin, external: true },
+    { group: "Actions", label: "YouTube channel", href: CONTACT_DATA.youtube, external: true },
+  ];
+  return [...pages, ...cases, ...posts, ...chapters, ...actions];
+}
 
 export default function RootLayout({
   children,
@@ -318,7 +372,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${bodyFont.variable} ${serifFont.variable} ${devaFont.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>
@@ -341,13 +395,14 @@ export default function RootLayout({
           disableTransitionOnChange
         >
 
-          <div className="max-w-5xl mx-auto px-6 pt-2 pb-8 min-h-screen flex flex-col justify-between">
-            <div>
-              <Navigation />
-              <main className="py-8">
-                {children}
-              </main>
-            </div>
+          <div className="scroll-progress" aria-hidden="true" />
+          <Cursor />
+          <SmoothScroll />
+          <PageTransition />
+          <CommandPalette items={paletteItems()} email={CONTACT_DATA.email} />
+          <div id="top" className="w-full px-5 sm:px-8 lg:px-12 2xl:px-20 min-h-screen flex flex-col">
+            <Navigation />
+            <main className="flex-1">{children}</main>
             <Footer />
           </div>
         </ThemeProvider>

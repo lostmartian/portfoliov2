@@ -1,5 +1,7 @@
 import readlistData from "@/data/readlist.json";
 import type { Metadata } from "next";
+import PageHeader, { PageBody } from "@/components/ui/PageHeader";
+import { devaNum } from "@/components/ui/deva";
 
 export const metadata: Metadata = {
   title: "Readlist & Technical Archive | Sahil Gangurde",
@@ -60,42 +62,42 @@ export default function ReadlistPage() {
   };
 
   return (
-    <main className="space-y-6">
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <header className="space-y-1">
-        <h1 className="text-[1.75rem] sm:text-[2.4rem] font-bold tracking-tight leading-tight text-foreground">
-          A running record of what I read.
-        </h1>
-        <p className="text-[15px] text-foreground/75 leading-relaxed">
-          An archive of books, papers, articles, and documentation I&apos;ve read.
-        </p>
-      </header>
+      <PageHeader mr="वाचन" label="Readlist" title={<>A running record of <span className="serif text-accent">what I read.</span></>}>
+        Books, papers, articles and documentation I&apos;ve read.
+      </PageHeader>
 
-      <div className="divide-y divide-border/60 border-y border-border/60">
-        {sortedItems.map((item, i) => (
-          <div key={i} className="py-4 group flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-            <a
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[15px] font-semibold text-foreground group-hover:text-accent transition-colors"
-            >
-              {item.title} ↗
-            </a>
-            <div className="flex items-center gap-3 shrink-0">
-              <span className="text-xs uppercase tracking-wide text-accent/80 font-semibold">
-                {item.type}
-              </span>
-              <span className="text-sm text-foreground/55 tabular-nums">
-                {formatYear(item.date)}
-              </span>
-            </div>
-          </div>
-        ))}
+      <PageBody>
+      <div className="border-t border-border">
+        <ul className="divide-y divide-border">
+          {sortedItems.map((item, i) => (
+            <li key={i}>
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="row-link group flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-6 py-4"
+              >
+                <span className="flex items-baseline gap-4 min-w-0">
+                  <span className="deva text-accent w-7 shrink-0">{devaNum(i + 1)}</span>
+                  <span className="text-[15px] sm:text-base font-medium text-foreground group-hover:text-accent transition-colors">
+                    {item.title} ↗
+                  </span>
+                </span>
+                <span className="flex items-center gap-3 shrink-0 pl-10 sm:pl-0">
+                  <span className="label !text-accent">{item.type}</span>
+                  <span className="label tabular-nums">{formatYear(item.date)}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
-    </main>
+      </PageBody>
+    </div>
   );
 }

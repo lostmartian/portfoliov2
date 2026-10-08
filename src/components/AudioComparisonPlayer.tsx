@@ -345,11 +345,11 @@ export default function AudioComparisonPlayer({
           <div className="flex flex-col justify-between p-5 border border-border/10 bg-foreground/[0.005] rounded-lg opacity-80">
             <div>
               <div className="flex items-center justify-between gap-4 mb-2">
-                <span className="text-[9px] uppercase tracking-widest text-foreground/40 font-bold">SOURCE_01</span>
-                <span className="text-[10px] text-foreground/30">--:-- / --:--</span>
+                <span className="text-[9px] uppercase tracking-widest text-muted font-bold">SOURCE_01</span>
+                <span className="text-[10px] text-muted">--:-- / --:--</span>
               </div>
               <h4 className="text-sm font-semibold text-foreground tracking-tight leading-snug">{originalTitle}</h4>
-              <p className="text-[11px] text-foreground/50 mt-1 mb-6 leading-relaxed">{originalDesc}</p>
+              <p className="text-[11px] text-muted mt-1 mb-6 leading-relaxed">{originalDesc}</p>
             </div>
             <div className="space-y-4">
               <div className="h-14 w-full flex items-end gap-[2px] opacity-20">
@@ -357,7 +357,7 @@ export default function AudioComparisonPlayer({
                   <div key={i} className="flex-grow bg-foreground/10 rounded-sm" style={{ height: "15%" }} />
                 ))}
               </div>
-              <div className="w-full py-2.5 rounded border border-border/15 text-[10px] uppercase tracking-wider font-semibold text-foreground/30 flex items-center justify-center">
+              <div className="w-full py-2.5 rounded border border-border/15 text-[10px] uppercase tracking-wider font-semibold text-muted flex items-center justify-center">
                 LOADING...
               </div>
             </div>
@@ -366,11 +366,11 @@ export default function AudioComparisonPlayer({
           <div className="flex flex-col justify-between p-5 border border-border/10 bg-foreground/[0.005] rounded-lg opacity-80">
             <div>
               <div className="flex items-center justify-between gap-4 mb-2">
-                <span className="text-[9px] uppercase tracking-widest text-foreground/40 font-bold">SOURCE_02</span>
-                <span className="text-[10px] text-foreground/30">--:-- / --:--</span>
+                <span className="text-[9px] uppercase tracking-widest text-muted font-bold">SOURCE_02</span>
+                <span className="text-[10px] text-muted">--:-- / --:--</span>
               </div>
               <h4 className="text-sm font-semibold text-foreground tracking-tight leading-snug">{compressedTitle}</h4>
-              <p className="text-[11px] text-foreground/50 mt-1 mb-6 leading-relaxed">{compressedDesc}</p>
+              <p className="text-[11px] text-muted mt-1 mb-6 leading-relaxed">{compressedDesc}</p>
             </div>
             <div className="space-y-4">
               <div className="h-14 w-full flex items-end gap-[2px] opacity-20">
@@ -378,7 +378,7 @@ export default function AudioComparisonPlayer({
                   <div key={i} className="flex-grow bg-foreground/10 rounded-sm" style={{ height: "15%" }} />
                 ))}
               </div>
-              <div className="w-full py-2.5 rounded border border-border/15 text-[10px] uppercase tracking-wider font-semibold text-foreground/30 flex items-center justify-center">
+              <div className="w-full py-2.5 rounded border border-border/15 text-[10px] uppercase tracking-wider font-semibold text-muted flex items-center justify-center">
                 LOADING...
               </div>
             </div>
@@ -406,17 +406,17 @@ export default function AudioComparisonPlayer({
         >
           <div>
             <div className="flex items-center justify-between gap-4 mb-2">
-              <span className="text-[9px] uppercase tracking-widest text-foreground/40 font-bold">
+              <span className="text-[9px] uppercase tracking-widest text-muted font-bold">
                 SOURCE_01
               </span>
-              <span className="text-[10px] text-foreground/50">
+              <span className="text-[10px] text-muted">
                 {formatTime(currentTime)} / {formatTime(duration)}
               </span>
             </div>
             <h4 className="text-sm font-semibold text-foreground tracking-tight leading-snug">
               {originalTitle}
             </h4>
-            <p className="text-[11px] text-foreground/50 mt-1 mb-6 leading-relaxed">
+            <p className="text-[11px] text-muted mt-1 mb-6 leading-relaxed">
               {originalDesc}
             </p>
           </div>
@@ -442,7 +442,7 @@ export default function AudioComparisonPlayer({
                   ? isPlaying
                     ? "bg-foreground text-background border-foreground hover:bg-foreground/90"
                     : "bg-foreground/5 border-foreground/30 text-foreground hover:bg-foreground/10"
-                  : "bg-transparent border-border/15 text-foreground/50 hover:text-foreground hover:border-border/30"
+                  : "bg-transparent border-border/15 text-muted hover:text-foreground hover:border-border/30"
               }`}
             >
               {activeSource === "original" && isPlaying ? (
@@ -465,26 +465,26 @@ export default function AudioComparisonPlayer({
 
             {/* Dynamic Metadata Footer */}
             {originalMeta && (
-              <div className="mt-5 pt-4 border-t border-border/10 grid grid-cols-2 gap-y-3 gap-x-2 sm:grid-cols-5 text-[9px] uppercase tracking-wider text-foreground/40 text-left">
+              <div className="mt-5 pt-4 border-t border-border/10 grid grid-cols-2 gap-y-3 gap-x-2 sm:grid-cols-5 text-[9px] uppercase tracking-wider text-muted text-left">
                 <div>
-                  <div className="text-[8px] text-foreground/30 mb-0.5">FORMAT</div>
-                  <div className="font-semibold text-foreground/60 truncate">{originalMeta.format}</div>
+                  <div className="text-[8px] text-muted mb-0.5">FORMAT</div>
+                  <div className="font-semibold text-muted truncate">{originalMeta.format}</div>
                 </div>
                 <div>
-                  <div className="text-[8px] text-foreground/30 mb-0.5">SIZE</div>
-                  <div className="font-semibold text-foreground/60 truncate">{originalMeta.size}</div>
+                  <div className="text-[8px] text-muted mb-0.5">SIZE</div>
+                  <div className="font-semibold text-muted truncate">{originalMeta.size}</div>
                 </div>
                 <div>
-                  <div className="text-[8px] text-foreground/30 mb-0.5">BITRATE</div>
-                  <div className="font-semibold text-foreground/60 truncate">{originalMeta.bitrate}</div>
+                  <div className="text-[8px] text-muted mb-0.5">BITRATE</div>
+                  <div className="font-semibold text-muted truncate">{originalMeta.bitrate}</div>
                 </div>
                 <div>
-                  <div className="text-[8px] text-foreground/30 mb-0.5">RATE</div>
-                  <div className="font-semibold text-foreground/60 truncate">{originalMeta.sampleRate}</div>
+                  <div className="text-[8px] text-muted mb-0.5">RATE</div>
+                  <div className="font-semibold text-muted truncate">{originalMeta.sampleRate}</div>
                 </div>
                 <div>
-                  <div className="text-[8px] text-foreground/30 mb-0.5">CHANNELS</div>
-                  <div className="font-semibold text-foreground/60 truncate">{originalMeta.channels}</div>
+                  <div className="text-[8px] text-muted mb-0.5">CHANNELS</div>
+                  <div className="font-semibold text-muted truncate">{originalMeta.channels}</div>
                 </div>
               </div>
             )}
@@ -501,17 +501,17 @@ export default function AudioComparisonPlayer({
         >
           <div>
             <div className="flex items-center justify-between gap-4 mb-2">
-              <span className="text-[9px] uppercase tracking-widest text-foreground/40 font-bold">
+              <span className="text-[9px] uppercase tracking-widest text-muted font-bold">
                 SOURCE_02
               </span>
-              <span className="text-[10px] text-foreground/50">
+              <span className="text-[10px] text-muted">
                 {formatTime(currentTime)} / {formatTime(duration)}
               </span>
             </div>
             <h4 className="text-sm font-semibold text-foreground tracking-tight leading-snug">
               {compressedTitle}
             </h4>
-            <p className="text-[11px] text-foreground/50 mt-1 mb-6 leading-relaxed">
+            <p className="text-[11px] text-muted mt-1 mb-6 leading-relaxed">
               {compressedDesc}
             </p>
           </div>
@@ -537,7 +537,7 @@ export default function AudioComparisonPlayer({
                   ? isPlaying
                     ? "bg-foreground text-background border-foreground hover:bg-foreground/90"
                     : "bg-foreground/5 border-foreground/30 text-foreground hover:bg-foreground/10"
-                  : "bg-transparent border-border/15 text-foreground/50 hover:text-foreground hover:border-border/30"
+                  : "bg-transparent border-border/15 text-muted hover:text-foreground hover:border-border/30"
               }`}
             >
               {activeSource === "compressed" && isPlaying ? (
@@ -560,26 +560,26 @@ export default function AudioComparisonPlayer({
 
             {/* Dynamic Metadata Footer */}
             {compressedMeta && (
-              <div className="mt-5 pt-4 border-t border-border/10 grid grid-cols-2 gap-y-3 gap-x-2 sm:grid-cols-5 text-[9px] uppercase tracking-wider text-foreground/40 text-left">
+              <div className="mt-5 pt-4 border-t border-border/10 grid grid-cols-2 gap-y-3 gap-x-2 sm:grid-cols-5 text-[9px] uppercase tracking-wider text-muted text-left">
                 <div>
-                  <div className="text-[8px] text-foreground/30 mb-0.5">FORMAT</div>
-                  <div className="font-semibold text-foreground/60 truncate">{compressedMeta.format}</div>
+                  <div className="text-[8px] text-muted mb-0.5">FORMAT</div>
+                  <div className="font-semibold text-muted truncate">{compressedMeta.format}</div>
                 </div>
                 <div>
-                  <div className="text-[8px] text-foreground/30 mb-0.5">SIZE</div>
-                  <div className="font-semibold text-foreground/60 truncate">{compressedMeta.size}</div>
+                  <div className="text-[8px] text-muted mb-0.5">SIZE</div>
+                  <div className="font-semibold text-muted truncate">{compressedMeta.size}</div>
                 </div>
                 <div>
-                  <div className="text-[8px] text-foreground/30 mb-0.5">BITRATE</div>
-                  <div className="font-semibold text-foreground/60 truncate">{compressedMeta.bitrate}</div>
+                  <div className="text-[8px] text-muted mb-0.5">BITRATE</div>
+                  <div className="font-semibold text-muted truncate">{compressedMeta.bitrate}</div>
                 </div>
                 <div>
-                  <div className="text-[8px] text-foreground/30 mb-0.5">RATE</div>
-                  <div className="font-semibold text-foreground/60 truncate">{compressedMeta.sampleRate}</div>
+                  <div className="text-[8px] text-muted mb-0.5">RATE</div>
+                  <div className="font-semibold text-muted truncate">{compressedMeta.sampleRate}</div>
                 </div>
                 <div>
-                  <div className="text-[8px] text-foreground/30 mb-0.5">CHANNELS</div>
-                  <div className="font-semibold text-foreground/60 truncate">{compressedMeta.channels}</div>
+                  <div className="text-[8px] text-muted mb-0.5">CHANNELS</div>
+                  <div className="font-semibold text-muted truncate">{compressedMeta.channels}</div>
                 </div>
               </div>
             )}

@@ -11,6 +11,16 @@ export interface Section {
   points?: string[];
 }
 
+/** The three-beat story shown on the work index and at the top of each case study. */
+export interface CaseStory {
+  client: string;
+  clientNote: string;
+  role: string;
+  problem: string;
+  approach: string;
+  outcome: string;
+}
+
 export interface Project {
   slug: string;
   title: string;
@@ -26,6 +36,7 @@ export interface Project {
   clients: Client[];
   stack?: string[];
   sections?: Section[];
+  story?: CaseStory;
 }
 
 export const projects: Project[] = [
@@ -40,7 +51,14 @@ export const projects: Project[] = [
     challenge: "Ingesting, deduplicating, and reconciling millions of heterogeneous bid records within a rigid T+3 SEBI cycle, while avoiding DB write-lock contentions.",
     solution: "Separated the control plane (AWS Step Functions) from the vectorized data plane (Polars on AWS Batch) to achieve 1.6M+ records/sec throughput with 100% deterministic reproducibility.",
     type: "CODE",
-    image: "/projects/ipo-datagrid.png",
+    story: {
+      client: "Niche Technologies Pvt. Ltd.",
+      clientNote: "SEBI-registered Category I RTA, via JRat's Studio",
+      role: "Software Engineer (freelance)",
+      problem: "Millions of IPO bids land when bidding closes. Under SEBI's T+3 rule they must be validated, reconciled and allotted overnight, with zero tolerance for error.",
+      approach: "Split a Go control plane from a vectorized Polars data plane on AWS Batch, and made the allotment lottery seeded and reproducible.",
+      outcome: "1.6M+ records reconciled per second (10M in 6.34 s), with database lock contention down 80%.",
+    },
     clients: [
       { name: "JRat's Studio", link: "https://www.jrats.studio/" }
     ],
@@ -92,11 +110,18 @@ export const projects: Project[] = [
     challenge: "Fragmented documentation and a lack of centralized oversight for complex AI evaluation metrics across multiple multi-tenant workspaces and products.",
     solution: "Developed a comprehensive portal that integrates custom Python scoring engines for 'Ground Truth' benchmarking, automated infrastructure management, and granular permission systems to ensure system integrity.",
     type: "CODE",
-    image: "/projects/farsight-score.png",
+    story: {
+      client: "Omara Technologies",
+      clientNote: "Enterprise AI and document intelligence",
+      role: "Founding Full-Stack AI Engineer",
+      problem: "Documentation, AI evaluation metrics and workspace permissions were scattered across products and tenants, with no single place to see how models were really performing.",
+      approach: "Built one governance portal: Cognito RBAC across workspaces, a Ground Truth scoring engine, and the hub for DocuNexus knowledge graphs and the labelling platform.",
+      outcome: "Every evaluation measured with field-level precision, recall and Cohen's kappa, and model edge cases fed straight back into training.",
+    },
     clients: [
       { name: "Omara Technologies", link: "https://www.omaratechnologies.com/en" }
     ],
-    stack: ["Python", "Go", "NextJS", "Langchain", "Langgraph", "AWS", "IaC"],
+    stack: ["Python", "Go", "NextJS", "Langchain", "Langgraph", "Neo4j", "AWS", "IaC"],
     sections: [
       {
         title: "The Governance Framework",
@@ -132,5 +157,24 @@ export const projects: Project[] = [
         ]
       }
     ]
+  },
+  {
+    slug: "agentdiff",
+    title: "AgentDiff",
+    category: "Developer Tools / AI Evaluation / Open Source",
+    year: "2026",
+    duration: "Aug 2026 - Present",
+    description: "Trajectory regression testing for AI agents. AgentDiff lines up a known-good agent run against the run from your pull request, and fails CI when the new path drifts, loops, costs more or recovers slower.",
+    type: "AI",
+    clients: [{ name: "AgentDiff", link: "https://agentdiff.app" }],
+    stack: ["Python", "GitHub Actions", "LangGraph", "CrewAI", "OpenTelemetry", "Langfuse", "LangSmith"],
+    story: {
+      client: "AgentDiff",
+      clientNote: "My own product, open source and MIT licensed",
+      role: "Founder & sole engineer",
+      problem: "Agents fail quietly. A prompt tweak or model update makes the agent loop, waste tokens or cost more, and the test still passes because the final answer looks fine.",
+      approach: "Compare two agent runs as aligned graphs, deterministically and locally, with no LLM judge, and turn drift, loops, cost and recovery into CI gates.",
+      outcome: "A pre-release on PyPI with a GitHub Action that blocks the pull request and names the exact step that regressed.",
+    },
   },
 ];

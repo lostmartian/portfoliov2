@@ -1,4 +1,5 @@
 import { getBlogPosts } from "@/lib/blogs";
+import PageHeader, { PageBody } from "@/components/ui/PageHeader";
 import BlogList from "@/app/blogs/BlogList";
 import type { Metadata } from "next";
 
@@ -90,18 +91,15 @@ export default function BlogsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdCollection) }}
       />
-      <header className="space-y-1">
-        <h1 className="text-[1.75rem] sm:text-[2.4rem] font-bold tracking-tight leading-tight text-foreground">
-          Writing on systems and craft.
-        </h1>
-        <p className="text-[15px] text-foreground/75 leading-relaxed">
-          A collection of essays, deep-dives, and reflections on technology, design, and society.
-        </p>
-      </header>
+      <PageHeader mr="लेखन" label="Writing" title={<>Writing on systems <span className="serif text-accent">and craft.</span></>}>
+        A collection of essays, deep-dives, and reflections on technology, design, and society.
+      </PageHeader>
 
+      <PageBody>
       <section>
         <BlogList initialPosts={posts} />
       </section>
+      </PageBody>
     </main>
   );
 }

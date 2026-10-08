@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { getYouTubeData } from "@/lib/youtube";
-import VideoListItem from "@/components/VideoListItem";
+import EpisodePlayer from "@/components/video/EpisodePlayer";
+import ComingUp from "@/components/video/ComingUp";
+import { VIDEO_CHAPTERS } from "@/data/video-chapters";
+import PageHeader, { PageBody } from "@/components/ui/PageHeader";
 
 export const dynamic = "force-static";
 
@@ -161,64 +164,53 @@ export default function VideosPage() {
   };
 
   return (
-    <main className="space-y-8 font-sans">
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <header className="space-y-1">
-        <h1 className="text-[1.75rem] sm:text-[2.4rem] font-bold tracking-tight leading-tight text-foreground">
-          Technical essays in video.
-        </h1>
-        <p className="text-[15px] text-foreground/75 leading-relaxed">
-          First-principles engineering breakdowns of deep learning architectures, GPU execution limits, and systems craft on{" "}
-          <a
-            href="https://www.youtube.com/@sahilgangurdetech"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold text-accent/90 underline decoration-accent/30 underline-offset-4 hover:text-accent hover:decoration-accent transition-colors"
-          >
-            @sahilgangurdetech ↗
-          </a>.
-        </p>
-      </header>
-
-      {/* Single tidy list matching /work and /blogs aesthetic */}
-      <div className="divide-y divide-border/60 border-y border-border/60">
-        {videos.map((video, index) => (
-          <VideoListItem
-            key={video.id}
-            video={video}
-            index={index}
-            defaultOpen={false}
-          />
-        ))}
-      </div>
-
-      {/* Channel & Backlink Meta Row */}
-      <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-foreground/60 border-t border-border/40">
-        <div>
-          Subscribe to{" "}
-          <a
-            href="https://www.youtube.com/@sahilgangurdetech?sub_confirmation=1"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold text-foreground hover:text-accent transition-colors underline decoration-foreground/20 underline-offset-4"
-          >
-            Sahil Gangurde Tech (@sahilgangurdetech) ↗
-          </a>{" "}
-          for upcoming deep dives into FlashAttention and KV Caching.
-        </div>
+      <PageHeader mr="चलचित्र" label="Videos" title={<>Technical essays <span className="serif text-accent">in video.</span></>}>
+        First-principles breakdowns of deep learning architectures, GPU execution limits, and systems craft on{" "}
         <a
-          href="https://www.youtube.com/@sahilgangurdetech?sub_confirmation=1"
+          href="https://www.youtube.com/@sahilgangurdetech"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-accent hover:underline font-medium shrink-0"
+          className="font-medium text-accent underline decoration-accent/30 underline-offset-4 hover:decoration-accent transition-colors"
         >
-          Subscribe on YouTube ↗
-        </a>
-      </div>
-    </main>
+          @sahilgangurdetech ↗
+        </a>.
+      </PageHeader>
+
+      <PageBody>
+        {videos[0] && (
+          <EpisodePlayer video={videos[0]} chapters={VIDEO_CHAPTERS[videos[0].id]} episode={videos.length} variant="page" />
+        )}
+
+        {videos.length > 1 && (
+          <section className="pt-16">
+            <p className="label mb-8">Earlier episodes</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-14">
+              {videos.slice(1).map((v, i) => (
+                <a key={v.id} href={v.url} target="_blank" rel="noopener noreferrer" className="group block">
+                  <div className="border border-border p-1.5 transition-colors duration-500 group-hover:border-accent">
+                    <div className="relative aspect-video overflow-hidden bg-foreground">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={v.thumbnailUrl} alt="" className="photo absolute inset-0 w-full h-full object-cover" />
+                    </div>
+                  </div>
+                  <p className="label mt-5">Episode {String(videos.length - 1 - i).padStart(2, "0")}</p>
+                  <h3 className="mt-2 text-3xl leading-tight group-hover:text-accent transition-colors">{v.title}</h3>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <div className="pt-16">
+          <ComingUp channel={data.channel} />
+        </div>
+      </PageBody>
+    </div>
   );
 }

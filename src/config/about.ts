@@ -38,3 +38,12 @@ export const VALIDATION_STATS = [
     description: "Competitive programming, optimization challenges, and weekly contests."
   }
 ];
+
+export const EDUCATION = [
+  {
+    degree: "Dual Degree (B.Tech + M.Tech), Information Technology",
+    school: "IIIT Gwalior",
+    schoolFull: "ABV-Indian Institute of Information Technology and Management, Gwalior",
+    years: "2019 – 2024",
+  },
+];

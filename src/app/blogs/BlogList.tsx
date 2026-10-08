@@ -134,7 +134,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
       <div className="relative flex gap-4 items-center justify-between pb-2">
         {/* Minimal Search Input with Border */}
         <div className="relative flex-grow">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/30" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
           <input
             type="text"
             placeholder="Search blogs..."
@@ -143,7 +143,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
               setSearch(e.target.value);
               setCurrentPage(1);
             }}
-            className="w-full bg-foreground/[0.02] border border-border/50 rounded py-1.5 pl-9 pr-4 text-sm placeholder:text-foreground/30 text-foreground focus:outline-none focus:border-accent transition-all font-sans"
+            className="w-full bg-foreground/[0.02] border border-border/50 rounded py-1.5 pl-9 pr-4 text-sm placeholder:text-muted text-foreground focus:outline-none focus:border-accent transition-all font-sans"
           />
         </div>
 
@@ -156,7 +156,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
             className={`text-sm hover:text-accent transition-all flex items-center gap-2 cursor-pointer px-4 py-2 border rounded-full ${
               showFilters || selectedCategories.length > 0
                 ? "border-accent text-accent bg-accent/5"
-                : "border-border/50 text-foreground/50 bg-foreground/[0.01]"
+                : "border-border/50 text-muted bg-foreground/[0.01]"
             }`}
           >
             <SlidersHorizontal className="w-3 h-3" />
@@ -169,7 +169,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
           {/* View Toggle */}
           <button
             onClick={handleToggleView}
-            className="text-foreground/50 hover:text-accent hover:bg-accent/5 transition-all p-1.5 border border-border/50 rounded cursor-pointer flex items-center justify-center"
+            className="text-muted hover:text-accent hover:bg-accent/5 transition-all p-1.5 border border-border/50 rounded cursor-pointer flex items-center justify-center"
             title={viewMode === "list" ? "Switch to Thumbnail Grid" : "Switch to List View"}
           >
             {viewMode === "list" ? (
@@ -188,7 +188,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
           >
             {/* Sorting Option */}
             <div className="space-y-1.5">
-              <span className="text-xs uppercase tracking-wider text-foreground/45 block font-semibold">
+              <span className="text-xs uppercase tracking-wider text-muted block font-semibold">
                 Sort Order
               </span>
               <div className="flex flex-col gap-1">
@@ -198,7 +198,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
                     onClick={() => setSortOrder(order)}
                     className={`text-left py-0.5 text-sm transition-all cursor-pointer ${sortOrder === order
                       ? "text-accent font-semibold"
-                      : "text-foreground/50 hover:text-accent"
+                      : "text-muted hover:text-accent"
                       }`}
                   >
                     {order === "desc" ? "• Latest First" : "• Oldest First"}
@@ -209,7 +209,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
 
             {/* Domain Category Filter */}
             <div className="space-y-1.5">
-              <span className="text-xs uppercase tracking-wider text-foreground/45 block font-semibold">
+              <span className="text-xs uppercase tracking-wider text-muted block font-semibold">
                 Domain
               </span>
               <div className="flex flex-col gap-1">
@@ -226,7 +226,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
                       }}
                       className={`text-left py-0.5 text-sm transition-all cursor-pointer flex items-center justify-between ${isSelected
                         ? "text-accent font-semibold"
-                        : "text-foreground/50 hover:text-accent"
+                        : "text-muted hover:text-accent"
                         }`}
                       >
                       <span>• {cat}</span>
@@ -251,10 +251,10 @@ export default function BlogList({ initialPosts }: BlogListProps) {
                   <span className="text-[11px] uppercase tracking-wider text-accent/85 font-bold select-none truncate pr-1">
                     {post.categories[0] || "Article"}
                   </span>
-                  <span className="text-sm text-foreground/55 select-none tabular-nums">
+                  <span className="text-sm text-muted select-none tabular-nums">
                     {formatDate(post.date)}
                   </span>
-                  <span className="text-foreground/30 select-none text-center">—</span>
+                  <span className="text-muted select-none text-center">—</span>
                   <Link href={`/blogs/${post.slug}`} className="text-[15px] font-semibold text-foreground group-hover:text-accent transition-colors leading-snug">
                     {post.title}
                   </Link>
@@ -264,8 +264,8 @@ export default function BlogList({ initialPosts }: BlogListProps) {
                 <div className="sm:hidden flex flex-col gap-1">
                   <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-bold select-none">
                     <span className="text-accent/85">{post.categories[0] || "Article"}</span>
-                    <span className="text-foreground/30 font-normal">&bull;</span>
-                    <span className="text-foreground/50 font-normal">{formatDate(post.date)}</span>
+                    <span className="text-muted font-normal">&bull;</span>
+                    <span className="text-muted font-normal">{formatDate(post.date)}</span>
                   </div>
                   <Link href={`/blogs/${post.slug}`} className="font-semibold text-[15px] leading-snug text-foreground group-hover:text-accent transition-colors block">
                     {post.title}
@@ -300,7 +300,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
                 {/* Card Body */}
                 <div className="p-4 flex flex-col justify-between flex-grow space-y-3">
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between text-[11px] tracking-wide text-foreground/55 font-medium uppercase">
+                    <div className="flex items-center justify-between text-[11px] tracking-wide text-muted font-medium uppercase">
                       <span>{post.categories.join(" / ") || "ARTICLE"}</span>
                       <span>{post.date}</span>
                     </div>
@@ -315,7 +315,7 @@ export default function BlogList({ initialPosts }: BlogListProps) {
         )
       ) : (
         <div className="py-12 text-center border border-dashed border-border/20 rounded">
-          <p className="text-sm text-foreground/50">
+          <p className="text-sm text-muted">
             No matching blogs found
           </p>
         </div>

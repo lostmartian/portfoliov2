@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import IPOAllotmentClient from "./IPOAllotmentClient";
+import IpoStory from "./IpoStory";
 
 export const metadata: Metadata = {
   title: "SEBI IPO Allotment Engine | JRat's Studio & NTPL | Sahil Gangurde",
@@ -71,7 +71,7 @@ export default function IPOAllotmentPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <IPOAllotmentClient />
+      <IpoStory />
     </>
   );
 }

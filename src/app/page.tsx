@@ -67,13 +67,15 @@ export default function Home() {
 
           <h1 className="mt-5 sm:mt-6 text-[clamp(3rem,min(9.6vw,14svh),11.5rem)] leading-[0.9] tracking-[-0.035em]">
             <span className="mask-line">
-              <span className="mask-inner justify-center" style={d(160)}>I build AI that thinks</span>
+              <span className="mask-inner justify-center" style={d(160)}>
+                <span className="whitespace-nowrap">Full-stack</span> software,
+              </span>
             </span>
             <span className="mask-line">
               <span className="mask-inner justify-center" style={d(260)}>
-                &amp; backends that
+                AI where it
                 <span className="relative serif text-accent">
-                  last.
+                  counts.
                   <svg viewBox="0 0 300 20" preserveAspectRatio="none" className="scribble absolute left-[2%] -bottom-[0.04em] w-[96%] h-[0.12em] overflow-visible" aria-hidden="true">
                     <path d="M2 12 C 40 4, 70 18, 110 10 S 180 4, 220 11 S 280 14, 298 7" pathLength={1} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
                   </svg>
@@ -84,7 +86,8 @@ export default function Home() {
 
           <p className="rise mt-6 2xl:mt-9 max-w-[38rem] text-[17px] sm:text-lg leading-relaxed text-foreground/85" style={d(480)}>
             An engineer from Pune. By day I build backends and AI agents for founders and teams, and right now I&apos;m
-            building <a href="https://agentdiff.app/" {...ext} className="ink-link">AgentDiff</a>. By weekend I paint and cook.
+            building <a href="https://agentdiff.app/" {...ext} className="ink-link">AgentDiff</a>. By weekend I paint, cook, and explain how AI works on{" "}
+            <a href={CONTACT_DATA.youtube} {...ext} className="ink-link">YouTube</a>.
           </p>
 
           <div className="rise mt-6 2xl:mt-9 flex flex-col items-center gap-3.5" style={d(580)}>

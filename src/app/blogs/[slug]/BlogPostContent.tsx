@@ -331,9 +331,9 @@ export default function BlogPostContent({
                 }
 
                 return (
-                  <div className="relative group my-8 w-full max-w-full overflow-hidden rounded-xl border border-border shadow-[0_1px_3px_rgba(15,23,42,0.05)]">
+                  <div className="code-block relative group my-8 w-full max-w-full overflow-hidden border border-border">
                     {/* Code Header */}
-                    <div className="flex items-center justify-between px-4 py-2.5 bg-[#eef1f4] dark:bg-[#151a20] border-b border-border w-full">
+                    <div className="code-block-head flex items-center justify-between px-4 py-2.5 border-b border-border w-full">
                       <span className="text-xs text-muted uppercase tracking-wide font-medium">
                         {language || "code"}
                       </span>
@@ -350,8 +350,8 @@ export default function BlogPostContent({
                       </button>
                     </div>
                     {/* Code Block */}
-                    <div className="overflow-hidden w-full max-w-full bg-[#f7f9fa] dark:bg-[#101318]">
-                      <pre className="!m-0 !rounded-none overflow-x-auto max-w-full w-full !bg-transparent px-4 py-4" {...props}>
+                    <div className="overflow-hidden w-full max-w-full">
+                      <pre className="!m-0 !rounded-none overflow-x-auto max-w-full w-full !bg-transparent !px-4 !py-4" {...props}>
                         <code className={`${className} text-[13px] [font-family:var(--font-geist-mono)]`}>
                           {codeChild.props?.children}
                         </code>
@@ -361,7 +361,7 @@ export default function BlogPostContent({
                 );
               }
 
-              return <pre className="text-[13px] [font-family:var(--font-geist-mono)] px-4 py-4" {...props}>{children}</pre>;
+              return <pre className="code-block border border-border my-8 overflow-x-auto text-[13px] [font-family:var(--font-geist-mono)] !px-4 !py-4" {...props}>{children}</pre>;
             },
             code({ className, children, ...props }: any) {
               const isInline = !className || !className.includes("language-");

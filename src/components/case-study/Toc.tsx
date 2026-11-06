@@ -93,9 +93,13 @@ export function MobileToc({ items }: { items: TocItem[] }) {
   const active = useActiveSection(items);
   const listRef = useRef<HTMLDivElement>(null);
 
+  // Centre the active pill by scrolling the strip sideways only. scrollIntoView would also
+  // scroll the page down to the strip, so pages opened below their hero.
   useEffect(() => {
-    const el = listRef.current?.querySelector<HTMLElement>(`[data-id="${active}"]`);
-    el?.scrollIntoView({ inline: "center", block: "nearest" });
+    const list = listRef.current;
+    const el = list?.querySelector<HTMLElement>(`[data-id="${active}"]`);
+    if (!list || !el) return;
+    list.scrollTo({ left: el.offsetLeft - (list.clientWidth - el.offsetWidth) / 2, behavior: "smooth" });
   }, [active]);
 
   return (

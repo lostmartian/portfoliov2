@@ -12,9 +12,9 @@ import { duration, isoDuration, series, thumb, videos, watch } from "@/lib/video
 export const metadata: Metadata = pageMeta({
   title: "Videos",
   description:
-    "Technical breakdowns by Sahil Gangurde on YouTube: how LLMs work from the GPU up (attention, KV cache, RoPE, MLA), retrieval and search from scratch, and system design.",
+    "Technical breakdowns by Sahil Gangurde on YouTube: how AI runs from the GPU up (attention, FlashAttention, KV cache, RoPE, MLA), how Indian fintech works (UPI, IPO allotment), retrieval and search from scratch, and system design.",
   path: "/videos",
-  keywords: ["Sahil Gangurde YouTube", "LLM internals", "KV cache explained", "attention explained", "RoPE", "retrieval", "information retrieval", "system design"],
+  keywords: ["Sahil Gangurde YouTube", "LLM internals", "FlashAttention explained", "GPU internals", "UPI explained", "IPO allotment explained", "KV cache explained", "attention explained", "RoPE", "retrieval", "information retrieval", "system design"],
 });
 
 const date = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
@@ -67,7 +67,7 @@ export default function VideosPage() {
           <a href={YOUTUBE} className="font-semibold text-fg transition-opacity hover:opacity-60">
             YouTube
           </a>
-          : how language models run, how search works from scratch, and how real systems are designed.
+          : how AI runs on the GPU, how India's payments and markets work, how search works from scratch, and how real systems are designed.
         </p>
       }
     >

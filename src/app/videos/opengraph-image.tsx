@@ -12,6 +12,6 @@ export default function Image() {
     label: "Videos",
     title: "How AI systems actually work.",
     rest: "From the GPU up.",
-    summary: "LLM internals, retrieval and system design on YouTube",
+    summary: "AI internals, fintech, retrieval and system design on YouTube",
   });
 }

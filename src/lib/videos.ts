@@ -6,43 +6,33 @@ export type Video = { id: string; title: string; description: string; date: stri
 
 export const series: { name: string; blurb: string; videos: Video[] }[] = [
   {
-    name: "Retrieval",
-    blurb: "How search really works, from scratch: the machine behind every search box and every chatbot that answers from your documents.",
+    name: "AI internals",
+    blurb: "How neural networks and language models actually run, from the GPU up: attention, memory, and the tricks that make them fast and affordable.",
     videos: [
       {
-        id: "P66zWHd0Amo",
-        title: "The Inverted Index: How Search Engines Find Anything in Milliseconds",
-        description: "Search engines don't read your documents when you search. They read a few short lists from an inverted index, built here from scratch with real numbers.",
-        date: "2026-10-29T06:00:02-07:00",
-        seconds: 906,
+        id: "5cpgl3UMOXc",
+        title: "Why Neural Networks Need Non-Linearity",
+        description:
+          "Take the activation functions out of a 10-layer network and it collapses into a single layer. Why, shown as pictures: grids that tilt, fold and bend.",
+        date: "2026-11-20T21:00:15-08:00",
+        seconds: 990,
       },
       {
-        id: "MQx_bS60dS0",
-        title: "Tokenization, Stop Words, Stemming and Lemmatization",
-        description: "Why the simplest search misses half the good answers, and how every search engine fixes words before it stores them.",
-        date: "2026-10-29T05:50:13-07:00",
-        seconds: 870,
+        id: "x1CTnEcbN70",
+        title: "How FlashAttention Made Transformers 4x Faster",
+        description:
+          "FlashAttention does 13% more arithmetic than standard attention and finishes 5.7× sooner, because the expensive part was never the maths but moving memory. Built from scratch on real numbers.",
+        date: "2026-11-14T06:45:24-08:00",
+        seconds: 3662,
       },
       {
-        id: "W0bFw025P68",
-        title: "MRR and nDCG Explained: Ranking Metrics",
-        description: "Two searches find the same good results but one buries the answer at rank four. MRR and nDCG are the numbers that notice.",
-        date: "2026-10-27T06:09:36-07:00",
-        seconds: 361,
+        id: "R8-O8YHfw0A",
+        title: "GPU Internals for AI: The Techniques Behind Fitting Any LLM on GPUs",
+        description:
+          "An H100 can do 989 trillion operations a second, yet writing one token of Llama 2 7B leaves its maths units idle 99.7% of the time. Why, and every GPU term you meet along the way.",
+        date: "2026-11-12T06:34:16-08:00",
+        seconds: 3317,
       },
-      {
-        id: "io0ZVfC86nM",
-        title: "What Makes a Search Result Good? Precision vs Recall",
-        description: "How do you know if a search is any good? The first video of a series on retrieval and vector search.",
-        date: "2026-10-27T05:39:28-07:00",
-        seconds: 423,
-      },
-    ],
-  },
-  {
-    name: "LLM internals",
-    blurb: "How large language models actually run, from the GPU up: attention, memory and the tricks that make long context affordable.",
-    videos: [
       {
         id: "si_thYJnd30",
         title: "MLA Explained: How DeepSeek Shrinks the KV Cache 57×",
@@ -81,9 +71,73 @@ export const series: { name: string; blurb: string; videos: Video[] }[] = [
     ],
   },
   {
-    name: "Breakdowns",
-    blurb: "System design and security stories, and new AI releases checked claim by claim.",
+    name: "Fintech",
+    blurb: "How India's money systems work underneath: payments, IPOs and the rules that decide who gets what.",
     videos: [
+      {
+        id: "pdLjy7ThEAo",
+        title: "The Real Reason You Never Get IPO Allotment",
+        description:
+          "One friend bids 1 lot and gets shares; the other bids 13 lots and gets nothing. SEBI's rulebook, the queues and the lottery that decide who gets an IPO allotment.",
+        date: "2026-11-07T07:43:31-08:00",
+        seconds: 1767,
+      },
+      {
+        id: "4QkiiH6Hh2c",
+        title: "Inside UPI: How India Built the Fastest Payment System",
+        description:
+          "One ₹20 chai payment followed through all of UPI: two apps, two PSP banks, NPCI's switch and about ten messages in two seconds, with the real money moving hours later.",
+        date: "2026-11-06T05:05:55-08:00",
+        seconds: 1694,
+      },
+    ],
+  },
+  {
+    name: "Retrieval",
+    blurb: "How search really works, from scratch: the machine behind every search box and every chatbot that answers from your documents.",
+    videos: [
+      {
+        id: "P66zWHd0Amo",
+        title: "The Inverted Index: How Search Engines Find Anything in Milliseconds",
+        description: "Search engines don't read your documents when you search. They read a few short lists from an inverted index, built here from scratch with real numbers.",
+        date: "2026-10-29T06:00:02-07:00",
+        seconds: 906,
+      },
+      {
+        id: "MQx_bS60dS0",
+        title: "Tokenization, Stop Words, Stemming and Lemmatization",
+        description: "Why the simplest search misses half the good answers, and how every search engine fixes words before it stores them.",
+        date: "2026-10-29T05:50:13-07:00",
+        seconds: 870,
+      },
+      {
+        id: "W0bFw025P68",
+        title: "MRR and nDCG Explained: Ranking Metrics",
+        description: "Two searches find the same good results but one buries the answer at rank four. MRR and nDCG are the numbers that notice.",
+        date: "2026-10-27T06:09:36-07:00",
+        seconds: 361,
+      },
+      {
+        id: "io0ZVfC86nM",
+        title: "What Makes a Search Result Good? Precision vs Recall",
+        description: "How do you know if a search is any good? The first video of a series on retrieval and vector search.",
+        date: "2026-10-27T05:39:28-07:00",
+        seconds: 423,
+      },
+    ],
+  },
+  {
+    name: "Breakdowns",
+    blurb: "System design and security stories, new AI releases checked claim by claim, and essays on where AI is heading.",
+    videos: [
+      {
+        id: "X82t7xIPRYQ",
+        title: "The Token Class: When Intelligence Has a Meter",
+        description:
+          "Intelligence is becoming a utility like water and power, and it comes with a meter: sold in grades and billed by the token. What that means for who gets to think with it.",
+        date: "2026-11-20T05:08:26-08:00",
+        seconds: 496,
+      },
       {
         id: "o4YGWgzAOW4",
         title: "Gemini 4 Carbon: Google's New #1 AI Model? Every Claim Fact-Checked",

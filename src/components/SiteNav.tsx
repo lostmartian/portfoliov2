@@ -5,14 +5,15 @@ const LINKS = [
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
   { href: "/blogs", label: "Blogs" },
+  { href: "/writeups", label: "Writeups", wide: true },
   { href: "/videos", label: "Videos", wide: true },
 ];
 
-export type NavPath = "/" | "/services" | "/about" | "/blogs" | "/videos";
+export type NavPath = "/" | "/services" | "/about" | "/blogs" | "/writeups" | "/videos";
 
 /** Top-level navigation shared by every page with a top bar. */
 export function SiteNav({ active }: { active: NavPath }) {
-  // Phones have room for three links: "Videos" goes, and so does "Work" away from the
+  // Phones have room for three links: "Writeups" and "Videos" go, and so does "Work" away from the
   // homepage, where the name in the corner already links home.
   const hidePhone = (l: (typeof LINKS)[number]) => ("wide" in l && l.wide) || (l.href === "/" && active !== "/");
   return (

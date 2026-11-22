@@ -42,7 +42,16 @@ export default function BlogsPage() {
           Writing. <span className="text-fg/40">Now and then.</span>
         </>
       }
-      intro={<p>Product launches, engineering deep dives, and the odd essay on people and politics.</p>}
+      intro={
+        <p>
+          Product launches, engineering deep dives, and the odd essay on people and politics. For tutorials and explanations, see
+          the{" "}
+          <Link href="/writeups" className="font-semibold text-fg transition-opacity hover:opacity-60">
+            writeups
+          </Link>
+          .
+        </p>
+      }
     >
       <JsonLd data={structured} />
       <ul {...reveal(320)} className="group/list border-t border-line">

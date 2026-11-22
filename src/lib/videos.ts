@@ -2,7 +2,8 @@
 // feed is unreliable) with the upload date and length each video page reports, which
 // VideoObject structured data needs. Add new uploads to the top of their series.
 
-export type Video = { id: string; title: string; description: string; date: string; seconds: number };
+/** `writeup`: a page on this site that covers the same topic, linked both ways. */
+export type Video = { id: string; title: string; description: string; date: string; seconds: number; writeup?: string };
 
 export const series: { name: string; blurb: string; videos: Video[] }[] = [
   {
@@ -11,6 +12,7 @@ export const series: { name: string; blurb: string; videos: Video[] }[] = [
     videos: [
       {
         id: "5cpgl3UMOXc",
+        writeup: "/writeups/why-neural-networks-need-non-linearity",
         title: "Why Neural Networks Need Non-Linearity",
         description:
           "Take the activation functions out of a 10-layer network and it collapses into a single layer. Why, shown as pictures: grids that tilt, fold and bend.",
@@ -177,6 +179,9 @@ export const series: { name: string; blurb: string; videos: Video[] }[] = [
 ];
 
 export const videos = series.flatMap((s) => s.videos);
+
+/** The video that goes with a page, if one does. */
+export const videoFor = (href: string) => videos.find((v) => v.writeup === href);
 
 export const thumb = (id: string) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 export const watch = (id: string) => `https://www.youtube.com/watch?v=${id}`;

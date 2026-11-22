@@ -1,6 +1,6 @@
 // llms.txt (https://llmstxt.org): a plain Markdown profile for AI assistants and agents, built
 // from the same data as the pages so it never drifts. llms-full.txt adds every case study's
-// results and every blog post in full.
+// results, and every blog post and writeup in full.
 
 import * as agentdiff from "@/lib/case-studies/agentdiff";
 import * as ayuva from "@/lib/case-studies/ayuva";
@@ -9,7 +9,7 @@ import { caseStudies } from "@/lib/case-studies";
 import * as ipo from "@/lib/case-studies/ipo";
 import * as tsx2rs from "@/lib/case-studies/tsx2rs";
 import { path as career, openSource } from "@/lib/about";
-import { formatDate, posts } from "@/lib/posts";
+import { formatDate, posts, writeups } from "@/lib/posts";
 import { videos, watch } from "@/lib/videos";
 import { DESCRIPTION, HANDLE, NAME, SITE_URL, YOUTUBE, abs, contact, expertise, sameAs, services, ventures } from "@/lib/site";
 
@@ -63,6 +63,7 @@ function profile() {
     "## Writing and video",
     "",
     ...posts.map((p) => `- [${p.title}](${abs(p.href)}) (${formatDate(p.date)}, Markdown: ${abs(p.markdown)}): ${p.description}`),
+    ...writeups.map((p) => `- Writeup: [${p.title}](${abs(p.href)}) (${formatDate(p.date)}, Markdown: ${abs(p.markdown)}): ${p.description}`),
     `- YouTube, technical breakdowns of how AI systems work: ${YOUTUBE}`,
     ...videos.map((v) => `  - [${v.title}](${watch(v.id)})`),
     `- All videos: ${abs("/videos")} · RSS feed of posts: ${abs("/feed.xml")}`,
@@ -97,5 +98,6 @@ export function llmsFullTxt() {
     "",
   ]);
   const writing = posts.flatMap((p) => [`## ${p.title}`, "", `Source: ${abs(p.href)} · ${formatDate(p.date)} · ${p.category}`, "", p.body.trim(), ""]);
-  return [...profile(), "", "# Case studies in detail", "", ...work, "# Blog posts", "", ...writing].join("\n");
+  const tutorials = writeups.flatMap((p) => [`## ${p.title}`, "", `Source: ${abs(p.href)} · ${formatDate(p.date)} · ${p.category}`, "", p.body.trim(), ""]);
+  return [...profile(), "", "# Case studies in detail", "", ...work, "# Blog posts", "", ...writing, "# Technical writeups", "", ...tutorials].join("\n");
 }

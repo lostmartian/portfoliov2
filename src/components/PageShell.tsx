@@ -15,16 +15,21 @@ export function PageShell({
   eyebrow,
   title,
   intro,
+  compact = false,
   children,
 }: {
   active: NavPath;
   eyebrow: string;
   title: React.ReactNode;
   intro?: React.ReactNode;
+  /** a shorter header, for pages whose content should start above the fold (Writeups) */
+  compact?: boolean;
   children: React.ReactNode;
 }) {
+  // At least one screen tall, so on short pages the footer sits at the bottom rather than
+  // right under the content.
   return (
-    <>
+    <div className="flex min-h-svh flex-col">
       <div className="graphite-fade relative isolate">
         <header className={`${container} relative z-10 flex items-center justify-between py-6 text-sm`}>
           <Link href="/" className="font-medium tracking-tight">
@@ -35,16 +40,16 @@ export function PageShell({
             <ThemeSwitcher />
           </div>
         </header>
-        <div className={`${container} relative z-10 pb-16 pt-16 sm:pb-20 sm:pt-24`}>
+        <div className={`${container} relative z-10 ${compact ? "pb-6 pt-4 sm:pb-10 sm:pt-10" : "pb-10 pt-8 sm:pb-20 sm:pt-24"}`}>
           <p {...reveal(60)} className={label}>
             {eyebrow}
           </p>
-          <h1 {...reveal(140)} className="mt-5 max-w-4xl font-display text-[2.75rem] leading-[1.04] sm:text-6xl lg:text-7xl">{title}</h1>
-          {intro && <div {...reveal(260)} className="mt-8 max-w-[62ch] space-y-4 text-lg leading-[1.7] text-muted">{intro}</div>}
+          <h1 {...reveal(140)} className={`mt-3 max-w-4xl font-display leading-[1.06] ${compact ? "text-[1.85rem] sm:text-5xl" : "text-[2.1rem] sm:mt-5 sm:text-6xl lg:text-7xl"}`}>{title}</h1>
+          {intro && <div {...reveal(260)} className={`max-w-[62ch] space-y-4 text-base leading-[1.65] text-muted ${compact ? "mt-3 sm:mt-4" : "mt-5 sm:mt-8 sm:text-lg sm:leading-[1.7]"}`}>{intro}</div>}
         </div>
       </div>
 
-      <main className={`${container} pb-24`}>{children}</main>
+      <main className={`${container} flex-1 pb-24`}>{children}</main>
 
       <footer className={container}>
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-line py-6 text-[13px] text-muted">
@@ -60,7 +65,7 @@ export function PageShell({
           </nav>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
 

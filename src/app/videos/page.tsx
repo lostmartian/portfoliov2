@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { JsonLd } from "@/components/JsonLd";
 import { PageShell } from "@/components/PageShell";
 import { Row } from "@/components/Row";
@@ -42,6 +43,7 @@ const structured = [
           duration: isoDuration(v.seconds),
           contentUrl: watch(v.id),
           embedUrl: `https://www.youtube.com/embed/${v.id}`,
+          ...(v.writeup ? { subjectOf: { "@type": "TechArticle", url: abs(v.writeup) } } : {}),
           author: { "@id": ids.person },
           publisher: { "@id": ids.channel },
         },
@@ -97,6 +99,15 @@ export default function VideosPage() {
                   </span>
                   <span className="tabular mt-1 block text-[13px] text-muted">{date.format(new Date(v.date))}</span>
                 </a>
+                {v.writeup && (
+                  <Link
+                    href={v.writeup}
+                    className="group/w mt-2 inline-flex items-center gap-1.5 text-[13px] font-semibold transition-opacity hover:opacity-60"
+                  >
+                    Read the interactive writeup
+                    <ArrowRight aria-hidden className="h-3.5 w-3.5 transition-transform group-hover/w:translate-x-0.5" strokeWidth={1.75} />
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

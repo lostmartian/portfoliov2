@@ -35,7 +35,7 @@ export function Mermaid({ chart }: { chart: string }) {
   return (
     <figure className="my-10 overflow-x-auto">
       {svg ? (
-        <div className="mx-auto w-fit [&_svg]:h-auto [&_svg]:max-w-full" dangerouslySetInnerHTML={{ __html: svg }} />
+        <div className="w-full [&_svg]:mx-auto [&_svg]:h-auto" dangerouslySetInnerHTML={{ __html: svg }} />
       ) : (
         <pre className="font-mono text-[13px] leading-[1.7] text-muted">{chart}</pre>
       )}

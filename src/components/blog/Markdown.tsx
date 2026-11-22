@@ -2,6 +2,7 @@
 // code, plus the two interactive pieces the posts use (mermaid diagrams and the
 // <audio-comparison> player), which hydrate on the client.
 
+import dynamic from "next/dynamic";
 import ReactMarkdown, { type Components } from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import rehypeKatex from "rehype-katex";
@@ -12,6 +13,11 @@ import { AudioCompare } from "@/components/blog/AudioCompare";
 import { CodeBlock } from "@/components/blog/CodeBlock";
 import { Mermaid } from "@/components/blog/Mermaid";
 import { slugify } from "@/lib/slug";
+
+// Interactive figures for writeups, loaded only on the pages that use them.
+const NeuralDemo = dynamic(() => import("@/components/writeups/NonLinearity"));
+
+const CUSTOM = new Set(["audio-comparison", "nn-demo"]);
 
 type HastNode = { type: string; value?: string; tagName?: string; properties?: Record<string, unknown>; children?: HastNode[] };
 
@@ -49,11 +55,14 @@ const components = {
       </div>
     );
   },
-  // A lone custom element still arrives wrapped in <p>; unwrap it so the player isn't inside a paragraph.
+  // A lone custom element still arrives wrapped in <p>; unwrap it so a figure isn't inside a paragraph.
   p({ node, children }) {
     const only = (node as HastNode | undefined)?.children?.filter((c) => !(c.type === "text" && !c.value?.trim()));
-    if (only?.length === 1 && only[0].tagName === "audio-comparison") return <>{children}</>;
+    if (only?.length === 1 && CUSTOM.has(only[0].tagName ?? "")) return <>{children}</>;
     return <p>{children}</p>;
+  },
+  "nn-demo"({ node }: { node?: HastNode }) {
+    return <NeuralDemo kind={String((node?.properties ?? {}).kind ?? "")} />;
   },
   // HTML attribute names arrive lowercased from the parser.
   "audio-comparison"({ node }: { node?: HastNode }) {

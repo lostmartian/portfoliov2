@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { caseStudies } from "@/lib/case-studies";
-import { posts } from "@/lib/posts";
+import { posts, writeups } from "@/lib/posts";
 import { abs } from "@/lib/site";
 import { videos } from "@/lib/videos";
 
@@ -15,6 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: abs("/services"), changeFrequency: "monthly", priority: 0.9 },
     ...caseStudies.map((c) => ({ url: abs(c.href), changeFrequency: "monthly" as const, priority: 0.9 })),
     { url: abs("/blogs"), lastModified: latest, changeFrequency: "weekly", priority: 0.8 },
+    { url: abs("/writeups"), lastModified: writeups[0]?.date, changeFrequency: "weekly", priority: 0.8 },
+    ...writeups.map((p) => ({ url: abs(p.href), lastModified: p.date, changeFrequency: "yearly" as const, priority: 0.7 })),
     { url: abs("/videos"), lastModified: videos[0]?.date.slice(0, 10), changeFrequency: "weekly", priority: 0.7 },
     ...posts.map((p) => ({ url: abs(p.href), lastModified: p.date, changeFrequency: "yearly" as const, priority: 0.7 })),
   ];

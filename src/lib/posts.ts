@@ -1,6 +1,6 @@
-// Blog posts, read from src/content/blogs/*.md at build time. Frontmatter keeps the format
-// of the old site (dates like "AUG 24, 2026", category as a string or a list), so the files
-// can be copied over unchanged.
+// Blog posts and technical writeups, read from src/content/{blogs,writeups}/*.md at build
+// time. Frontmatter keeps the format of the old site (dates like "AUG 24, 2026", category as a
+// string or a list), so files can be copied over unchanged. Writeups may also list `tags`.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -8,13 +8,17 @@ import matter from "gray-matter";
 import { imageSize } from "image-size";
 import { sectionLabel, slugify } from "@/lib/slug";
 
+export type Collection = "blogs" | "writeups";
+
 export type Post = {
+  collection: Collection;
   slug: string;
   href: string;
   title: string;
   /** ISO date, for sorting and <time> */
   date: string;
   category: string;
+  tags: string[];
   description: string;
   headerImage?: { src: string; width: number; height: number };
   headerImageCaption?: string;
@@ -22,11 +26,10 @@ export type Post = {
   minutes: number;
   /** The post's ## headings, for the section index */
   sections: { id: string; label: string }[];
-  /** the post as plain Markdown (src/app/blogs/md/[file]/route.ts) */
+  /** the post as plain Markdown (src/app/<collection>/md/[file]/route.ts) */
   markdown: string;
 };
 
-const DIR = path.join(process.cwd(), "src/content/blogs");
 
 const titleCase = (s: string) => s.charAt(0) + s.slice(1).toLowerCase();
 
@@ -60,37 +63,49 @@ function header(src: string) {
   return { src, width, height };
 }
 
-function load(file: string): Post & { hidden: boolean } {
+function load(collection: Collection, file: string): Post & { hidden: boolean } {
   const slug = file.replace(/\.md$/, "");
-  const { data, content } = matter(fs.readFileSync(path.join(DIR, file), "utf-8"));
+  const { data, content } = matter(fs.readFileSync(path.join(dir(collection), file), "utf-8"));
   const category = Array.isArray(data.category) ? data.category[0] : data.category;
   const parsed = new Date(`${data.date} UTC`);
   return {
+    collection,
     slug,
-    href: `/blogs/${slug}`,
+    href: `/${collection}/${slug}`,
     title: data.title,
     date: parsed.toISOString().slice(0, 10),
     category: titleCase(String(category ?? "Writing")),
+    tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     description: data.description ?? "",
     headerImage: data.headerImage ? header(data.headerImage) : undefined,
     headerImageCaption: data.headerImageCaption,
     body: prepareMath(content),
     minutes: Math.max(1, Math.round(content.split(/\s+/).length / 230)),
     sections: sections(content),
-    markdown: `/blogs/md/${slug}.md`,
+    markdown: `/${collection}/md/${slug}.md`,
     hidden: data.hidden === true,
   };
 }
 
+const dir = (collection: Collection) => path.join(process.cwd(), "src/content", collection);
+
+/** Every visible post in a folder, newest first. */
+function loadCollection(collection: Collection): Post[] {
+  if (!fs.existsSync(dir(collection))) return [];
+  return fs
+    .readdirSync(dir(collection))
+    .filter((f) => f.endsWith(".md"))
+    .map((f) => load(collection, f))
+    .filter((p) => !p.hidden)
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
+
 // Read once at module scope: the files don't change between requests.
-export const posts: Post[] = fs
-  .readdirSync(DIR)
-  .filter((f) => f.endsWith(".md"))
-  .map(load)
-  .filter((p) => !p.hidden)
-  .sort((a, b) => b.date.localeCompare(a.date));
+export const posts = loadCollection("blogs");
+export const writeups = loadCollection("writeups");
 
 export const getPost = (slug: string) => posts.find((p) => p.slug === slug);
+export const getWriteup = (slug: string) => writeups.find((p) => p.slug === slug);
 
 export const formatDate = (iso: string) =>
   new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });

@@ -8,7 +8,7 @@ import { themeScript } from "@/lib/theme";
 import "./globals.css";
 
 // Inter with its optical-size axis: large headings get the tighter Display cut automatically.
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"], axes: ["opsz"] });
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"], style: ["normal", "italic"], axes: ["opsz"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 // Pages set a short title ("About", a post's title); the template adds the name.

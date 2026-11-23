@@ -23,7 +23,7 @@ export default function Home() {
       <div aria-hidden className="spotlight pointer-events-none absolute inset-0 -z-10" />
 
       {/* Top bar */}
-      <header className={`${container} relative z-10 flex shrink-0 items-center justify-between gap-3 py-[clamp(14px,2.8svh,24px)] text-sm sm:gap-6`}>
+      <header className={`${container} relative z-30 flex shrink-0 items-center justify-between gap-3 py-[clamp(14px,2.8svh,24px)] text-sm sm:gap-6`}>
         <span className="inline-flex items-center gap-2.5 text-[13px] font-medium text-fg/80">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500/60 motion-reduce:animate-none" />
@@ -33,7 +33,7 @@ export default function Home() {
             Available<span className="max-sm:hidden"> for work</span>
           </span>
         </span>
-        <div className="flex items-center gap-3 sm:gap-5">
+        <div className="flex items-center gap-1 sm:gap-5">
           <SiteNav active="/" />
           <ThemeSwitcher />
         </div>
@@ -41,7 +41,7 @@ export default function Home() {
 
       {/* Statement and work index */}
       <main
-        className={`${container} relative z-10 grid min-h-0 flex-1 content-center gap-[clamp(24px,5svh,56px)] max-sm:gap-[clamp(16px,3.5svh,32px)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-[clamp(48px,7vw,128px)]`}
+        className={`${container} relative z-10 grid min-h-0 flex-1 grid-cols-[minmax(0,1fr)] content-center gap-[clamp(24px,5svh,56px)] max-sm:gap-[clamp(16px,3.5svh,32px)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-[clamp(48px,7vw,128px)]`}
       >
         <section>
           <h1

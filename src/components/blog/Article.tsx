@@ -29,11 +29,11 @@ export const kinds = {
 export function ArticleChrome({ collection, children }: { collection: Collection; children: React.ReactNode }) {
   return (
     <>
-      <header className={`${container} absolute inset-x-0 top-0 z-20 flex items-center justify-between py-6 text-sm`}>
+      <header className={`${container} absolute inset-x-0 top-0 z-30 flex items-center justify-between py-6 text-sm`}>
         <Link href="/" className="font-medium tracking-tight">
           Sahil<span className="max-sm:hidden"> Gangurde</span>
         </Link>
-        <div className="flex items-center gap-3 sm:gap-5">
+        <div className="flex items-center gap-1 sm:gap-5">
           <SiteNav active={kinds[collection].path} />
           <ThemeSwitcher />
         </div>

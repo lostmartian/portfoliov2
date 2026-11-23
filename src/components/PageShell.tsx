@@ -30,12 +30,12 @@ export function PageShell({
   // right under the content.
   return (
     <div className="flex min-h-svh flex-col">
-      <div className="graphite-fade relative isolate">
-        <header className={`${container} relative z-10 flex items-center justify-between py-6 text-sm`}>
+      <div className="graphite-fade relative isolate z-20">
+        <header className={`${container} relative z-30 flex items-center justify-between py-6 text-sm`}>
           <Link href="/" className="font-medium tracking-tight">
             Sahil<span className="max-sm:hidden"> Gangurde</span>
           </Link>
-          <div className="flex items-center gap-3 sm:gap-5">
+          <div className="flex items-center gap-1 sm:gap-5">
             <SiteNav active={active} />
             <ThemeSwitcher />
           </div>

@@ -11,9 +11,10 @@ const LINKS = [
   { href: "/blogs", label: "Blogs" },
   { href: "/writeups", label: "Writeups" },
   { href: "/videos", label: "Videos" },
+  { href: "/cooking", label: "Cooking" },
 ];
 
-export type NavPath = "/" | "/services" | "/about" | "/blogs" | "/writeups" | "/videos";
+export type NavPath = "/" | "/services" | "/about" | "/blogs" | "/writeups" | "/videos" | "/cooking";
 
 /** Top-level navigation shared by every page with a top bar. From sm up every link sits in the
  *  bar; phones get a menu icon that opens the same links in a small panel. */

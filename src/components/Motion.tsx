@@ -1,43 +1,13 @@
 "use client";
 
-// Site-wide motion: Lenis smooth scrolling, plus scroll reveals for anything marked
-// data-reveal. Both stay off for people who ask for reduced motion. Reading pages (the blog
-// and writeups) scroll natively: no Lenis there.
+// Scroll reveals for anything marked data-reveal (off for people who ask for reduced motion,
+// see globals.css). Scrolling itself is the browser's own: no smooth-scroll library.
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import Lenis from "lenis";
-
-const nativeScroll = (pathname: string) => /^\/(blogs|writeups)(\/|$)/.test(pathname);
 
 export function Motion() {
   const pathname = usePathname();
-  const smooth = !nativeScroll(pathname);
-
-  // Started and stopped as you move between reading pages and the rest of the site.
-  useEffect(() => {
-    if (!smooth || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const lenis = new Lenis({ autoRaf: true, lerp: 0.1 });
-
-    // In-page links (TOC, "Scroll to read"): cancel the browser's instant jump, which would
-    // otherwise fight Lenis, and glide there instead. scrollTo honours scroll-margin-top.
-    const onClick = (e: MouseEvent) => {
-      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      const link = (e.target as Element | null)?.closest?.('a[href^="#"]');
-      const id = link ? decodeURIComponent(link.getAttribute("href")!.slice(1)) : "";
-      const target = id ? document.getElementById(id) : null;
-      if (!target) return;
-      e.preventDefault();
-      lenis.scrollTo(target);
-      history.pushState(null, "", `#${id}`);
-    };
-    document.addEventListener("click", onClick);
-
-    return () => {
-      document.removeEventListener("click", onClick);
-      lenis.destroy();
-    };
-  }, [smooth]);
 
   // Re-scan on every route change: client navigations bring in new elements to reveal.
   useEffect(() => {

@@ -1,11 +1,12 @@
-// Case studies listed on the homepage. `company` and `note` make up the short line under
-// each title; the full story and its numbers live on the case study's own page.
+// Case studies shown as bento cards on the homepage. `company`, `note` and `tags` are all a
+// card says; the full story and its numbers live on the case study's own page.
 
 export const caseStudies: {
   href: string;
   title: string;
   company: string;
   note: string;
+  tags: string[];
   status?: string;
 }[] = [
   {
@@ -13,24 +14,28 @@ export const caseStudies: {
     title: "IPO Allotment Engine",
     company: "Niche Technologies",
     note: "who gets shares, decided in a day",
+    tags: ["Fintech", "Backend"],
   },
   {
     href: "/work/farsight",
     title: "Farsight",
     company: "Omara Technologies",
     note: "ground truth for AI, built solo",
+    tags: ["AI data", "Full stack"],
   },
   {
     href: "/work/ayuva",
     title: "AYUVA",
     company: "First500days",
     note: "the AI inside a UK health app",
+    tags: ["Healthcare", "AI"],
   },
   {
     href: "/work/agentdiff",
     title: "AgentDiff",
     company: "KerrShift",
     note: "what AI coding agents cost, and why",
+    tags: ["Developer tools", "AI"],
   },
   {
     href: "/work/tsx2rs",
@@ -38,14 +43,6 @@ export const caseStudies: {
     company: "Personal",
     note: "Next.js, compiled to Rust",
     status: "In progress",
+    tags: ["Compilers", "Rust"],
   },
-];
-
-// Homepage strip: facts about Sahil rather than any one product. Sources: founding engineer
-// at Omara and its two products built solo (Farsight), and the three case studies' fields
-// (fintech, AI data, healthcare).
-export const highlights = [
-  { value: "0→1", label: "Founding engineer", href: "/about" },
-  { value: "2", label: "Products built solo", href: "/work/farsight" },
-  { value: "3", label: "Industries", href: undefined },
 ];

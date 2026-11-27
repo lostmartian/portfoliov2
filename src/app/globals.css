@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "lenis/dist/lenis.css";
 
 /* The inline script in layout.tsx resolves the saved choice (or the system setting) to
    data-theme="light" | "dark" on <html> before the first paint. */
@@ -529,4 +528,78 @@ body {
 .post-code .hljs-tag,
 .post-code .hljs-selector-id {
   color: var(--c-attr);
+}
+
+/* Homepage bento backgrounds, after Pryzm's "Pewter Fade": a cool wash lit by a warm bloom,
+   blurred soft, with fine grain. Each card sets --cool/--warm (colours) and --x/--y (where the
+   warm bloom sits). The cards are fully coloured with white text in both themes; a soft shade
+   along the bottom keeps the text readable. Hovering only brightens the glow. */
+.fade {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--cool) 78%, #0b0b12);
+  --shade: 0.32;
+}
+[data-theme="dark"] .fade {
+  background: color-mix(in srgb, var(--cool) 52%, #0b0b12);
+  --shade: 0.45;
+}
+.fade::before {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  background:
+    radial-gradient(34% 40% at var(--x) var(--y), var(--warm) 0%, transparent 72%),
+    radial-gradient(70% 80% at calc(100% - var(--x)) calc(100% - var(--y)), var(--cool) 0%, transparent 78%);
+  filter: blur(24px) saturate(1.2);
+  opacity: 0.9;
+  transition:
+    opacity 0.6s ease,
+    filter 0.6s ease;
+}
+.group:hover .fade::before,
+.group:focus-visible .fade::before {
+  opacity: 1;
+  filter: blur(24px) saturate(1.35) brightness(1.15);
+}
+.fade::after {
+  /* grain, plus the shade under the text */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(to top, rgb(0 0 0 / var(--shade)), transparent 65%);
+}
+
+/* The waving hand in the homepage greeting: one wave shortly after load, another on hover.
+   Two keyframe names so hovering restarts it. Still for reduced motion. */
+.wave {
+  display: inline-block;
+  transform-origin: 70% 75%;
+  animation: wave 1.6s 0.9s ease-in-out both;
+}
+.group\/hi:hover .wave {
+  animation: wave-again 1.6s ease-in-out both;
+}
+@keyframes wave {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  10%, 30% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+}
+@keyframes wave-again {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  10%, 30% { transform: rotate(15deg); }
+  20% { transform: rotate(-8deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wave,
+  .group\/hi:hover .wave {
+    animation: none;
+  }
 }

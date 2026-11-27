@@ -73,6 +73,68 @@ export const series: { name: string; blurb: string; videos: Video[] }[] = [
     ],
   },
   {
+    name: "Auth",
+    blurb: "Authentication and authorization, drawn as moving diagrams: passwords, sessions, tokens and OAuth, one idea per video.",
+    videos: [
+      {
+        id: "qQKbLgn8gUw",
+        title: "OAuth Code Flow, Step by Step",
+        description:
+          "The OAuth 2.0 authorization code flow one message at a time: the request, consent, the one-time code, the state check, the token exchange and the API call, with the browser's front channel and the server's back channel drawn apart.",
+        date: "2026-11-26T23:53:44-08:00",
+        seconds: 712,
+      },
+      {
+        id: "VvOES-cM3X8",
+        title: "OAuth 2.0: Why Apps Never Need Your Password",
+        description:
+          "Giving an app your password hands it a master key you can't take back. How OAuth fixes that: the valet key, the four roles, access tokens, scopes and consent.",
+        date: "2026-11-26T06:30:25-08:00",
+        seconds: 781,
+      },
+      {
+        id: "6d5IlZC4FCU",
+        title: "Access vs Refresh Tokens: Why You Need Both",
+        description:
+          "A signed token keeps working until it expires, even after you log out. The fix, built step by step: denylists, short-lived access tokens, refresh tokens, rotation and reuse detection.",
+        date: "2026-11-26T03:30:39-08:00",
+        seconds: 746,
+      },
+      {
+        id: "tJ2oP1SWHFg",
+        title: "JWT Decoded by Hand: Header, Payload, Signature",
+        description:
+          "A real JWT taken apart by hand: the three parts, base64url decoded bit by bit, the claims, and the HMAC signature that lets a server trust it without a database lookup.",
+        date: "2026-11-26T00:42:23-08:00",
+        seconds: 773,
+      },
+      {
+        id: "GXWS9L0C37k",
+        title: "How Websites Keep You Logged In: Sessions & Cookies",
+        description:
+          "HTTP forgets you between requests, yet you stay logged in for weeks. The session ID, the session store, Set-Cookie, the browser's cookie jar and the attributes that guard it.",
+        date: "2026-11-25T05:30:08-08:00",
+        seconds: 882,
+      },
+      {
+        id: "6YOn7glMLgs",
+        title: "How to Store Passwords: Hashing, Salt and Pepper",
+        description:
+          "How a site checks your password without ever keeping it: hashing, salt, slow memory-hard hashes and pepper, ending with LinkedIn's 2012 breach.",
+        date: "2026-11-25T03:30:37-08:00",
+        seconds: 888,
+      },
+      {
+        id: "682anogyf0o",
+        title: "Authentication vs Authorization, Finally Clear",
+        description:
+          "Who are you, and what are you allowed to do? The two questions pulled apart with a hotel analogy, the four key words, and why mixing them up is the top web security risk.",
+        date: "2026-11-24T19:30:34-08:00",
+        seconds: 752,
+      },
+    ],
+  },
+  {
     name: "Fintech",
     blurb: "How India's money systems work underneath: payments, IPOs and the rules that decide who gets what.",
     videos: [

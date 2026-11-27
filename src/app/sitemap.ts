@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { caseStudies } from "@/lib/case-studies";
+import { dishes } from "@/lib/cooking";
 import { posts, writeups } from "@/lib/posts";
 import { abs } from "@/lib/site";
 import { videos } from "@/lib/videos";
@@ -19,5 +20,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...writeups.map((p) => ({ url: abs(p.href), lastModified: p.date, changeFrequency: "yearly" as const, priority: 0.7 })),
     { url: abs("/videos"), lastModified: videos[0]?.date.slice(0, 10), changeFrequency: "weekly", priority: 0.7 },
     ...posts.map((p) => ({ url: abs(p.href), lastModified: p.date, changeFrequency: "yearly" as const, priority: 0.7 })),
+    { url: abs("/cooking"), lastModified: dishes[0]?.date, changeFrequency: "monthly", priority: 0.4 },
   ];
 }

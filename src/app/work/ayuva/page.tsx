@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tintFor } from "@/lib/palette";
 import { JsonLd } from "@/components/JsonLd";
 import { pageMeta } from "@/lib/meta";
 import { caseStudyGraph } from "@/lib/schema";
@@ -91,7 +92,7 @@ function Interpretation() {
         </dl>
       </div>
 
-      <ArrowRight aria-hidden className="mx-auto hidden h-7 w-7 text-fg/30 @2xl:block" strokeWidth={1.5} />
+      <ArrowRight aria-hidden className="mx-auto hidden h-7 w-7 text-fg/65 @2xl:block" strokeWidth={1.5} />
 
       <div className={card}>
         <p className={label}>What AYUVA explains</p>
@@ -141,14 +142,16 @@ export default function AyuvaCaseStudy() {
     <>
       <JsonLd data={structured} />
       <CaseStudyFrame
+        tint={tintFor("/work/ayuva")}
         sections={SECTIONS}
         hero={
           <CaseStudyHero
+            tint={tintFor("/work/ayuva")}
             eyebrow={`Case study · ${meta.title}`}
             title={
               <>
                 Medical reports, in words patients understand.{" "}
-                <span className="text-fg/40">Without playing doctor.</span>
+                <span className="accent-text">Without playing doctor.</span>
               </>
             }
             summary={meta.summary}
@@ -193,7 +196,7 @@ export default function AyuvaCaseStudy() {
           {...sec("role")}
           title={
             <>
-              The whole AI layer. <span className="text-fg/45">From contract to cost report.</span>
+              The whole AI layer. <span className="accent-text">From contract to cost report.</span>
             </>
           }
           intro="I designed, built, tested and documented the AI service, and wired it into the client's backend."

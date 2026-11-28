@@ -2,7 +2,9 @@ import Link from "next/link";
 import { PuneClock } from "@/components/PuneClock";
 import { SiteNav, type NavPath } from "@/components/SiteNav";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+import { TintBackdrop, TintDot, TintGlow, tintVars } from "@/components/Tint";
 import { socials } from "@/lib/data";
+import { tintFor } from "@/lib/palette";
 
 export { container } from "@/lib/layout";
 import { container } from "@/lib/layout";
@@ -26,11 +28,14 @@ export function PageShell({
   compact?: boolean;
   children: React.ReactNode;
 }) {
+  const tint = tintFor(active);
   // At least one screen tall, so on short pages the footer sits at the bottom rather than
   // right under the content.
   return (
-    <div className="flex min-h-svh flex-col">
+    <div className="relative isolate flex min-h-svh flex-col" style={tintVars(tint)}>
+      <TintBackdrop tint={tint} />
       <div className="graphite-fade relative isolate z-20">
+        <TintGlow tint={tint} />
         <header className={`${container} relative z-30 flex items-center justify-between py-6 text-sm`}>
           <Link href="/" className="font-medium tracking-tight">
             Sahil<span className="max-sm:hidden"> Gangurde</span>
@@ -42,6 +47,7 @@ export function PageShell({
         </header>
         <div className={`${container} relative z-10 ${compact ? "pb-6 pt-4 sm:pb-10 sm:pt-10" : "pb-10 pt-8 sm:pb-20 sm:pt-24"}`}>
           <p {...reveal(60)} className={label}>
+            <TintDot tint={tint} />
             {eyebrow}
           </p>
           <h1 {...reveal(140)} className={`mt-3 max-w-4xl font-display leading-[1.06] ${compact ? "text-[1.85rem] sm:text-5xl" : "text-[2.1rem] sm:mt-5 sm:text-6xl lg:text-7xl"}`}>{title}</h1>

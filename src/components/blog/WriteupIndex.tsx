@@ -76,7 +76,7 @@ export function WriteupIndex({ items }: { items: WriteupItem[] }) {
                   }`}
                 >
                   {name}
-                  <span className={`tabular ml-1.5 ${on ? "text-ink/60" : "text-fg/35"}`}>{count}</span>
+                  <span className={`tabular ml-1.5 ${on ? "text-ink/70" : "text-fg/60"}`}>{count}</span>
                 </button>
               );
             })}
@@ -120,19 +120,19 @@ export function WriteupIndex({ items }: { items: WriteupItem[] }) {
                   <time dateTime={i.date} className="tabular">
                     {i.dateLabel}
                   </time>
-                  <span className="text-fg/40 before:mx-2 before:content-['·'] sm:block sm:before:hidden">{i.minutes} min read</span>
+                  <span className="text-muted before:mx-2 before:content-['·'] sm:block sm:before:hidden">{i.minutes} min read</span>
                 </span>
                 <span className="min-w-0">
                   <span className="block max-w-3xl font-display text-[1.1rem] leading-[1.3] sm:text-[1.4rem]">{i.title}</span>
                   <span className="mt-1 line-clamp-1 max-w-[72ch] text-[13px] leading-[1.55] text-muted sm:text-[14px]">
                     <span className="font-medium text-fg/70">{i.category}</span>
-                    <span aria-hidden className="mx-1.5 text-fg/25">·</span>
+                    <span aria-hidden className="mx-1.5 text-fg/45">·</span>
                     {i.description}
                   </span>
                 </span>
                 <span
                   aria-hidden
-                  className="hidden h-9 w-9 place-items-center rounded-full text-fg/45 ring-1 ring-fg/15 transition-[background-color,color,box-shadow] duration-300 group-hover:bg-fg group-hover:text-ink group-hover:ring-fg group-focus-visible:bg-fg group-focus-visible:text-ink sm:grid"
+                  className="hidden h-9 w-9 place-items-center rounded-full text-fg/70 ring-1 ring-fg/20 transition-[background-color,color,box-shadow] duration-300 group-hover:bg-fg group-hover:text-ink group-hover:ring-fg group-focus-visible:bg-fg group-focus-visible:text-ink sm:grid"
                 >
                   <ArrowUpRight
                     className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45 group-focus-visible:rotate-45"

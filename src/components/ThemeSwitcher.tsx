@@ -1,11 +1,11 @@
 "use client";
 
-// One quiet button that flips between light and dark. The site follows the system setting
+// A small day/night switch: a sunny sky with a sun knob in light mode, a starry night with a
+// moon knob in dark mode (drawn in CSS, see .theme-toggle in globals.css). The site follows the system setting
 // until it is clicked; picking the theme the system already uses goes back to following it.
 // The inline script in layout.tsx applies the saved choice before paint.
 
 import { useEffect } from "react";
-import { Moon, Sun } from "lucide-react";
 import { THEME_KEY } from "@/lib/theme";
 
 const darkQuery = () => matchMedia("(prefers-color-scheme: dark)");
@@ -55,11 +55,19 @@ export function ThemeSwitcher({ className = "" }: { className?: string }) {
       onClick={toggle}
       aria-label="Toggle dark mode"
       title="Toggle dark mode"
-      className={`grid h-8 w-8 place-items-center rounded-full text-muted transition-colors hover:bg-fg/[0.06] hover:text-fg ${className}`}
+      className={`theme-toggle ${className}`}
     >
-      {/* The icon shows what a click switches to; CSS picks it, so it is right before hydration. */}
-      <Moon aria-hidden className="h-4 w-4 dark:hidden" strokeWidth={1.75} />
-      <Sun aria-hidden className="hidden h-4 w-4 dark:block" strokeWidth={1.75} />
+      {/* everything below is CSS-driven by data-theme, so it is right before hydration */}
+      <span aria-hidden className="theme-toggle-cloud" />
+      <span aria-hidden className="theme-toggle-stars">
+        <i />
+        <i />
+        <i />
+      </span>
+      <span aria-hidden className="theme-toggle-knob">
+        <i />
+        <i />
+      </span>
     </button>
   );
 }

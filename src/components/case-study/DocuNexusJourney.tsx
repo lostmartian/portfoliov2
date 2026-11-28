@@ -116,7 +116,7 @@ const bg = "bg-[#0d0d0f]";
 const panel = "bg-[#141417]";
 const raised = "bg-[#1c1c20]";
 const line = "border-white/[0.08]";
-const muted = "text-white/50";
+const muted = "text-white/65";
 
 const typed = (text: string, t: number, start: number, dur: number) =>
   text.slice(0, Math.floor(clamp((t - start) / dur) * text.length));
@@ -327,7 +327,7 @@ function Ontology({ t }: { t: number }) {
               >
                 <Ico className="h-3.5 w-3.5" />
                 <span className="font-medium">{n.label}</span>
-                <span className={`text-[9.5px] ${isSel ? "text-black/50" : "text-white/40"}`}>{n.kind}</span>
+                <span className={`text-[9.5px] ${isSel ? "text-black/65" : "text-white/60"}`}>{n.kind}</span>
               </div>
             );
           })}
@@ -552,7 +552,7 @@ function Processing({ t }: { t: number }) {
                   )}
                 </span>
                 <span className="w-[170px]">
-                  <span className={`block font-medium ${p > 0 ? "text-white" : "text-white/40"}`}>{s.name}</span>
+                  <span className={`block font-medium ${p > 0 ? "text-white" : "text-white/60"}`}>{s.name}</span>
                   <span className={`text-[10.5px] ${muted}`}>{s.detail}</span>
                 </span>
                 <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/10">

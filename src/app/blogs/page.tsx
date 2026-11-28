@@ -39,7 +39,7 @@ export default function BlogsPage() {
       eyebrow="Blogs"
       title={
         <>
-          Writing. <span className="text-fg/40">Now and then.</span>
+          Writing. <span className="accent-text">Now and then.</span>
         </>
       }
       intro={
@@ -66,7 +66,7 @@ export default function BlogsPage() {
             >
               <span className="tabular text-sm text-muted sm:pt-2">
                 <time dateTime={p.date}>{formatDate(p.date)}</time>
-                <span className="mt-1 block text-fg/40 max-sm:inline max-sm:before:mx-2 max-sm:before:content-['·']">{p.category}</span>
+                <span className="mt-1 block text-muted max-sm:inline max-sm:before:mx-2 max-sm:before:content-['·']">{p.category}</span>
               </span>
               <span className="min-w-0">
                 <span className="block max-w-3xl font-display text-[1.6rem] leading-[1.2] sm:text-[2rem]">
@@ -76,7 +76,7 @@ export default function BlogsPage() {
               </span>
               <span
                 aria-hidden
-                className="hidden h-10 w-10 place-items-center rounded-full text-fg/45 ring-1 ring-fg/15 transition-[background-color,color,box-shadow] duration-300 group-hover:bg-fg group-hover:text-ink group-hover:ring-fg group-focus-visible:bg-fg group-focus-visible:text-ink sm:mt-1 sm:grid"
+                className="hidden h-10 w-10 place-items-center rounded-full text-fg/70 ring-1 ring-fg/20 transition-[background-color,color,box-shadow] duration-300 group-hover:bg-fg group-hover:text-ink group-hover:ring-fg group-focus-visible:bg-fg group-focus-visible:text-ink sm:mt-1 sm:grid"
               >
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45 group-focus-visible:rotate-45" strokeWidth={1.75} />
               </span>

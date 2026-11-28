@@ -5,6 +5,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { caseStudies } from "@/lib/case-studies";
+import { palette, tintFor } from "@/lib/palette";
 import type { CSSProperties } from "react";
 import { reveal } from "@/lib/reveal";
 
@@ -17,15 +18,20 @@ const layout = [
   "lg:col-span-3",
 ];
 
-// Card backgrounds (the .fade style in globals.css): one look, a different cool wash, warm
-// bloom and bloom position per card. Hovering only brightens it.
-const fade = [
-  { "--cool": "#3d6bff", "--warm": "#ff9a3c", "--x": "78%", "--y": "22%" }, // cobalt, amber bloom
-  { "--cool": "#0fb5c9", "--warm": "#ff6f4f", "--x": "20%", "--y": "25%" }, // cyan, coral
-  { "--cool": "#2fc46b", "--warm": "#ffd23f", "--x": "75%", "--y": "70%" }, // green, sun yellow
-  { "--cool": "#7b5cff", "--warm": "#ff5fa2", "--x": "25%", "--y": "75%" }, // violet, pink
-  { "--cool": "#4f63ff", "--warm": "#ff5a1f", "--x": "80%", "--y": "30%" }, // indigo, rust orange
-] as unknown as CSSProperties[];
+// Card backgrounds (the .fade style in globals.css): each card's colour pair comes from
+// lib/palette.ts (shared with its case study page); only the warm bloom's position varies.
+const bloom = [
+  { x: "78%", y: "22%" },
+  { x: "20%", y: "25%" },
+  { x: "75%", y: "70%" },
+  { x: "25%", y: "75%" },
+  { x: "80%", y: "30%" },
+];
+const fade = (href: string, i: number) => {
+  const t = tintFor(href) ?? palette.cobalt;
+  const b = bloom[i % bloom.length];
+  return { "--cool": t.cool, "--warm": t.warm, "--x": b.x, "--y": b.y } as CSSProperties;
+};
 
 export function WorkBento({ className = "" }: { className?: string }) {
   return (
@@ -40,7 +46,7 @@ export function WorkBento({ className = "" }: { className?: string }) {
                 lead ? "min-h-[13rem]" : "min-h-[9rem] lg:min-h-[10.5rem]"
               }`}
             >
-              <span aria-hidden style={fade[i % fade.length]} className="fade" />
+              <span aria-hidden style={fade(c.href, i)} className="fade" />
 
               <span className="relative flex items-start justify-between gap-4">
                 <span className="text-[13px] font-semibold text-white/85 sm:text-[14px]">

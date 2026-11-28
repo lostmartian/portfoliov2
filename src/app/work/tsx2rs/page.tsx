@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tintFor } from "@/lib/palette";
 import { JsonLd } from "@/components/JsonLd";
 import { pageMeta } from "@/lib/meta";
 import { caseStudyGraph } from "@/lib/schema";
@@ -84,7 +85,7 @@ function Throughput() {
                   style={{ width: `${Math.max((t.value / max) * 100, 2)}%` }}
                 />
               </span>
-              <span className={`tabular w-[4.5ch] text-right font-display text-2xl ${t.lead ? "" : "text-fg/45"}`}>
+              <span className={`tabular w-[4.5ch] text-right font-display text-2xl ${t.lead ? "" : "text-fg/60"}`}>
                 {t.value.toLocaleString("en-US")}
               </span>
             </div>
@@ -130,13 +131,15 @@ export default function Tsx2rsCaseStudy() {
     <>
       <JsonLd data={structured} />
       <CaseStudyFrame
+        tint={tintFor("/work/tsx2rs")}
         sections={SECTIONS}
         hero={
           <CaseStudyHero
+            tint={tintFor("/work/tsx2rs")}
             eyebrow="Case study · tsx2rs · In progress"
             title={
               <>
-                Next.js, compiled to Rust. <span className="text-fg/40">Same output.</span>
+                Next.js, compiled to Rust. <span className="accent-text">Same output.</span>
               </>
             }
             summary={meta.summary}
@@ -173,7 +176,7 @@ export default function Tsx2rsCaseStudy() {
           {...sec("validation")}
           title={
             <>
-              Ten experiments before any product code. <span className="text-fg/45">Each one changed the plan.</span>
+              Ten experiments before any product code. <span className="accent-text">Each one changed the plan.</span>
             </>
           }
           intro="I didn't write the product until every open question had a measured answer. This is how the idea changed along the way."
@@ -201,7 +204,7 @@ export default function Tsx2rsCaseStudy() {
             Follow it on GitHub
             <ArrowUpRight
               aria-hidden
-              className="h-4 w-4 text-fg/50 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg"
+              className="h-4 w-4 text-fg/65 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg"
               strokeWidth={1.75}
             />
           </a>

@@ -20,7 +20,7 @@ const fonts = [
 
 const ink = "#fdfdfc";
 const fg = "#0c0c0d";
-const muted = "#66666d";
+const muted = "#4d4d54";
 const line = "#e8e8e5";
 
 export function ogCard({

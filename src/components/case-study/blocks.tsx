@@ -2,11 +2,13 @@
 // file and any one-off visuals; everything structural lives here.
 
 import Link from "next/link";
+import { CtaCard } from "@/components/CtaCard";
+import { TintBackdrop, TintDot, TintGlow, tintVars } from "@/components/Tint";
+import { type Tint, palette } from "@/lib/palette";
 import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
 import { Icon, IconBadge } from "@/components/case-study/Icon";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { MobileToc, ReadingProgress, Toc, type TocItem } from "@/components/case-study/Toc";
-import { EMAIL } from "@/lib/data";
 
 export { container } from "@/lib/layout";
 import { container } from "@/lib/layout";
@@ -17,11 +19,14 @@ export const label = "text-[13px] font-medium text-muted";
 /* ---------- Frame ---------- */
 
 export function CaseStudyFrame({
+  tint,
   sections,
   hero,
   children,
   related = [],
 }: {
+  /** the project's colour pair, carried faintly down the page */
+  tint?: Tint;
   sections: TocItem[];
   hero: React.ReactNode;
   children: React.ReactNode;
@@ -29,7 +34,8 @@ export function CaseStudyFrame({
   related?: readonly { title: string; href: string }[];
 }) {
   return (
-    <>
+    <div className="relative isolate" style={tintVars(tint)}>
+      <TintBackdrop tint={tint} />
       <ReadingProgress />
       {hero}
       <MobileToc items={sections} />
@@ -48,7 +54,7 @@ export function CaseStudyFrame({
                   <li key={r.href}>
                     <Link href={r.href} className="group inline-flex items-start gap-3 text-xl font-medium leading-snug">
                       <span className="transition-opacity group-hover:opacity-60">{r.title}</span>
-                      <ArrowRight aria-hidden className="mt-1 h-5 w-5 shrink-0 text-fg/40 transition-transform group-hover:translate-x-0.5" strokeWidth={1.75} />
+                      <ArrowRight aria-hidden className="mt-1 h-5 w-5 shrink-0 text-fg/65 transition-transform group-hover:translate-x-0.5" strokeWidth={1.75} />
                     </Link>
                   </li>
                 ))}
@@ -58,39 +64,27 @@ export function CaseStudyFrame({
         </main>
       </div>
 
-      <section className="graphite-fade relative">
-        <div className={`${container} relative z-10`}>
-          <div className="flex flex-col gap-10 border-t border-line py-28 md:flex-row md:items-end md:justify-between">
-            <h2 className="max-w-[16ch] font-display text-[2.75rem] leading-[1.08] sm:text-6xl">
-              Building something that has to be exactly right? <span className="text-fg/40">Let&apos;s talk.</span>
-            </h2>
-            <div className="flex flex-wrap items-center gap-6 text-[15px]">
-              <a
-                href={`mailto:${EMAIL}?subject=Project%20enquiry`}
-                className="group inline-flex items-center gap-2.5 rounded-full bg-fg px-6 py-3.5 font-medium text-ink transition-colors hover:bg-fg/85"
-              >
-                Start a conversation
-                <ArrowRight className="h-[18px] w-[18px] transition-transform group-hover:translate-x-0.5" strokeWidth={1.75} />
-              </a>
-              <Link href="/services" className="text-muted transition-colors hover:text-fg">
-                How I work
-              </Link>
-              <Link href="/#work" className="text-muted transition-colors hover:text-fg">
-                All work
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <div className={`${container} border-t border-line py-16 sm:py-24`}>
+        <CtaCard
+          tint={tint ?? palette.cobalt}
+          title="Building something that has to be exactly right?"
+          accent="Let's talk."
+          links={[
+            { label: "How I work", href: "/services" },
+            { label: "All work", href: "/#work" },
+          ]}
+        />
+      </div>
 
       <footer className={container}>
         <div className="border-t border-line py-8 text-[13px] text-muted">© 2026 Sahil Gangurde · Pune</div>
       </footer>
-    </>
+    </div>
   );
 }
 
 export function CaseStudyHero({
+  tint,
   eyebrow,
   title,
   summary,
@@ -98,6 +92,8 @@ export function CaseStudyHero({
   visualLabel,
   visual,
 }: {
+  /** the project's colour pair, the same as its homepage card */
+  tint?: Tint;
   eyebrow: string;
   title: React.ReactNode;
   summary: string;
@@ -110,6 +106,7 @@ export function CaseStudyHero({
   return (
     <>
       <header className="graphite-fade relative isolate flex h-svh flex-col">
+        <TintGlow tint={tint} />
         <nav className={`${container} relative z-10 flex w-full shrink-0 items-center justify-between py-6 text-sm`}>
           <Link href="/" className="font-medium tracking-tight">
             Sahil Gangurde
@@ -130,6 +127,7 @@ export function CaseStudyHero({
         >
           <div>
             <p {...reveal(60)} className={label}>
+              <TintDot tint={tint} />
               {eyebrow}
             </p>
             <h1
@@ -267,7 +265,7 @@ export function StepFlow({
           <div className="flex items-center">
             <IconBadge name={p.icon} size="lg" />
             {i < steps.length - 1 && (
-              <span aria-hidden className="ml-3 hidden flex-1 items-center text-fg/35 lg:flex">
+              <span aria-hidden className="ml-3 hidden flex-1 items-center text-fg/55 lg:flex">
                 <span className="h-px flex-1 bg-current" />
                 <ChevronRight className="-ml-2 h-5 w-5" strokeWidth={1.75} />
               </span>
@@ -362,7 +360,7 @@ export function Decisions({ stories }: { stories: readonly CaseStory[] }) {
             <div>
               <p className={label}>
                 <span className="tabular text-fg">{String(i + 1).padStart(2, "0")}</span>
-                <span className="mx-2 text-fg/25">/</span>
+                <span className="mx-2 text-fg/45">/</span>
                 {s.tag}
               </p>
               <h3 className="mt-3 font-display text-[2rem] leading-[1.15]">{s.title}</h3>

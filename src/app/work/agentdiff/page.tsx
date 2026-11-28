@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tintFor } from "@/lib/palette";
 import { ArrowUpRight } from "lucide-react";
 import { JsonLd } from "@/components/JsonLd";
 import {
@@ -126,14 +127,16 @@ export default function AgentDiffCaseStudy() {
     <>
       <JsonLd data={structured} />
       <CaseStudyFrame
+        tint={tintFor("/work/agentdiff")}
         sections={SECTIONS}
         related={relatedPosts("/work/agentdiff")}
         hero={
           <CaseStudyHero
+            tint={tintFor("/work/agentdiff")}
             eyebrow="Case study · AgentDiff · KerrShift"
             title={
               <>
-                Where your agent&apos;s money went. <span className="text-fg/40">And what was avoidable.</span>
+                Where your agent&apos;s money went. <span className="accent-text">And what was avoidable.</span>
               </>
             }
             summary={meta.summary}
@@ -167,7 +170,7 @@ export default function AgentDiffCaseStudy() {
           {...sec("decisions")}
           title={
             <>
-              Built solo. <span className="text-fg/45">Four calls that shaped it.</span>
+              Built solo. <span className="accent-text">Four calls that shaped it.</span>
             </>
           }
         >
@@ -200,7 +203,7 @@ export default function AgentDiffCaseStudy() {
                 {l.label}
                 <ArrowUpRight
                   aria-hidden
-                  className="h-4 w-4 text-fg/50 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg"
+                  className="h-4 w-4 text-fg/65 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg"
                   strokeWidth={1.75}
                 />
               </a>

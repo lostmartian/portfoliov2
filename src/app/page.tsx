@@ -2,8 +2,9 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { ContactPill } from "@/components/ContactPill";
+import { CtaCard } from "@/components/CtaCard";
+import { palette } from "@/lib/palette";
 import { JsonLd } from "@/components/JsonLd";
 import { Row, SmartLink } from "@/components/Row";
 import { SiteNav } from "@/components/SiteNav";
@@ -193,21 +194,14 @@ export default function Home() {
         </Row>
 
         {/* Get in touch */}
-        <section className="border-t border-line py-20 sm:py-28">
-          <h2 {...reveal()} className="max-w-[18ch] font-display text-[2rem] leading-[1.08] tracking-[-0.035em] sm:text-[2.75rem]">
-            Have something that has to be right?
-          </h2>
-          <div {...reveal(120)} className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-            <ContactPill />
-            <Link
-              href="/services"
-              className="group inline-flex items-center gap-1.5 text-[15px] font-medium text-muted transition-colors hover:text-fg"
-            >
-              See services
-              <ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.75} />
-            </Link>
-          </div>
-        </section>
+        <div className="border-t border-line py-16 sm:py-20">
+          <CtaCard
+            tint={palette.cobalt}
+            title="Have something that has to be right?"
+            accent="Let's build it."
+            links={[{ label: "See services", href: "/services" }]}
+          />
+        </div>
       </main>
 
       <footer className={container}>

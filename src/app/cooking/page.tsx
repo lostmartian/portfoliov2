@@ -92,7 +92,7 @@ export default function CookingPage() {
       eyebrow="Cooking"
       title={
         <>
-          Things I&apos;ve cooked. <span className="text-fg/40">From my kitchen.</span>
+          Things I&apos;ve cooked. <span className="accent-text">From my kitchen.</span>
         </>
       }
       intro={<p>Away from the keyboard, I cook. Here&apos;s what came out of the kitchen.</p>}

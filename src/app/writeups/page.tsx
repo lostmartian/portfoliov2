@@ -40,7 +40,7 @@ export default function WriteupsPage() {
       eyebrow="Writeups"
       title={
         <>
-          Technical writeups. <span className="text-fg/40 max-sm:hidden">How things actually work.</span>
+          Technical writeups. <span className="accent-text max-sm:hidden">How things actually work.</span>
         </>
       }
       intro={

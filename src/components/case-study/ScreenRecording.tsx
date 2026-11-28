@@ -239,7 +239,7 @@ export function ScreenRecording({
             <ChevronLeft className="h-4 w-4 text-white/60" />
             <ChevronRight className="h-4 w-4 text-white/30" />
             <RotateCw className="h-3.5 w-3.5 text-white/60" />
-            <div className="flex h-7 flex-1 items-center gap-2 rounded-full bg-[#202124] px-3.5 text-[12px] text-white/55">
+            <div className="flex h-7 flex-1 items-center gap-2 rounded-full bg-[#202124] px-3.5 text-[12px] text-white/70">
               <Lock className="h-3 w-3" />
               <span className="text-white/90">{host}</span>
               <span>{scenes[scene].path}</span>

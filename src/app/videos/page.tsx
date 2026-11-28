@@ -60,7 +60,7 @@ export default function VideosPage() {
       eyebrow="Videos"
       title={
         <>
-          How AI systems actually work. <span className="text-fg/40">From the GPU up.</span>
+          How AI systems actually work. <span className="accent-text">From the GPU up.</span>
         </>
       }
       intro={
@@ -69,7 +69,7 @@ export default function VideosPage() {
           <a href={YOUTUBE} className="font-semibold text-fg transition-opacity hover:opacity-60">
             YouTube
           </a>
-          : how AI runs on the GPU, how login and OAuth work, how India's payments and markets work, how search works from scratch, and how real systems are designed.
+          : how AI runs on the GPU, how login and OAuth work, how India&apos;s payments and markets work, how search works from scratch, and how real systems are designed.
         </p>
       }
     >
@@ -95,7 +95,7 @@ export default function VideosPage() {
                   </span>
                   <span className="mt-3 flex items-start justify-between gap-3">
                     <span className="text-[15px] font-medium leading-snug transition-opacity group-hover:opacity-60">{v.title}</span>
-                    <ArrowUpRight aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-fg/40" strokeWidth={1.75} />
+                    <ArrowUpRight aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-fg/65" strokeWidth={1.75} />
                   </span>
                   <span className="tabular mt-1 block text-[13px] text-muted">{date.format(new Date(v.date))}</span>
                 </a>

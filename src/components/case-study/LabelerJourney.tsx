@@ -127,7 +127,7 @@ const bg = "bg-[#0d0d0f]";
 const panel = "bg-[#141417]";
 const raised = "bg-[#1c1c20]";
 const line = "border-white/[0.08]";
-const muted = "text-white/50";
+const muted = "text-white/65";
 
 /* ====================================================================== */
 /* Screens                                                                 */
@@ -584,7 +584,7 @@ function ClaimForm({ totalOn }: { totalOn: boolean }) {
         I hereby certify that the above treatment was provided to the beneficiary and that the amounts claimed are as
         per the scheme&apos;s package rates. No amount has been collected from the beneficiary.
       </p>
-      <div className="mt-2 flex justify-between border-t border-black/20 pt-1 text-[4.5px] text-black/50">
+      <div className="mt-2 flex justify-between border-t border-black/20 pt-1 text-[4.5px] text-black/65">
         <span>For official use only</span>
         <span>Page 2 of 4</span>
       </div>
@@ -825,7 +825,7 @@ function Workspace({ t }: { t: number }) {
 function LabelPicker() {
   return (
     <div className="absolute bottom-[23%] right-[3%] z-10 w-[118px] rounded-md border border-white/15 bg-[#1c1c20] p-1 text-[8px] text-white shadow-2xl">
-      <p className="px-1.5 pb-1 pt-0.5 text-[7px] text-white/50">Assign label</p>
+      <p className="px-1.5 pb-1 pt-0.5 text-[7px] text-white/65">Assign label</p>
       <p data-t="popup-total" className="rounded bg-white/15 px-1.5 py-1 font-medium">
         Total amount
       </p>

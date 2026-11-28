@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
+import { PastelIcon, type PastelIconName } from "@/components/PastelIcon";
+import { ColourDot } from "@/components/Tint";
+import { CtaCard } from "@/components/CtaCard";
+import { palette } from "@/lib/palette";
 import { JsonLd } from "@/components/JsonLd";
 import { PageShell, label } from "@/components/PageShell";
 import { CopyEmail } from "@/components/CopyEmail";
@@ -29,10 +33,21 @@ export const metadata: Metadata = pageMeta({
   ],
 });
 
+// Colour follows the work: each service's icon and each industry's dot use the pair of the
+// case study it comes from (lib/palette.ts): fintech is IPO's cobalt, healthcare AYUVA's green.
+const serviceIcons: Record<string, PastelIconName> = {
+  "AI engineering": "ai",
+  "Backend and data systems": "data",
+  "Fintech and regulated systems": "fintech",
+  "Product builds, zero to one": "rocket",
+  "Developer tooling and performance": "tooling",
+};
+
 /** Industries, each backed by shipped work. */
 const industries = [
   {
     name: "Fintech and capital markets",
+    tint: palette.cobalt,
     text: "IPO validation, reconciliation and allotment for a SEBI-registered registrar, and the ERP that runs its shareholder registers, KYC and dividends.",
     links: [
       { label: "IPO Allotment Engine", href: "/work/ipo-allotment-engine" },
@@ -41,6 +56,7 @@ const industries = [
   },
   {
     name: "AI and data",
+    tint: palette.cyan,
     text: "Ground-truth labelling where people disagree, document knowledge graphs, and tools that make AI agents cheaper and safer to run.",
     links: [
       { label: "Farsight", href: "/work/farsight" },
@@ -49,11 +65,13 @@ const industries = [
   },
   {
     name: "Healthcare",
+    tint: palette.green,
     text: "The AI layer of a UK health app: triage, care journeys and plain-language reports, behind guardrails that never let the AI play doctor.",
     links: [{ label: "AYUVA", href: "/work/ayuva" }],
   },
   {
     name: "Developer tooling",
+    tint: palette.indigo,
     text: "Compilers and CLIs that make engineering teams faster: a Next.js-to-Rust compiler and an agent cost analyser.",
     links: [
       { label: "tsx2rs", href: "/work/tsx2rs" },
@@ -63,18 +81,18 @@ const industries = [
 ];
 
 const process = [
-  { step: "Learn the domain", text: "Rules, edge cases and the source of truth come first. In regulated work, that is most of the job." },
-  { step: "Design for correctness", text: "Make the dangerous path impossible, audit what matters, and test against an oracle." },
-  { step: "Build end to end", text: "Backend, AI, interface and infrastructure, so nothing falls between people." },
-  { step: "Ship and hand over", text: "Deployed, documented and measured, with decisions written down so your team can carry it." },
+  { tint: palette.cobalt, step: "Learn the domain", text: "Rules, edge cases and the source of truth come first. In regulated work, that is most of the job." },
+  { tint: palette.cyan, step: "Design for correctness", text: "Make the dangerous path impossible, audit what matters, and test against an oracle." },
+  { tint: palette.violet, step: "Build end to end", text: "Backend, AI, interface and infrastructure, so nothing falls between people." },
+  { tint: palette.green, step: "Ship and hand over", text: "Deployed, documented and measured, with decisions written down so your team can carry it." },
 ];
 
 const engagements = [
-  ["Freelance projects", "A defined product or feature, built and shipped"],
-  ["Contract or retainer", "An extra senior engineer on your team"],
-  ["Full-time roles", "Backend, AI or founding-engineer positions"],
-  ["Where", contact.availability],
-] as const;
+  { k: "Freelance projects", v: "A defined product or feature, built and shipped" },
+  { k: "Contract or retainer", v: "An extra senior engineer on your team" },
+  { k: "Full-time roles", v: "Backend, AI or founding-engineer positions" },
+  { k: "Where", v: contact.availability },
+];
 
 const structured = [
   {
@@ -96,7 +114,7 @@ export default function ServicesPage() {
       eyebrow="Services"
       title={
         <>
-          Work with me. <span className="text-fg/40">From the first idea to production.</span>
+          Work with me. <span className="accent-text">From the first idea to production.</span>
         </>
       }
       intro={
@@ -123,7 +141,10 @@ export default function ServicesPage() {
         <div className="grid gap-x-12 gap-y-10 sm:grid-cols-2">
           {services.map((s) => (
             <div key={s.name}>
-              <h2 className="text-lg font-medium">{s.name}</h2>
+              <h2 className="flex items-center gap-3 text-lg font-medium">
+                <PastelIcon name={serviceIcons[s.name] ?? "ai"} size={36} />
+                {s.name}
+              </h2>
               <p className="mt-2 text-[15px] leading-[1.7] text-muted">{s.description}</p>
             </div>
           ))}
@@ -133,8 +154,11 @@ export default function ServicesPage() {
       <Row name="Industries" note="Each one backed by shipped work">
         <div className="space-y-10">
           {industries.map((i) => (
-            <div key={i.name} className="grid gap-2 sm:grid-cols-[220px_minmax(0,1fr)] sm:gap-8">
-              <h2 className="text-[15px] font-medium">{i.name}</h2>
+            <div key={i.name} className="grid gap-3 sm:grid-cols-[240px_minmax(0,1fr)] sm:gap-8">
+              <h2 className="flex items-center gap-2.5 text-[15px] font-medium">
+                <ColourDot tint={i.tint} className="h-2.5 w-2.5" />
+                {i.name}
+              </h2>
               <div>
                 <p className="max-w-[60ch] text-[15px] leading-[1.7] text-muted">{i.text}</p>
                 <p className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm">
@@ -154,8 +178,13 @@ export default function ServicesPage() {
         <ol className="grid gap-x-12 gap-y-8 sm:grid-cols-2">
           {process.map((p, i) => (
             <li key={p.step}>
-              <p className="tabular text-[13px] text-muted">{String(i + 1).padStart(2, "0")}</p>
-              <h2 className="mt-1 text-lg font-medium">{p.step}</h2>
+              <p
+                className="tabular font-display text-[2rem] leading-none"
+                style={{ color: `color-mix(in oklab, ${p.tint.cool} 78%, var(--fg))` }}
+              >
+                {String(i + 1).padStart(2, "0")}
+              </p>
+              <h2 className="mt-3 text-lg font-medium">{p.step}</h2>
               <p className="mt-1.5 text-[15px] leading-[1.7] text-muted">{p.text}</p>
             </li>
           ))}
@@ -164,7 +193,7 @@ export default function ServicesPage() {
 
       <Row name="Ways to work together">
         <dl className="space-y-5">
-          {engagements.map(([k, v]) => (
+          {engagements.map(({ k, v }) => (
             <div key={k} className="grid gap-1 sm:grid-cols-[200px_minmax(0,1fr)] sm:gap-6">
               <dt className="text-[15px] font-medium">{k}</dt>
               <dd className="text-[15px] leading-[1.7] text-muted">{v}</dd>
@@ -179,6 +208,9 @@ export default function ServicesPage() {
           .
         </p>
       </Row>
+      <div className="border-t border-line pt-16 sm:pt-20">
+        <CtaCard tint={palette.violet} title="Ready to build something?" accent="Tell me about it." links={[{ label: "See the work", href: "/#work" }]} />
+      </div>
     </PageShell>
   );
 }

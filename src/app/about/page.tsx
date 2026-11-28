@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { pageMeta } from "@/lib/meta";
 import { Row, SmartLink } from "@/components/Row";
-import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { PastelIcon, type PastelIconName } from "@/components/PastelIcon";
+import { ColourDot } from "@/components/Tint";
+import { CtaCard } from "@/components/CtaCard";
+import { palette, type Tint } from "@/lib/palette";
 import { PageShell, label } from "@/components/PageShell";
-import { CopyEmail } from "@/components/CopyEmail";
 import { GITHUB, beyond, elsewhere, facts, intro, now, openSource, path, principle, story } from "@/lib/about";
-import { EMAIL } from "@/lib/data";
 import { reveal } from "@/lib/reveal";
 
 export const metadata: Metadata = pageMeta({
@@ -17,6 +18,19 @@ export const metadata: Metadata = pageMeta({
   type: "profile",
 });
 
+// Colour follows the work: timeline dots take the pair of the case study each role led to
+// (Omara is Farsight's cyan, JRat's Studio IPO's cobalt, First500days AYUVA's green, KerrShift
+// AgentDiff's violet); the rest borrow from the same palette.
+const pathTints: Tint[] = [palette.indigo, palette.cyan, palette.violet, palette.cobalt, palette.green, palette.violet];
+const beyondIcons: Record<string, PastelIconName> = {
+  Writing: "writing",
+  Teaching: "teaching",
+  "The Latent Chronicle": "newsletter",
+  "Off the clock": "coffee",
+};
+// GitHub-style language dots
+const langColour: Record<string, string> = { Python: "#3572A5", TypeScript: "#3178c6", Go: "#00ADD8", Rust: "#dea584", JavaScript: "#f1e05a" };
+
 export default function AboutPage() {
   return (
     <PageShell
@@ -24,7 +38,7 @@ export default function AboutPage() {
       eyebrow="About"
       title={
         <>
-          Hi, I&apos;m Sahil. <span className="text-fg/40">I build systems that have to hold.</span>
+          Hi, I&apos;m Sahil. <span className="accent-text">I build systems that have to hold.</span>
         </>
       }
       intro={<p>{intro}</p>}
@@ -45,7 +59,7 @@ export default function AboutPage() {
             <p key={p.slice(0, 20)}>{p}</p>
           ))}
         </div>
-        <p className="mt-10 max-w-[30ch] border-l-2 border-fg pl-6 font-display text-2xl leading-snug sm:text-[1.75rem]">
+        <p style={{ borderImage: `linear-gradient(${palette.cobalt.cool}, ${palette.cobalt.warm}) 1` }} className="mt-10 max-w-[30ch] border-l-[3px] pl-6 font-display text-2xl leading-snug sm:text-[1.75rem]">
           {principle}
         </p>
       </Row>
@@ -53,13 +67,11 @@ export default function AboutPage() {
       <Row name="The path so far">
         <ol className="relative">
           <span aria-hidden className="absolute bottom-3 left-[5px] top-3 w-px bg-fg/15" />
-          {path.map((p) => (
+          {path.map((p, i) => (
             <li key={p.title} className="relative pb-10 pl-9 last:pb-0">
-              <span
-                aria-hidden
-                className={`absolute left-0 top-[7px] h-[11px] w-[11px] rounded-full ${
-                  p.current ? "bg-fg ring-[5px] ring-fg/10" : "border-[1.5px] border-fg/60 bg-ink"
-                }`}
+              <ColourDot
+                tint={pathTints[i % pathTints.length]}
+                className={`absolute left-0 top-[7px] h-[11px] w-[11px] ${p.current ? "ring-[5px] ring-fg/10" : "ring-[3px] ring-ink"}`}
               />
               <p className="tabular text-sm text-muted">{p.when}</p>
               <p className="mt-1 text-lg font-medium leading-snug">{p.title}</p>
@@ -89,7 +101,10 @@ export default function AboutPage() {
         <div className="grid gap-x-12 gap-y-10 sm:grid-cols-2">
           {beyond.map((b) => (
             <div key={b.title}>
-              <h3 className="text-lg font-medium">{b.title}</h3>
+              <h3 className="flex items-center gap-3 text-lg font-medium">
+                {beyondIcons[b.title] && <PastelIcon name={beyondIcons[b.title]} size={36} />}
+                {b.title}
+              </h3>
               <p className="mt-2 text-[15px] leading-[1.7] text-muted">{b.text}</p>
               {b.link && (
                 <p className="mt-3 text-sm">
@@ -109,13 +124,16 @@ export default function AboutPage() {
                 <span>
                   <span className="flex items-baseline gap-3">
                     <span className="text-lg font-medium">{r.name}</span>
-                    <span className="text-[13px] text-muted">{r.lang}</span>
+                    <span className="inline-flex items-center gap-1.5 text-[13px] text-muted">
+                      <span aria-hidden className="h-2.5 w-2.5 rounded-full" style={{ background: langColour[r.lang] ?? "var(--muted)" }} />
+                      {r.lang}
+                    </span>
                   </span>
                   <span className="mt-1 block max-w-[60ch] text-[15px] leading-[1.7] text-muted">{r.text}</span>
                 </span>
                 <ArrowUpRight
                   aria-hidden
-                  className="mt-1.5 h-4 w-4 shrink-0 text-fg/40 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg"
+                  className="mt-1.5 h-4 w-4 shrink-0 text-fg/65 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg"
                   strokeWidth={1.75}
                 />
               </a>
@@ -127,24 +145,15 @@ export default function AboutPage() {
         </p>
       </Row>
 
-      <Row name="Get in touch">
-        <p className="max-w-[24ch] font-display text-3xl leading-tight sm:text-4xl">
-          Building something that has to hold? <span className="text-fg/40">Let&apos;s talk.</span>
-        </p>
-        <div className="mt-8 flex flex-wrap items-center gap-6 text-[15px]">
-          <a href={`mailto:${EMAIL}?subject=Hello`} className="rounded-full bg-fg px-5 py-2.5 font-medium text-ink transition-colors hover:bg-fg/85">
-            Say hello
-          </a>
-          <CopyEmail className="text-muted transition-colors hover:text-fg" />
-        </div>
-        <p className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-[15px]">
-          {elsewhere.map((l) => (
-            <SmartLink key={l.href} href={l.href}>
-              {l.label}
-            </SmartLink>
-          ))}
-        </p>
-      </Row>
+      <div className="border-t border-line pt-16 sm:pt-20">
+        <CtaCard
+          tint={palette.cobalt}
+          title="Building something that has to hold?"
+          accent="Let's talk."
+          subject="Hello"
+          links={elsewhere}
+        />
+      </div>
     </PageShell>
   );
 }

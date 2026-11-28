@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tintFor } from "@/lib/palette";
 import { JsonLd } from "@/components/JsonLd";
 import { pageMeta } from "@/lib/meta";
 import { caseStudyGraph } from "@/lib/schema";
@@ -105,13 +106,13 @@ function Disagreement() {
               <span className="text-[15px] text-muted">{r.who}</span>
               <span className="flex items-center gap-3">
                 <span
-                  className={`tabular font-display text-2xl ${r.agrees ? "text-fg" : "text-fg/40 line-through decoration-1"}`}
+                  className={`tabular font-display text-2xl ${r.agrees ? "text-fg" : "text-fg/55 line-through decoration-1"}`}
                 >
                   {r.value}
                 </span>
                 <span
                   className={`inline-flex h-6 w-6 items-center justify-center rounded-full ${
-                    r.agrees ? "bg-fg text-ink" : "border border-fg/25 text-fg/50"
+                    r.agrees ? "bg-fg text-ink" : "border border-fg/30 text-fg/65"
                   }`}
                 >
                   {r.agrees ? (
@@ -125,7 +126,7 @@ function Disagreement() {
           ))}
         </ul>
       </div>
-      <ChevronRight aria-hidden className="mx-auto hidden h-8 w-8 text-fg/30 @2xl:block" strokeWidth={1.5} />
+      <ChevronRight aria-hidden className="mx-auto hidden h-8 w-8 text-fg/65 @2xl:block" strokeWidth={1.5} />
       <div className="rounded-2xl bg-card p-7 ring-1 ring-line shadow-[0_1px_2px_rgb(var(--shadow)/0.04),0_12px_32px_-12px_rgb(var(--shadow)/0.12)]">
         <p className={label}>Settled value</p>
         <p className="tabular mt-3 font-display text-5xl">{disagreement.result.value}</p>
@@ -228,13 +229,15 @@ export default function FarsightCaseStudy() {
     <>
       <JsonLd data={structured} />
       <CaseStudyFrame
+        tint={tintFor("/work/farsight")}
         sections={SECTIONS}
         hero={
           <CaseStudyHero
+            tint={tintFor("/work/farsight")}
             eyebrow={`Case study · ${meta.title}`}
             title={
               <>
-                Trusted answers from messy documents. <span className="text-fg/40">Even when people disagree.</span>
+                Trusted answers from messy documents. <span className="accent-text">Even when people disagree.</span>
               </>
             }
             summary={meta.summary}
@@ -303,7 +306,7 @@ export default function FarsightCaseStudy() {
           {...sec("role")}
           title={
             <>
-              Founding engineer. <span className="text-fg/45">Every layer, solo.</span>
+              Founding engineer. <span className="accent-text">Every layer, solo.</span>
             </>
           }
           intro="I designed and built both products end to end, from database schema and algorithms to the screens labelers and experts use every day."

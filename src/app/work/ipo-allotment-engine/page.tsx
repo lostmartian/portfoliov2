@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { tintFor } from "@/lib/palette";
 import { JsonLd } from "@/components/JsonLd";
 import { pageMeta } from "@/lib/meta";
 import { relatedPosts } from "@/lib/related";
@@ -107,7 +108,7 @@ function ListingTimeline() {
               t.crunch ? "bg-fg ring-[6px] ring-fg/10" : "border border-fg/30 bg-ink"
             }`}
           />
-          <p className={`font-display text-3xl @3xl:text-4xl ${t.crunch ? "text-fg" : "text-fg/45"}`}>{t.day}</p>
+          <p className={`font-display text-3xl @3xl:text-4xl ${t.crunch ? "text-fg" : "text-fg/60"}`}>{t.day}</p>
           <div className="@3xl:mt-2">
             <p className="flex flex-wrap items-center gap-2 text-sm text-muted">
               <span className="tabular">{t.time}</span>
@@ -158,14 +159,16 @@ export default function IpoCaseStudy() {
     <>
       <JsonLd data={structured} />
       <CaseStudyFrame
+        tint={tintFor("/work/ipo-allotment-engine")}
         sections={SECTIONS}
         related={relatedPosts("/work/ipo-allotment-engine")}
         hero={
           <CaseStudyHero
+            tint={tintFor("/work/ipo-allotment-engine")}
             eyebrow={`Case study · ${meta.title}`}
             title={
               <>
-                One day to get every share right. <span className="text-fg/40">No room for error.</span>
+                One day to get every share right. <span className="accent-text">No room for error.</span>
               </>
             }
             summary={meta.summary}
@@ -203,7 +206,7 @@ export default function IpoCaseStudy() {
           {...sec("role")}
           title={
             <>
-              Six layers. <span className="text-fg/45">I worked in every one.</span>
+              Six layers. <span className="accent-text">I worked in every one.</span>
             </>
           }
           intro="I led the engine at the heart of the product, built most of the surfaces around it, and wrote in five languages along the way."

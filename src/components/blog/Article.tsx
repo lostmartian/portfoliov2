@@ -7,6 +7,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { JsonLd } from "@/components/JsonLd";
+import { TintBackdrop, TintGlow, tintVars } from "@/components/Tint";
+import { tintFor } from "@/lib/palette";
 import { Markdown } from "@/components/blog/Markdown";
 import { label } from "@/components/PageShell";
 import { MobileToc, ReadingProgress, Toc } from "@/components/case-study/Toc";
@@ -28,7 +30,8 @@ export const kinds = {
 /** Top bar and footer around a post. The post itself goes in `children`. */
 export function ArticleChrome({ collection, children }: { collection: Collection; children: React.ReactNode }) {
   return (
-    <>
+    <div className="relative isolate" style={tintVars(tintFor(kinds[collection].path))}>
+      <TintBackdrop tint={tintFor(kinds[collection].path)} />
       <header className={`${container} absolute inset-x-0 top-0 z-30 flex items-center justify-between py-6 text-sm`}>
         <Link href="/" className="font-medium tracking-tight">
           Sahil<span className="max-sm:hidden"> Gangurde</span>
@@ -53,7 +56,7 @@ export function ArticleChrome({ collection, children }: { collection: Collection
           </nav>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
 
@@ -118,6 +121,7 @@ export function ArticleView({ post }: { post: Post | undefined }) {
       <JsonLd data={structured} />
       <ReadingProgress />
       <div className={hero}>
+        <TintGlow tint={tintFor(kind.path)} />
         <div className={heroInner}>
           <div className="max-w-6xl lg:col-span-2">
             <Link
@@ -132,9 +136,9 @@ export function ArticleView({ post }: { post: Post | undefined }) {
               <time dateTime={post.date} className="tabular">
                 {formatDate(post.date)}
               </time>
-              <span aria-hidden className="text-fg/25">·</span>
+              <span aria-hidden className="text-fg/45">·</span>
               {post.category}
-              <span aria-hidden className="text-fg/25">·</span>
+              <span aria-hidden className="text-fg/45">·</span>
               {post.minutes} min read
             </p>
             {post.tags.length > 0 && (
@@ -182,7 +186,7 @@ export function ArticleView({ post }: { post: Post | undefined }) {
                 <p className={label}>Related work</p>
                 <Link href={c.href} className="group mt-2 inline-flex items-start gap-2 text-lg font-medium leading-snug">
                   <span className="transition-opacity group-hover:opacity-60">{c.title} case study</span>
-                  <ArrowRight aria-hidden className="mt-1 h-4 w-4 shrink-0 text-fg/40 transition-transform group-hover:translate-x-0.5" strokeWidth={1.75} />
+                  <ArrowRight aria-hidden className="mt-1 h-4 w-4 shrink-0 text-fg/65 transition-transform group-hover:translate-x-0.5" strokeWidth={1.75} />
                 </Link>
               </div>
             ))}
@@ -190,7 +194,7 @@ export function ArticleView({ post }: { post: Post | undefined }) {
               <p className={label}>Work with me</p>
               <Link href="/services" className="group mt-2 inline-flex items-start gap-2 text-lg font-medium leading-snug">
                 <span className="transition-opacity group-hover:opacity-60">AI and backend engineering, end to end</span>
-                <ArrowRight aria-hidden className="mt-1 h-4 w-4 shrink-0 text-fg/40 transition-transform group-hover:translate-x-0.5" strokeWidth={1.75} />
+                <ArrowRight aria-hidden className="mt-1 h-4 w-4 shrink-0 text-fg/65 transition-transform group-hover:translate-x-0.5" strokeWidth={1.75} />
               </Link>
             </div>
           </aside>
@@ -202,7 +206,7 @@ export function ArticleView({ post }: { post: Post | undefined }) {
                 <span className="font-display text-2xl leading-snug sm:text-3xl">{next.title}</span>
                 <ArrowRight
                   aria-hidden
-                  className="mt-2 h-5 w-5 shrink-0 text-fg/40 transition-transform group-hover:translate-x-0.5 group-hover:text-fg"
+                  className="mt-2 h-5 w-5 shrink-0 text-fg/65 transition-transform group-hover:translate-x-0.5 group-hover:text-fg"
                   strokeWidth={1.75}
                 />
               </Link>

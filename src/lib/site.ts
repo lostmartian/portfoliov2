@@ -8,15 +8,21 @@ export const SITE_URL = "https://lostmartian.in";
 export const NAME = "Sahil Gangurde";
 export const HANDLE = "lostmartian";
 
-export const TITLE = "Sahil Gangurde | AI & Backend Engineer, Founder of KerrShift and AgentDiff";
+export const TITLE = "Sahil Gangurde (lostmartian) · AI, ML & Fintech Engineer in Pune";
 export const TAGLINE = "AI and backend engineer who builds software that has to be right.";
 
 export const DESCRIPTION =
-  "Sahil Gangurde (lostmartian) is a freelance AI and backend engineer in Pune, India, and the founder of KerrShift and AgentDiff. He builds products end to end, from architecture and backend to AI and interface: IPO allotment for a SEBI-registered registrar, ground-truth platforms for AI, the AI layer of a UK health app, and a Rust compiler for Next.js. Available for freelance, contract and full-time work worldwide.";
+  "Sahil Gangurde (lostmartian) is a freelance AI and backend engineer in Pune, India, and the founder of KerrShift and AgentDiff. He builds products end to end, from architecture and backend to AI and interface: IPO allotment for a SEBI-registered registrar, ground-truth platforms for AI, the AI layer of a UK health app, and a Rust compiler for Next.js. He also explains how AI systems work, from the GPU up, on his YouTube channel. Available for freelance, contract and full-time work worldwide.";
+
+/** The short version search engines show under the result (about 155 characters), so the
+ *  words people search for come first: name, handle, AI/ML, fintech, Pune, YouTube. */
+export const META_DESCRIPTION =
+  "Sahil Gangurde (lostmartian) is an AI, ML and fintech engineer in Pune, founder of KerrShift and AgentDiff, who makes technical deep dives on YouTube.";
 
 export const sameAs = [
   "https://github.com/lostmartian",
-  "https://linkedin.com/in/lostmartian",
+  "https://www.linkedin.com/in/lostmartian",
+  "https://x.com/lost_martian_",
   "https://twitter.com/lost_martian_",
   "https://www.youtube.com/@sahilgangurdetech",
   "https://www.youtube.com/channel/UCtaWm5UMqhiBtgHzKzkOabw",
@@ -74,6 +80,7 @@ export const services = [
 
 export const expertise = [
   "AI engineering",
+  "Machine learning",
   "Large language models",
   "AI agents",
   "Agent evaluation and regression testing",
@@ -129,6 +136,15 @@ export const keywords = [
   "tsx2rs",
   "Next.js Rust compiler",
   "Sahil Gangurde YouTube",
+  "Sahil Gangurde Pune",
+  "Sahil Gangurde AI",
+  "Sahil Gangurde fintech",
+  "Sahil Gangurde lostmartian",
+  "lostmartian YouTube",
+  "machine learning engineer Pune",
+  "AI ML engineer Pune",
+  "fintech developer Pune",
+  "software engineer Pune",
 ];
 
 export const contact = { email: EMAIL, location: "Pune, Maharashtra, India", availability: "Freelance, contract and full-time, remote worldwide" };

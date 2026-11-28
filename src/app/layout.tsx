@@ -3,7 +3,7 @@ import { Geist_Mono, Inter } from "next/font/google";
 import { JsonLd } from "@/components/JsonLd";
 import { Motion } from "@/components/Motion";
 import { siteGraph } from "@/lib/schema";
-import { DESCRIPTION, HANDLE, NAME, SITE_URL, TITLE, keywords } from "@/lib/site";
+import { HANDLE, META_DESCRIPTION, NAME, SITE_URL, TITLE, keywords } from "@/lib/site";
 import { themeScript } from "@/lib/theme";
 import "./globals.css";
 
@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: TITLE, template: `%s | ${NAME}` },
-  description: DESCRIPTION,
+  description: META_DESCRIPTION,
   applicationName: `${NAME} (${HANDLE})`,
   keywords,
   authors: [{ name: NAME, url: SITE_URL }],
@@ -29,8 +29,8 @@ export const metadata: Metadata = {
       "application/rss+xml": [{ url: "/feed.xml", title: `${NAME}'s blog` }],
     },
   },
-  openGraph: { type: "website", siteName: `${NAME} (${HANDLE})`, locale: "en_IN", url: "/", title: TITLE, description: DESCRIPTION },
-  twitter: { card: "summary_large_image", creator: "@lost_martian_", site: "@lost_martian_", title: TITLE, description: DESCRIPTION },
+  openGraph: { type: "website", siteName: `${NAME} (${HANDLE})`, locale: "en_IN", url: "/", title: TITLE, description: META_DESCRIPTION },
+  twitter: { card: "summary_large_image", creator: "@lost_martian_", site: "@lost_martian_", title: TITLE, description: META_DESCRIPTION },
   robots: {
     index: true,
     follow: true,

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { pageMeta } from "@/lib/meta";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs, ids } from "@/lib/schema";
+import { abs } from "@/lib/site";
 import { Row, SmartLink } from "@/components/Row";
 import { ArrowUpRight } from "lucide-react";
 import { PastelIcon, type PastelIconName } from "@/components/PastelIcon";
@@ -31,6 +34,21 @@ const beyondIcons: Record<string, PastelIconName> = {
 // GitHub-style language dots
 const langColour: Record<string, string> = { Python: "#3572A5", TypeScript: "#3178c6", Go: "#00ADD8", Rust: "#dea584", JavaScript: "#f1e05a" };
 
+// The About page is Sahil's profile: search engines read it as a ProfilePage about the same
+// Person node as the rest of the site.
+const structured = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${abs("/about")}#profile`,
+    url: abs("/about"),
+    name: "About Sahil Gangurde (lostmartian)",
+    mainEntity: { "@id": ids.person },
+    about: { "@id": ids.person },
+  },
+  breadcrumbs([{ name: "About", path: "/about" }]),
+];
+
 export default function AboutPage() {
   return (
     <PageShell
@@ -43,6 +61,7 @@ export default function AboutPage() {
       }
       intro={<p>{intro}</p>}
     >
+      <JsonLd data={structured} />
       {/* Quick facts */}
       <dl {...reveal(340)} className="grid grid-cols-2 gap-x-10 gap-y-6 pb-16 lg:grid-cols-4">
         {facts.map(([k, v]) => (

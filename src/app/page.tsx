@@ -94,8 +94,9 @@ export default function Home() {
             , I&apos;m Sahil Gangurde.
           </h1>
           <p {...reveal(140)} className="mt-5 max-w-[52ch] text-[17px] leading-[1.6] text-muted sm:text-[19px]">
-            Backend and AI engineer in Pune. I build software that has to be right: share allotments, ground-truth data and AI
-            that people trust.
+            AI and backend engineer in Pune, known online as{" "}
+            <span className="font-semibold text-fg">lostmartian</span>. I build software that has to be right: share
+            allotments, ground-truth data and AI that people trust.
           </p>
           <div {...reveal(220)} className="mt-8">
             <ContactPill />
@@ -206,7 +207,7 @@ export default function Home() {
 
       <footer className={container}>
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-line py-6 text-[13px] text-muted">
-          <span>© 2026 Sahil Gangurde · Pune</span>
+          <span>© 2026 Sahil Gangurde (lostmartian) · Pune</span>
           <nav aria-label="Elsewhere" className="flex flex-wrap gap-x-5 gap-y-1">
             {socials.map((s) => (
               <a key={s.label} href={s.href} className="transition-colors hover:text-fg">
